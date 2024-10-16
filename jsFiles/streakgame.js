@@ -8,36 +8,19 @@ var streakGame = (function() {
     // randomly assign to conditions
     var settings = {
         colorOrder: 0,
-        pM: .5,
-        pEM: [10, 10],
-        gameTypeOrder: 1,
-        val: 10,
-        nTrials: 62,
+        pM: .5, //probability?
+        pEM: [10, 10],///???
+        gameTypeOrder: 0,
+        val: 10, //how much they earn
+        nTrials: 62, //number of trials per condition
         basePay: 10,
     };
-    
-    // debug mode (find debugging status from URL)
-    
-//        var debug = false;
-//        jsPsych.data.addProperties({
-//            debug: jsPsych.data.getURLVariable('debug'),
-//        });
-//        if (debug = true) {
-//                var settings = {
-//                 colorOrder: Math.floor(Math.random()*2),
-//                 pM: Array('easy', 'hard')[Math.floor(Math.random()*2)],
-//                 pEM: [10, 10],
-//                 gameTypeOrder: Math.floor(Math.random()*2),
-//                 val: 3,
-//                 nTrials: 2
-//         };
-//        }
 
     // create text variables for instructions
     
     var text = {
-        game1: settings.colorOrder == 1 ? 'Green Game' : 'Blue Game',
-        color1: settings.colorOrder == 1 ? 'green' : 'blue',
+        game1: settings.colorOrder == 1 ? 'Green Game' : 'Blue Game', //text.game1 = blue game
+        color1: settings.colorOrder == 1 ? 'green' : 'blue', 
         hex1: settings.colorOrder == 1 ? '#00aa00' : '#1067e8',
         span1: settings.colorOrder == 1 ? 'a-span' : 'b-span',
         game2: settings.colorOrder == 0 ? 'Green Game' : 'Blue Game',
@@ -47,7 +30,7 @@ var streakGame = (function() {
         value: settings.val.toString(),
         plural: settings.val == 1 ? '' : 's', 
         wasWere: settings.val == 1 ? 'was' : 'were'
-    };
+    }; 
 
     const outerCircleActivation = Math.random() < 0.5 ? 'gray' : 'yellow';
 
@@ -76,7 +59,7 @@ var streakGame = (function() {
             e0: `failure`
         },
         r2: {
-            m1: `<div class="box" style="background-color:${text.hex2}"> </div>`,
+            m1: `<div class="box" style="background-color:#1067e8"> </div>`,
             m0: `<div class="box" style="background-color:white"> </div>`,
             e1: `success`,
             e0: `failure`
@@ -89,13 +72,6 @@ var streakGame = (function() {
 
     // save condition and URL data
     jsPsych.data.addProperties({
-        pM: settings.pM,
-        val: settings.val,
-        basePay: settings.basePay,
-        // pEM: settings.pEM,
-        colorOrder: settings.colorOrder,
-        chunkSecond: settings.gameTypeOrder,
-        startTime: dateStrng,
         subjectID: Math.floor(Math.random() * 10000),
     });
 
@@ -113,31 +89,21 @@ var streakGame = (function() {
         compAns2,
         pages = {
             r1: {
-                part1: [`<div class='parent' style='text-align: left'>
-                <p>Thank you.</p>
-                <p>Next, we will introduce you to the survey.</p>
-                <p>When you are ready, please continue.</p></div>`,
-
-                `<div class='parent' style='text-align: left'>
-                <p>We are designing games that scientists can use to study visual attention. 
-                Our goal is to make the games as immersive and engaging as possible.
-                To make the games as immersive and engaging as possible, we are getting feedback from people like you.</p>
-                <p>You will play two different games of equal length: the <span class='${text.span1}'>${text.game1}</span> and the 
-                <span class='${text.span2}'>${text.game2}</span>. After each game, you will report how immersed and engaged you felt.</p>
-                <p>The games are very similar, but their color schemes will help you tell them apart.</p>
-                <p>Continue to learn about and play the <span class='${text.span1}'>${text.game1}</span>.</p>
-                <p>After you finish, you will learn about and play the <span class='${text.span2}'>${text.game2}</span>.</p>
+                part1: [`<div class='parent'>
+                <p> Welcome to the "Tile Game"! </p>
+                <p>We are interested in your response in playing a game. </p>
+                <p>Our goal is to make the games as immersive and engaging as possible.</p>
+                 <p> After each game, you will report how immersed and engaged you felt.</p>
                 </div>`,
 
                 `<div class='parent'>
-                <p>The goal of the <span class='${text.span1}'>${text.game1}</span> is to win as much money as possible.</p>
-                <p>All of the money you win during the <span class='${text.span1}'>${text.game1}</span> will be added to
-                a "bonus fund,"<br>which you'll receive at the end of the study.</p>
-                <p>Your total payment will be $${settings.basePay} for your participation, plus all of the money in your bonus fund.</p>
+                <p>The goal of the game is to win as much money as possible.</p>
+                <p>All of the money you win during the game will be added to a "bonus fund,"<br>which you'll receive at the end of the study.</p>
+                <p>Your total payment will be $X for your participation, plus all of the money in your bonus fund.</p>
                 </div>`],
 
                 part2Chunk: [`<div class='parent'>
-                <p>The <span class='${text.span1}'>${text.game1}</span> is played in multiple rounds.</p>
+                <p>This game is played in multiple rounds.</p>
                 </div>`,
 
                 `<div class='parent'>
@@ -148,7 +114,7 @@ var streakGame = (function() {
 
                 `<div class='parent'>
                 <p>The more rounds you win, the more money you'll earn.<br>
-                Specifically, ${settings.val} cent${text.plural} will be added to your bonus fund for each round you win.</p>               
+                Specifically, X cents will be added to your bonus fund for each round you win.</p>               
                 <div class='box' style='background-color:gray'></div>
                 </div>`,
 
@@ -159,15 +125,14 @@ var streakGame = (function() {
                 </div>`,
 
                 `<div class='parent'>
-                <p>In the <span class='${text.span1}'>${text.game1}</span>, tiles turn <span class='${text.span1}'>${text.color1}</span> 
-                when activated.</p>
-                <div class='box' style='background-color:${text.hex1}'></div>
+                <p>In this game, tiles turn blue when activated.</p>
+                <div class='box' style='background-color:#1067e8'></div>
                 </div>`,
 
                 `<div class='parent'>
                 <p>If you activate a tile before your five chances are up, you'll see that you won the round<br>
-                and ${text.value} cent${text.plural} ${text.wasWere} added to your bonus fund. The next round will start immediately after.</p>
-                <div style='font-size:35px'><p>You won the round!</p><p>+${settings.val} cent${text.plural}</p><p><br></p><p>(Get ready for the next round!)</p></div>
+                and X cents was added to your bonus fund. The next round will start immediately after.</p>
+                <div style='font-size:35px'><p>You won the round!<p><br></p><p>(Get ready for the next round!)</p></div>
                 </div>`,
 
                 `<div class='parent'>
@@ -179,11 +144,10 @@ var streakGame = (function() {
                 `<div class='parent'>
                 <p>Each time you miss a tile, you'll see how many more chances you have left in the current round.<br>
                 For example, if you have three chances left to activate a tile in the current round, you'll see this message:</p>
-                <div style='font-size:35px'><p><span style='color:${text.color1}; font-size:60px'>3</span></p><p>Chances left</p></div>
                 </div>`],
 
                 part2Bern: [`<div class='parent'>
-                <p>To earn money in the <span class='${text.span1}'>${text.game1}</span>, you must achieve wins.<br>
+                <p>To earn money, you must achieve wins.<br>
                 The more wins you achieve, the more money you'll earn.</p>
                 </div>`,
 
@@ -195,7 +159,7 @@ var streakGame = (function() {
 
                 `<div class='parent'>
                 <p>Wins are worth money. The more tiles you activate, the more money you'll earn.<br>
-                Specifically, ${settings.val} cent${text.plural} will be added to your bonus fund for each tile you activate.</p>               
+                Specifically, ${settings.val} cent will be added to your bonus fund for each tile you activate.</p>               
                 <div class='box' style='background-color:gray'></div>
                 </div>`,
 
@@ -206,9 +170,9 @@ var streakGame = (function() {
                 </div>`,
 
                 `<div class='parent'>
-                <p>In the <span class='${text.span1}'>${text.game1}</span>, tiles turn <span class='${text.span1}'>${text.color1}</span> 
+                <p>In the tiles turn 
                 when activated.</p>
-                <div class='box' style='background-color:${text.hex1}'></div>
+                <div class='box' style='background-color:#1067e8'></div>
                 </div>`,
 
                 `<div class='parent'>
@@ -312,6 +276,7 @@ var streakGame = (function() {
             }
         };
 
+/*
     // constructor function for round 1 comprehension check loop
     function MakeLoop(span, game, color, round) {
         
@@ -321,15 +286,9 @@ var streakGame = (function() {
         var attnChk2Ans = `${text.value} cent${text.plural}`;
         var attnChk2Scale = ["0 cents", "1 cent", "2 cents", "5 cents", "8 cents", "10 cents"];
         var attnChk2Name = `attnChk2_${round}`;
-        if (round == 'R1') {
-            var attnChk1Ans = settings.gameTypeOrder == 0 ? `True` : `False`
-            var attnChk2Prompt = (settings.gameTypeOrder == 0) ? `How much money is added to your bonus fund for each round you win?` : `How much money is added to your bonus fund for each tile you activate?`;
-            var instPage = (settings.gameTypeOrder == 0) ? pages.r1.part2Chunk : pages.r1.part2Bern;
-        } else {
-            var attnChk1Ans = settings.gameTypeOrder == 0 ? `False` : `True`
-            var attnChk2Prompt = (settings.gameTypeOrder == 0) ? `How much money is added to your bonus fund for each tile you activate?` : `How much money is added to your bonus fund for each round you win?`;
-            var instPage = (settings.gameTypeOrder == 0) ? pages.r2.part2Bern : pages.r2.part2Chunk;
-        };
+        var attnChk1Ans = settings.gameTypeOrder == 0 ? `True` : `False`
+        var attnChk2Prompt = (settings.gameTypeOrder == 0) ? `How much money is added to your bonus fund for each round you win?` : `How much money is added to your bonus fund for each tile you activate?`;
+        var instPage = (settings.gameTypeOrder == 0) ? pages.r1.part2Chunk : pages.r1.part2Bern
 
         var errorMessage = {
             type: "instructions",
@@ -374,7 +333,7 @@ var streakGame = (function() {
         this.loop_function = function(){
             return compAns1 != attnChk1Ans || compAns2 != attnChk2Ans;
         };
-    };
+    }; */
 
     // consent form
 
@@ -383,7 +342,7 @@ var streakGame = (function() {
     <p><b>Adult Consent for Participation in a Research Project<br>
     200 FR 2 (2017-1)</b><br>
     Study Title: Choices, decisions, and pursuits<br>
-    Investigator: Paul Stillman<br>
+    Investigator: Josephine Tan & David Melnikoff<br>
     HSC #: 2000023892</p>
 
     <p><b>Purpose:</b><br>
@@ -431,9 +390,9 @@ var streakGame = (function() {
         post_trial_gap: 500,
     };
 
-    p.intro.r1part2 = new MakeLoop(text.span1, text.game1, text.color1, 'R1');
+//    p.intro.r1part2 = new MakeLoop(text.span1, text.game1, text.color1, 'R1');
 
-    p.intro.r2part2 = new MakeLoop(text.span2, text.game2, text.color2, 'R2');
+ //   p.intro.r2part2 = new MakeLoop(text.span2, text.game2, text.color2, 'R2');
 
     p.intro.r1part3 = {
         type: "instructions",
@@ -458,9 +417,9 @@ var streakGame = (function() {
     p.task = {}
 
     // temporary data
-    var hitFeedback = new MakeHitFeedback(),
-        missFeedback = new MakeMissFeedback(),
-        latency = new MakeLatencyArrays(),
+  //  var hitFeedback = new MakeHitFeedback(),
+     //   missFeedback = new MakeMissFeedback(),
+    var latency = new MakeLatencyArrays(),
         length = 5,
         trialNumber = 0,
         skipFeedback = false,
@@ -471,40 +430,9 @@ var streakGame = (function() {
         totalJackpotsR2,
         totalJackpots
 
-    // constructor functions
-    function MakeHitFeedback() {
-        var arrayR1 = [];
-        var arrayR2 = [];
-        var e1r1 = Array(settings.pEM[0]).fill(stim.r1.e1);
-        var e0r1 = Array(10-settings.pEM[0]).fill(stim.r1.e0);
-        var e1r2 = Array(settings.pEM[1]).fill(stim.r2.e1);
-        var e0r2 = Array(10-settings.pEM[1]).fill(stim.r2.e0);
-        for (let i = 0; i < (settings.nTrials/10); i++) {
-            arrayR1.push(jsPsych.randomization.shuffle(e1r1.concat(e0r1)));
-            arrayR2.push(jsPsych.randomization.shuffle(e1r2.concat(e0r2)));
-        };
-        this.R1 = arrayR1.flat();
-        this.R2 = arrayR2.flat();
-    };
-
-    function MakeMissFeedback() {
-        var arrayR1 = [];
-        var arrayR2 = [];
-        var e1r1 = Array(10-settings.pEM[0]).fill(stim.r1.e1);
-        var e0r1 = Array(settings.pEM[0]).fill(stim.r1.e0);
-        var e1r2 = Array(10-settings.pEM[1]).fill(stim.r2.e1);
-        var e0r2 = Array(settings.pEM[1]).fill(stim.r2.e0);
-        for (let i = 0; i < (settings.nTrials/10); i++) {
-            arrayR1.push(jsPsych.randomization.shuffle(e1r1.concat(e0r1)));
-            arrayR2.push(jsPsych.randomization.shuffle(e1r2.concat(e0r2)));
-        };
-        this.R1 = arrayR1.flat();
-        this.R2 = arrayR2.flat();
-    };
-
     function MakeLatencyArrays() {
         this.R1 = makeRT(settings.nTrials, settings.pM);
-        this.R2 = makeRT(settings.nTrials, settings.pM);
+ //       this.R2 = makeRT(settings.nTrials, settings.pM);
     };
 
     function MakeProbe(round) {
@@ -552,13 +480,13 @@ function getRandomDuration(min = 100, max = 500) {
 
 // Combine the two into a single trial using a timeline
 function CombinedTrial(round) {
-    let trialStartTime; 
+    let trialStartTime;
     let trialEndTime;
     let randomDuration;
 
     return {
         type: 'html-keyboard-response',
-        data: {Trial_Type: 'combined'},
+        data: { Trial_Type: 'combined' },
         stimulus: `
             <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
                 <div id="outer-circle" style="background-color: gray; width: 150px; height: 150px; 
@@ -570,120 +498,117 @@ function CombinedTrial(round) {
             </div>`,
         choices: [32],
         trial_duration: function() {
-            // Return the duration for the entire trial
- 
-            return Math.max(
-                latency[round][trialNumber]
-            ); 
- //           [5000]
+            return Math.max(latency[round][trialNumber]);
         },
         on_start: function(trial) {
             trialStartTime = Date.now();
             randomDuration = getRandomDuration();
-            // Set timeout to have outercircle randomly turn blue
-            setTimeout(function() {
-                document.getElementById('outer-circle').style.backgroundColor = 'blue';
-            }, randomDuration);
-            console.log('random Duration that the outer circle becomes highlighted '+ randomDuration); //OR latency[round][trialNumber]);
-        }, 
+            console.log('random Duration that the outer circle becomes highlighted: ' + randomDuration);
 
+            jsPsych.pluginAPI.setTimeout(function() {
+                const outerCircle = document.getElementById('outer-circle');
+                if (outerCircle) {
+                    outerCircle.style.backgroundColor = 'blue';
+                } else {
+                    console.error('outer-circle element not found');
+                }
+            }, randomDuration);
+        },
         on_finish: function(data) {
-            trialEndTime = Date.now(); 
+            trialEndTime = Date.now();
             const trialDuration = trialEndTime - trialStartTime;
             data.randomDuration = randomDuration;
-            console.log(trialDuration + ' trial duration')
-            console.log(randomDuration + ' random duration'); 
-            if (data.key_press == 32 && randomDuration < trialDuration) {
-                console.log("both win");
-                data.result = 1; 
-            } else if (data.key_press == 32 && randomDuration > trialDuration) { 
-                console.log("participant wins but fake doesn't")
-                data.result = 2; 
-            } else if (data.rt == null && randomDuration > trialDuration){
-                console.log("both lose")
-                data.result = 3; 
-            } else if (data.rt == null && randomDuration < trialDuration){
-                console.log("participant lose but fake wins")
-                data.result = 4; 
-            }
+            data.trial_duration = trialDuration; 
+            console.log('Trial duration: ' + trialDuration);
+            console.log('Random duration: ' + randomDuration);
         }
     };
 }
 
- function MakeResponse(round) {
+function MakeResponse(round) {
     return {
         type: 'html-keyboard-response',
-        data: {Trial_Type: `activation_${round}`},
+        data: { Trial_Type: `activation_${round}` },
         stimulus: function() {
-            const lastTrialData = jsPsych.data.get().last(1).values()[0]; // Get last trial data
+            const lastTrialData = jsPsych.data.get().last(1).values()[0];
             const randomDuration = lastTrialData.randomDuration;
-            console.log(randomDuration + ' random duration in make response function')
             const rt = lastTrialData.rt;
-            console.log(rt + ' reaction time in make response function')
+            console.log(randomDuration + ' random duration in make response function');
+            console.log(rt + ' reaction time in make response function');
 
-       if (lastTrialData.key_press == 32 && randomDuration < rt) {
+            if (lastTrialData.key_press == 32 && randomDuration < rt) {
                 console.log("Both win", stim.r1.m1);
-                return stim.r1.m1; //both win
+                return stim.r1.m1;
             } else if (lastTrialData.key_press == 32 && randomDuration > rt) {
                 console.log("Participant wins but fake doesn't", stim.r1.m2);
                 return stim.r1.m2;
-            } else if (rt == null && randomDuration > lastTrialData.trial_duration) {
+            } else if ((rt === null || rt === undefined) && randomDuration > lastTrialData.trial_duration) {
                 console.log("Both lose", stim.r1.m0);
                 return stim.r1.m0;
-            } else if (rt == null && randomDuration < lastTrialData.trial_duration) {
-                console.log("Participant loses but fake wins" + stim.r1.m3);
+            } else if ((rt === null || rt === undefined) && randomDuration < lastTrialData.trial_duration) {
+                console.log("Participant loses but fake wins", stim.r1.m3);
                 return stim.r1.m3;
             }
         },
-        choices: [32], // represents spacebar 
+        choices: [32],
         response_ends_trial: false,
-        trial_duration: 1000, // feedback for if you "get it or not"
+        trial_duration: 1000,
         on_finish: function() {
+            const lastTrialData = jsPsych.data.get().last(1).values()[0];
+            const randomDuration = lastTrialData.randomDuration;
+            const rt = lastTrialData.rt;
+
+            if (lastTrialData.key_press == 32 && randomDuration < rt) {
+                data.result = 1;
+            } else if (lastTrialData.key_press == 32 && randomDuration > rt) {
+                data.result = 2;
+            } else if ((rt === null || rt === undefined) && randomDuration > lastTrialData.trial_duration) {
+                data.result = 3;
+            } else if ((rt === null || rt === undefined) && randomDuration < lastTrialData.trial_duration) {
+                data.result = 4;
+            }
             jsPsych.data.get().last(2).values()[0].key_press != 32 ? misses++ : hits++;
-        }      
+        }
     };
 }
 
-    function MakeFeedback(round, span, game) {
-        this.type = 'html-keyboard-response';
-        this.data = {Trial_Type: `feedback_${round}`};
-        this.stimulus = function() { 
-            var img = (jsPsych.data.get().last(2).values()[0].key_press == 32) ? hitFeedback[round][hits-1] : missFeedback[round][misses-1];
-            if (round == 'R1' && settings.gameTypeOrder == 1 || round == 'R2' && settings.gameTypeOrder == 0) {
-                if (img == "failure") {
-                    return feedbackText = `<div style='font-size:35px'><p>You missed</p><p>+0 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-                } else {
-                    return feedbackText = `<div style='font-size:35px'><p>You activated it!</p><p>+${settings.val} point${text.plural}</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-                }
-            } else {
-                if (img == "failure" && length > 1) {
-                    length--;
-                    let hex = round == 'R1' ? text.hex1 : text.hex2;
-                    let tryText = length == 1 ? "Chance" : "Chances";
-                    return `<div style='font-size:35px'><p><span style='color:${hex}; font-size:60px'>${length}</span></p><p>${tryText} left</p></div>`;
-                } else if (img == "failure" && length == 1) {
-                    length = 5;
-                    return feedbackText = `<div style='font-size:35px'><p>You lost the round</p><p>+0 points</p><p><br></p><p>(Get ready for the next round!)</p></div>`;
-                } else {
-                    length = 5;
-                    return feedbackText = `<div style='font-size:35px'><p>You won the round!</p><p>+${settings.val} point${text.plural}</p><p><br></p><p>(Get ready for the next round!)</p></div>`;
-                }
+function MakeFeedback(round, span, game) {
+    this.type = 'html-keyboard-response';
+    this.data = { Trial_Type: `feedback_${round}` };
+    this.stimulus = function() {
+        const lastTrialData = jsPsych.data.get().last(2).values()[0];
+        const randomDuration = lastTrialData.randomDuration;
+        const rt = lastTrialData.rt;
+        const trialDuration = lastTrialData.trial_duration; 
+        console.log(rt + ' rt in makefeedback');
+        console.log(trialDuration + ' last trial data in makefeedback')
+        console.log(randomDuration + ' random duration in make feedback');
+
+        let feedbackText = ''
+
+        if (round == 'R1') {
+            if (lastTrialData.key_press == 32 && randomDuration > rt) {
+                feedbackText = `<div style='font-size:35px'><p>You activated it but the other participant didn't!</p><p>+10 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
+            } else if (lastTrialData.key_press == 32 && randomDuration < rt) {
+                feedbackText = `<div style='font-size:35px'><p>Both activated it!</p><p>+20 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
+            } else if ((lastTrialData.key_press === null || lastTrialData.key_press === undefined) && randomDuration > trialDuration) {
+                feedbackText = `<div style='font-size:35px'><p>Both lose!</p><p>+0 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
+            } else if ((lastTrialData.key_press === null || lastTrialData.key_press === undefined) && randomDuration < trialDuration) {
+                feedbackText = `<div style='font-size:35px'><p>The other participant activated it, but you didn't!</p><p>+10 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
             }
-        };
-        this.choices = jsPsych.NO_KEYS;
-        this.trial_duration = 2000;
-        this.on_finish = function(data) {
-            trialNumber++;
-            if (trialNumber == settings.nTrials) {
-                trialNumber = 0;
-                hits = 0;
-                misses = 0;
-            };
-            jsPsych.data.get().last(3).values()[0].key_press == 32 ? data.Jackpot = true : data.Jackpot = false;      
-        };
+        }
+
+        return feedbackText;
     };
 
-    function MakeRoundIntro(round) {
+    this.choices = jsPsych.NO_KEYS;
+    this.trial_duration = 2000;
+    this.on_finish = function(data) {
+        trialNumber++;
+    };
+}
+
+function MakeRoundIntro(round) {
         this.type = 'html-keyboard-response';
         this.data = {Trial_Type: `firstRoundIntro_${round}`};
         this.stimulus = function() {
@@ -695,9 +620,9 @@ function CombinedTrial(round) {
         };
         this.choices = jsPsych.NO_KEYS;
         this.trial_duration = 2000;
-    };
+};
 
-    function MakeDelay(round) {
+function MakeDelay(round) {
         this.type = 'html-keyboard-response';
         this.data = {Trial_Type: `ITI_${round}`};
         this.stimulus = "";
@@ -708,9 +633,9 @@ function CombinedTrial(round) {
         this.on_finish = function(data) {
             data.key_press == 32 ? data.TooFast = 1 : data.TooFast = 0;
         };
-    };
+};
 
-    function MakeTooFast(round) {
+function MakeTooFast(round) {
         this.type = 'html-keyboard-response';
         this.data = {Trial_Type: `tooFastMessage_${round}`};
         this.choices = jsPsych.NO_KEYS;
@@ -725,7 +650,115 @@ function CombinedTrial(round) {
         this.post_trial_gap = function() {
             return (jsPsych.data.get().last(1).values()[0].key_press == 32) ? 1000 : 0;
         };
-    };
+};
+
+p.Foundsomeone = {
+    type: 'html-keyboard-response',
+    stimulus: `
+        <div style="font-size: 24px; text-align: center;">
+            <p id="loading-text"> We found someone. Loading game now...</p>
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+        </div>
+    `,
+    choices: jsPsych.NO_KEYS,
+    trial_duration: 10000,  // Total time for loading screen
+    on_load: function() {
+        const css = `
+            #loading-text {
+                width: 250px; /* Fixed width for text element */
+                margin: 0 auto; /* Center the text within the container */
+            }
+            .loading-bar-container {
+                width: 100%;
+                height: 20px;
+                background-color: #f3f3f3;
+                border-radius: 10px;
+                overflow: hidden;
+                margin: 20px auto;
+            }
+            .loading-bar {
+                width: 0;
+                height: 100%;
+                background-color: #6b6d6e;
+                animation: load 3s forwards;
+            }
+            @keyframes load {
+                0% { width: 0; }
+                100% { width: 100%; } // Change to fill the full width over 3 seconds
+            }
+        `;
+        const style = document.createElement('style');
+        style.innerHTML = css;
+        document.head.appendChild(style);
+        
+        // Optionally change the loading text after the animation
+    },
+    on_finish: function(data) {
+        data.loading_completed = true;
+    }
+};
+
+p.loadingPage = {
+    type: 'html-keyboard-response',
+    stimulus: `
+        <div style="font-size: 24px; text-align: center;">
+            <p id="loading-text"> Finding a partner....</p>
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+        </div>
+    `,
+    choices: jsPsych.NO_KEYS,
+    trial_duration: 10000,  // Duration of the loading screen in milliseconds, 15 seconds
+    on_load: function() {
+        // Inject CSS for the loading bar animation and loading text width
+        const css = `
+            #loading-text {
+                width: 250px; /* Fixed width for text element */
+                margin: 0 auto; /* Center the text within the container */
+            }
+            .loading-bar-container {
+                width: 100%;
+                height: 20px;
+                background-color: #f3f3f3;
+                border-radius: 10px;
+                overflow: hidden;
+                margin: 20px auto;
+            }
+            .loading-bar {
+                width: 0;
+                height: 100%;
+                background-color: #6b6d6e;
+                animation: load 3s forwards;
+            }
+            @keyframes load {
+                0% { width: 0; }
+                10% { width: 10%; }
+                30% { width: 30%; }
+                40% { width: 40%; }
+                60% { width: 60%; }
+                75% { width: 75%; }
+                80% { width: 80%; }
+                95% { width: 95%; }
+                100% { width: 100%; }
+            }
+        `;
+        const style = document.createElement('style');
+        style.innerHTML = css;
+        document.head.appendChild(style);
+
+        // Set a timer to change the text halfway through the loading
+        setTimeout(() => {
+            document.getElementById('loading-text').innerText = "Still searching...";
+        }, 9000);
+    },
+    on_finish: function(data) {
+        data.loading_completed = true;
+    }
+};
+
 
     // trial variables
     var probeR1 = new MakeProbe('R1'),
@@ -770,18 +803,10 @@ function CombinedTrial(round) {
         timeline: [roundIntroR1],
     };
 
-    p.task.round2Intro = {
-        timeline: [roundIntroR2],
-    };
 
     p.task.round1 = {
         timeline: [delayLoopR1, combinedTrial, responseR1, feedbackR1],
         //timeline: [delayLoopR1, probeR1, outerR1, combinedTrial, responseR1, feedbackR1],
-        repetitions: settings.nTrials,
-    };
-
-    p.task.round2 = {
-        timeline: [delayLoopR2, probeR2, responseR2, feedbackR2],
         repetitions: settings.nTrials,
     };
 
