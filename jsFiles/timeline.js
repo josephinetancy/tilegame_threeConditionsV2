@@ -15,8 +15,9 @@ function MakeTimeline(game) {
     game.intro.preMessage,
     game.intro.r1part1,
     game.loadingPage,
-    game.Foundsomeone,
-//    game.intro.r1part2,
+    game.foundsomeone, 
+    game.avatars,
+   // game.intro.r1part2,
     game.task.round1Intro, //this is including the intro for the round1 
     game.task.round1,
     ]

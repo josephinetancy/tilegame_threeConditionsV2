@@ -652,7 +652,7 @@ function MakeTooFast(round) {
         };
 };
 
-p.Foundsomeone = {
+p.foundsomeone = {
     type: 'html-keyboard-response',
     stimulus: `
         <div style="font-size: 24px; text-align: center;">
@@ -759,6 +759,51 @@ p.loadingPage = {
     }
 };
 
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Define the avatar selection task with shuffled images
+const avatars = ['avatar/1.jpeg', 'avatar/2.jpeg', 'avatar/3.jpeg'];
+const shuffledAvatars = shuffle(avatars);
+
+p.avatars = {
+    type: 'html-button-response',
+    stimulus: `<div class='parent'>
+               <p>Now, you'll choose an avatar to play the game. <p> Choose 1 avatar out of the 3 colors below.</p>
+               <img src= "avatar/avatarsAll.jpg" style="width: 700px; height: 282px;"> 
+               </div>
+               </div>`,
+    choices: ['Yellow', 'Green', 'Navy'], // Choices correspond to selecting avatar 1, 2, or 3
+    on_finish: (data) => {
+    }
+}; 
+
+/*
+p.avatars = {
+    type: 'html-button-response',
+    stimulus: `<div class='parent'>
+               <p>Now, you'll choose an avatar to play the game. Choose 1 avatar out of the 3 options below.</p>
+               <div class="avatar-selection" style="display: flex; flex-direction: column; align-items: center;">
+                    ${shuffledAvatars.map((img, index) => 
+                      `<label style="display: flex; flex-direction: column; align-items: center; margin: 10px;">
+                        <input type="radio" name="avatar" value="${index + 1}" required>
+                        <img src="${img}" class="avatar-img" alt="Avatar ${index + 1}" style="width: 100px; height: 100px;">
+                        <span>Choose ${index + 1}</span>
+                      </label>`).join('')}
+               </div>
+               </div>`,
+    choices: ['1', '2', '3'], // Choices correspond to selecting avatar 1, 2, or 3
+    button_label: 'Continue', // Default button
+    on_finish: (data) => {
+        const selectedAvatarIndex = document.querySelector('input[name="avatar"]:checked').value;
+        data.selected_avatar = shuffledAvatars[selectedAvatarIndex - 1];
+    }
+}; */
 
     // trial variables
     var probeR1 = new MakeProbe('R1'),
