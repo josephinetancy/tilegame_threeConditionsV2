@@ -142,13 +142,7 @@ function updateStimColors(backgroundColor) {
                 <p>In this game, tiles turn blue when activated.</p>
                 <div class='box' style='background-color:#1067e8'></div>
                 </div>`,
-
-                `<div class='parent'>
-                <p>If you activate a tile before your five chances are up, you'll see that you won the round<br>
-                and X cents was added to your bonus fund. The next round will start immediately after.</p>
-                <div style='font-size:35px'><p>You won the round!<p><br></p><p>(Get ready for the next round!)</p></div>
-                </div>`,
-
+                
                 `<div class='parent'>
                 <p>If you fail to activate a tile before your five chances are up, you'll see that you lost the round<br>
                 and no money was added to your bonus fund. The next round will start immediately after.</p>
