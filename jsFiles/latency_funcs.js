@@ -4,6 +4,51 @@ function for creating n-dimensional latency array given p(hit)
 generating random response times 
 
 */
+const jsPsych = initJsPsych({
+    on_finish: (data) => {
+      console.log()
+        data.boot = boot;
+        if(!boot) {
+            document.body.innerHTML = 
+                `<div align='center' style="margin: 10%">
+                    <p>Thank you for participating!<p>
+                    <b>You will be automatically re-directed to Prolific in a few moments.</b>
+                </div>`;
+            setTimeout(() => { 
+                location.href = `https://app.prolific.co/submissions/complete?cc=${completionCode}`
+            }, 1000);
+        }
+    },
+}); 
+
+// set and save subject ID
+let subject_id = jsPsych.data.getURLVariable("PROLIFIC_PID");
+if (!subject_id) { subject_id = jsPsych.randomization.randomID(10) };
+jsPsych.data.addProperties({ subject: subject_id });
+
+// define file name
+const filename = `${subject_id}.csv`;
+
+// define completion code for Prolific
+const completionCode = "050505";
+
+let boot = false;
+
+// function for saving survey data in wide format
+const saveSurveyData = (data) => {
+    const names = Object.keys(data.response);
+    const values = Object.values(data.response);
+    for(let i = 0; i < names.length; i++) {
+        data[names[i]] = values[i];
+    };      
+};
+
+const getTotalErrors = (data, correctAnswers) => {
+    const answers = Object.values(data.response);
+    const errors = answers.map((val, index) => val === correctAnswers[index] ? 0 : 1)
+    const totalErrors = errors.reduce((partialSum, a) => partialSum + a, 0);
+    return totalErrors;
+};
 
 const makeRT = function(n, p) {
 

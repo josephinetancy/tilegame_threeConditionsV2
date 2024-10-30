@@ -12,29 +12,27 @@ if (typeof PROLIFIC_PID !== 'undefined') {
 
 function MakeTimeline(game) {
     this.timeline = [
-    game.intro.preMessage,
+ //   game.intro.preMessage,
     game.intro.r1part1,
-    game.loadingPage,
-    game.foundsomeone, 
+   game.findingPartner, 
+    game.foundPartner, 
     game.avatars,
-   // game.intro.r1part2,
-    game.task.round1Intro, //this is including the intro for the round1 
+    game.partnerAvatar,
+    game.partnerRevealAvatar,
+  //  game.intro.r1part2,
+    game.task.round1Intro, //this is including the intro for the round1 "get ready for the first round"
     game.task.round1,
     ]
 };
 
+
+//const timeline = [p.avatars,game.task.round1];
+
+
 var exp = new MakeTimeline(streakGame);
 
-//jsPsych.init({
-//    timeline: exp.timeline,
-//    
-//});
-//
+jsPsych.run(exp.timeline);
 
-// initiate timeline
-jsPsych.init({
-    timeline: exp.timeline,
-     on_finish: function() {
-        jsPsych.data.displayData();
-    }
-});
+
+
+

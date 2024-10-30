@@ -1,9 +1,8 @@
 // Define Stimuli
-
+let p = {};
 
 var streakGame = (function() {
 
-    var p = {};
 
     // randomly assign to conditions
     var settings = {
@@ -18,6 +17,7 @@ var streakGame = (function() {
 
     // create text variables for instructions
     
+
     var text = {
         game1: settings.colorOrder == 1 ? 'Green Game' : 'Blue Game', //text.game1 = blue game
         color1: settings.colorOrder == 1 ? 'green' : 'blue', 
@@ -32,48 +32,62 @@ var streakGame = (function() {
         wasWere: settings.val == 1 ? 'was' : 'were'
     }; 
 
-    const outerCircleActivation = Math.random() < 0.5 ? 'gray' : 'yellow';
 
-    var stim = {
-        r1: {
-            m0: `<div class="box" style="background-color:white"> </div>`, //both didn't hit it
-            m1: `<div class="outer-circle" style="background-color: blue; 
-        width: 150px; height: 150px; border-radius: 50%; 
-        border: 5px solid black; display: flex; align-items:center; justify-content:center;">
-        <div class="inner-circle" style="background-color:blue; border: 5px solid black;
-            width: 100px; height: 100px; border-radius: 50%;"></div>
-        </div>`, //both hit it
+ const outerCircleActivation = Math.random() < 0.5 ? 'gray' : 'yellow';
+
+
+// Function to update the stim colors dynamically
+
+
+var stim = {
+    r1: {
+        m0: `<div class="box" style="background-color:white"> </div>`, // both didn't hit it
+        m1: `<div class="outer-circle" style="background-color: blue; 
+            width: 150px; height: 150px; border-radius: 50%; 
+            border: 5px solid black; display: flex; align-items:center; justify-content:center;">
+            <div class="inner-circle" style="background-color:blue; border: 5px solid black;
+                width: 100px; height: 100px; border-radius: 50%;"></div>
+        </div>`, // both hit it
         m2: `<div class="outer-circle" style="background-color: gray; 
-        width: 150px; height: 150px; border-radius: 50%; 
-        border: 5px solid black; display: flex; align-items:center; justify-content:center;">
-        <div class="inner-circle" style="background-color:blue; border: 5px solid black;
-            width: 100px; height: 100px; border-radius: 50%;"></div>
-        </div>`, //for when I hit it, and you don't 
+            width: 150px; height: 150px; border-radius: 50%; 
+            border: 5px solid black; display: flex; align-items:center; justify-content:center;">
+            <div class="inner-circle" style="background-color:blue; border: 5px solid black;
+                width: 100px; height: 100px; border-radius: 50%;"></div>
+        </div>`, // I hit it, you didn't
         m3: `<div class="outer-circle" style="background-color: blue; 
+            width: 150px; height: 150px; border-radius: 50%; 
+            border: 5px solid black; display: flex; align-items:center; justify-content:center;">
+            <div class="inner-circle" style="background-color:gray; border: 5px solid black;
+                width: 100px; height: 100px; border-radius: 50%;"></div>
+        </div>`, // You hit it, I didn't
+    }
+};  
+
+
+function updateStimColors(backgroundColor) {
+    stim.r1.m0 = `<div class="box" style="background-color:white"> </div>`;
+    stim.r1.m1 = `<div class="outer-circle" style="background-color: #2669ee; 
         width: 150px; height: 150px; border-radius: 50%; 
         border: 5px solid black; display: flex; align-items:center; justify-content:center;">
-        <div class="inner-circle" style="background-color:gray; border: 5px solid black;
+        <div class="inner-circle" style="background-color: ${backgroundColor}; border: 5px solid black;
             width: 100px; height: 100px; border-radius: 50%;"></div>
-        </div>`, //for when you hit it, and I don't 
-            e1: `success`,
-            e0: `failure`
-        },
-        r2: {
-            m1: `<div class="box" style="background-color:#1067e8"> </div>`,
-            m0: `<div class="box" style="background-color:white"> </div>`,
-            e1: `success`,
-            e0: `failure`
-        }
-    };
+    </div>`;
 
+    stim.r1.m2 = `<div class="outer-circle" style="background-color: gray; 
+        width: 150px; height: 150px; border-radius: 50%; 
+        border: 5px solid black; display: flex; align-items:center; justify-content:center;">
+        <div class="inner-circle" style="background-color: ${backgroundColor}; border: 5px solid black;
+            width: 100px; height: 100px; border-radius: 50%;"></div>
+    </div>`;
 
-    const dateObj = new Date();
-    const dateStrng = String(dateObj);
+    stim.r1.m3 = `<div class="outer-circle" style="background-color: #2669ee; 
+        width: 150px; height: 150px; border-radius: 50%; 
+        border: 5px solid black; display: flex; align-items:center; justify-content:center;">
+        <div class="inner-circle" style="background-color: gray; border: 5px solid black;
+            width: 100px; height: 100px; border-radius: 50%;"></div>
+    </div>`;
+} 
 
-    // save condition and URL data
-    jsPsych.data.addProperties({
-        subjectID: Math.floor(Math.random() * 10000),
-    });
 
    /*
     *
@@ -370,21 +384,21 @@ var streakGame = (function() {
 
     // create instruction variables
     p.intro.preMessage = {
-        type: 'instructions',
+        type: jsPsychInstructions,
         pages: [consent],
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
 
     p.intro.r1part1 = {
-        type: "instructions",
+        type: jsPsychInstructions,
         pages: pages.r1.part1,
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
 
     p.intro.r2part1 = {
-        type: "instructions",
+        type: jsPsychInstructions,
         pages: pages.r2.part1,
         show_clickable_nav: true,
         post_trial_gap: 500,
@@ -395,14 +409,14 @@ var streakGame = (function() {
  //   p.intro.r2part2 = new MakeLoop(text.span2, text.game2, text.color2, 'R2');
 
     p.intro.r1part3 = {
-        type: "instructions",
+        type: jsPsychInstructions,
         pages: pages.r1.part3,
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
 
     p.intro.r2part3 = {
-        type: "instructions",
+        type: jsPsychInstructions,
         pages: pages.r2.part3,
         show_clickable_nav: true,
         post_trial_gap: 500,
@@ -413,6 +427,68 @@ var streakGame = (function() {
     *   TASK
     *
     */
+/*
+AVATAR 
+CHOICE 
+*/
+
+let selectedAvatarColor = '#2669ee';
+
+// Define the avatar selection task with shuffled images
+const avatars = ['avatar/1.jpeg', 'avatar/2.jpeg', 'avatar/3.jpeg'];
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+const avatarChoices = [
+    { color: 'Yellow', img: 'avatar/1.jpeg' },
+    { color: 'Green', img: 'avatar/2.jpeg' },
+    { color: 'Navy', img: 'avatar/3.jpeg' }
+];
+
+// Create the stimulus HTML for the avatars (without buttons)
+const avatarImages = avatarChoices.map(choice => 
+    `<img src="${choice.img}" style="width: 200px; height: 200px; margin: 0 10px;" alt="${choice.color}">`).join('');
+
+// Define the task
+p.avatars = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: `<div class='parent'>
+               <p>Now, you'll choose the color of your avatar to play the game.</p>
+               <p>Choose 1 avatar out of the 3 colors below:</p>
+               <div class="avatar-selection" style="display: flex; justify-content: center;">
+                    <img src="./avatar/avatarsAll.jpg">
+               </div>
+               </div>`,
+        choices: ['Yellow', 'Green', 'Navy'],
+        on_finish: (data) => {
+            selectedColor = data.response.toString();
+
+        let backgroundColor = '';
+        if (selectedColor === '0') {
+            backgroundColor = '#FFA827';
+        } else if (selectedColor === '1') {
+            backgroundColor = '#90CD4C';
+        } else if (selectedColor === '2') {
+            backgroundColor = '#1E2B4D';
+        }
+        console.log('Before update:', stim.r1.m1); // Should show old value
+        updateStimColors(backgroundColor);
+        console.log('After update:', stim.r1.m1);
+
+        console.log('data response', data.response)
+        console.log('Selected color:', backgroundColor);
+        console.log(stim.r1.m1 + 'in avatar images');
+/*
+        const selectedChoice = avatarChoices.find(choice => choice.color === selectedColor);
+        data.selected_avatar = selectedChoice ? selectedChoice.img : null; */
+    }
+};
 
     p.task = {}
 
@@ -435,59 +511,53 @@ var streakGame = (function() {
  //       this.R2 = makeRT(settings.nTrials, settings.pM);
     };
 
-    function MakeProbe(round) {
+/* Not needed - was old
+function MakeProbe(round) {
     return {
-        type: 'html-keyboard-response',
-        data: {Trial_Type: 'probe'},
+        type: jsPsychHtmlKeyboardResponse, 
+        data: { Trial_Type: 'probe' },
         stimulus: `
             <div class="outer-circle" style="background-color: gray; 
                 width: 150px; height: 150px; border-radius: 50%; 
-                border: 5px solid black; position: absolute; display: flex; align-items:center; justify-content:center;">
-                <div class="inner-circle" style="background-color:gray; border: 5px solid black;
+                border: 5px solid black; position: absolute; display: flex; align-items: center; justify-content: center;">
+                <div class="inner-circle" style="background-color: gray; border: 5px solid black;
                     width: 100px; height: 100px; border-radius: 50%;"></div>
             </div>`,
-        choices: [32],
-        trial_duration: function() { 
-            return latency[round][trialNumber]; 
-        },
-        on_finish: function(data) {
-            data.key_press == 32 ? data.TooSlow = 0 : data.TooSlow = 1;
+        choices: [' '], // spacebar is the only valid choice
+        trial_duration: () => latency[round][trialNumber], // simplified for v7
+        on_finish: (data) => {
+            data.TooSlow = data.response === ' ' ? 0 : 1; // 0 if spacebar was pressed, otherwise 1
         }
     };
 }
 
 function MakeOuter(round) {
     return {
-        type: 'html-keyboard-response',
-        data: {Trial_Type: 'Outer'},
+        type: jsPsychHtmlKeyboardResponse, 
+        data: { Trial_Type: 'Outer' },
         stimulus: `
-            <div class="outer-circle" style="background-color:gray; 
+            <div class="outer-circle" style="background-color: gray; 
                 width: 150px; height: 150px; border-radius: 50%; position: absolute; top: 0; left: 0;"></div>`,
-        trial_duration: function() { 
-            return 5000;  // Adjust duration as needed
-        },
-        on_finish: function(data) {
-            console.log('this is make outer')
-     //       data.key_press == 32 ? data.TooSlow = 0 : data.TooSlow = 1;
+        trial_duration: 5000, // fixed duration for this trial
+        on_finish: (data) => {
+            console.log('This is MakeOuter');
         }
     };
-}
+}*/
 
 function getRandomDuration(min = 100, max = 500) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+} 
 
-
-// Combine the two into a single trial using a timeline
 function CombinedTrial(round) {
     let trialStartTime;
     let trialEndTime;
     let randomDuration;
 
     return {
-        type: 'html-keyboard-response',
+        type: jsPsychHtmlKeyboardResponse,
         data: { Trial_Type: 'combined' },
-        stimulus: `
+        stimulus: ` 
             <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
                 <div id="outer-circle" style="background-color: gray; width: 150px; height: 150px; 
                     border-radius: 50%; border: 5px solid black; position: absolute;">
@@ -496,19 +566,22 @@ function CombinedTrial(round) {
                     width: 100px; height: 100px; border-radius: 50%; position: absolute; top: 25px; left: 25px;">
                 </div>
             </div>`,
-        choices: [32],
-        trial_duration: function() {
+        choices: [" "],
+
+        trial_duration: 10000,
+
+/*        trial_duration: function() {
             return Math.max(latency[round][trialNumber]);
-        },
+        }, */
         on_start: function(trial) {
             trialStartTime = Date.now();
             randomDuration = getRandomDuration();
-            console.log('random Duration that the outer circle becomes highlighted: ' + randomDuration);
+            console.log('random Duration that the outer circle becomes highlighted: ' + randomDuration); //ok so the random duration matches up
 
             jsPsych.pluginAPI.setTimeout(function() {
                 const outerCircle = document.getElementById('outer-circle');
                 if (outerCircle) {
-                    outerCircle.style.backgroundColor = 'blue';
+                    outerCircle.style.backgroundColor = '#2669ee';
                 } else {
                     console.error('outer-circle element not found');
                 }
@@ -519,27 +592,29 @@ function CombinedTrial(round) {
             const trialDuration = trialEndTime - trialStartTime;
             data.randomDuration = randomDuration;
             data.trial_duration = trialDuration; 
-            console.log('Trial duration: ' + trialDuration);
-            console.log('Random duration: ' + randomDuration);
+            console.log('Trial duration in combined trial: ' + trialDuration);
+            console.log('Random duration in combined trial: ' + randomDuration);
         }
     };
 }
 
+///MAKE RESPONSE IS FOR THE BLUE TO ACTIVATE FOR THE PARTICIPANT'S RESPONSE
 function MakeResponse(round) {
     return {
-        type: 'html-keyboard-response',
+        type: jsPsychHtmlKeyboardResponse,
         data: { Trial_Type: `activation_${round}` },
-        stimulus: function() {
+        stimulus: () => {
             const lastTrialData = jsPsych.data.get().last(1).values()[0];
             const randomDuration = lastTrialData.randomDuration;
             const rt = lastTrialData.rt;
             console.log(randomDuration + ' random duration in make response function');
             console.log(rt + ' reaction time in make response function');
+            console.log('Current stim.r1.m1:', stim.r1.m1); 
 
-            if (lastTrialData.key_press == 32 && randomDuration < rt) {
+            if (lastTrialData.response === " " && randomDuration < rt) {
                 console.log("Both win", stim.r1.m1);
                 return stim.r1.m1;
-            } else if (lastTrialData.key_press == 32 && randomDuration > rt) {
+            } else if (lastTrialData.response === " " && randomDuration > rt) {
                 console.log("Participant wins but fake doesn't", stim.r1.m2);
                 return stim.r1.m2;
             } else if ((rt === null || rt === undefined) && randomDuration > lastTrialData.trial_duration) {
@@ -550,110 +625,125 @@ function MakeResponse(round) {
                 return stim.r1.m3;
             }
         },
-        choices: [32],
+        choices: [' '],
         response_ends_trial: false,
         trial_duration: 1000,
-        on_finish: function() {
+        on_finish: () => {
             const lastTrialData = jsPsych.data.get().last(1).values()[0];
             const randomDuration = lastTrialData.randomDuration;
             const rt = lastTrialData.rt;
+            let result; //just to log the result into the data
 
-            if (lastTrialData.key_press == 32 && randomDuration < rt) {
-                data.result = 1;
-            } else if (lastTrialData.key_press == 32 && randomDuration > rt) {
-                data.result = 2;
+            if (lastTrialData.response === " " && randomDuration < rt) {
+                result = 1;
+            } else if (lastTrialData.response === " " && randomDuration > rt) {
+                result = 2;
             } else if ((rt === null || rt === undefined) && randomDuration > lastTrialData.trial_duration) {
-                data.result = 3;
+                result = 3;
             } else if ((rt === null || rt === undefined) && randomDuration < lastTrialData.trial_duration) {
-                data.result = 4;
+                result = 4;
             }
-            jsPsych.data.get().last(2).values()[0].key_press != 32 ? misses++ : hits++;
+
+            jsPsych.data.get().last(1).values()[0].result = result;
+            jsPsych.data.get().last(2).values()[0].response !== 0 ? misses++ : hits++;
         }
     };
 }
 
+//THIS IS TO TELL THE PARTICIPANT "YOU WON OR DID NOT WIN"
 function MakeFeedback(round, span, game) {
-    this.type = 'html-keyboard-response';
-    this.data = { Trial_Type: `feedback_${round}` };
-    this.stimulus = function() {
-        const lastTrialData = jsPsych.data.get().last(2).values()[0];
-        const randomDuration = lastTrialData.randomDuration;
-        const rt = lastTrialData.rt;
-        const trialDuration = lastTrialData.trial_duration; 
-        console.log(rt + ' rt in makefeedback');
-        console.log(trialDuration + ' last trial data in makefeedback')
-        console.log(randomDuration + ' random duration in make feedback');
+    return {
+        type: jsPsychHtmlKeyboardResponse,
+        data: { Trial_Type: `feedback_${round}` },
+        stimulus: () => {
+            const lastTrialData = jsPsych.data.get().last(2).values()[0];
+            const randomDuration = lastTrialData.randomDuration;
+            const rt = lastTrialData.rt;
+            const trialDuration = lastTrialData.trial_duration;
+            
+            console.log(rt + ' rt in makefeedback');
+            console.log(trialDuration + ' last trial data in makefeedback');
+            console.log(randomDuration + ' random duration in make feedback');
 
-        let feedbackText = ''
+            let feedbackText = '';
 
-        if (round == 'R1') {
-            if (lastTrialData.key_press == 32 && randomDuration > rt) {
-                feedbackText = `<div style='font-size:35px'><p>You activated it but the other participant didn't!</p><p>+10 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-            } else if (lastTrialData.key_press == 32 && randomDuration < rt) {
-                feedbackText = `<div style='font-size:35px'><p>Both activated it!</p><p>+20 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-            } else if ((lastTrialData.key_press === null || lastTrialData.key_press === undefined) && randomDuration > trialDuration) {
-                feedbackText = `<div style='font-size:35px'><p>Both lose!</p><p>+0 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-            } else if ((lastTrialData.key_press === null || lastTrialData.key_press === undefined) && randomDuration < trialDuration) {
-                feedbackText = `<div style='font-size:35px'><p>The other participant activated it, but you didn't!</p><p>+10 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
+            if (round == 'R1') {
+                if (lastTrialData.response == " " && randomDuration > rt) {
+                    feedbackText = `<div style='font-size:35px'><p>You activated it but the other participant didn't!</p><p>+10 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
+                } else if (lastTrialData.response == " " && randomDuration < rt) {
+                    feedbackText = `<div style='font-size:35px'><p>Both activated it!</p><p>+20 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
+                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && randomDuration > trialDuration) {
+                    feedbackText = `<div style='font-size:35px'><p>Both lose!</p><p>+0 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
+                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && randomDuration < trialDuration) {
+                    feedbackText = `<div style='font-size:35px'><p>The other participant activated it, but you didn't!</p><p>+10 points</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
+                }
             }
+
+            return feedbackText;
+        },
+        choices: "NO_KEYS",
+        trial_duration: 2000,
+        on_finish: (data) => {
+            data.trialNumber = (data.trialNumber || 0) + 1; // Update trial number
         }
-
-        return feedbackText;
-    };
-
-    this.choices = jsPsych.NO_KEYS;
-    this.trial_duration = 2000;
-    this.on_finish = function(data) {
-        trialNumber++;
     };
 }
 
 function MakeRoundIntro(round) {
-        this.type = 'html-keyboard-response';
-        this.data = {Trial_Type: `firstRoundIntro_${round}`};
-        this.stimulus = function() {
+    return {
+        type: jsPsychHtmlKeyboardResponse,
+        data: { Trial_Type: `firstRoundIntro_${round}` },
+        stimulus: () => {
             if (round == 'R1') {
-                return settings.gameTypeOrder == 0  ? `<div style='font-size:35px'><p>Get ready for the first round!</p></div>` : `<div style='font-size:35px'><p>Get ready for the first tile!</p></div>`;
+                return settings.gameTypeOrder == 0  
+                    ? `<div style='font-size:35px'><p>Get ready for the first round!</p></div>` 
+                    : `<div style='font-size:35px'><p>Get ready for the first tile!</p></div>`;
             } else {
-                return settings.gameTypeOrder == 0  ? `<div style='font-size:35px'><p>Get ready for the first tile!</p></div>` : `<div style='font-size:35px'><p>Get ready for the first round!</p></div>`;
+                return settings.gameTypeOrder == 0  
+                    ? `<div style='font-size:35px'><p>Get ready for the first tile!</p></div>` 
+                    : `<div style='font-size:35px'><p>Get ready for the first round!</p></div>`;
             }
-        };
-        this.choices = jsPsych.NO_KEYS;
-        this.trial_duration = 2000;
-};
+        },
+        choices: "NO_KEYS",
+        trial_duration: 2000,
+    };
+}
 
 function MakeDelay(round) {
-        this.type = 'html-keyboard-response';
-        this.data = {Trial_Type: `ITI_${round}`};
-        this.stimulus = "";
-        this.choices = [32];
-        this.trial_duration = function() {
-            return jsPsych.randomization.sampleWithoutReplacement(ITI, 1)[0];
-        };
-        this.on_finish = function(data) {
-            data.key_press == 32 ? data.TooFast = 1 : data.TooFast = 0;
-        };
-};
+    return {
+        type: jsPsychHtmlKeyboardResponse,
+        data: { Trial_Type: `ITI_${round}` },
+        stimulus: "",
+        choices: [' '],  // Spacebar response
+        trial_duration: () => jsPsych.randomization.sampleWithoutReplacement(ITI, 1)[0],
+        on_finish: (data) => {
+            data.TooFast = data.response === " " ? 1 : 0;
+        }
+    };
+}
 
 function MakeTooFast(round) {
-        this.type = 'html-keyboard-response';
-        this.data = {Trial_Type: `tooFastMessage_${round}`};
-        this.choices = jsPsych.NO_KEYS;
-        this.stimulus = function() {
-            var message = `<div style='font-size: 20px'><p>Too Fast!</p><p>Please wait for the tile to appear 
-            before pressing your SPACEBAR</p></div>`;
-            return (jsPsych.data.get().last(1).values()[0].key_press == 32) ? message : '';
-        };
-        this.trial_duration = function() {
-            return (jsPsych.data.get().last(1).values()[0].key_press == 32) ? 2500 : 0;
-        };
-        this.post_trial_gap = function() {
-            return (jsPsych.data.get().last(1).values()[0].key_press == 32) ? 1000 : 0;
-        };
-};
+    return {
+        type: jsPsychHtmlKeyboardResponse,
+        data: { Trial_Type: `tooFastMessage_${round}` },
+        choices: [],  // Disables any response
+        stimulus: () => {
+            const lastKeyPress = jsPsych.data.get().last(1).values()[0].response;
+            return lastKeyPress === " " ? `<div style='font-size: 20px'><p>Too Fast!</p><p>Please wait for the tile to appear before pressing your SPACEBAR! </p></div>` : '';
+        },
+        trial_duration: () => {
+            const lastKeyPress = jsPsych.data.get().last(1).values()[0].response;
+            return lastKeyPress === " " ? 2500 : 0;
+        },
+        post_trial_gap: () => {
+            const lastKeyPress = jsPsych.data.get().last(1).values()[0].response;
+            return lastKeyPress === " " ? 1000 : 0;
+        }
+    };
+}
 
-p.foundsomeone = {
-    type: 'html-keyboard-response',
+p.foundPartner= {
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <div style="font-size: 24px; text-align: center;">
             <p id="loading-text"> We found someone. Loading game now...</p>
@@ -662,13 +752,13 @@ p.foundsomeone = {
             </div>
         </div>
     `,
-    choices: jsPsych.NO_KEYS,
+    choices: "NO_KEYS",
     trial_duration: 10000,  // Total time for loading screen
-    on_load: function() {
+    on_load: () => {
         const css = `
             #loading-text {
-                width: 250px; /* Fixed width for text element */
-                margin: 0 auto; /* Center the text within the container */
+                width: 250px;
+                margin: 0 auto;
             }
             .loading-bar-container {
                 width: 100%;
@@ -686,22 +776,20 @@ p.foundsomeone = {
             }
             @keyframes load {
                 0% { width: 0; }
-                100% { width: 100%; } // Change to fill the full width over 3 seconds
+                100% { width: 100%; }
             }
         `;
         const style = document.createElement('style');
         style.innerHTML = css;
         document.head.appendChild(style);
-        
-        // Optionally change the loading text after the animation
     },
-    on_finish: function(data) {
+    on_finish: (data) => {
         data.loading_completed = true;
     }
 };
 
-p.loadingPage = {
-    type: 'html-keyboard-response',
+p.findingPartner = {
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <div style="font-size: 24px; text-align: center;">
             <p id="loading-text"> Finding a partner....</p>
@@ -710,14 +798,13 @@ p.loadingPage = {
             </div>
         </div>
     `,
-    choices: jsPsych.NO_KEYS,
+    choices: "NO_KEYS",
     trial_duration: 10000,  // Duration of the loading screen in milliseconds, 15 seconds
-    on_load: function() {
-        // Inject CSS for the loading bar animation and loading text width
+    on_load: () => {
         const css = `
             #loading-text {
-                width: 250px; /* Fixed width for text element */
-                margin: 0 auto; /* Center the text within the container */
+                width: 250px;
+                margin: 0 auto;
             }
             .loading-bar-container {
                 width: 100%;
@@ -749,68 +836,85 @@ p.loadingPage = {
         style.innerHTML = css;
         document.head.appendChild(style);
 
-        // Set a timer to change the text halfway through the loading
         setTimeout(() => {
             document.getElementById('loading-text').innerText = "Still searching...";
         }, 9000);
     },
-    on_finish: function(data) {
+    on_finish: (data) => {
         data.loading_completed = true;
     }
 };
 
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
+p.partnerAvatar = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+        <div style="font-size: 24px; text-align: center;">
+            <p id="loading-text"> Now, waiting for your partner to choose their color of their avatar.</p>
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+        </div>
+    `,
+    choices: "NO_KEYS",
+    trial_duration: 2000,  // Duration of the loading screen in milliseconds, 15 seconds
+    on_load: () => {
+        const css = `
+            #loading-text {
+                width: 250px;
+                margin: 0 auto;
+            }
+            .loading-bar-container {
+                width: 100%;
+                height: 20px;
+                background-color: #f3f3f3;
+                border-radius: 10px;
+                overflow: hidden;
+                margin: 20px auto;
+            }
+            .loading-bar {
+                width: 0;
+                height: 100%;
+                background-color: #6b6d6e;
+                animation: load 1.5s forwards;
+            }
+            @keyframes load {
+                0% { width: 0; }
+                80% { width: 80%; }
+                100% { width: 100%; }
+            }
+        `;
+        const style = document.createElement('style');
+        style.innerHTML = css;
+        document.head.appendChild(style);
 
-// Define the avatar selection task with shuffled images
-const avatars = ['avatar/1.jpeg', 'avatar/2.jpeg', 'avatar/3.jpeg'];
-const shuffledAvatars = shuffle(avatars);
-
-p.avatars = {
-    type: 'html-button-response',
-    stimulus: `<div class='parent'>
-               <p>Now, you'll choose an avatar to play the game. <p> Choose 1 avatar out of the 3 colors below.</p>
-               <img src= "avatar/avatarsAll.jpg" style="width: 700px; height: 282px;"> 
-               </div>
-               </div>`,
-    choices: ['Yellow', 'Green', 'Navy'], // Choices correspond to selecting avatar 1, 2, or 3
+    },
     on_finish: (data) => {
+        data.loading_completed = true;
     }
-}; 
+};
 
-/*
-p.avatars = {
-    type: 'html-button-response',
-    stimulus: `<div class='parent'>
-               <p>Now, you'll choose an avatar to play the game. Choose 1 avatar out of the 3 options below.</p>
-               <div class="avatar-selection" style="display: flex; flex-direction: column; align-items: center;">
-                    ${shuffledAvatars.map((img, index) => 
-                      `<label style="display: flex; flex-direction: column; align-items: center; margin: 10px;">
-                        <input type="radio" name="avatar" value="${index + 1}" required>
-                        <img src="${img}" class="avatar-img" alt="Avatar ${index + 1}" style="width: 100px; height: 100px;">
-                        <span>Choose ${index + 1}</span>
-                      </label>`).join('')}
-               </div>
-               </div>`,
-    choices: ['1', '2', '3'], // Choices correspond to selecting avatar 1, 2, or 3
-    button_label: 'Continue', // Default button
+p.partnerRevealAvatar = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+        <div style="font-size: 24px; text-align: center;">
+            <p id="loading-text"> Your partner chose this avatar: </p>
+            <img src="./avatar/4.jpg" style="width: 200px; height: 200px; margin: 0 10px">
+            </div>
+        </div>
+    `,
+    choices: "NO_KEYS",
+    trial_duration: 2000,  // Duration of the loading screen in milliseconds, 15 seconds
     on_finish: (data) => {
-        const selectedAvatarIndex = document.querySelector('input[name="avatar"]:checked').value;
-        data.selected_avatar = shuffledAvatars[selectedAvatarIndex - 1];
+        data.loading_completed = true;
     }
-}; */
+};
 
     // trial variables
-    var probeR1 = new MakeProbe('R1'),
-        probeR2 = new MakeProbe('R2'),
+    var //probeR1 = new MakeProbe('R1'),
+       // probeR2 = new MakeProbe('R2'),
         combinedTrial = new CombinedTrial('R1'),
-        outerR1 = new MakeOuter('R1'),
-        outerR1 = new MakeOuter('R2'),
+      //  outerR1 = new MakeOuter('R1'),
+      //  outerR1 = new MakeOuter('R2'),
         responseR1 = new MakeResponse('R1'),
         responseR2 = new MakeResponse('R2'),
         feedbackR1 = new MakeFeedback('R1', text.span1, text.game1),
@@ -850,8 +954,9 @@ p.avatars = {
 
 
     p.task.round1 = {
-        timeline: [delayLoopR1, combinedTrial, responseR1, feedbackR1],
-        //timeline: [delayLoopR1, probeR1, outerR1, combinedTrial, responseR1, feedbackR1],
+        timeline: [combinedTrial, responseR1, feedbackR1], //delayloop is the issue
+       //timeline: [delayLoopR1, combinedTrial, responseR1, feedbackR1], 
+  //      timeline: [delayLoopR1, probeR1, outerR1, combinedTrial, responseR1, feedbackR1],
         repetitions: settings.nTrials,
     };
 
