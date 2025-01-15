@@ -14,9 +14,9 @@ const jsPsych = initJsPsych({
                     <p>Thank you for participating!<p>
                     <b>You will be automatically re-directed to Prolific in a few moments.</b>
                 </div>`;
-            setTimeout(() => { 
-                location.href = `https://app.prolific.co/submissions/complete?cc=${completionCode}`
-            }, 1000);
+//            setTimeout(() => { 
+//                location.href = `https://app.prolific.co/submissions/complete?cc=${completionCode}`
+//            }, 1000);
         }
     },
 }); 

@@ -13,13 +13,12 @@ if (typeof PROLIFIC_PID !== 'undefined') {
 function MakeTimeline(game) {
     this.timeline = [
  //   game.intro.preMessage,
-    game.intro.r1part1,
+/*    game.intro.r1part1,
    game.findingPartner, 
     game.foundPartner, 
     game.avatars,
     game.partnerAvatar,
-    game.partnerRevealAvatar,
-  //  game.intro.r1part2,
+    game.partnerRevealAvatar, */
     game.task.round1Intro, //this is including the intro for the round1 "get ready for the first round"
     game.task.round1,
     ]
