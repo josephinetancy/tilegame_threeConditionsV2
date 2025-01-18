@@ -150,38 +150,39 @@ var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
 
     // Check if the response's reaction time is greater than the partner's reaction time
     if (response.rt > trial.partner_rt) {
-        console.log("Response RT > Partner RT");
-        response.delay = 10;
-   //     response.result = stim.r1.m1; // Set the result based on your requirement
-        console.log("Participant wins but fake doesn't yet:", response.result);
+    console.log("Response RT > Partner RT");
+    response.delay = 120;
+    console.log("Participant wins but fake doesn't yet:", response.result);
 
-        const innerCircle = document.getElementById("inner-circle");
-        if (innerCircle) {
-         innerCircle.style.backgroundColor = "#FFA500"; // Replace the content of the container
+    const innerCircle = document.getElementById("inner-circle");
+    if (innerCircle) {
+        innerCircle.style.backgroundColor = "#FFA500"; // Change to orange
     } else {
-        console.error("inner-circle-container element not found");
+        console.error("inner-circle element not found");
     }
-      setTimeout(() => {
-            end_trial();
-        }, response.delay);
 
+    // Use setTimeout to delay the trial ending
+    setTimeout(() => {
         end_trial();
-    } if (response.rt < trial.partner_rt) {
-        response.delay = trial.ending_time - response.rt; // Calculate delay
-        response.result = null; // Or set another result if needed
-        console.log("Participant responded before partner RT. Delay:", response.delay);
+    }, response.delay);
 
-        const innerCircle = document.getElementById("inner-circle");
-        if (innerCircle) {
-            innerCircle.style.backgroundColor = "#FFA500"; // Change to orange
-        } else {
-            console.error("inner-circle element not found");
-        }
+} else if (response.rt < trial.partner_rt) {
+    response.delay = trial.ending_time - response.rt; // Calculate delay
+    response.result = null; // Or set another result if needed
+    console.log("Participant responded before partner RT. Delay:", response.delay);
 
-        setTimeout(() => {
-            end_trial();
-        }, response.delay);
+    const innerCircle = document.getElementById("inner-circle");
+    if (innerCircle) {
+        innerCircle.style.backgroundColor = "#FFA500"; // Change to orange
+    } else {
+        console.error("inner-circle element not found");
     }
+
+    // Use setTimeout to delay the trial ending
+    setTimeout(() => {
+        end_trial();
+    }, response.delay);
+}
 };
           // start the response listener
           if (trial.choices != "NO_KEYS") {

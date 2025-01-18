@@ -637,6 +637,7 @@ function WLTrialSecond(round) {
             } else if ((rt === null || rt === undefined) && randomDuration < lastTrialData.trial_duration) {
                 result = 4;
             }
+            console.log(data);
 
             jsPsych.data.get().last(1).values()[0].result = result;
             jsPsych.data.get().last(2).values()[0].response !== 0 ? misses++ : hits++;
@@ -898,7 +899,6 @@ function WWTrial(round) {
 
             // Additional logging
             console.log('Reaction time: ' + data.rt);
-            console.log(data);
             console.log('Trial duration: ' + trialDuration);
         }
     };
@@ -956,15 +956,22 @@ function MakeWWResponse(round) {
             const rt = lastTrialData.rt;
             let result; //just to log the result into the data
 
-            if (lastTrialData.response === " ") {
-                result = 1; //both win
-            } else if ((rt === null || rt === undefined)) {
-                result = 3; //if not it will be LW
+            if (lastTrialData.response === " " && partner_rt < rt) {
+                result = 1;
+            } else if (lastTrialData.response === " " && partner_rt > rt) {
+                console.log("Participant wins but fake doesn't yet", stim.r1.m2);
+                result = 2;
+            } else if ((rt === null || rt === undefined) && partner_rt > lastTrialData.trial_duration) {
+                result = 3;
+            } else if ((rt === null || rt === undefined) && partner_rt < lastTrialData.trial_duration) {
+                console.log("Participant loses but fake wins", stim.r1.m3);
+                result = 4;
             }
             
             // Logging the result into the data
             jsPsych.data.get().last(1).values()[0].result = result;
             jsPsych.data.get().last(2).values()[0].response !== 0 ? misses++ : hits++;
+            console.log(data);
         } // End of on_finish function
     }; // End of return object
 } // End of MakeWWResponse function
@@ -1044,16 +1051,20 @@ function MakeFeedback(round, span, game) {
 
             let feedbackText = '';
 
-            if (round == 'R1') {
+ //           if (round == 'R1') {
                 if (lastTrialData.response == " " && partner_rt == 1000) {
-                    feedbackText = `<div style='font-size:35px'><p>You activated it but the other participant didn't!</p><p>+6 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
+                    feedbackText = `<div style='font-size:35px'><p>You activated it but the other participant didn't!</p>
+                    <p>+6 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
                 } else if (lastTrialData.response == " " && partner_rt < trialDuration && rt < trialDuration) {
-                    feedbackText = `<div style='font-size:35px'><p>Both activated it!</p><p>+8 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
+                    feedbackText = `<div style='font-size:35px'><p>Both activated it!</p><p>+8 points for you!</p><p>
+                    <br></p><p>(Get ready for the next tile!)</p></div>`;
                 } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && partner_rt == 1000) {
-                    feedbackText = `<div style='font-size:35px'><p>Both lose!</p><p>+2 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
+                    feedbackText = `<div style='font-size:35px'><p>Both lose!</p><p>+2 points for you!</p><p><br>
+                    </p><p>(Get ready for the next tile!)</p></div>`;
                 } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && rt < trialDuration) {
-                    feedbackText = `<div style='font-size:35px'><p>The other participant activated it, but you didn't!</p><p>+4 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-                }
+                    feedbackText = `<div style='font-size:35px'><p>The other participant activated it, but you didn't!</p>
+                    <p>+4 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
+    //            }
             }
 
             return feedbackText;
@@ -1061,7 +1072,21 @@ function MakeFeedback(round, span, game) {
         choices: "NO_KEYS",
         trial_duration: 2000,
         on_finish: (data) => {
+            const lastTrialData = jsPsych.data.get().last(2).values()[0];
+            const partner_rt = lastTrialData.partner_rt;
+            const rt = lastTrialData.rt;
+            const trialDuration = lastTrialData.trial_duration;
+                if (lastTrialData.response == " " && partner_rt == 1000) {
+                    data.result = "WL"; 
+                } else if (lastTrialData.response == " " && partner_rt < trialDuration && rt < trialDuration) {
+                    data.result = "WW";
+                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && partner_rt == 1000) {
+                    data.result = "LL"; 
+                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && rt < trialDuration) {
+                    data.result = "LW";
+                }
             data.trialNumber = (data.trialNumber || 0) + 1; // Update trial number
+            console.log(data);
         }
     };
 }
