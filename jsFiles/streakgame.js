@@ -652,11 +652,11 @@ function LWTrial(round) {
                 </div>
             </div>`,
         choices: [" "],
+        response_ends_trial: true,
         trial_duration: trialforLose, // Fallback duration if no response from participant
         partner_rt: function forLW(min = 225, max = 235) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 },
-        ending_time: 250, // Must be larger than partner_rt and it's the difference between ending_time and participant's RT for the trial end time
         on_start: function(trial) {
             trialStartTime = Date.now(); 
             console.log('Outer circle becomes highlighted at partner reaction time: ' + trial.partner_rt);
@@ -694,7 +694,7 @@ function LLTrial(round) {
     let trialEndTime;
 
     return {
-        type: jsPsychWWHtmlKeyboardResponse,
+        type: jsPsychLWHtmlKeyboardResponse,
         data: { Trial_Type: 'combined' },
         stimulus: ` 
             <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
@@ -706,10 +706,9 @@ function LLTrial(round) {
                 </div>
             </div>`,
         choices: [" "],
-     //   trial_duration: trialforLose, // Fallback duration if no response from participant
         trial_duration: trialforLose, // Fallback duration if no response from participant
         partner_rt: partner_rtL,
-        ending_time: 250, // Must be larger than partner_rt and it's the difference between ending_time and participant's RT for the trial end time
+        response_ends_trial: false,
         on_start: function(trial) {
             trialStartTime = Date.now(); 
             console.log('Outer circle becomes highlighted at partner reaction time: ' + trial.partner_rt);
@@ -811,7 +810,7 @@ function MakeFeedback(round, span, game) {
             const trialDuration = lastTrialData.trial_duration;
             
             console.log(rt + ' rt in makefeedback');
-            console.log(trialDuration + ' last trial data in makefeedback');
+            console.log(trialDuration + ' last trial duration data in makefeedback');
             console.log(partner_rt + ' partner_rt in make feedback');
 
             let feedbackText = '';
@@ -820,13 +819,13 @@ function MakeFeedback(round, span, game) {
                 if (lastTrialData.response == " " && partner_rt == partner_rtL) {
                     feedbackText = `<div style='font-size:35px'><p>You activated it but the other participant didn't!</p>
                     <p>+6 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-                } else if (lastTrialData.response == " " && partner_rt < trialDuration && rt < trialDuration) {
+                } else if (lastTrialData.response == " " && partner_rt <= trialDuration && rt <= trialDuration) {
                     feedbackText = `<div style='font-size:35px'><p>Both activated it!</p><p>+8 points for you!</p><p>
                     <br></p><p>(Get ready for the next tile!)</p></div>`;
                 } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && partner_rt == partner_rtL) {
                     feedbackText = `<div style='font-size:35px'><p>Both lose!</p><p>+2 points for you!</p><p><br>
                     </p><p>(Get ready for the next tile!)</p></div>`;
-                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && rt < trialDuration) {
+                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && rt <= trialDuration) {
                     feedbackText = `<div style='font-size:35px'><p>The other participant activated it, but you didn't!</p>
                     <p>+4 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
     //            }
@@ -843,11 +842,11 @@ function MakeFeedback(round, span, game) {
             const trialDuration = lastTrialData.trial_duration;
                 if (lastTrialData.response == " " && partner_rt == partner_rtL) {
                     data.result = "WL"; 
-                } else if (lastTrialData.response == " " && partner_rt < trialDuration && rt < trialDuration) {
+                } else if (lastTrialData.response == " " && partner_rt <= trialDuration && rt <= trialDuration) {
                     data.result = "WW";
                 } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && partner_rt == partner_rtL) {
                     data.result = "LL"; 
-                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && rt < trialDuration) {
+                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && rt <= trialDuration) {
                     data.result = "LW";
                 }
             data.trialNumber = (data.trialNumber || 0) + 1; // Update trial number
@@ -1123,7 +1122,7 @@ p.partnerRevealAvatar = {
 
 
     p.task.round1 = {
-     timeline: [delayLoopR1, LLTrial, feedbackR1], //delayloop is the issue
+     timeline: [delayLoopR1, LWTrial, feedbackR1], //delayloop is the issue
         repetitions: noOfTrials,
     }; 
 /*

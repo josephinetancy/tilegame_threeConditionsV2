@@ -58,13 +58,6 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
               pretty_name: "Partner's response time",
               default: null,
           },
-
-          ending_time: {
-              type: jspsych.ParameterType.INT,
-              pretty_name: "Adding delay to end trial, which will be ending_time minus partner_rt",
-              default: null,
-          },
-
       },
   };
   /**
@@ -131,19 +124,12 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
         } else {
             console.error("inner-circle element not found");
         }
-
-        if (response.rt > trial.partner_rt) {
-            console.log("Participant responded after the partner.");
-            response.delay = 50; // Set delay (adjustable)
-        } else if (response.rt < trial.partner_rt) { 
-            console.log("Participant responded before the partner.");
-            response.delay = trial.ending_time - response.rt; // Calculate delay
-        }
-
-        // End the trial after the delay
-        setTimeout(end_trial, response.delay);
-    };
-
+    if (response.key !== null) {
+        setTimeout(end_trial, 50); // Add a 50ms delay before ending the trial
+    } else if (trial.response_ends_trial) {
+        end_trial(); // End trial immediately if no response
+    }
+ };
         // Handle conditions
 
           // start the response listener
