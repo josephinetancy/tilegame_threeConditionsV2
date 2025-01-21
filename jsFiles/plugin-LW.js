@@ -50,7 +50,7 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
           response_ends_trial: {
               type: jspsych.ParameterType.BOOL,
               pretty_name: "Response ends trial",
-              default: true,
+              default: false,
           },
 
           partner_rt: {
@@ -91,6 +91,7 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
           var response = {
               rt: null,
               key: null,
+              delay: null,
           };
           // function to end trial when it is time
           const end_trial = () => {
@@ -114,52 +115,37 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
               this.jsPsych.finishTrial(trial_data);
           };
           // function to handle responses by the subject
-          var after_response = (info) => {
-    // Add a CSS class to indicate a response was recorded
-    display_element.querySelector("#jspsych-html-keyboard-response-stimulus").className +=
-        " responded";
+    var after_response = (info) => {
+        // Add a CSS class to indicate a response was recorded
+        display_element.querySelector("#jspsych-html-keyboard-response-stimulus").className += " responded";
 
-    // Only record the first response
-    if (response.key == null) {
-        response = info;
-    }
+        // Only record the first response
+        if (response.key == null) {
+            response = info; // Record the response
+        }
 
-    // Check if the response's reaction time is greater than the partner's reaction time
-    if (response.rt > trial.partner_rt) {
-    console.log("Response RT > Partner RT");
-    response.delay = 120;
-    console.log("Participant wins but fake doesn't yet:", response.result);
+        // Change the inner-circle color immediately on any response
+        const innerCircle = document.getElementById("inner-circle");
+        if (innerCircle) {
+            innerCircle.style.backgroundColor = "#FFA500"; // Change to orange
+        } else {
+            console.error("inner-circle element not found");
+        }
 
-    const innerCircle = document.getElementById("inner-circle");
-    if (innerCircle) {
-        innerCircle.style.backgroundColor = "#FFA500"; // Change to orange
-    } else {
-        console.error("inner-circle element not found");
-    }
+        if (response.rt > trial.partner_rt) {
+            console.log("Participant responded after the partner.");
+            response.delay = 50; // Set delay (adjustable)
+        } else if (response.rt < trial.partner_rt) { 
+            console.log("Participant responded before the partner.");
+            response.delay = trial.ending_time - response.rt; // Calculate delay
+        }
 
-    // Use setTimeout to delay the trial ending
-    setTimeout(() => {
-        end_trial();
-    }, response.delay);
+        // End the trial after the delay
+        setTimeout(end_trial, response.delay);
+    };
 
-} else if (response.rt < trial.partner_rt) {
-    response.delay = trial.ending_time - response.rt; // Calculate delay
-    response.result = null; // Or set another result if needed
-    console.log("Participant responded before partner RT. Delay:", response.delay);
+        // Handle conditions
 
-    const innerCircle = document.getElementById("inner-circle");
-    if (innerCircle) {
-        innerCircle.style.backgroundColor = "#FFA500"; // Change to orange
-    } else {
-        console.error("inner-circle element not found");
-    }
-
-    // Use setTimeout to delay the trial ending
-    setTimeout(() => {
-        end_trial();
-    }, response.delay);
-}
-};
           // start the response listener
           if (trial.choices != "NO_KEYS") {
               var keyboardListener = this.jsPsych.pluginAPI.getKeyboardResponse({

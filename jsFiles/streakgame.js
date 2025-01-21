@@ -416,8 +416,10 @@ function updateStimColors(backgroundColor) {
     *
     */
 /*
+///
 AVATAR 
 CHOICE 
+///
 */
 
 let selectedAvatarColor = '#2669ee';
@@ -499,373 +501,19 @@ p.avatars = {
  //       this.R2 = makeRT(settings.nTrials, settings.pM);
     };
 
-/* 
-//
-FOR LL TRIAL 
+
+/*
 ///
-*/
-function getLLTrialDuration(min = 224, max = 250) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-} 
-
-
-//FOR LL//////this trial's duration is 200-250ms, the outer ring does not activate at all. Participants have some chance of getting it if they hit it before 250
-function LLTrial(round) {
-    let trialStartTime;
-    let trialEndTime;
-
-    return {
-        type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: 'combined' },
-        stimulus: ` 
-            <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
-                <div id="outer-circle" style="background-color: gray; width: 150px; height: 150px; 
-                    border-radius: 50%; border: 5px solid black; position: absolute;">
-                </div>
-                <div id="inner-circle" style="background-color: gray; border: 5px solid black;
-                    width: 100px; height: 100px; border-radius: 50%; position: absolute; top: 25px; left: 25px;">
-                </div>
-            </div>`,
-        choices: [" "],
-
-        trial_duration: 250,
-
-        on_start: function(trial) {
-            trialStartTime = Date.now();
-            console.log('LL Trial started');
-        },
-
-        on_finish: function(data) {
-            trialEndTime = Date.now();
-            const trialDuration = trialEndTime - trialStartTime;
-
-            // Save trial data
-            data.randomDuration = 1000; // No random outer circle activation in LL trials
-            data.trial_duration = trialDuration;
-
-            console.log('LL trial actual duration: ' + trialDuration);
-        }
-    };
-}
-
-
-/* 
-//
-FOR WL TRIAL: note will includex specific feedback/response because of adding 100ms in new trial
-///
-*/
-
-/*
-function WLTrial(round) {
-    let trialStartTime;
-    let trialEndTime;
-
-    return {
-        type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: 'combined' },
-        stimulus: ` 
-            <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
-                <div id="outer-circle" style="background-color: gray; width: 150px; height: 150px; 
-                    border-radius: 50%; border: 5px solid black; position: absolute;">
-                </div>
-                <div id="inner-circle" style="background-color: gray; border: 5px solid black;
-                    width: 100px; height: 100px; border-radius: 50%; position: absolute; top: 25px; left: 25px;">
-                </div>
-            </div>`,
-        choices: [" "],
-        response_ends_trial: true,
-        trial_duration: 750,
-
-        on_start: function(trial) {
-            trialStartTime = Date.now();
-            console.log('WL Trial started');
-        },
-
-        on_finish: function(data) {
-            trialEndTime = Date.now();
-            const trialDuration = trialEndTime - trialStartTime;
-
-            // Save trial data
-            data.randomDuration = 1000; // No random outer circle activation in LL trials
-            data.trial_duration = trialDuration;
-
-            console.log('WL trial actual duration: ' + trialDuration);
-        }
-    };
-} 
-
-function WLTrialSecond(round) {
-    return {
-        type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: `activation_${round}` },
-        stimulus: () => {
-            const lastTrialData = jsPsych.data.get().last(1).values()[0];
-            const randomDuration = lastTrialData.randomDuration;
-            const rt = lastTrialData.rt;
-            console.log(randomDuration + ' random duration in WLTRIALSECOND');
-            console.log(rt + ' reaction time in WLTRIALSECOND');
-
-            if (lastTrialData.response === " " && randomDuration < rt) {
-                console.log("Both win", stim.r1.m1);
-                return stim.r1.m1;
-            } else if (lastTrialData.response === " " && randomDuration > rt) {
-                console.log("Participant wins but fake doesn't", stim.r1.m2);
-                return stim.r1.m2;
-            } else if ((rt === null || rt === undefined) && randomDuration > lastTrialData.trial_duration) {
-                console.log("Both lose", stim.r1.m0);
-                return stim.r1.m0;
-            } else if ((rt === null || rt === undefined) && randomDuration < lastTrialData.trial_duration) {
-                console.log("Participant loses but fake wins", stim.r1.m3);
-                return stim.r1.m3;
-            }
-        },
-        choices: [' '],
-        response_ends_trial: false,
-        trial_duration: 100,
-        on_finish: function() {
-            const lastTrialData = jsPsych.data.get().last(1).values()[0];
-            const randomDuration = lastTrialData.randomDuration;
-            const rt = lastTrialData.rt;
-            let result; // Store the outcome into data
-
-            if (lastTrialData.response === " " && randomDuration < rt) {
-                result = 1;
-            } else if (lastTrialData.response === " " && randomDuration > rt) {
-                result = 2;
-            } else if ((rt === null || rt === undefined) && randomDuration > lastTrialData.trial_duration) {
-                result = 3;
-            } else if ((rt === null || rt === undefined) && randomDuration < lastTrialData.trial_duration) {
-                result = 4;
-            }
-            console.log(data);
-
-            jsPsych.data.get().last(1).values()[0].result = result;
-            jsPsych.data.get().last(2).values()[0].response !== 0 ? misses++ : hits++;
-        }
-    };
-} */
-
-
-function MakeResponseWL(round) {
-    return {
-        type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: `activation_${round}` },
-        stimulus: () => {
-            const lastTrialData = jsPsych.data.get().last(2).values()[0];
-            const randomDuration = lastTrialData.randomDuration;
-            const rt = lastTrialData.rt;
-            console.log(randomDuration + ' random duration in make response function');
-            console.log(rt + ' reaction time in make response function');
-            console.log('Current stim.r1.m1:', stim.r1.m1); 
-
-            if (lastTrialData.response === " " && randomDuration < rt) {
-                console.log("Both win", stim.r1.m1);
-                return stim.r1.m1;
-            } else if (lastTrialData.response === " " && randomDuration > rt) {
-                console.log("Participant wins but fake doesn't", stim.r1.m2);
-                return stim.r1.m2;
-            } else if ((rt === null || rt === undefined) && randomDuration > lastTrialData.trial_duration) {
-                console.log("Both lose", stim.r1.m0);
-                return stim.r1.m0;
-            } else if ((rt === null || rt === undefined) && randomDuration < lastTrialData.trial_duration) {
-                console.log("Participant loses but fake wins", stim.r1.m3);
-                return stim.r1.m3;
-            }
-        },
-        choices: [' '],
-        response_ends_trial: false,
-        trial_duration: 1000,
-        on_finish: () => {
-            const lastTrialData = jsPsych.data.get().last(2).values()[0];
-            const randomDuration = lastTrialData.randomDuration;
-            const rt = lastTrialData.rt;
-            let result; //just to log the result into the data
-
-            if (lastTrialData.response === " " && randomDuration < rt) {
-                result = 1;
-            } else if (lastTrialData.response === " " && randomDuration > rt) {
-                result = 2;
-            } else if ((rt === null || rt === undefined) && randomDuration > lastTrialData.trial_duration) {
-                result = 3;
-            } else if ((rt === null || rt === undefined) && randomDuration < lastTrialData.trial_duration) {
-                result = 4;
-            }
-
-            jsPsych.data.get().last(1).values()[0].result = result;
-            jsPsych.data.get().last(2).values()[0].response !== 0 ? misses++ : hits++;
-        }
-    };
-}
-
-
-
-function MakeWLResponse(round) {
-    return {
-        type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: `activation_${round}` },
-        stimulus: () => {
-            const lastTrialData = jsPsych.data.get().last(1).values()[0];
-            const randomDuration = lastTrialData.randomDuration;
-            const rt = lastTrialData.rt;
-            console.log(randomDuration + ' random duration in make response functionWL');
-            console.log(rt + ' reaction time in make response functionWL');
-            console.log('Current stim.r1.m1:', stim.r1.m1); 
-
-            if (lastTrialData.response === " " && randomDuration < rt) {
-                console.log("Both win", stim.r1.m1);
-                return stim.r1.m1;
-            } else if (lastTrialData.response === " " && randomDuration > rt) {
-                console.log("Participant wins but fake doesn't", stim.r1.m2);
-                return stim.r1.m2;
-            } else if ((rt === null || rt === undefined) && randomDuration > lastTrialData.trial_duration) {
-                console.log("Both lose", stim.r1.m0);
-                return stim.r1.m0;
-            } else if ((rt === null || rt === undefined) && randomDuration < lastTrialData.trial_duration) {
-                console.log("Participant loses but fake wins", stim.r1.m3);
-                return stim.r1.m3;
-            }
-        },
-        choices: [' '],
-        response_ends_trial: false,
-        trial_duration: 1000,
-        on_finish: function() {
-            const lastTrialData = jsPsych.data.get().last(1).values()[0];
-            const randomDuration = lastTrialData.randomDuration;
-            const rt = lastTrialData.rt;
-            let result; // Store the outcome into data
-
-            if (lastTrialData.response === " " && randomDuration < rt) {
-                result = 1;
-            } else if (lastTrialData.response === " " && randomDuration > rt) {
-                result = 2;
-            } else if ((rt === null || rt === undefined) && randomDuration > lastTrialData.trial_duration) {
-                result = 3;
-            } else if ((rt === null || rt === undefined) && randomDuration < lastTrialData.trial_duration) {
-                result = 4;
-            }
-
-            jsPsych.data.get().last(1).values()[0].result = result;
-            jsPsych.data.get().last(2).values()[0].response !== 0 ? misses++ : hits++;
-        }
-    };
-}
-
-//THIS IS TO TELL THE PARTICIPANT "YOU WON OR DID NOT WIN"
-function MakeFeedbackWL(round, span, game) {
-    return {
-        type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: `feedback_${round}` },
-        stimulus: () => {
-            const lastTrialData = jsPsych.data.get().last(3).values()[0];
-            const randomDuration = lastTrialData.randomDuration;
-            const rt = lastTrialData.rt;
-            const trialDuration = lastTrialData.trial_duration;
-            
-            console.log(rt + ' rt in makefeedbackWL');
-            console.log(trialDuration + ' last trial data in makefeedbackWL');
-            console.log(randomDuration + ' random duration in make feedbackWL');
-
-            let feedbackText = '';
-
-            if (round == 'R1') {
-                if (lastTrialData.response == " " && randomDuration > rt) {
-                    feedbackText = `<div style='font-size:35px'><p>You activated it but the other participant didn't!</p><p>+6 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-                } else if (lastTrialData.response == " " && randomDuration < rt) {
-                    feedbackText = `<div style='font-size:35px'><p>Both activated it!</p><p>+8 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && randomDuration > trialDuration) {
-                    feedbackText = `<div style='font-size:35px'><p>Both lose!</p><p>+2 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && randomDuration < trialDuration) {
-                    feedbackText = `<div style='font-size:35px'><p>The other participant activated it, but you didn't!</p><p>+4 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-                }
-            }
-
-            return feedbackText;
-        },
-        choices: "NO_KEYS",
-        trial_duration: 2000,
-        on_finish: (data) => {
-            data.trialNumber = (data.trialNumber || 0) + 1; // Update trial number
-        }
-    };
-}
-
-
-
-/*
-//
-FOR LW TRIAL
-//
-*/
-
-
-/*
-//FOR LW///this trial's duration is 250ms, the outer ring activates in 225-249ms (randomized)
-function LWTrial(round) {
-    let trialStartTime;
-    let trialEndTime;
-    let randomDuration;
-
-    return {
-        type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: 'combined' },
-        stimulus: ` 
-            <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
-                <div id="outer-circle" style="background-color: gray; width: 150px; height: 150px; 
-                    border-radius: 50%; border: 5px solid black; position: absolute;">
-                </div>
-                <div id="inner-circle" style="background-color: gray; border: 5px solid black;
-                    width: 100px; height: 100px; border-radius: 50%; position: absolute; top: 25px; left: 25px;">
-                </div>
-            </div>`,
-        choices: [" "],
-
-        trial_duration: 250,
-
-        on_start: function(trial) {
-            trialStartTime = Date.now();
-            randomDuration = getFPactivateLW();
-            console.log('random Duration that the outer circle becomes highlighted: ' + randomDuration); //ok so the random duration matches up
-
-            jsPsych.pluginAPI.setTimeout(function() {
-                const outerCircle = document.getElementById('outer-circle');
-                if (outerCircle) {
-                    outerCircle.style.backgroundColor = '#2669ee';
-                } else {
-                    console.error('outer-circle element not found');
-                }
-            }, randomDuration);
-        },
-        on_finish: function(data) {
-            trialEndTime = Date.now();
-            const trialDuration = trialEndTime - trialStartTime;
-            data.randomDuration = randomDuration;
-            data.trial_duration = trialDuration; 
-            console.log('Trial duration in combined trial: ' + trialDuration);
-            console.log('Random duration in combined trial: ' + randomDuration);
-        }
-    };
-} */
-
-/*
-
 variables for plugins
-
+///
 */
+
+let noOfTrials = 5;
 
 ///fake participant's activation time for WL and LL trials, that far exceeds trial duration
 let partner_rtL = 20000; //for when partner "loses".
 
-///fake participant's activation time is between 225-249 for LW trials
-function forLW(min = 225, max = 248) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-} 
-
-///fake participant's activation time is between 250-400 for WW trials
-function forWW(min = 225, max = 400) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-} 
-
-let delayforWWandWL = 400;
+let delayTime = 400;
 
 //trial duration times for WW and WL times: this is the time 
 let trialforWins = 750;
@@ -879,15 +527,13 @@ FOR WW TRIAL WITH PLUG IN
 ///
 */
 
-
-// WW trial
 function WWTrial(round) {
     let trialStartTime;
     let trialEndTime;
 
     return {
         type: jsPsychWWHtmlKeyboardResponse,
-        data: { Trial_Type: 'combined' },
+        data: { Trial_Type: 'combined'},
         stimulus: ` 
             <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
                 <div id="outer-circle" style="background-color: gray; width: 150px; height: 150px; 
@@ -898,35 +544,31 @@ function WWTrial(round) {
                 </div>
             </div>`,
         choices: [" "],
-        trial_duration: 30000, // Fallback duration if no response from participant
-       // trial_duration: trialforWins, // Fallback duration if no response from participant
-        partner_rt: 7000, // Partner reaction time
-       // partner_rt: forWW(), // Partner reaction time
-        ending_time: 10000,
-       // ending_time: delayforWWandWL, // Must be larger than partner_rt and it's the difference between ending_time and participant's RT for the trial end time
-        on_start: function(trial) {
-            trialStartTime = Date.now(); 
-            console.log('Outer circle becomes highlighted at partner reaction time: ' + trial.partner_rt);
-
-            // Highlight the outer circle at the partner reaction time
-            jsPsych.pluginAPI.setTimeout(function() {
+        trial_duration: trialforWins, // Fallback duration if no response from participant
+        partner_rt: function forWW(min = 225, max = 400) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        },
+        ending_time: delayTime, // Must be larger than partner_rt
+        on_start: function (trial) {
+            trialStartTime = Date.now();
+            jsPsych.pluginAPI.setTimeout(function () {
                 const outerCircle = document.getElementById('outer-circle');
                 if (outerCircle) {
                     outerCircle.style.backgroundColor = '#2669ee';
                 } else {
                     console.error('outer-circle element not found');
                 }
-            }, trial.partner_rt);
-        },
-        on_finish: function(data) {
+            }, trial.partner_rt)
+                },
+        on_finish: function (data) {
             trialEndTime = Date.now();
             const trialDuration = trialEndTime - trialStartTime;
-            data.trial_duration = trialDuration; 
-
-            // Additional logging
+            data.trial_duration = trialDuration;
             console.log('Reaction time: ' + data.rt);
             console.log('Trial duration: ' + trialDuration);
-        }
+            console.log('Partner RT: ' + data.partner_rt);
+
+        },
     };
 }
 
@@ -943,7 +585,7 @@ function WLTrial(round) {
     let trialEndTime;
 
     return {
-        type: jsPsychWLHtmlKeyboardResponse,
+        type: jsPsychWWHtmlKeyboardResponse,
         data: { Trial_Type: 'combined' },
         stimulus: ` 
             <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
@@ -957,12 +599,11 @@ function WLTrial(round) {
         choices: [" "],
         trial_duration: trialforWins, // Fallback duration if no response from participant
         partner_rt: partner_rtL, // Partner reaction time
-        ending_time: delayforWWandWL, // Must be larger than partner_rt and it's the difference between ending_time and participant's RT for the trial end time
+        ending_time: delayTime, // Must be larger than partner_rt and it's the difference between ending_time and participant's RT for the trial end time
         on_start: function(trial) {
             trialStartTime = Date.now(); 
             console.log('Outer circle becomes highlighted at partner reaction time: ' + trial.partner_rt);
 
-            // Highlight the outer circle at the partner reaction time
             jsPsych.pluginAPI.setTimeout(function() {
                 const outerCircle = document.getElementById('outer-circle');
                 if (outerCircle) {
@@ -999,7 +640,7 @@ function LWTrial(round) {
     let trialEndTime;
 
     return {
-        type: jsPsychWLHtmlKeyboardResponse,
+        type: jsPsychLWHtmlKeyboardResponse,
         data: { Trial_Type: 'combined' },
         stimulus: ` 
             <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
@@ -1011,16 +652,15 @@ function LWTrial(round) {
                 </div>
             </div>`,
         choices: [" "],
-        trial_duration: 300, // Fallback duration if no response from participant
-        partner_rt: 220, // Partner reaction time
-        ending_time: 750, // Must be larger than partner_rt and it's the difference between ending_time and participant's RT for the trial end time
+        trial_duration: trialforLose, // Fallback duration if no response from participant
+        partner_rt: function forLW(min = 225, max = 235) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+},
+        ending_time: 250, // Must be larger than partner_rt and it's the difference between ending_time and participant's RT for the trial end time
         on_start: function(trial) {
             trialStartTime = Date.now(); 
             console.log('Outer circle becomes highlighted at partner reaction time: ' + trial.partner_rt);
 
-            trial.data.partner_rt = trial.partner_rt;
-
-            // Highlight the outer circle at the partner reaction time
             jsPsych.pluginAPI.setTimeout(function() {
                 const outerCircle = document.getElementById('outer-circle');
                 if (outerCircle) {
@@ -1035,7 +675,59 @@ function LWTrial(round) {
             const trialDuration = trialEndTime - trialStartTime;
             data.trial_duration = trialDuration;
 
-            // Additional logging
+            console.log('Reaction time: ' + data.rt);
+            console.log('Trial duration: ' + trialDuration);
+            console.log('Partner RT: ' + data.partner_rt);
+        }
+    };
+}
+
+/* 
+//
+FOR LL TRIAL WITH PLUG IN 
+///
+*/
+
+// LL trial
+function LLTrial(round) {
+    let trialStartTime;
+    let trialEndTime;
+
+    return {
+        type: jsPsychWWHtmlKeyboardResponse,
+        data: { Trial_Type: 'combined' },
+        stimulus: ` 
+            <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
+                <div id="outer-circle" style="background-color: gray; width: 150px; height: 150px; 
+                    border-radius: 50%; border: 5px solid black; position: absolute;">
+                </div>
+                <div id="inner-circle" style="background-color: gray; border: 5px solid black;
+                    width: 100px; height: 100px; border-radius: 50%; position: absolute; top: 25px; left: 25px;">
+                </div>
+            </div>`,
+        choices: [" "],
+     //   trial_duration: trialforLose, // Fallback duration if no response from participant
+        trial_duration: trialforLose, // Fallback duration if no response from participant
+        partner_rt: partner_rtL,
+        ending_time: 250, // Must be larger than partner_rt and it's the difference between ending_time and participant's RT for the trial end time
+        on_start: function(trial) {
+            trialStartTime = Date.now(); 
+            console.log('Outer circle becomes highlighted at partner reaction time: ' + trial.partner_rt);
+
+            jsPsych.pluginAPI.setTimeout(function() {
+                const outerCircle = document.getElementById('outer-circle');
+                if (outerCircle) {
+                    outerCircle.style.backgroundColor = '#2669ee';
+                } else {
+                    console.error('outer-circle element not found');
+                }
+            }, trial.partner_rt);
+        },
+        on_finish: function(data) {
+            trialEndTime = Date.now();
+            const trialDuration = trialEndTime - trialStartTime;
+            data.trial_duration = trialDuration;
+
             console.log('Reaction time: ' + data.rt);
             console.log('Trial duration: ' + trialDuration);
             console.log('Partner RT: ' + data.partner_rt);
@@ -1044,75 +736,12 @@ function LWTrial(round) {
 }
 
 
-//FP to activate WW
-function getFPactivateWW(min = 250, max = 400) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-} 
 
 /* 
 //
-Makeresponse + makefeedback for LL and WL below. 
+Makeresponse + makefeedback 
 ///
 */
-
-
-///NEW MAKE RESPONSE BASED ON WW 
-
-function MakeWWResponse(round) {
-    return {
-        type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: `activation_${round}` },
-        stimulus: () => {
-            const lastTrialData = jsPsych.data.get().last(1).values()[0];
-            console.log(lastTrialData);
-            const partner_rt = lastTrialData.partner_rt;
-            const rt = lastTrialData.rt;
-            console.log(partner_rt + ' partner rt in make response function');
-            console.log(rt + ' reaction time in make response function');
-
-            if (lastTrialData.response === " " && partner_rt < rt) {
-                console.log("Both win", stim.r1.m1);
-                return stim.r1.m1;
-            } else if (lastTrialData.response === " " && partner_rt > rt) {
-                console.log("Participant wins but fake doesn't yet", stim.r1.m2);
-                return stim.r1.m2;
-            } else if ((rt === null || rt === undefined) && partner_rt > lastTrialData.trial_duration) {
-                console.log("Both lose", stim.r1.m0);
-                return stim.r1.m0;
-            } else if ((rt === null || rt === undefined) && partner_rt < lastTrialData.trial_duration) {
-                console.log("Participant loses but fake wins", stim.r1.m3);
-                return stim.r1.m3;
-            }
-        },
-        choices: [' '],
-        response_ends_trial: false,
-        trial_duration: 1000,
-        on_finish: () => {
-            const lastTrialData = jsPsych.data.get().last(1).values()[0];
-            const rt = lastTrialData.rt;
-            let result; //just to log the result into the data
-
-            if (lastTrialData.response === " " && partner_rt < rt) {
-                result = 1;
-            } else if (lastTrialData.response === " " && partner_rt > rt) {
-                console.log("Participant wins but fake doesn't yet", stim.r1.m2);
-                result = 2;
-            } else if ((rt === null || rt === undefined) && partner_rt > lastTrialData.trial_duration) {
-                result = 3;
-            } else if ((rt === null || rt === undefined) && partner_rt < lastTrialData.trial_duration) {
-                console.log("Participant loses but fake wins", stim.r1.m3);
-                result = 4;
-            }
-            
-            // Logging the result into the data
-            jsPsych.data.get().last(1).values()[0].result = result;
-            jsPsych.data.get().last(2).values()[0].response !== 0 ? misses++ : hits++;
-            console.log(data);
-        } // End of on_finish function
-    }; // End of return object
-} // End of MakeWWResponse function
-
-
 
 
 /*
@@ -1206,17 +835,17 @@ function MakeFeedback(round, span, game) {
             return feedbackText;
         },
         choices: "NO_KEYS",
-        trial_duration: 3000,
+        trial_duration: 3500,
         on_finish: (data) => {
             const lastTrialData = jsPsych.data.get().last(2).values()[0];
             const partner_rt = lastTrialData.partner_rt;
             const rt = lastTrialData.rt;
             const trialDuration = lastTrialData.trial_duration;
-                if (lastTrialData.response == " " && partner_rt == 1000) {
+                if (lastTrialData.response == " " && partner_rt == partner_rtL) {
                     data.result = "WL"; 
                 } else if (lastTrialData.response == " " && partner_rt < trialDuration && rt < trialDuration) {
                     data.result = "WW";
-                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && partner_rt == 1000) {
+                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && partner_rt == partner_rtL) {
                     data.result = "LL"; 
                 } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && rt < trialDuration) {
                     data.result = "LW";
@@ -1453,19 +1082,8 @@ p.partnerRevealAvatar = {
      //   combinedTrial = new CombinedTrial('R1'),
         LLTrial = new LLTrial('R1'),
         LWTrial = new LWTrial('R1'),
-      //  secondPart = new secondPart('R1'),
         WLTrial = new WLTrial('R1'),
-      //  LLresponse = new MakeLLResponse('R1'),
-      //  outerR1 = new MakeOuter('R1'),
-      //  outerR1 = new MakeOuter('R2'),
         WWTrial = new WWTrial('R1'),
-       // responseR1 = new MakeResponse('R1'),
-        responseWW = new MakeWWResponse('R1'),
-  //      responseR2 = new MakeResponse('R2'),
-        responseWL = new MakeResponseWL('R1'),
-    //    responseWW = new MakeResponseWW('R1'),
-   //     feedbackWW = new MakeFeedbackWW('R1'),
-        feedbackWL = new MakeFeedbackWL('R1'),
         feedbackR1 = new MakeFeedback('R1', text.span1, text.game1),
         feedbackR2 = new MakeFeedback('R2', text.span2, text.game2),
         delayR1 = new MakeDelay('R1'),
@@ -1502,12 +1120,11 @@ p.partnerRevealAvatar = {
     };
 
 
+
+
     p.task.round1 = {
-  //   timeline: [WLTrialtimeline], //delayloop is the issue
-     timeline: [WWTrial, feedbackR1], //delayloop is the issue
-   //      timeline: [WWTrial],
-       //timeline: [delayLoopR1, combinedTrial, responseR1, feedbackR1], 
-        repetitions: 5,
+     timeline: [delayLoopR1, LLTrial, feedbackR1], //delayloop is the issue
+        repetitions: noOfTrials,
     }; 
 /*
 p.task.round1 = { 
