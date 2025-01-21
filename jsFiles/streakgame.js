@@ -962,8 +962,6 @@ function WLTrial(round) {
             trialStartTime = Date.now(); 
             console.log('Outer circle becomes highlighted at partner reaction time: ' + trial.partner_rt);
 
-            trial.data.partner_rt = trial.partner_rt;
-
             // Highlight the outer circle at the partner reaction time
             jsPsych.pluginAPI.setTimeout(function() {
                 const outerCircle = document.getElementById('outer-circle');
