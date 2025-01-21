@@ -1,4 +1,4 @@
-var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
+var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
   'use strict';
 
   const info = {
@@ -75,7 +75,7 @@ var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
    * @author Josh de Leeuw
    * @see {@link https://www.jspsych.org/plugins/jspsych-html-keyboard-response/ html-keyboard-response plugin documentation on jspsych.org}
    */
-  class WWKeyboardResponsePlugin {
+  class LWKeyboardResponsePlugin {
       constructor(jsPsych) {
           this.jsPsych = jsPsych;
       }
@@ -128,6 +128,7 @@ var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
     if (response.rt > trial.partner_rt) {
     console.log("Response RT > Partner RT");
     response.delay = 120;
+    console.log("Participant wins but fake doesn't yet:", response.result);
 
     const innerCircle = document.getElementById("inner-circle");
     if (innerCircle) {
@@ -213,8 +214,8 @@ var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
           }
       }
   }
-  WWKeyboardResponsePlugin.info = info;
+  LWKeyboardResponsePlugin.info = info;
 
-  return WWKeyboardResponsePlugin;
+  return LWKeyboardResponsePlugin;
 
 })(jsPsychModule);
