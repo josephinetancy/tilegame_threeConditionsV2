@@ -29,6 +29,14 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
               default: null,
           },
           /**
+           * How long participants have to respond.
+           */
+          response_duration: {
+              type: jspsych.ParameterType.INT,
+              pretty_name: "Response duration",
+              default: null,
+          },
+          /**
            * How long to show the stimulus.
            */
           stimulus_duration: {
@@ -80,6 +88,12 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
           }
           // draw
           display_element.innerHTML = new_html;
+          // set timeout 
+          const innerCircle = document.getElementById("inner-circle");
+          const timeoutID = setTimeout(() => {
+            innerCircle.style.backgroundColor = "grey"; // Change to orange
+          }, trial.response_duration);
+
           // store response
           var response = {
               rt: null,
@@ -101,6 +115,7 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
                   response: response.key,
                   partner_rt: trial.partner_rt,
                   delay: response.delay || null,
+                  outcome: response.rt != null & response.rt <= trial.response_duration,
               };
               // clear the display
               display_element.innerHTML = "";
@@ -118,18 +133,13 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
         }
 
         // Change the inner-circle color immediately on any response
-        const innerCircle = document.getElementById("inner-circle");
-        if (innerCircle) {
+        if (innerCircle && response.rt <= trial.response_duration) {
+            clearTimeout(timeoutID);
             innerCircle.style.backgroundColor = "#FFA500"; // Change to orange
         } else {
             console.error("inner-circle element not found");
         }
-    if (response.key !== null) {
-        setTimeout(end_trial, 50); // Add a 50ms delay before ending the trial
-    } else if (trial.response_ends_trial) {
-        end_trial(); // End trial immediately if no response
-    }
- };
+    };
         // Handle conditions
 
           // start the response listener

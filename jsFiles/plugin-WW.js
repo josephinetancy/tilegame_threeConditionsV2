@@ -29,6 +29,14 @@ var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
               default: null,
           },
           /**
+           * How long participants have to respond.
+           */
+          response_duration: {
+              type: jspsych.ParameterType.INT,
+              pretty_name: "Response duration",
+              default: null,
+          },
+          /**
            * How long to show the stimulus.
            */
           stimulus_duration: {
@@ -87,6 +95,23 @@ var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
           }
           // draw
           display_element.innerHTML = new_html;
+          // set timeout 
+          const innerCircle = document.getElementById("inner-circle");
+          const outerCircle = document.getElementById('outer-circle');
+
+          const timeoutID = setTimeout(() => {
+            innerCircle.style.backgroundColor = "grey"; // Change to orange
+          }, trial.response_duration);
+
+          const timeoutID_partner = setTimeout(() => {
+              if (trial.partner_rt <= 100) {
+                outerCircle.style.backgroundColor = "grey"; // Change to orange
+              };
+          }, trial.response_duration);
+
+
+
+
           // store response
           var response = {
               rt: null,
@@ -108,6 +133,7 @@ var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
                   response: response.key,
                   partner_rt: trial.partner_rt,
                   delay: response.delay || null,
+                  outcome: response.rt != null & response.rt <= trial.response_duration,
               };
               // clear the display
               display_element.innerHTML = "";
@@ -119,30 +145,27 @@ var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
         // Add a CSS class to indicate a response was recorded
         display_element.querySelector("#jspsych-html-keyboard-response-stimulus").className += " responded";
 
+
         // Only record the first response
         if (response.key == null) {
             response = info; // Record the response
         }
 
         // Change the inner-circle color immediately on any response
-        const innerCircle = document.getElementById("inner-circle");
-        if (innerCircle) {
+        if (innerCircle && response.rt <= trial.response_duration) {
+            clearTimeout(timeoutID);
+            clearTimeout(timeoutID_partner);
             innerCircle.style.backgroundColor = "#FFA500"; // Change to orange
+            setTimeout(() => {
+              if (trial.partner_rt <= 100) {
+                outerCircle.style.backgroundColor = "grey"; // Change to orange
+              };
+            }, trial.partner_rt);
         } else {
+
             console.error("inner-circle element not found");
         }
 
-        // Handle conditions (if needed)
-        if (response.rt > trial.partner_rt) {
-            console.log("Participant responded after the partner.");
-            response.delay = 50; // Set delay (adjustable)
-        } else {
-            console.log("Participant responded before the partner.");
-            response.delay = trial.ending_time - response.rt; // Calculate delay
-        }
-
-        // End the trial after the delay
-        setTimeout(end_trial, response.delay);
     };
           // start the response listener
           if (trial.choices != "NO_KEYS") {
