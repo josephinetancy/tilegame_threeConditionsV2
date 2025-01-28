@@ -1,3 +1,7 @@
+//randomAssignment
+const randomAssignment = Math.floor(Math.random() * 2) + 1;
+console.log(randomAssignment + "randomAssignment")
+
 // Define Stimuli
 let p = {};
 
@@ -19,6 +23,7 @@ var streakGame = (function() {
 
     // create text variables for instructions
     
+
 
     var text = {
         game1: settings.colorOrder == 1 ? 'Green Game' : 'Blue Game', //text.game1 = blue game
@@ -118,7 +123,7 @@ function updateStimColors(backgroundColor) {
                 </div>`,
 
                 `<div class='parent'>
-                <p>In each version of the game, you'll have 50 chances to "activate" tiles like this one per each version of the game.<br>
+                <p>In each version of the game, you'll have 80 chances to "activate" tiles like this one per each version of the game.<br>
                 <p>The tiles will appear on your screen, then disappear very quickly.</p> 
                 <p> To activate a tile, you must press your SPACE BAR before it disappears; whenever you see a tile, you should press your SPACE BAR as fast as possible. </p>
                 <p>Watch the video below to see how it works. </p>
@@ -531,18 +536,18 @@ function WWTrial(round) {
     let trialStartTime;
     let trialEndTime;
 
+    const outerShapeClass = randomAssignment === 1 ? "square" : "circle";
+    const innerShapeClass = randomAssignment === 1 ? "square" : "circle";
+
     return {
         type: jsPsychWWHtmlKeyboardResponse,
-        data: { Trial_Type: 'combined'},
-        stimulus: ` 
-            <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
-                <div id="outer-circle" style="background-color: white; width: 150px; height: 150px; 
-                    border-radius: 50%; border: 5px solid black; position: absolute;">
-                </div>
-                <div id="inner-circle" style="background-color: white; border: 5px solid black;
-                    width: 100px; height: 100px; border-radius: 50%; position: absolute; top: 25px; left: 25px;">
-                </div>
-            </div>`,
+        data: { Trial_Type: randomAssignment === 1 ? "square" : "circle" },
+        stimulus: `
+            <div id="outer-container">
+                <div id="outer-shape" class="${outerShapeClass}"></div>
+                <div id="inner-shape" class="${innerShapeClass}"></div>
+            </div>
+        `,
         choices: [" "],
         response_duration: trialforWins, 
         trial_duration: 2000, // Fallback duration if no response from participant
@@ -553,7 +558,7 @@ function WWTrial(round) {
         on_start: function (trial) {
             trialStartTime = Date.now();
             jsPsych.pluginAPI.setTimeout(function () {
-                const outerCircle = document.getElementById('outer-circle');
+                const outerCircle = document.getElementById('outer-shape');
                 if (outerCircle) {
                     outerCircle.style.backgroundColor = '#2669ee';
                 } else {
@@ -586,36 +591,36 @@ function WLTrial(round) {
     let trialStartTime;
     let trialEndTime;
 
+    // Determine the shape classes based on randomAssignment
+    const outerShapeClass = randomAssignment === 1 ? "square" : "circle";
+    const innerShapeClass = randomAssignment === 1 ? "square" : "circle";
+
     return {
         type: jsPsychWWHtmlKeyboardResponse,
-        data: { Trial_Type: 'combined' },
-        stimulus: ` 
-            <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
-                <div id="outer-circle" style="background-color: white; width: 150px; height: 150px; 
-                    border-radius: 50%; border: 5px solid black; position: absolute;">
-                </div>
-                <div id="inner-circle" style="background-color: white; border: 5px solid black;
-                    width: 100px; height: 100px; border-radius: 50%; position: absolute; top: 25px; left: 25px;">
-                </div>
-            </div>`,
+        data: { Trial_Type: randomAssignment === 1 ? "square" : "circle" },
+        stimulus: `
+            <div id="outer-container">
+                <div id="outer-shape" class="${outerShapeClass}"></div>
+                <div id="inner-shape" class="${innerShapeClass}"></div>
+            </div>
+        `,
         choices: [" "],
-        response_duration: trialforWins, 
-        trial_duration: 2000, // Fallback duration if no response from participant
+        response_duration: trialforWins,
+        trial_duration: 2000,
         partner_rt: function forWW(min = 0, max = 100) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
-        },        
-        ending_time: delayTime, // Must be larger than partner_rt and it's the difference between ending_time and participant's RT for the trial end time
+        },
+        ending_time: delayTime,
         on_finish: function(data) {
             trialEndTime = Date.now();
             const trialDuration = trialEndTime - trialStartTime;
             data.trial_duration = trialDuration;
             data.partner_outcome = false;
 
-            // Additional logging
-            console.log('Reaction time: ' + data.rt);
-            console.log('Trial duration: ' + trialDuration);
-            console.log('Partner RT: ' + data.partner_rt);
-        }
+            console.log("Reaction time: " + data.rt);
+            console.log("Trial duration: " + trialDuration);
+            console.log("Partner RT: " + data.partner_rt);
+        },
     };
 }
 
@@ -632,18 +637,18 @@ function LWTrial(round) {
     let trialStartTime;
     let trialEndTime;
 
+    const outerShapeClass = randomAssignment === 1 ? "square" : "circle";
+    const innerShapeClass = randomAssignment === 1 ? "square" : "circle";
+
     return {
         type: jsPsychLWHtmlKeyboardResponse,
-        data: { Trial_Type: 'combined' },
-        stimulus: ` 
-            <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
-                <div id="outer-circle" style="background-color: white; width: 150px; height: 150px; 
-                    border-radius: 50%; border: 5px solid black; position: absolute;">
-                </div>
-                <div id="inner-circle" style="background-color: white; border: 5px solid black;
-                    width: 100px; height: 100px; border-radius: 50%; position: absolute; top: 25px; left: 25px;">
-                </div>
-            </div>`,
+        data: { Trial_Type: randomAssignment === 1 ? "square" : "circle" },
+        stimulus: `
+            <div id="outer-container">
+                <div id="outer-shape" class="${outerShapeClass}"></div>
+                <div id="inner-shape" class="${innerShapeClass}"></div>
+            </div>
+        `,
         choices: [" "],
         response_duration: trialforLose, // Fallback duration if no response from participant
         trial_duration: 2000, // Fallback duration if no response from participant
@@ -655,7 +660,7 @@ function LWTrial(round) {
             console.log('Outer circle becomes highlighted at partner reaction time: ' + trial.partner_rt);
 
             jsPsych.pluginAPI.setTimeout(function() {
-                const outerCircle = document.getElementById('outer-circle');
+                const outerCircle = document.getElementById('outer-shape');
                 if (outerCircle) {
                     outerCircle.style.backgroundColor = '#2669ee';
                 } else {
@@ -687,18 +692,18 @@ function LLTrial(round) {
     let trialStartTime;
     let trialEndTime;
 
+    const outerShapeClass = randomAssignment === 1 ? "square" : "circle";
+    const innerShapeClass = randomAssignment === 1 ? "square" : "circle";
+
     return {
         type: jsPsychLWHtmlKeyboardResponse,
-        data: { Trial_Type: 'combined' },
-        stimulus: ` 
-            <div id="outer-circle-container" style="position: relative; width: 150px; height: 150px;">
-                <div id="outer-circle" style="background-color: white; width: 150px; height: 150px; 
-                    border-radius: 50%; border: 5px solid black; position: absolute;">
-                </div>
-                <div id="inner-circle" style="background-color: white; border: 5px solid black;
-                    width: 100px; height: 100px; border-radius: 50%; position: absolute; top: 25px; left: 25px;">
-                </div>
-            </div>`,
+        data: { Trial_Type: randomAssignment === 1 ? "square" : "circle" },
+        stimulus: `
+            <div id="outer-container">
+                <div id="outer-shape" class="${outerShapeClass}"></div>
+                <div id="inner-shape" class="${innerShapeClass}"></div>
+            </div>
+        `,
         choices: [" "],
         response_duration: trialforLose, // Fallback duration if no response from participant
         trial_duration: 2000, // Fallback duration if no response from participant
@@ -709,7 +714,7 @@ function LLTrial(round) {
             console.log('Outer circle becomes highlighted at partner reaction time: ' + trial.partner_rt);
 
             jsPsych.pluginAPI.setTimeout(function() {
-                const outerCircle = document.getElementById('outer-circle');
+                const outerCircle = document.getElementById('outer-shape');
                 if (outerCircle) {
                     outerCircle.style.backgroundColor = 'grey';
                 } else {
@@ -904,7 +909,7 @@ function MakeTooFast(round) {
     };
 }
 
-p.foundPartner= {
+p.foundPartner = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <div style="font-size: 24px; text-align: center;">
@@ -1133,7 +1138,8 @@ p.partnerRevealAvatar = {
 
 
     p.task.round1 = {
-        timeline: [LLLoop, WWLoop, LWLoop, WLLoop], //delayloop is the issue
+        timeline: [WWLoop, LLLoop], //delayloop is the issue
+        //timeline: [LLLoop, WWLoop, LWLoop, WLLoop], //delayloop is the issue
         randomize_order: true,
         repetitions: noOfTrials,
     }; 

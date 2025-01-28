@@ -256,3 +256,34 @@
   font-weight: bold;
   color: #cf0000;
 }
+
+#outer-shape, #inner-shape {
+    position: absolute;
+    border: 5px solid black;
+    background-color: white;
+}
+
+/* Circle styles */
+.circle {
+    border-radius: 50%; /* Fully rounded */
+}
+
+/* Square styles */
+.square {
+    border-radius: 0; /* No rounding */
+}
+
+/* Sizes for outer and inner shapes */
+#outer-shape {
+    width: 150px;
+    height: 150px;
+}
+
+#inner-shape {
+    width: 100px;
+    height: 100px;
+    top: 25px;
+    left: 25px;
+    position: relative;
+}
+

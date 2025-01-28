@@ -89,7 +89,9 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
           // draw
           display_element.innerHTML = new_html;
           // set timeout 
-          const innerCircle = document.getElementById("inner-circle");
+          const innerCircle = document.getElementById("inner-shape");
+          const outerCircle = document.getElementById('outer-shape');
+
           const timeoutID = setTimeout(() => {
             innerCircle.style.backgroundColor = "grey"; // Change to orange
           }, trial.response_duration);
