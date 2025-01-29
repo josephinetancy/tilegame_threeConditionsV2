@@ -93,7 +93,7 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
           const outerCircle = document.getElementById('outer-shape');
 
           const timeoutID = setTimeout(() => {
-            innerCircle.style.backgroundColor = "grey"; // Change to orange
+            innerCircle.style.backgroundColor = "grey"; 
           }, trial.response_duration);
 
           // store response
@@ -137,7 +137,7 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
         // Change the inner-circle color immediately on any response
         if (innerCircle && response.rt <= trial.response_duration) {
             clearTimeout(timeoutID);
-            innerCircle.style.backgroundColor = "#FFA500"; // Change to orange
+            innerCircle.style.backgroundColor = "${backgroundColor}"; // Change to orange
         } else {
             console.error("inner-circle element not found");
         }

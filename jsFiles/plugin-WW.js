@@ -73,6 +73,12 @@ var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
               default: null,
           },
 
+          selected_color: {
+              type: jspsych.ParameterType.HTML_STRING,
+              pretty_name: "Selected color that participant chose",
+              default: null,
+          },
+
       },
   };
   /**
@@ -134,6 +140,7 @@ var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
                   partner_rt: trial.partner_rt,
                   delay: response.delay || null,
                   outcome: response.rt != null & response.rt <= trial.response_duration,
+                  selected_color: trial.selected_color,
               };
               // clear the display
               display_element.innerHTML = "";
@@ -155,7 +162,8 @@ var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
         if (innerCircle && response.rt <= trial.response_duration) {
             clearTimeout(timeoutID);
             clearTimeout(timeoutID_partner);
-            innerCircle.style.backgroundColor = "#FFA500"; // Change to orange
+            innerCircle.style.backgroundColor = trial.selected_color; // change to participant's color
+            console.log("inner shape is", trial.selected_color)
             setTimeout(() => {
               if (trial.partner_rt <= 100) {
                 outerCircle.style.backgroundColor = "grey"; // Change to orange

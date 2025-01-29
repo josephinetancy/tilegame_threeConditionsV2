@@ -2,6 +2,8 @@
 const randomAssignment = Math.floor(Math.random() * 2) + 1;
 console.log(randomAssignment + "randomAssignment")
 
+let avatarResponse = '#2669ee';
+
 // Define Stimuli
 let p = {};
 
@@ -44,7 +46,7 @@ var streakGame = (function() {
 
 
 // Function to update the stim colors dynamically
-
+/*
 
 var stim = {
     r1: {
@@ -71,6 +73,7 @@ var stim = {
 };  
 
 
+/*
 function updateStimColors(backgroundColor) {
     stim.r1.m0 = `<div class="box" style="background-color:white"> </div>`;
     stim.r1.m1 = `<div class="outer-circle" style="background-color: #2669ee; 
@@ -94,7 +97,7 @@ function updateStimColors(backgroundColor) {
             width: 100px; height: 100px; border-radius: 50%;"></div>
     </div>`;
 } 
-
+*/
 
    /*
     *
@@ -112,17 +115,19 @@ function updateStimColors(backgroundColor) {
             r1: {
                 part1: [`<div class='parent'>
                 <p> Welcome to the "Tile Game"! </p>
-                <p>We are interested in your response in playing a game. </p> 
-                <p>After playing two versions of the game, you'll report how immersed and engaged you felt.</p>
+                <p>We are interested in your thoughts about a game of skill. </p> 
+                <p>Specifically, you'll play a game of skill called the Tile Game.</p>
+                <p>INSERT GIF HERE</p>
                 </div>`,
 
                 `<div class='parent'>
                 <p>The goal of the game is to win as much money as possible.</p>
                 <p>All of the money you win during the game will be added to a "bonus fund,"<br>which you'll receive at the end of the study.</p>
-                <p>Your total payment will be $X for your participation, plus all of the money in your bonus fund.</p>
+                <p>Your total payment will be $10 for your participation, plus all of the money in your bonus fund.</p>
                 </div>`,
 
                 `<div class='parent'>
+                <p> You'll play two versions of the game, called the Circle game or the Square game. </p>
                 <p>In each version of the game, you'll have 80 chances to "activate" tiles like this one per each version of the game.<br>
                 <p>The tiles will appear on your screen, then disappear very quickly.</p> 
                 <p> To activate a tile, you must press your SPACE BAR before it disappears; whenever you see a tile, you should press your SPACE BAR as fast as possible. </p>
@@ -132,11 +137,11 @@ function updateStimColors(backgroundColor) {
 
                 `<div class='parent'>
                 <p>The more tiles you activate, the more money you'll earn.</p>
-                <p>Specifically, X cents will be added to your bonus fund for each round you win.</p>               
+                <p>Specifically, $0.10 cents will be added to your bonus fund for each round you win.</p>               
                 </div>`,
 
                 `<div class='parent'>
-                <p>In the round game, the tiles are round.</p>
+                <p>In the Circle game, the tiles are circles.</p>
                 <p>We will randomly assign you to either play the outer circle or the inner circle. </p>
                 <p>To activate the round tile, you must press your SPACE BAR before it disappears; whenever you see a tile, you should press your SPACE BAR as fast as possible.
                 <p>Insert GIF HERE</p></div>
@@ -346,34 +351,28 @@ function updateStimColors(backgroundColor) {
 
     const consent = `
     <div class='parent' style='height: 1000px; width: 1000px'>
-    <p><b>Adult Consent for Participation in a Research Project<br>
-    200 FR 2 (2017-1)</b><br>
-    Study Title: Choices, decisions, and pursuits<br>
-    Investigator: Josephine Tan & David Melnikoff<br>
-    HSC #: 2000023892</p>
+    <p><b>Consent Form<br>
 
-    <p><b>Purpose:</b><br>
-    You are invited to participate in a research study designed to examine judgment and decision-making.</p>
+    <p><b>Description</b><br>
+    You are invited to participate in a research study on how humans enjoy different tasks. You'll be asked to participate in a short game that involves hitting a space bar to activate a tile. Then you'll be asked to answer various questions about your experience./p>
 
-    <p><b>Procedures:</b><br>
-    If you agree to take part, your participation in this study will involve answering a series of questions as well as making choices between different options that will be presented to you as part of study activities. We anticipate that your involvement will require 12-15 minutes.</p>
+    <p><b>Time Involvement</b><br>
+    Your participation will take approximately 20 minutes. 
 
-    <p><b>Compensation:</b><br>
-    You will receive $${settings.basePay} in exchange for your participation at the Yale SOM Lab.</p>
+    <p><b>Risks and Benefits</b><br>
+    The risks associated with this study are not anticipated to be beyond those involved in normal, daily computer use. There are no foreseeable psychological risks and benefits beyond those involved in normal, daily life. The benefits which may reasonably be expected to result from this study are none. We cannot and do not guarantee or promise that you will receive any benefits from this study.
+    
+    <p><b>Payment</b><br>
+    You will receive $4.60 payment for your participation.
 
-    <p><b>Risks and Benefits:</b><br>
-    There are no known or anticipated risks associated with this study. Although this study will not benefit you personally, we hope that our results will add to the knowledge about judgment and decision-making.</p>
+     <p><b>Payment</b><br>
+    If you have read this form and have decided to participate in this project, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. The alternative is not to participate. You have the right to refuse to answer particular questions. The results of this research study may be presented at scientific or professional meetings or published in scientific journals. Your individual privacy will be maintained in all published and written data resulting from the study.
+    In accordance with scientific norms, the data from this study may be used or shared with other researchers for future research (after removing personally identifying information) without additional consent from you.
 
-    <p><b>Confidentiality:</b><br>
-    All of your responses will be anonymous.  Only the researchers involved in this study and those responsible for research oversight will have access to any information that could identify you/that you provide. The researcher will not know your name, and no identifying information will be connected to your survey answers in any way. The survey is therefore anonymous.</p>
-
-    <p><b>Voluntary Participation:</b><br>
-    Your participation in this study is voluntary. You are free to decline to participate, to end your participation at any time for any reason, or to refuse to answer any individual question without penalty.</p>
-
-    <p><b>Questions:</b><br>
-    If you have any questions about this study, you may contact the principal investigator, Paul Stillman, (paul.stillman@yale.edu). If you would like to talk with someone other than the researchers to discuss problems or concerns, to discuss situations in the event that a member of the research team is not available, or to discuss your rights as a research participant, you may contact the Yale University Human Subjects Committee, 203-785-4688, human.subjects@yale.edu. Additional information is available at http://your.yale.edu/research-support/human-research/research-participants</p>
-
-    <p>Would you like to continue to the study? Press the "Next" button to indicate that you consent to participate in the study.</p>`
+    <p><b>Contact Information:</b><br>
+    Questions: If you have any questions, concerns or complaints about this research, its procedures, risks and benefits, contact the Protocol Director, Josephine Tan (josetan@stanford.edu) or Assistant Professor David Melnikoff (dmelnik@stanford.edu).
+    Independent Contact: If you are not satisfied with how this study is being conducted, or if you have any concerns, complaints, or general questions about the research or your rights as a participant, please contact the Stanford Institutional Review Board (IRB) to speak to someone independent of the research team at (650)-723-2480 or toll free at 1-866-680-2906, or email at irbnonmed@stanford.edu. You can also write to the Stanford IRB, Stanford University, 1705 El Camino Real, Palo Alto, CA 94306.
+    If you agree to participate, press the "Next" button to indicate that you consent to participate in the study.</p>`
 
     // create instruction variables
     p.intro.preMessage = {
@@ -429,6 +428,7 @@ CHOICE
 
 let selectedAvatarColor = '#2669ee';
 
+/*
 // Define the avatar selection task with shuffled images
 const avatars = ['avatar/1.jpeg', 'avatar/2.jpeg', 'avatar/3.jpeg'];
 
@@ -440,48 +440,37 @@ function shuffle(array) {
     return array;
 }
 
-const avatarChoices = [
-    { color: 'Yellow', img: 'avatar/1.jpeg' },
-    { color: 'Green', img: 'avatar/2.jpeg' },
-    { color: 'Navy', img: 'avatar/3.jpeg' }
-];
 
 // Create the stimulus HTML for the avatars (without buttons)
 const avatarImages = avatarChoices.map(choice => 
     `<img src="${choice.img}" style="width: 200px; height: 200px; margin: 0 10px;" alt="${choice.color}">`).join('');
+*/
 
-// Define the task
 p.avatars = {
-        type: jsPsychHtmlButtonResponse,
-        stimulus: `<div class='parent'>
-               <p>Now, you'll choose the color of your avatar to play the game.</p>
-               <p>Choose 1 avatar out of the 3 colors below:</p>
-               <div class="avatar-selection" style="display: flex; justify-content: center;">
-                    <img src="./avatar/avatarsAll.jpg">
-               </div>
-               </div>`,
-        choices: ['Yellow', 'Green', 'Navy'],
-        on_finish: (data) => {
-            selectedColor = data.response.toString();
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `
+        <div class='parent'>
+            <p>Now, you'll choose the color of your avatar to play the game.</p>
+            <p>Choose 1 avatar out of the 3 colors below:</p>
+            <div class="avatar-selection" style="display: flex; justify-content: center;">
+                <img src="./avatar/avatarsAll.jpg">
+            </div>
+        </div>`,
+    choices: ['Yellow', 'Green', 'Navy'],
+    on_finish: (data) => {
+        const responseIndex = data.response;
 
-        let backgroundColor = '';
-        if (selectedColor === '0') {
-            backgroundColor = '#FFA827';
-        } else if (selectedColor === '1') {
-            backgroundColor = '#90CD4C';
-        } else if (selectedColor === '2') {
-            backgroundColor = '#1E2B4D';
+        // Map the response to a specific color
+        if (responseIndex === 0) {
+            avatarResponse = '#FFA827'; // Yellow
+        } else if (responseIndex === 1) {
+            avatarResponse = '#90CD4C'; // Green
+        } else if (responseIndex === 2) {
+            avatarResponse = '#1E2B4D'; // Navy
         }
-        console.log('Before update:', stim.r1.m1); // Should show old value
-        updateStimColors(backgroundColor);
-        console.log('After update:', stim.r1.m1);
 
-        console.log('data response', data.response)
-        console.log('Selected color:', backgroundColor);
-        console.log(stim.r1.m1 + 'in avatar images');
-/*
-        const selectedChoice = avatarChoices.find(choice => choice.color === selectedColor);
-        data.selected_avatar = selectedChoice ? selectedChoice.img : null; */
+        jsPsych.data.addProperties({ avatarResponse: avatarResponse });
+        console.log('Avatar response saved globally:', data.avatarResponse);
     }
 };
 
@@ -532,35 +521,44 @@ FOR WW TRIAL WITH PLUG IN
 ///
 */
 
+
 function WWTrial(round) {
     let trialStartTime;
     let trialEndTime;
-
+  
     const outerShapeClass = randomAssignment === 1 ? "square" : "circle";
     const innerShapeClass = randomAssignment === 1 ? "square" : "circle";
+ //   let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; //I cannot get avatarResponse here
 
     return {
         type: jsPsychWWHtmlKeyboardResponse,
-        data: { Trial_Type: randomAssignment === 1 ? "square" : "circle" },
-        stimulus: `
-            <div id="outer-container">
-                <div id="outer-shape" class="${outerShapeClass}"></div>
-                <div id="inner-shape" class="${innerShapeClass}"></div>
-            </div>
-        `,
+        data: { Trial_Type: randomAssignment === 1 ? "square" : "circle", selected_color: avatarResponse },
+        stimulus: function () {
+            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse;
+            console.log(avatarResponse); //I can get avatarResponse here
+
+            return `
+                <div id="outer-container">
+                    <div id="outer-shape" class="${outerShapeClass}"></div>
+                    <div id="inner-shape" class="${innerShapeClass}"></div>
+                </div>
+            `;
+        },
         choices: [" "],
         response_duration: trialforWins, 
+        selected_color: avatarResponse, 
         trial_duration: 2000, // Fallback duration if no response from participant
         partner_rt: function forWW(min = 225, max = 400) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
         ending_time: delayTime, // Must be larger than partner_rt
         on_start: function (trial) {
-            trialStartTime = Date.now();
+            console.log('Selected color:', trial.selected_color); // Log the selected color
+            trialStartTime = Date.now();           
             jsPsych.pluginAPI.setTimeout(function () {
                 const outerCircle = document.getElementById('outer-shape');
                 if (outerCircle) {
-                    outerCircle.style.backgroundColor = '#2669ee';
+                    outerCircle.style.backgroundColor = trial.selected_color; // Use the selected color
                 } else {
                     console.error('outer-circle element not found');
                 }
@@ -574,7 +572,6 @@ function WWTrial(round) {
             console.log('Reaction time: ' + data.rt);
             console.log('Trial duration: ' + trialDuration);
             console.log('Partner RT: ' + data.partner_rt);
-
         },
     };
 }
@@ -735,69 +732,86 @@ function LLTrial(round) {
 }
 
 
+function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points, avatar2Points) {
+    return `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+            <!-- Left Avatar -->
+            <div style="text-align: center;">
+                <img src="${avatar1}" style="width: 200px; height: 200px; margin: 0 10px;">
+                <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
+                    ${avatar1Text}
+                </div>
+                <!-- Second text box for accumulating points -->
+                <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
+                    ${avatar1Points} Points
+                </div>
+            </div>
+            <!-- Right Avatar -->
+            <div style="text-align: center;">
+                <img src="./avatar/4.jpg" style="width: 200px; height: 200px; margin: 0 10px;">
+                <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
+                    ${avatar2Text}
+                </div>
+                <!-- Second text box for accumulating points -->
+                <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
+                    ${avatar2Points} Points
+                </div>
+            </div>
+        </div>
+    `;
+}
 
-/* 
-//
-Makeresponse + makefeedback 
-///
-*/
+const avatarChoices = [
+    { color: 'Yellow', code: '#FFA827', img: './avatar/1.jpg' },
+    { color: 'Green', code: '#90CD4C', img: './avatar/2.jpg' },
+    { color: 'Navy', code: '#1E2B4D', img: './avatar/3.jpg' }
+];
 
-
-/*
-
-///MAKE RESPONSE IS FOR THE BLUE TO ACTIVATE FOR THE PARTICIPANT'S RESPONSE
-function MakeResponse(round) {
+function MakeFeedback(round, span, game) {
     return {
         type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: `activation_${round}` },
+        data: { Trial_Type: `feedback_${round}` },
         stimulus: () => {
             const lastTrialData = jsPsych.data.get().last(1).values()[0];
+            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse;
+            let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
+            let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
+            console.log(selectedAvatarImg);
+
             const partner_rt = lastTrialData.partner_rt;
-            const rt = lastTrialData.rt;
-            console.log(partner_rt + ' random duration in make response function');
-            console.log(rt + ' reaction time in make response function');
-            console.log('Current stim.r1.m1:', stim.r1.m1); 
+  //          const rt = lastTrialData.rt;
+  //          const trialDuration = lastTrialData.trial_duration;
+            const partner_outcome = lastTrialData.partner_outcome;
 
-            if (lastTrialData.response === " " && partner_rt < rt) {
-                console.log("Both win", stim.r1.m1);
-                return stim.r1.m1;
-            } else if (lastTrialData.response === " " && partner_rt > rt) {
-                console.log("Participant wins but fake doesn't", stim.r1.m2);
-                return stim.r1.m2;
-            } else if ((rt === null || rt === undefined) && partner_rt > lastTrialData.trial_duration) {
-                console.log("Both lose", stim.r1.m0);
-                return stim.r1.m0;
-            } else if ((rt === null || rt === undefined) && partner_rt < lastTrialData.trial_duration) {
-                console.log("Participant loses but fake wins", stim.r1.m3);
-                return stim.r1.m3;
+            let feedbackText = '';
+
+                if (lastTrialData.outcome && !partner_outcome) {
+                    feedbackText = `<div style="font-size: 35px; text-align: center;">
+            <img src="./avatar/4.jpg" style="width: 200px; height: 200px; margin: 0 10px">
+            </div>`; //You activated it but the other participant didn't!
+                } else if (lastTrialData.outcome && partner_outcome) {
+                    feedbackText = `<div style='font-size:35px'><p>Both activated it!</p><p>+8 points for you!</p><p>
+                    <br></p><p>(Get ready for the next tile!)</p></div>`; //
+                } else if (!lastTrialData.outcome && !partner_outcome) {
+                    feedbackText = `<div style='font-size:35px'><p>Both lose!</p><p>+2 points for you!</p><p><br>
+                    </p><p>(Get ready for the next tile!)</p></div>`;
+                } else if (!lastTrialData.outcome && partner_outcome) { //they activated it but you didn't
+                     feedbackText = generateAvatarFeedback(`${selectedAvatarImg}`, '+4', '+6', '16', '20');
             }
+
+            return feedbackText;
         },
-        choices: [' '],
-        response_ends_trial: false,
-        trial_duration: 1000,
-        on_finish: () => {
-            const lastTrialData = jsPsych.data.get().last(1).values()[0];
-            const randomDuration = lastTrialData.randomDuration;
-            const rt = lastTrialData.rt;
-            let result; //just to log the result into the data
-
-            if (lastTrialData.response === " " && randomDuration < rt) {
-                result = 1;
-            } else if (lastTrialData.response === " " && randomDuration > rt) {
-                result = 2;
-            } else if ((rt === null || rt === undefined) && randomDuration > lastTrialData.trial_duration) {
-                result = 3;
-            } else if ((rt === null || rt === undefined) && randomDuration < lastTrialData.trial_duration) {
-                result = 4;
-            }
-
-            jsPsych.data.get().last(1).values()[0].result = result;
-            jsPsych.data.get().last(2).values()[0].response !== 0 ? misses++ : hits++;
+        choices: "NO_KEYS",
+        trial_duration: 3500,
+        on_finish: (data) => {
+            data.trialNumber = (data.trialNumber || 0) + 1; // Update trial number
+            console.log(data);
         }
     };
 }
 
-*/
+/*
+
 //THIS IS TO TELL THE PARTICIPANT "YOU WON OR DID NOT WIN"
 function MakeFeedback(round, span, game) {
     return {
@@ -855,7 +869,7 @@ function MakeFeedback(round, span, game) {
         }
     };
 }
-
+ */
 function MakeRoundIntro(round) {
     return {
         type: jsPsychHtmlKeyboardResponse,
@@ -895,7 +909,7 @@ function MakeTooFast(round) {
         data: { Trial_Type: `tooFastMessage_${round}` },
         choices: [],  // Disables any response
         stimulus: () => {
-            const lastKeyPress = jsPsych.data.get().last(1).values()[0].response;
+            const lastKeyPress = jsPsych.data.get().last(2).values()[0].response;
             return lastKeyPress === " " ? `<div style='font-size: 20px'><p>Too Fast!</p><p>Please wait for the tile to appear before pressing your SPACEBAR! </p></div>` : '';
         },
         trial_duration: () => {
@@ -1056,6 +1070,7 @@ p.partnerAvatar = {
 
     },
     on_finish: (data) => {
+        console.log(data);
         data.loading_completed = true;
     }
 };
@@ -1072,6 +1087,7 @@ p.partnerRevealAvatar = {
     choices: "NO_KEYS",
     trial_duration: 2000,  // Duration of the loading screen in milliseconds, 15 seconds
     on_finish: (data) => {
+        console.log(data);
         data.loading_completed = true;
     }
 };
@@ -1138,8 +1154,8 @@ p.partnerRevealAvatar = {
 
 
     p.task.round1 = {
-        timeline: [WWLoop, LLLoop], //delayloop is the issue
-        //timeline: [LLLoop, WWLoop, LWLoop, WLLoop], //delayloop is the issue
+        timeline: [WWLoop],
+        //timeline: [LLLoop, WWLoop, LWLoop, WLLoop],
         randomize_order: true,
         repetitions: noOfTrials,
     }; 
