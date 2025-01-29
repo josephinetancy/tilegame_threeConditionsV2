@@ -2,7 +2,6 @@
 const randomAssignment = Math.floor(Math.random() * 2) + 1;
 console.log(randomAssignment + "randomAssignment")
 
-let avatarResponse = '#2669ee';
 
 // Define Stimuli
 let p = {};
@@ -528,11 +527,10 @@ function WWTrial(round) {
   
     const outerShapeClass = randomAssignment === 1 ? "square" : "circle";
     const innerShapeClass = randomAssignment === 1 ? "square" : "circle";
- //   let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; //I cannot get avatarResponse here
 
     return {
         type: jsPsychWWHtmlKeyboardResponse,
-        data: { Trial_Type: randomAssignment === 1 ? "square" : "circle", selected_color: avatarResponse },
+        data: { Trial_Type: randomAssignment === 1 ? "square" : "circle" },
         stimulus: function () {
             let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse;
             console.log(avatarResponse); //I can get avatarResponse here
@@ -546,7 +544,10 @@ function WWTrial(round) {
         },
         choices: [" "],
         response_duration: trialforWins, 
-        selected_color: avatarResponse, 
+        selected_color: () => {
+            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; //I cannot get avatarResponse here
+            return avatarResponse;
+        },
         trial_duration: 2000, // Fallback duration if no response from participant
         partner_rt: function forWW(min = 225, max = 400) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -558,7 +559,7 @@ function WWTrial(round) {
             jsPsych.pluginAPI.setTimeout(function () {
                 const outerCircle = document.getElementById('outer-shape');
                 if (outerCircle) {
-                    outerCircle.style.backgroundColor = trial.selected_color; // Use the selected color
+                    outerCircle.style.backgroundColor = '#2669ee'; // Use the selected color
                 } else {
                     console.error('outer-circle element not found');
                 }
