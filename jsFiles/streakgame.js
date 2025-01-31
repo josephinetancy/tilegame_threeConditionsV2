@@ -569,7 +569,7 @@ function LWTrial(round) {
                 if (outerCircle) {
                     outerCircle.style.backgroundColor = '#2669ee';
                 } else {
-                    console.error('outer-circle element not found');
+                    console.log('outer-circle element not found');
                 }
             }, trial.partner_rt);
         },
@@ -627,7 +627,7 @@ function LLTrial(round) {
                 if (outerCircle) {
                     outerCircle.style.backgroundColor = 'grey';
                 } else {
-                    console.error('outer-circle element not found');
+                    console.log('outer-circle element not found');
                 }
             }, trialforLose);
         },
@@ -647,7 +647,6 @@ let avatar1TotalPoints = 0;
 let avatar2TotalPoints = 0;
 
 function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points, avatar2Points) {
-    // Update accumulated points
     avatar1TotalPoints += avatar1Points;
     avatar2TotalPoints += avatar2Points;
 
@@ -683,16 +682,39 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points
     `;
 }
 
+function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1Points) {
+    avatar1TotalPoints += avatar1Points;
+
+    return `
+          <div style="display: flex; flex-direction: column; align-items: center;">
+                <img src="${avatar1}" style="width: 200px; height: 200px;">
+                <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
+                    ${avatar1Text}
+                </div>
+                <!-- Second text box for accumulating points -->
+                <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
+                    ${avatar1TotalPoints} Points
+                </div>
+            </div>
+        </div>
+        <!-- Line at the bottom -->
+        <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold;">
+            Get ready for the next tile!
+        </div>
+    `;
+}
+
+
 const avatarChoices = [
     { color: 'Yellow', code: '#FFA827', img: './avatar/1.jpg' },
     { color: 'Green', code: '#90CD4C', img: './avatar/2.jpg' },
     { color: 'Red', code: '#800000', img: './avatar/3.jpg' }
 ];
 
-function MakeFeedback(round, span, game) {
+function MakeFeedback(mode) {
     return {
         type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: `feedback_${round}` },
+        data: { Trial_Type: `feedback_${mode}` },
         stimulus: () => {
             const lastTrialData = jsPsych.data.get().last(1).values()[0];
             let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse;
@@ -705,16 +727,31 @@ function MakeFeedback(round, span, game) {
 
             let feedbackText = '';
 
-               if (lastTrialData.outcome && !partner_outcome) {
-            feedbackText = generateAvatarFeedback(selectedAvatarImg, '+6', '+4', 6, 4); // You activated it but the other participant didn't!
-           } else if (lastTrialData.outcome && partner_outcome) {
-            feedbackText = generateAvatarFeedback(selectedAvatarImg, '+8', '+8', 8, 8); // Both activated it
-           } else if (!lastTrialData.outcome && !partner_outcome) {
-            feedbackText = generateAvatarFeedback(selectedAvatarImg, '+2', '+2', 2, 2); // Both lose
-           } else if (!lastTrialData.outcome && partner_outcome) { 
-            feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+6', 4, 6); // They activated it but you didn't
-}
+                 if (mode === 'partner') {
+                const partner_outcome = lastTrialData.partner_outcome;
 
+                if (lastTrialData.outcome && !partner_outcome) {
+                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+6', '+4', 6, 4); // You activated it, they didn’t
+                } else if (lastTrialData.outcome && partner_outcome) {
+                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+8', '+8', 8, 8); // Both activated
+                } else if (!lastTrialData.outcome && !partner_outcome) {
+                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+2', '+2', 2, 2); // Both lose
+                } else if (!lastTrialData.outcome && partner_outcome) { 
+                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+6', 4, 6); // They activated, you didn’t
+                }
+            } else if (mode === 'solo') {
+                // Solo feedback (ignoring partner outcome)
+                if (lastTrialData.outcome && !partner_outcome) {
+                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+6', 6); // You activated it, they didn’t
+                } else if (lastTrialData.outcome && partner_outcome) {
+                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+8', 8); // Both activated
+                } else if (!lastTrialData.outcome && !partner_outcome) {
+                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+2', 2); // Both lose
+                } else if (!lastTrialData.outcome && partner_outcome) { 
+                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', 4); // They activated, you didn’t
+                }
+
+            }
             return feedbackText;
         },
         choices: "NO_KEYS",
@@ -956,8 +993,8 @@ p.partnerRevealAvatar = {
         LWTrial = new LWTrial('R1'),
         WLTrial = new WLTrial('R1'),
         WWTrial = new WWTrial('R1'),
-        feedbackR1 = new MakeFeedback('R1', text.span1, text.game1),
-        feedbackR2 = new MakeFeedback('R2', text.span2, text.game2),
+        feedbackGroup = new MakeFeedback('group'),
+        feedbackSolo = new MakeFeedback('solo'),
         delayR1 = new MakeDelay('R1'),
         delayR2 = new MakeDelay('R2'),
         tooFastR1 = new MakeTooFast('R1'),
@@ -992,19 +1029,19 @@ p.partnerRevealAvatar = {
     };
 
     const LLLoop = {
-     timeline: [delayLoopR1, LLTrial, feedbackR1], //delayloop is the issue
+     timeline: [delayLoopR1, LLTrial, feedbackSolo], //delayloop is the issue
     };  
 
     const WWLoop = {
-     timeline: [delayLoopR1, WWTrial, feedbackR1], //delayloop is the issue
+     timeline: [delayLoopR1, WWTrial, feedbackSolo], //delayloop is the issue
     };
 
     const LWLoop = {
-     timeline: [delayLoopR1, LWTrial, feedbackR1], //delayloop is the issue
+     timeline: [delayLoopR1, LWTrial, feedbackSolo], //delayloop is the issue
     };  
 
     const WLLoop = {
-     timeline: [delayLoopR1, WLTrial, feedbackR1], //delayloop is the issue
+     timeline: [delayLoopR1, WLTrial, feedbackSolo], //delayloop is the issue
     };  
 
 
