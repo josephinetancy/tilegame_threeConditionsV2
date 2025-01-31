@@ -40,64 +40,6 @@ var streakGame = (function() {
         wasWere: settings.val == 1 ? 'was' : 'were'
     }; 
 
-
- const outerCircleActivation = Math.random() < 0.5 ? 'gray' : 'yellow';
-
-
-// Function to update the stim colors dynamically
-/*
-
-var stim = {
-    r1: {
-        m0: `<div class="box" style="background-color:white"> </div>`, // both didn't hit it
-        m1: `<div class="outer-circle" style="background-color: blue; 
-            width: 150px; height: 150px; border-radius: 50%; 
-            border: 5px solid black; display: flex; align-items:center; justify-content:center;">
-            <div class="inner-circle" style="background-color:blue; border: 5px solid black;
-                width: 100px; height: 100px; border-radius: 50%;"></div>
-        </div>`, // both hit it
-        m2: `<div class="outer-circle" style="background-color: gray; 
-            width: 150px; height: 150px; border-radius: 50%; 
-            border: 5px solid black; display: flex; align-items:center; justify-content:center;">
-            <div class="inner-circle" style="background-color:blue; border: 5px solid black;
-                width: 100px; height: 100px; border-radius: 50%;"></div>
-        </div>`, // I hit it, you didn't
-        m3: `<div class="outer-circle" style="background-color: blue; 
-            width: 150px; height: 150px; border-radius: 50%; 
-            border: 5px solid black; display: flex; align-items:center; justify-content:center;">
-            <div class="inner-circle" style="background-color:gray; border: 5px solid black;
-                width: 100px; height: 100px; border-radius: 50%;"></div>
-        </div>`, // You hit it, I didn't
-    }
-};  
-
-
-/*
-function updateStimColors(backgroundColor) {
-    stim.r1.m0 = `<div class="box" style="background-color:white"> </div>`;
-    stim.r1.m1 = `<div class="outer-circle" style="background-color: #2669ee; 
-        width: 150px; height: 150px; border-radius: 50%; 
-        border: 5px solid black; display: flex; align-items:center; justify-content:center;">
-        <div class="inner-circle" style="background-color: ${backgroundColor}; border: 5px solid black;
-            width: 100px; height: 100px; border-radius: 50%;"></div>
-    </div>`;
-
-    stim.r1.m2 = `<div class="outer-circle" style="background-color: gray; 
-        width: 150px; height: 150px; border-radius: 50%; 
-        border: 5px solid black; display: flex; align-items:center; justify-content:center;">
-        <div class="inner-circle" style="background-color: ${backgroundColor}; border: 5px solid black;
-            width: 100px; height: 100px; border-radius: 50%;"></div>
-    </div>`;
-
-    stim.r1.m3 = `<div class="outer-circle" style="background-color: #2669ee; 
-        width: 150px; height: 150px; border-radius: 50%; 
-        border: 5px solid black; display: flex; align-items:center; justify-content:center;">
-        <div class="inner-circle" style="background-color: gray; border: 5px solid black;
-            width: 100px; height: 100px; border-radius: 50%;"></div>
-    </div>`;
-} 
-*/
-
    /*
     *
     *   INSTRUCTIONS
@@ -427,24 +369,6 @@ CHOICE
 
 let selectedAvatarColor = '#2669ee';
 
-/*
-// Define the avatar selection task with shuffled images
-const avatars = ['avatar/1.jpeg', 'avatar/2.jpeg', 'avatar/3.jpeg'];
-
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-
-// Create the stimulus HTML for the avatars (without buttons)
-const avatarImages = avatarChoices.map(choice => 
-    `<img src="${choice.img}" style="width: 200px; height: 200px; margin: 0 10px;" alt="${choice.color}">`).join('');
-*/
-
 p.avatars = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `
@@ -455,7 +379,7 @@ p.avatars = {
                 <img src="./avatar/avatarsAll.jpg">
             </div>
         </div>`,
-    choices: ['Yellow', 'Green', 'Navy'],
+    choices: ['Yellow', 'Green', 'Red'],
     on_finish: (data) => {
         const responseIndex = data.response;
 
@@ -465,7 +389,7 @@ p.avatars = {
         } else if (responseIndex === 1) {
             avatarResponse = '#90CD4C'; // Green
         } else if (responseIndex === 2) {
-            avatarResponse = '#1E2B4D'; // Navy
+            avatarResponse = '#800000'; // Red
         }
 
         jsPsych.data.addProperties({ avatarResponse: avatarResponse });
@@ -474,26 +398,6 @@ p.avatars = {
 };
 
     p.task = {}
-
-    // temporary data
-  //  var hitFeedback = new MakeHitFeedback(),
-     //   missFeedback = new MakeMissFeedback(),
-    var latency = new MakeLatencyArrays(),
-        length = 5,
-        trialNumber = 0,
-        skipFeedback = false,
-        ITI = [250, 500, 750, 1000, 1250, 1500, 1750, 2000], //when the button will show up
-        hits = 0,
-        misses = 0,
-        totalJackpotsR1,
-        totalJackpotsR2,
-        totalJackpots
-
-    function MakeLatencyArrays() {
-        this.R1 = makeRT(settings.nTrials, settings.pM);
- //       this.R2 = makeRT(settings.nTrials, settings.pM);
-    };
-
 
 /*
 ///
@@ -531,21 +435,16 @@ function WWTrial(round) {
     return {
         type: jsPsychWWHtmlKeyboardResponse,
         data: { Trial_Type: randomAssignment === 1 ? "square" : "circle" },
-        stimulus: function () {
-            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse;
-            console.log(avatarResponse); //I can get avatarResponse here
-
-            return `
+        stimulus: `
                 <div id="outer-container">
                     <div id="outer-shape" class="${outerShapeClass}"></div>
                     <div id="inner-shape" class="${innerShapeClass}"></div>
                 </div>
-            `;
-        },
+            `,
         choices: [" "],
         response_duration: trialforWins, 
         selected_color: () => {
-            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; //I cannot get avatarResponse here
+            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
             return avatarResponse;
         },
         trial_duration: 2000, // Fallback duration if no response from participant
@@ -604,6 +503,10 @@ function WLTrial(round) {
         `,
         choices: [" "],
         response_duration: trialforWins,
+        selected_color: () => {
+            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+            return avatarResponse;
+        },
         trial_duration: 2000,
         partner_rt: function forWW(min = 0, max = 100) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -649,6 +552,10 @@ function LWTrial(round) {
         `,
         choices: [" "],
         response_duration: trialforLose, // Fallback duration if no response from participant
+        selected_color: () => {
+            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+            return avatarResponse;
+        },
         trial_duration: 2000, // Fallback duration if no response from participant
         partner_rt: function forLW(min = 225, max = 235) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -704,6 +611,10 @@ function LLTrial(round) {
         `,
         choices: [" "],
         response_duration: trialforLose, // Fallback duration if no response from participant
+        selected_color: () => {
+            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+            return avatarResponse;
+        },
         trial_duration: 2000, // Fallback duration if no response from participant
         partner_rt: partner_rtL,
         response_ends_trial: false,
@@ -732,8 +643,14 @@ function LLTrial(round) {
     };
 }
 
+let avatar1TotalPoints = 0;
+let avatar2TotalPoints = 0;
 
 function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points, avatar2Points) {
+    // Update accumulated points
+    avatar1TotalPoints += avatar1Points;
+    avatar2TotalPoints += avatar2Points;
+
     return `
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
             <!-- Left Avatar -->
@@ -744,7 +661,7 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points
                 </div>
                 <!-- Second text box for accumulating points -->
                 <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-                    ${avatar1Points} Points
+                    ${avatar1TotalPoints} Points
                 </div>
             </div>
             <!-- Right Avatar -->
@@ -755,9 +672,13 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points
                 </div>
                 <!-- Second text box for accumulating points -->
                 <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-                    ${avatar2Points} Points
+                    ${avatar2TotalPoints} Points
                 </div>
             </div>
+        </div>
+        <!-- Line at the bottom -->
+        <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold;">
+            Get ready for the next tile!
         </div>
     `;
 }
@@ -765,7 +686,7 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points
 const avatarChoices = [
     { color: 'Yellow', code: '#FFA827', img: './avatar/1.jpg' },
     { color: 'Green', code: '#90CD4C', img: './avatar/2.jpg' },
-    { color: 'Navy', code: '#1E2B4D', img: './avatar/3.jpg' }
+    { color: 'Red', code: '#800000', img: './avatar/3.jpg' }
 ];
 
 function MakeFeedback(round, span, game) {
@@ -780,25 +701,19 @@ function MakeFeedback(round, span, game) {
             console.log(selectedAvatarImg);
 
             const partner_rt = lastTrialData.partner_rt;
-  //          const rt = lastTrialData.rt;
-  //          const trialDuration = lastTrialData.trial_duration;
             const partner_outcome = lastTrialData.partner_outcome;
 
             let feedbackText = '';
 
-                if (lastTrialData.outcome && !partner_outcome) {
-                    feedbackText = `<div style="font-size: 35px; text-align: center;">
-            <img src="./avatar/4.jpg" style="width: 200px; height: 200px; margin: 0 10px">
-            </div>`; //You activated it but the other participant didn't!
-                } else if (lastTrialData.outcome && partner_outcome) {
-                    feedbackText = `<div style='font-size:35px'><p>Both activated it!</p><p>+8 points for you!</p><p>
-                    <br></p><p>(Get ready for the next tile!)</p></div>`; //
-                } else if (!lastTrialData.outcome && !partner_outcome) {
-                    feedbackText = `<div style='font-size:35px'><p>Both lose!</p><p>+2 points for you!</p><p><br>
-                    </p><p>(Get ready for the next tile!)</p></div>`;
-                } else if (!lastTrialData.outcome && partner_outcome) { //they activated it but you didn't
-                     feedbackText = generateAvatarFeedback(`${selectedAvatarImg}`, '+4', '+6', '16', '20');
-            }
+               if (lastTrialData.outcome && !partner_outcome) {
+            feedbackText = generateAvatarFeedback(selectedAvatarImg, '+6', '+4', 6, 4); // You activated it but the other participant didn't!
+           } else if (lastTrialData.outcome && partner_outcome) {
+            feedbackText = generateAvatarFeedback(selectedAvatarImg, '+8', '+8', 8, 8); // Both activated it
+           } else if (!lastTrialData.outcome && !partner_outcome) {
+            feedbackText = generateAvatarFeedback(selectedAvatarImg, '+2', '+2', 2, 2); // Both lose
+           } else if (!lastTrialData.outcome && partner_outcome) { 
+            feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+6', 4, 6); // They activated it but you didn't
+}
 
             return feedbackText;
         },
@@ -811,66 +726,7 @@ function MakeFeedback(round, span, game) {
     };
 }
 
-/*
 
-//THIS IS TO TELL THE PARTICIPANT "YOU WON OR DID NOT WIN"
-function MakeFeedback(round, span, game) {
-    return {
-        type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: `feedback_${round}` },
-        stimulus: () => {
-            const lastTrialData = jsPsych.data.get().last(1).values()[0];
-            const partner_rt = lastTrialData.partner_rt;
-            const rt = lastTrialData.rt;
-            const trialDuration = lastTrialData.trial_duration;
-            const partner_outcome = lastTrialData.partner_outcome;
-
-            console.log(rt + ' rt in makefeedback');
-            console.log(trialDuration + ' last trial duration data in makefeedback');
-            console.log(partner_rt + ' partner_rt in make feedback');
-
-            let feedbackText = '';
-
- //           if (round == 'R1') {
-                if (lastTrialData.outcome && !partner_outcome) {
-                    feedbackText = `<div style='font-size:35px'><p>You activated it but the other participant didn't!</p>
-                    <p>+6 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-                } else if (lastTrialData.outcome && partner_outcome) {
-                    feedbackText = `<div style='font-size:35px'><p>Both activated it!</p><p>+8 points for you!</p><p>
-                    <br></p><p>(Get ready for the next tile!)</p></div>`;
-                } else if (!lastTrialData.outcome && !partner_outcome) {
-                    feedbackText = `<div style='font-size:35px'><p>Both lose!</p><p>+2 points for you!</p><p><br>
-                    </p><p>(Get ready for the next tile!)</p></div>`;
-                } else if (!lastTrialData.outcome && partner_outcome) {
-                    feedbackText = `<div style='font-size:35px'><p>The other participant activated it, but you didn't!</p>
-                    <p>+4 points for you!</p><p><br></p><p>(Get ready for the next tile!)</p></div>`;
-    //            }
-            }
-
-            return feedbackText;
-        },
-        choices: "NO_KEYS",
-        trial_duration: 3500,
-        on_finish: (data) => {
-            const lastTrialData = jsPsych.data.get().last(2).values()[0];
-            const partner_rt = lastTrialData.partner_rt;
-            const rt = lastTrialData.rt;
-            const trialDuration = lastTrialData.trial_duration;
-                if (lastTrialData.response == " " && partner_rt == partner_rtL) {
-                    data.result = "WL"; 
-                } else if (lastTrialData.response == " " && partner_rt <= trialDuration && rt <= trialDuration) {
-                    data.result = "WW";
-                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && partner_rt == partner_rtL) {
-                    data.result = "LL"; 
-                } else if ((lastTrialData.response === null || lastTrialData.response === undefined) && rt <= trialDuration) {
-                    data.result = "LW";
-                }
-            data.trialNumber = (data.trialNumber || 0) + 1; // Update trial number
-            console.log(data);
-        }
-    };
-}
- */
 function MakeRoundIntro(round) {
     return {
         type: jsPsychHtmlKeyboardResponse,
@@ -890,6 +746,8 @@ function MakeRoundIntro(round) {
         trial_duration: 2000,
     };
 }
+
+var ITI = [250, 500, 750, 1000, 1250, 1500, 1750, 2000]
 
 function MakeDelay(round) {
     return {
@@ -1094,10 +952,7 @@ p.partnerRevealAvatar = {
 };
 
     // trial variables
-    var //probeR1 = new MakeProbe('R1'),
-       // probeR2 = new MakeProbe('R2'),
-     //   combinedTrial = new CombinedTrial('R1'),
-        LLTrial = new LLTrial('R1'),
+    var LLTrial = new LLTrial('R1'),
         LWTrial = new LWTrial('R1'),
         WLTrial = new WLTrial('R1'),
         WWTrial = new WWTrial('R1'),
@@ -1155,7 +1010,7 @@ p.partnerRevealAvatar = {
 
 
     p.task.round1 = {
-        timeline: [WWLoop],
+        timeline: [WWLoop, LLLoop],
         //timeline: [LLLoop, WWLoop, LWLoop, WLLoop],
         randomize_order: true,
         repetitions: noOfTrials,

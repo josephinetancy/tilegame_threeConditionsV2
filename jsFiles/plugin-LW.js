@@ -66,6 +66,12 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
               pretty_name: "Partner's response time",
               default: null,
           },
+
+          selected_color: {
+              type: jspsych.ParameterType.HTML_STRING,
+              pretty_name: "Selected color that participant chose",
+              default: null,
+          },
       },
   };
   /**
