@@ -32,18 +32,17 @@ let timeline = [];
 
 const commonTimeline = [
     p.avatars,
-    p.task.round1Intro,
 ];
 
 const taskConfigurations = {
-    1: [p.task.SoloCircleHigh, p.findingPartner, p.foundPartner,p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareLow], //1
-    2: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.GroupSquareLow, p.task.round2Intro, p.task.SoloCircleHigh], //2
-    3: [p.task.SoloCircleLow, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareHigh], //3
-    4: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.GroupSquareHigh, p.task.round2Intro, p.task.SoloCircleLow], //4 
-    5: [p.task.SoloSquareHigh, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupCircleLow], //5 
-    6: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.GroupCircleLow, p.task.round2Intro, p.task.SoloSquareHigh], //6 
-    7: [p.task.SoloSquareLow, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupCircleHigh], //7 
-    8: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.GroupCircleHigh, p.task.round2Intro, p.task.SoloSquareLow], //8 
+    1: [p.task.round1Intro, p.task.SoloCircleHigh, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareLow], //1
+    2: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round1Intro, p.task.GroupSquareLow, p.task.round2Intro, p.task.SoloCircleHigh], //2
+    3: [p.task.round1Intro, p.task.SoloCircleLow, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareHigh], //3
+    4: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round1Intro, p.task.GroupSquareHigh, p.task.round2Intro, p.task.SoloCircleLow], //4 
+    5: [p.task.round1Intro, p.task.SoloSquareHigh, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupCircleLow], //5 
+    6: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round1Intro, p.task.GroupCircleLow, p.task.round2Intro, p.task.SoloSquareHigh], //6 
+    7: [p.task.round1Intro, p.task.SoloSquareLow, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupCircleHigh], //7 
+    8: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round1Intro, p.task.GroupCircleHigh, p.task.round2Intro, p.task.SoloSquareLow], //8 
 
 };
 
