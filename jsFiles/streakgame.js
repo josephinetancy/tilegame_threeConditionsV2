@@ -1,6 +1,22 @@
 //randomAssignment
-const randomAssignment = Math.floor(Math.random() * 4) + 1; // 1 = circle then square, 2 = square then circle 
-console.log(randomAssignment + "randomAssignment")
+const randomAssignment = Math.floor(Math.random() * 8) + 1; 
+console.log(randomAssignment + " randomAssignment")
+
+/* 
+
+1 = SoloCircleHigh + GroupSquareLow 
+2 = GroupSquareLow + SoloCircleHigh
+
+3 = SoloCircleLow + GroupSquareHigh
+4 = GroupSquareHigh + SoloCircleLow
+
+5 = SoloSquareHigh + GroupCircleLow 
+6 = GroupCircleLow + SoloSquareHigh 
+
+7 = SoloSquareLow + GroupCircleHigh 
+8 = GroupCircleHigh + SoloSquareLow
+
+*/
 
 
 // Define Stimuli
