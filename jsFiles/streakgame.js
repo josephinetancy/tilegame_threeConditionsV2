@@ -430,8 +430,8 @@ function WWTrial(shape) {
     let trialEndTime;
   
     // Set the shape classes based on the input parameter
-    const outerShapeClass = shape; // Use the shape passed to the function
-    const innerShapeClass = shape; // Use the shape passed to the function
+    const outerShapeClass = shape;
+    const innerShapeClass = shape; 
 
     return {
         type: jsPsychWWHtmlKeyboardResponse,
@@ -489,13 +489,13 @@ function WLTrial(shape) {
     let trialStartTime;
     let trialEndTime;
 
-    // Determine the shape classes based on randomAssignment
-    const outerShapeClass = randomAssignment === 1 ? "square" : "circle";
-    const innerShapeClass = randomAssignment === 1 ? "square" : "circle";
+    // Set the shape classes based on the input parameter
+    const outerShapeClass = shape;
+    const innerShapeClass = shape; 
 
     return {
         type: jsPsychWWHtmlKeyboardResponse,
-        data: { Trial_Type: randomAssignment === 1 ? "square" : "circle" },
+        data: { Trial_Type: shape },
         stimulus: `
             <div id="outer-container">
                 <div id="outer-shape" class="${outerShapeClass}"></div>
@@ -539,12 +539,12 @@ function LWTrial(shape) {
     let trialStartTime;
     let trialEndTime;
 
-    const outerShapeClass = randomAssignment === 1 ? "square" : "circle";
-    const innerShapeClass = randomAssignment === 1 ? "square" : "circle";
+    const outerShapeClass = shape;
+    const innerShapeClass = shape; 
 
     return {
         type: jsPsychLWHtmlKeyboardResponse,
-        data: { Trial_Type: randomAssignment === 1 ? "square" : "circle" },
+        data: { Trial_Type: shape },
         stimulus: `
             <div id="outer-container">
                 <div id="outer-shape" class="${outerShapeClass}"></div>
@@ -598,12 +598,12 @@ function LLTrial(shape) {
     let trialStartTime;
     let trialEndTime;
 
-    const outerShapeClass = randomAssignment === 1 ? "square" : "circle";
-    const innerShapeClass = randomAssignment === 1 ? "square" : "circle";
+    const outerShapeClass = shape;
+    const innerShapeClass = shape; 
 
     return {
         type: jsPsychLWHtmlKeyboardResponse,
-        data: { Trial_Type: randomAssignment === 1 ? "square" : "circle" },
+        data: { Trial_Type: shape },
         stimulus: `
             <div id="outer-container">
                 <div id="outer-shape" class="${outerShapeClass}"></div>
@@ -644,13 +644,8 @@ function LLTrial(shape) {
     };
 }
 
-let avatar1TotalPoints = 0;
-let avatar2TotalPoints = 0;
 
 function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points, avatar2Points) {
-    avatar1TotalPoints += avatar1Points;
-    avatar2TotalPoints += avatar2Points;
-
     return `
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
             <!-- Left Avatar -->
@@ -661,7 +656,7 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points
                 </div>
                 <!-- Second text box for accumulating points -->
                 <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-                    ${avatar1TotalPoints} Points
+                    ${avatar1Points} Points
                 </div>
             </div>
             <!-- Right Avatar -->
@@ -672,7 +667,7 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points
                 </div>
                 <!-- Second text box for accumulating points -->
                 <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-                    ${avatar2TotalPoints} Points
+                    ${avatar2Points} Points
                 </div>
             </div>
         </div>
@@ -684,8 +679,6 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points
 }
 
 function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1Points) {
-    avatar1TotalPoints += avatar1Points;
-
     return `
           <div style="display: flex; flex-direction: column; align-items: center;">
                 <img src="${avatar1}" style="width: 200px; height: 200px;">
@@ -694,7 +687,7 @@ function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1Points) {
                 </div>
                 <!-- Second text box for accumulating points -->
                 <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-                    ${avatar1TotalPoints} Points
+                    ${avatar1Points} Points
                 </div>
             </div>
         </div>
@@ -713,6 +706,10 @@ const avatarChoices = [
 ];
 
 function MakeFeedback(mode) {
+
+    let avatar1TotalPoints = 0;
+    let avatar2TotalPoints = 0;
+
     return {
         type: jsPsychHtmlKeyboardResponse,
         data: { Trial_Type: `feedback_${mode}` },
@@ -732,47 +729,71 @@ function MakeFeedback(mode) {
                 const partner_outcome = lastTrialData.partner_outcome;
 
                 if (lastTrialData.outcome && !partner_outcome) {
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+6', '+4', 6, 4); // You activated it, they didn’t
+                    avatar1TotalPoints += 6;
+                    avatar2TotalPoints += 4;
+                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+6', '+4', avatar1TotalPoints, avatar2TotalPoints); // You activated it, they didn’t
                 } else if (lastTrialData.outcome && partner_outcome) {
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+8', '+8', 8, 8); // Both activated
+                    avatar1TotalPoints += 8;
+                    avatar2TotalPoints += 8;
+                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+8', '+8', avatar1TotalPoints, avatar2TotalPoints); // Both activated
                 } else if (!lastTrialData.outcome && !partner_outcome) {
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+2', '+2', 2, 2); // Both lose
+                    avatar1TotalPoints += 2;
+                    avatar2TotalPoints += 2;
+                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+2', '+2', avatar1TotalPoints, avatar2TotalPoints); // Both lose
                 } else if (!lastTrialData.outcome && partner_outcome) { 
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+6', 4, 6); // They activated, you didn’t
+                    avatar1TotalPoints += 4;
+                    avatar2TotalPoints += 6;
+                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+6', avatar1TotalPoints, avatar2TotalPoints); // They activated, you didn’t
                 }
             } if (mode === 'soloHigh') {
                 // Solo feedback (ignoring partner outcome)
                 if (lastTrialData.outcome && !partner_outcome) {
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+6', 6); // You activated it, they didn’t
+                    avatar1TotalPoints += 6;
+                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+6', avatar1TotalPoints); // You activated it, they didn’t
                 } else if (lastTrialData.outcome && partner_outcome) {
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+8', 8); // Both activated
+                    avatar1TotalPoints += 8;
+                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+8', avatar1TotalPoints); // Both activated
                 } else if (!lastTrialData.outcome && !partner_outcome) {
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+2', 2); // Both lose
+                    avatar1TotalPoints += 2;
+                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+2', avatar1TotalPoints); // Both lose
                 } else if (!lastTrialData.outcome && partner_outcome) { 
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', 4); // They activated, you didn’t
+                    avatar1TotalPoints += 4;
+                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', avatar1TotalPoints); // They activated, you didn’t
                 } 
             } if (mode === 'groupLow') {
                 const partner_outcome = lastTrialData.partner_outcome;
 
                 if (lastTrialData.outcome && !partner_outcome) {
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+4', 4, 4); // You activated it, they didn’t
+                    avatar1TotalPoints += 4;
+                    avatar2TotalPoints += 4;
+                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+4', avatar1TotalPoints, avatar2TotalPoints); // You activated it, they didn’t
                 } else if (lastTrialData.outcome && partner_outcome) {
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+8', '+8', 8, 8); // Both activated
+                    avatar1TotalPoints += 8;
+                    avatar2TotalPoints += 8;
+                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+8', '+8', avatar1TotalPoints, avatar2TotalPoints); // Both activated
                 } else if (!lastTrialData.outcome && !partner_outcome) {
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+4', 2, 2); // Both lose
+                    avatar1TotalPoints += 4;
+                    avatar2TotalPoints += 4;
+                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+4', avatar1TotalPoints, avatar2TotalPoints); // Both lose
                 } else if (!lastTrialData.outcome && partner_outcome) { 
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+4', 4, 4); // They activated, you didn’t
+                    avatar1TotalPoints += 4;
+                    avatar2TotalPoints += 4;
+                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+4', avatar1TotalPoints, avatar2TotalPoints); // They activated, you didn’t
                 }
             } if (mode === 'soloLow') {
                 // Solo feedback (ignoring partner outcome)
                 if (lastTrialData.outcome && !partner_outcome) {
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', 4); // You activated it, they didn’t
+                    avatar1TotalPoints += 4;
+                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', avatar1TotalPoints); // You activated it, they didn’t
                 } else if (lastTrialData.outcome && partner_outcome) {
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', 8); // Both activated
+                    avatar1TotalPoints += 8;
+                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+8', avatar1TotalPoints); // Both activated
                 } else if (!lastTrialData.outcome && !partner_outcome) {
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', 4); // Both lose
+                    avatar1TotalPoints += 4;
+                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', avatar1TotalPoints); // Both lose
                 } else if (!lastTrialData.outcome && partner_outcome) { 
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', 4); // They activated, you didn’t
+                    avatar1TotalPoints += 4;
+                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', avatar1TotalPoints); // They activated, you didn’t
                 }
 
             }
@@ -786,7 +807,7 @@ function MakeFeedback(mode) {
         }
     };
 }
-/*
+
 function MakeRoundIntro(round) {
     return {
         type: jsPsychHtmlKeyboardResponse,
@@ -801,7 +822,7 @@ function MakeRoundIntro(round) {
         choices: "NO_KEYS",
         trial_duration: 2000,
     };
-} */
+} 
 
 /*
 function MakeRoundIntro(round) {
@@ -1044,9 +1065,9 @@ p.partnerRevealAvatar = {
         delayR1 = new MakeDelay('R1'),
         delayR2 = new MakeDelay('R2'),
         tooFastR1 = new MakeTooFast('R1'),
-        tooFastR2 = new MakeTooFast('R2')
-    //    roundIntroV1 = new MakeRoundIntro('V1'),
-    //    roundIntroV2 = new MakeRoundIntro('V2')
+        tooFastR2 = new MakeTooFast('R2'),
+        roundIntroV1 = new MakeRoundIntro('V1'),
+        roundIntroV2 = new MakeRoundIntro('V2')
 
     const delayLoopR1 = {
         timeline:[delayR1, tooFastR1],
@@ -1069,10 +1090,15 @@ p.partnerRevealAvatar = {
             return false
         }
     }
-/*
+
     p.task.round1Intro = {
         timeline: [roundIntroV1],
-    }; */
+    }; 
+
+    p.task.round2Intro = {
+        timeline: [roundIntroV2],
+    }; 
+
 
 //Solo Squares - High
  const LLLoopSoloSquareHigh = {
