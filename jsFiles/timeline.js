@@ -30,9 +30,11 @@ let timeline = [];
 
 */
 
+
 const commonTimeline = [
     p.avatars,
 ];
+
 
 const taskConfigurations = {
     1: [p.task.round1Intro, p.task.SoloCircleHigh, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareLow], //1

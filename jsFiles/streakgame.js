@@ -1,5 +1,6 @@
 //randomAssignment
-const randomAssignment = Math.floor(Math.random() * 8) + 1; 
+// const randomAssignment = Math.floor(Math.random() * 8) + 1; 
+randomAssignment = 1;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -24,10 +25,6 @@ let p = {};
 
 var streakGame = (function() {
 
-    //CREATE VARIABLES FOR PARTICIPANT LOSE DURATION
-
-
-    // randomly assign to conditions
     var settings = {
         colorOrder: 0,
         pM: .5, //probability?
@@ -37,9 +34,6 @@ var streakGame = (function() {
         nTrials: 62, //number of trials per condition
         basePay: 10,
     };
-
-    // create text variables for instructions
-    
 
 
     var text = {
@@ -385,6 +379,8 @@ CHOICE
 
 let selectedAvatarColor = '#2669ee';
 
+
+
 p.avatars = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `
@@ -395,13 +391,13 @@ p.avatars = {
                 <img src="./avatar/avatarsAll.jpg">
             </div>
         </div>`,
-    choices: ['Yellow', 'Green', 'Red'],
+    choices: ['Pink', 'Green', 'Red'],
     on_finish: (data) => {
         const responseIndex = data.response;
 
         // Map the response to a specific color
         if (responseIndex === 0) {
-            avatarResponse = '#FFA827'; // Yellow
+            avatarResponse = '#ff00fe'; // Pink
         } else if (responseIndex === 1) {
             avatarResponse = '#90CD4C'; // Green
         } else if (responseIndex === 2) {
@@ -441,7 +437,7 @@ FOR WW TRIAL WITH PLUG IN
 */
 
 
-function WWTrial(shape) {
+function WWTrial(shape, group) {
     let trialStartTime;
     let trialEndTime;
   
@@ -470,16 +466,19 @@ function WWTrial(shape) {
         },
         ending_time: delayTime, // Must be larger than partner_rt
         on_start: function (trial) {
+            trialStartTime = Date.now();
             console.log('Selected color:', trial.selected_color); // Log the selected color
-            trialStartTime = Date.now();           
-            jsPsych.pluginAPI.setTimeout(function () {
+
+            let color = group === 'solo' ? '#FFFF00' : '#2669ee';
+
+            jsPsych.pluginAPI.setTimeout(() => {
                 const outerCircle = document.getElementById('outer-shape');
                 if (outerCircle) {
-                    outerCircle.style.backgroundColor = '#2669ee'; // Use the selected color
+                    outerCircle.style.backgroundColor = color;
                 } else {
-                    console.error('outer-circle element not found');
+                    console.log('outer-shape element not found');
                 }
-            }, trial.partner_rt)
+            }, trial.partner_rt);
         },
         on_finish: function (data) {
             trialEndTime = Date.now();
@@ -551,12 +550,12 @@ FOR LW TRIAL WITH PLUG IN
 
 
 // LW trial
-function LWTrial(shape) {
+function LWTrial(shape, group) {
     let trialStartTime;
     let trialEndTime;
 
     const outerShapeClass = shape;
-    const innerShapeClass = shape; 
+    const innerShapeClass = shape;
 
     return {
         type: jsPsychLWHtmlKeyboardResponse,
@@ -568,28 +567,32 @@ function LWTrial(shape) {
             </div>
         `,
         choices: [" "],
-        response_duration: trialforLose, // Fallback duration if no response from participant
-        selected_color: () => {
-            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
-            return avatarResponse;
-        },
         trial_duration: 2000, // Fallback duration if no response from participant
-        partner_rt: function forLW(min = 225, max = 235) {
+        response_duration: trialforLose, // Ensure trialforLose is defined globally or passed properly
+
+        selected_color: function() {
+            const lastTrial = jsPsych.data.get().filter({ trial_type: 'html-button-response' }).last(1).values()[0];
+            return lastTrial ? lastTrial.avatarResponse : null;
+        },
+
+        partner_rt: function(min = 225, max = 235) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
-        on_start: function(trial) {
-            trialStartTime = Date.now(); 
-            console.log('Outer circle becomes highlighted at partner reaction time: ' + trial.partner_rt);
 
-            jsPsych.pluginAPI.setTimeout(function() {
+        on_start: function(trial) {
+            trialStartTime = Date.now();
+            let color = group === 'solo' ? '#FFFF00' : '#2669ee';
+
+            jsPsych.pluginAPI.setTimeout(() => {
                 const outerCircle = document.getElementById('outer-shape');
                 if (outerCircle) {
-                    outerCircle.style.backgroundColor = '#2669ee';
+                    outerCircle.style.backgroundColor = color;
                 } else {
-                    console.log('outer-circle element not found');
+                    console.log('outer-shape element not found');
                 }
             }, trial.partner_rt);
         },
+
         on_finish: function(data) {
             trialEndTime = Date.now();
             const trialDuration = trialEndTime - trialStartTime;
@@ -716,7 +719,7 @@ function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1Points) {
 
 
 const avatarChoices = [
-    { color: 'Yellow', code: '#FFA827', img: './avatar/1.jpg' },
+    { color: 'Pink', code: '#ff00fe', img: './avatar/1.jpg' },
     { color: 'Green', code: '#90CD4C', img: './avatar/2.jpg' },
     { color: 'Red', code: '#800000', img: './avatar/3.jpg' }
 ];
@@ -1068,12 +1071,16 @@ p.partnerRevealAvatar = {
     // trial variables
     var LLTrialCircle = new LLTrial('circle'),
         LLTrialSquare = new LLTrial('square'),
-        LWTrialCircle = new LWTrial('circle'),
-        LWTrialSquare = new LWTrial('square'),
+        LWTrialCircleGroup = new LWTrial('circle', 'group'),
+        LWTrialCircleSolo = new LWTrial('circle', 'solo'),
+        LWTrialSquareGroup = new LWTrial('square', 'group'),
+        LWTrialSquareSolo = new LWTrial('square', 'solo'),
         WLTrialCircle = new WLTrial('circle'),
         WLTrialSquare = new WLTrial('square'),
-        WWTrialCircle = new WWTrial('circle'),
-        WWTrialSquare = new WWTrial('square'),
+        WWTrialCircleGroup = new WWTrial('circle', 'group'),
+        WWTrialCircleSolo = new WWTrial('circle', 'solo'),
+        WWTrialSquareGroup = new WWTrial('square', 'group'),
+        WWTrialSquareSolo = new WWTrial('square', 'solo'),
         feedbackGroupHigh = new MakeFeedback('groupHigh'),
         feedbackGroupLow = new MakeFeedback('groupLow'),
         feedbackSoloHigh = new MakeFeedback('soloHigh'),
@@ -1122,11 +1129,11 @@ p.partnerRevealAvatar = {
     };  
 
     const WWLoopSoloSquareHigh = {
-     timeline: [delayLoopR1, WWTrialSquare, feedbackSoloHigh] 
+     timeline: [delayLoopR1, WWTrialSquareSolo, feedbackSoloHigh] 
     };
 
     const LWLoopSoloSquareHigh = {
-     timeline: [delayLoopR1, LWTrialSquare, feedbackSoloHigh]
+     timeline: [delayLoopR1, LWTrialSquareSolo, feedbackSoloHigh]
     };  
 
     const WLLoopSoloSquareHigh = {
@@ -1139,11 +1146,11 @@ p.partnerRevealAvatar = {
     };  
 
     const WWLoopSoloSquareLow = {
-     timeline: [delayLoopR1, WWTrialSquare, feedbackSoloLow] 
+     timeline: [delayLoopR1, WWTrialSquareSolo, feedbackSoloLow] 
     };
 
     const LWLoopSoloSquareLow = {
-     timeline: [delayLoopR1, LWTrialSquare, feedbackSoloLow]
+     timeline: [delayLoopR1, LWTrialSquareSolo, feedbackSoloLow]
     };  
 
     const WLLoopSoloSquareLow = {
@@ -1156,11 +1163,11 @@ p.partnerRevealAvatar = {
     };  
 
     const WWLoopGroupSquareHigh = {
-     timeline: [delayLoopR1, WWTrialSquare, feedbackGroupHigh]
+     timeline: [delayLoopR1, WWTrialSquareGroup, feedbackGroupHigh]
     };
 
     const LWLoopGroupSquareHigh = {
-     timeline: [delayLoopR1, LWTrialSquare, feedbackGroupHigh]
+     timeline: [delayLoopR1, LWTrialSquareGroup, feedbackGroupHigh]
     };  
 
     const WLLoopGroupSquareHigh = {
@@ -1174,11 +1181,11 @@ p.partnerRevealAvatar = {
     }; 
 
     const WWLoopGroupSquareLow = {
-     timeline: [delayLoopR1, WWTrialSquare, feedbackGroupLow] 
+     timeline: [delayLoopR1, WWTrialSquareGroup, feedbackGroupLow] 
     };
 
     const LWLoopGroupSquareLow = {
-     timeline: [delayLoopR1, LWTrialSquare, feedbackGroupLow] 
+     timeline: [delayLoopR1, LWTrialSquareGroup, feedbackGroupLow] 
     };  
 
     const WLLoopGroupSquareLow = {
@@ -1187,15 +1194,15 @@ p.partnerRevealAvatar = {
 
 //Solo Circles - High
     const LLLoopSoloCircleHigh = {
-     timeline: [delayLoopR1, WWTrialCircle, feedbackSoloHigh]
+     timeline: [delayLoopR1, LLTrialCircle, feedbackSoloHigh]
     };
 
     const WWLoopSoloCircleHigh = {
-     timeline: [delayLoopR1, WWTrialCircle, feedbackSoloHigh]
+     timeline: [delayLoopR1, WWTrialCircleSolo, feedbackSoloHigh]
     };
 
     const LWLoopSoloCircleHigh = {
-     timeline: [delayLoopR1, LWTrialCircle, feedbackSoloHigh]
+     timeline: [delayLoopR1, LWTrialCircleSolo, feedbackSoloHigh]
     };  
 
     const WLLoopSoloCircleHigh = {
@@ -1204,15 +1211,15 @@ p.partnerRevealAvatar = {
 
 //Solo Circles - Low
     const LLLoopSoloCircleLow = {
-     timeline: [delayLoopR1, WWTrialCircle, feedbackSoloLow]
+     timeline: [delayLoopR1, LLTrialCircle, feedbackSoloLow]
     };
 
     const WWLoopSoloCircleLow = {
-     timeline: [delayLoopR1, WWTrialCircle, feedbackSoloLow]
+     timeline: [delayLoopR1, WWTrialCircleSolo, feedbackSoloLow]
     };
 
     const LWLoopSoloCircleLow = {
-     timeline: [delayLoopR1, LWTrialCircle, feedbackSoloLow]
+     timeline: [delayLoopR1, LWTrialCircleSolo, feedbackSoloLow]
     };  
 
     const WLLoopSoloCircleLow = {
@@ -1226,11 +1233,11 @@ p.partnerRevealAvatar = {
     };  
 
     const WWLoopGroupCircleHigh = {
-     timeline: [delayLoopR1, WWTrialCircle, feedbackGroupHigh]
+     timeline: [delayLoopR1, WWTrialCircleGroup, feedbackGroupHigh]
     };
 
     const LWLoopGroupCircleHigh = {
-     timeline: [delayLoopR1, LWTrialCircle, feedbackGroupHigh]
+     timeline: [delayLoopR1, LWTrialCircleGroup, feedbackGroupHigh]
     };  
 
     const WLLoopGroupCircleHigh = {
@@ -1244,11 +1251,11 @@ p.partnerRevealAvatar = {
     };  
 
     const WWLoopGroupCircleLow = {
-     timeline: [delayLoopR1, WWTrialCircle, feedbackGroupLow]
+     timeline: [delayLoopR1, WWTrialCircleGroup, feedbackGroupLow]
     };
 
     const LWLoopGroupCircleLow = {
-     timeline: [delayLoopR1, LWTrialCircle, feedbackGroupLow]
+     timeline: [delayLoopR1, LWTrialCircleGroup, feedbackGroupLow]
     };  
 
     const WLLoopGroupCircleLow = {
@@ -1258,81 +1265,51 @@ p.partnerRevealAvatar = {
 
     p.task.SoloCircleLow = {
         timeline: [WWLoopSoloCircleLow, LLLoopSoloCircleLow, LWLoopSoloCircleLow, WLLoopSoloCircleLow],
-        //timeline: [LLLoop, WWLoop, LWLoop, WLLoop],
         randomize_order: true,
         repetitions: noOfTrials,
     };
 
     p.task.SoloCircleHigh = {
         timeline: [WWLoopSoloCircleHigh, LLLoopSoloCircleHigh, LWLoopSoloCircleHigh, WLLoopSoloCircleHigh],
-        //timeline: [LLLoop, WWLoop, LWLoop, WLLoop],
         randomize_order: true,
         repetitions: noOfTrials,
     }; 
 
     p.task.GroupCircleLow = {
         timeline: [WWLoopGroupCircleLow, LLLoopGroupCircleLow, LWLoopGroupCircleLow,  WLLoopGroupCircleLow],
-        //timeline: [LLLoop, WWLoop, LWLoop, WLLoop],
         randomize_order: true,
         repetitions: noOfTrials,
     };
 
     p.task.GroupCircleHigh = {
         timeline: [WWLoopGroupCircleHigh, LLLoopGroupCircleHigh, LWLoopGroupCircleHigh,  WLLoopGroupCircleHigh],
-        //timeline: [LLLoop, WWLoop, LWLoop, WLLoop],
         randomize_order: true,
         repetitions: noOfTrials,
     };
 
     p.task.SoloSquareLow = {
         timeline: [WWLoopSoloSquareLow, LLLoopSoloSquareLow, LWLoopSoloSquareLow, WLLoopSoloSquareLow],
-        //timeline: [LLLoop, WWLoop, LWLoop, WLLoop],
         randomize_order: true,
         repetitions: noOfTrials,
     };
 
     p.task.SoloSquareHigh = {
         timeline: [WWLoopSoloSquareHigh, LLLoopSoloSquareHigh, LWLoopSoloSquareHigh, WLLoopSoloSquareHigh],
-        //timeline: [LLLoop, WWLoop, LWLoop, WLLoop],
         randomize_order: true,
         repetitions: noOfTrials,
     };  
 
     p.task.GroupSquareLow = {
         timeline: [WWLoopGroupSquareLow, LLLoopGroupSquareLow, LWLoopGroupSquareLow,  WLLoopGroupSquareLow],
-        //timeline: [LLLoop, WWLoop, LWLoop, WLLoop],
         randomize_order: true,
         repetitions: noOfTrials,
     };
 
     p.task.GroupSquareHigh = {
         timeline: [WWLoopGroupSquareHigh, LLLoopGroupSquareHigh, LWLoopGroupSquareHigh,  WLLoopGroupSquareHigh],
-        //timeline: [LLLoop, WWLoop, LWLoop, WLLoop],
         randomize_order: true,
         repetitions: noOfTrials,
     };
-/*
-p.task.round1 = { 
-    timeline: [
-        WWTrial,  // First trial
-        {
-            timeline: [WWTrialSecond, responseWW, feedbackWW],  // Second trial (conditional)
-            conditional_function: function() {
-                // Get the data from the previous trial (WWTrial)
-                const lastTrialData = jsPsych.data.get().last(1).values()[0];
-                const randomDuration = lastTrialData.randomDuration;
-                const trialDuration = lastTrialData.trial_duration;
-
-                // Check if randomDuration > trial_duration
-                return randomDuration > trialDuration;
-            }
-        },
- //       responseR1,  // Response for round 1
- //       feedbackR1    // Feedback for round 1
-    ],
-    repetitions: settings.nTrials,
-}; */
-
 
 
    /*
