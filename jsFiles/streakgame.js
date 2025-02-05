@@ -50,6 +50,18 @@ var streakGame = (function() {
         wasWere: settings.val == 1 ? 'was' : 'were'
     }; 
 
+
+var textNew = {
+    game1: randomAssignment % 2 === 1 ? 'Circle Game' : 'Square Game',
+    shape1: randomAssignment % 2 === 1 ? 'circle' : 'square',
+    game2: randomAssignment % 2 === 1 ? 'Square Game' : 'Circle Game',
+    shape2: randomAssignment % 2 === 1 ? 'square' : 'circle',
+    group: randomAssignment % 2 === 1 ? 'alone' : 'with someone', //odd numbers = alone, even = group
+    group2: randomAssignment % 2 === 1 ? 'with someone else' : 'alone',
+    color: randomAssignment % 2 === 1 ? `yellow` : `your partner's color`, //odd numbers = alone, even = group
+    partner: randomAssignment % 2 === 1 ? `outer circle` : `your partner`, //odd numbers = alone, even = group
+}
+
    /*
     *
     *   INSTRUCTIONS
@@ -65,49 +77,62 @@ var streakGame = (function() {
         pages = {
             r1: {
                 part1: [`<div class='parent'>
-                <p> Welcome to the "Tile Game"! </p>
-                <p>We are interested in your thoughts about a game of skill. </p> 
-                <p>Specifically, you'll play a game of skill called the Tile Game.</p>
+                <p> Welcome to the Tile Game! </p>
+                <p>We are interested in your thoughts about a game of skill called the Tile Game.</p>
                 <p>INSERT GIF HERE</p>
                 </div>`,
 
                 `<div class='parent'>
-                <p>The goal of the game is to win as much money as possible.</p>
-                <p>All of the money you win during the game will be added to a "bonus fund,"<br>which you'll receive at the end of the study.</p>
-                <p>Your total payment will be $10 for your participation, plus all of the money in your bonus fund.</p>
+                <p>Throughout the game, you'll earn points. Each point is worth 2 cents in bonus money. 
+                You'll keep all the bonus money you earn on top of the $10 you earn for your participation. </p>
+                <p>To maximize your earnings, earn as money points as possible!</p>
                 </div>`,
 
                 `<div class='parent'>
-                <p> You'll play two versions of the game, called the Circle game or the Square game. </p>
-                <p>In each version of the game, you'll have 80 chances to "activate" tiles like this one per each version of the game.<br>
+                <p> You'll be playing 2 versions of the Tile Game: the ${textNew.game1} and the ${textNew.game2}.</p>
+                <p>In both versions, you'll have X chances to "activate" tiles like this one per each version of the game.<br>
+                <p>INSERT GIF HERE</p>
+                </div>`,
+
+                `<div class='parent'>
                 <p>The tiles will appear on your screen, then disappear very quickly.</p> 
-                <p> To activate a tile, you must press your SPACE BAR before it disappears; whenever you see a tile, you should press your SPACE BAR as fast as possible. </p>
+                <p>To activate a tile, you must press your SPACE BAR before it disappears; whenever you see a tile, you should press your SPACE BAR as fast as possible. </p>
+                <p>If you do not activate the tile in time, it will turn gray.</p> 
                 <p>Watch the video below to see how it works. </p>
-                <p>INSERT GIF HERE?</p>
+                <p>INSERT GIF HERE</p>
                 </div>`,
 
                 `<div class='parent'>
-                <p>The more tiles you activate, the more money you'll earn.</p>
-                <p>Specifically, $0.10 cents will be added to your bonus fund for each round you win.</p>               
+                <p>After each chance of activating a tile, you'll see the points you've earned and the total points you've earned so far for that game. </p>
+                <img src="./img/points.png" style="width: 250px; margin: 0 10px;">
                 </div>`,
 
                 `<div class='parent'>
-                <p>In the Circle game, the tiles are circles.</p>
-                <p>We will randomly assign you to either play the outer circle or the inner circle. </p>
-                <p>To activate the round tile, you must press your SPACE BAR before it disappears; whenever you see a tile, you should press your SPACE BAR as fast as possible.
-                <p>Insert GIF HERE</p></div>
+                <p>The ${textNew.game1} and the ${textNew.game2} are different versions of the same game. </p>
+                <p> In the ${textNew.game1}, the tiles are ${textNew.shape1}, while in the ${textNew.game2}, the tiles are ${textNew.shape2}.
+                <p>Second, the rules will change between games. 
+                <p>Third, in the ${textNew.game1}, you'll be playing ${textNew.group}, while in the ${textNew.game2}, you'll be playing ${textNew.group2}.</p>
                 </div>`,
 
                 `<div class='parent'>
-                <p>In the square game, the tiles are square.</p>
-                <p>We will randomly assign you to either play the outer square or the inner square. </p>
-                <p>To activate the square tile, you must press your SPACE BAR before it disappears; whenever you see a tile, you should press your SPACE BAR as fast as possible.
-                <p>Insert GIF HERE</p></div>
+                <p> You'll play the ${textNew.game1} first, then the ${textNew.game2} second. </p>
+                <p> You'll play the inner tile.</p>
+                <p> Click "next" to learn more about ${textNew.game1}. </p>
                 </div>`,
 
                 `<div class='parent'>
-                <p>You may also play with a partner or play without a partner. </p> </div> </div>`], 
+                <p> In the ${textNew.game1}, the outer circle will randomly activate to ${textNew.color}. </p>
+                <p> Rules: </p>
+                <p>If you and the ${textNew.partner} are activated at the same time, you'll earn +8 points. </p>
+                <p>If you activate and the ${textNew.partner} did not, you'll earn +6 points. </p>
+                <p>If you did not activate but the ${textNew.partner} is activated, you'll earn +4 points. </p>
+                <p>If you and the ${textNew.partner} did not activate, you'll earn +2 points. </p>
+                <p> insert GIF HERE of relevant game </p>
+                </div>`
 
+
+
+                ],
 
                 part2Bern: [`<div class='parent'>
                 <p>To earn money, you must achieve wins.<br>
@@ -139,12 +164,6 @@ var streakGame = (function() {
                 </div>`,
 
                 `<div class='parent'>
-                <p>If you activate a tile, you'll see that ${text.value} cent${text.plural} ${text.wasWere} added to your bonus fund.<br>
-                The next tile will appear immediately after.</p>
-                <div style='font-size:35px'><p>You activated it!</p><p>+${settings.val} cent${text.plural}</p><p><br></p><p>(Get ready for the next tile!)</p></div>
-                </div>`,
-
-                `<div class='parent'>
                 <p>If you miss a tile, you'll see that no money was added to your bonus fund.<br>
                 The next tile will appear immediately after.</p>
                 <div style='font-size:35px'><p>You missed</p><p>+0 cents</p><p><br></p><p>(Get ready for the next tile!)</p></div>
@@ -165,7 +184,7 @@ var streakGame = (function() {
 
                 `<div class='parent'>
                 <p>The <span class='${text.span2}'>${text.game2}</span> is identical to the 
-                <span class='${text.span1}'>${text.game1}</span> with two exceptions.</p>
+                <span class='${text.span1}'>${text.game1}</span> with three exceptions.</p>
                 </div>`],
 
                 part2Chunk: [`<div class='parent'>
