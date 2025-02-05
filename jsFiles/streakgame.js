@@ -58,7 +58,7 @@ var textNew = {
     shape2: randomAssignment % 2 === 1 ? 'square' : 'circle',
     group: randomAssignment % 2 === 1 ? 'alone' : 'with someone', //odd numbers = alone, even = group
     group2: randomAssignment % 2 === 1 ? 'with someone else' : 'alone',
-    color: randomAssignment % 2 === 1 ? `yellow` : `your partner's color`, //odd numbers = alone, even = group
+    color: randomAssignment % 2 === 1 ? '<span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span>' : `your partner's color`, //odd numbers = alone, even = group
     partner: randomAssignment % 2 === 1 ? `outer circle` : `your partner`, //odd numbers = alone, even = group
 }
 
@@ -122,10 +122,10 @@ var textNew = {
 
                 `<div class='parent'>
                 <p> In the ${textNew.game1}, the outer circle will randomly activate to ${textNew.color}. </p>
-                <p> Rules: </p>
+                <p><b> Rules: </b></p>
                 <p>If you and the ${textNew.partner} are activated at the same time, you'll earn +8 points. </p>
-                <p>If you activate and the ${textNew.partner} did not, you'll earn +6 points. </p>
-                <p>If you did not activate but the ${textNew.partner} is activated, you'll earn +4 points. </p>
+                <p>If you activated and the ${textNew.partner} did not, you'll earn +6 points. </p>
+                <p>If you did not activate but the ${textNew.partner} activated, you'll earn +4 points. </p>
                 <p>If you and the ${textNew.partner} did not activate, you'll earn +2 points. </p>
                 <p> insert GIF HERE of relevant game </p>
                 </div>`
