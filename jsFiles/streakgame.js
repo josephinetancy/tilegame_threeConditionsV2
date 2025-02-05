@@ -1,6 +1,6 @@
 //randomAssignment
 // const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-randomAssignment = 1;
+randomAssignment = 2;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -59,7 +59,8 @@ var textNew = {
     group: randomAssignment % 2 === 1 ? 'alone' : 'with someone', //odd numbers = alone, even = group
     group2: randomAssignment % 2 === 1 ? 'with someone else' : 'alone',
     color: randomAssignment % 2 === 1 ? '<span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span>' : `your partner's color`, //odd numbers = alone, even = group
-    partner: randomAssignment % 2 === 1 ? `outer circle` : `your partner`, //odd numbers = alone, even = group
+    partner: randomAssignment % 2 === 1 ? `the outer circle` : `your partner`, //odd numbers = alone, even = group
+    sentence: randomAssignment % 2 === 1 ? `will randomly activate to <span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span>` : `will be activated by your partner and it will activate to their chosen color.`, //odd numbers = alone, even = group
 }
 
    /*
@@ -110,8 +111,8 @@ var textNew = {
                 `<div class='parent'>
                 <p>The ${textNew.game1} and the ${textNew.game2} are different versions of the same game. </p>
                 <p> In the ${textNew.game1}, the tiles are ${textNew.shape1}, while in the ${textNew.game2}, the tiles are ${textNew.shape2}.
-                <p>Second, the rules will change between games. 
-                <p>Third, in the ${textNew.game1}, you'll be playing ${textNew.group}, while in the ${textNew.game2}, you'll be playing ${textNew.group2}.</p>
+                <p>The rules will change between games. 
+                <p>In the ${textNew.game1}, you'll be playing ${textNew.group}, while in the ${textNew.game2}, you'll be playing ${textNew.group2}.</p>
                 </div>`,
 
                 `<div class='parent'>
@@ -121,12 +122,13 @@ var textNew = {
                 </div>`,
 
                 `<div class='parent'>
-                <p> In the ${textNew.game1}, the outer circle will randomly activate to ${textNew.color}. </p>
+                <p> In the ${textNew.game1}, the outer ${textNew.shape1} ${textNew.sentence} </p>
+                <p> You will activate the inner ${textNew.shape1} and it will activate to your chosen color. </p>
                 <p><b> Rules: </b></p>
-                <p>If you and the ${textNew.partner} are activated at the same time, you'll earn +8 points. </p>
-                <p>If you activated and the ${textNew.partner} did not, you'll earn +6 points. </p>
-                <p>If you did not activate but the ${textNew.partner} activated, you'll earn +4 points. </p>
-                <p>If you and the ${textNew.partner} did not activate, you'll earn +2 points. </p>
+                <p>If you and ${textNew.partner} are activated at the same time, you'll earn +8 points. </p>
+                <p>If you activated and ${textNew.partner} did not, you'll earn +6 points. </p>
+                <p>If you did not activate but ${textNew.partner} activated, you'll earn +4 points. </p>
+                <p>If you and ${textNew.partner} did not activate, you'll earn +2 points. </p>
                 <p> insert GIF HERE of relevant game </p>
                 </div>`
 
