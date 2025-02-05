@@ -60,7 +60,7 @@ var textNew = {
     group2: randomAssignment % 2 === 1 ? 'with someone else' : 'alone',
     color: randomAssignment % 2 === 1 ? '<span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span>' : `your partner's color`, //odd numbers = alone, even = group
     partner: randomAssignment % 2 === 1 ? `the outer circle` : `your partner`, //odd numbers = alone, even = group
-    sentence: randomAssignment % 2 === 1 ? `will randomly activate to <span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span>` : `will be activated by your partner and it will activate to their chosen color.`, //odd numbers = alone, even = group
+    sentence: randomAssignment % 2 === 1 ? `will randomly activate to <span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span>.` : `will be activated by your partner and it will activate to their chosen color.`, //odd numbers = alone, even = group
 }
 
    /*
