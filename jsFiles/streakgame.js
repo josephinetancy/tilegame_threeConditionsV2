@@ -1,6 +1,6 @@
 //randomAssignment
 // const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-randomAssignment = 2;
+randomAssignment = 1;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -104,7 +104,7 @@ var textNew = {
                 </div>`,
 
                 `<div class='parent'>
-                <p>After each chance of activating a tile, you'll see the points you've earned and the total points you've earned so far for that game. </p>
+                <p>After each chance of activating a tile, you'll see the points you've earned and the total points you've earned so far in that game. </p>
                 <img src="./img/points.png" style="width: 250px; margin: 0 10px;">
                 </div>`,
 
