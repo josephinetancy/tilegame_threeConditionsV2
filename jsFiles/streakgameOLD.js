@@ -27,7 +27,6 @@ var streakGame = (function() {
 
     var settings = {
         colorOrder: 0,
-        pM: .5, //probability?
         pEM: [10, 10],///???
         gameTypeOrder: 0,
         val: 10, //how much they earn
@@ -122,7 +121,7 @@ var streakGame = (function() {
 
                 `<div class='parent'>
                 <p>Wins are worth money. The more tiles you activate, the more money you'll earn.<br>
-                Specifically, ${settings.val} cent will be added to your bonus fund for each tile you activate.</p>               
+                Specifically, 2 cents will be added to your bonus fund for each tile you activate.</p>               
                 <div class='box' style='background-color:gray'></div>
                 </div>`,
 
@@ -380,7 +379,6 @@ CHOICE
 let selectedAvatarColor = '#2669ee';
 
 
-
 function MakeAvatarSelection(round) {
     return {
         type: jsPsychHtmlButtonResponse,
@@ -398,7 +396,7 @@ function MakeAvatarSelection(round) {
             const avatarResponse = avatarColors[data.response] || null;
 
             if (avatarResponse) {
-                const responseKey = round === "R1" ? "avatarResponse" : "avatarResponse2";
+                const responseKey = round === "R1" ? "avatarResponse1" : "avatarResponse2";
                 let saveData = {};
                 saveData[responseKey] = avatarResponse;
 
@@ -437,7 +435,7 @@ FOR WW TRIAL WITH PLUG IN
 */
 
 
-function WWTrial(shape, group) {
+function WWTrial(shape, group, round) {
     let trialStartTime;
     let trialEndTime;
   
@@ -457,7 +455,8 @@ function WWTrial(shape, group) {
         choices: [" "],
         response_duration: trialforWins, 
         selected_color: () => {
-            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+            let responseKey = round === "R1" ? "avatarResponse1" : "avatarResponse2";
+            let avatarResponse = jsPsych.data.get().values().find(trial => trial[responseKey])?.[responseKey] || null;
             return avatarResponse;
         },
         trial_duration: 2000, // Fallback duration if no response from participant
@@ -500,7 +499,7 @@ FOR WL TRIAL WITH PLUG IN
 */
 
 // WL trial
-function WLTrial(shape) {
+function WLTrial(shape, round) {
     let trialStartTime;
     let trialEndTime;
 
@@ -520,7 +519,8 @@ function WLTrial(shape) {
         choices: [" "],
         response_duration: trialforWins,
         selected_color: () => {
-            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+            let responseKey = round === "R1" ? "avatarResponse1" : "avatarResponse2";
+            let avatarResponse = jsPsych.data.get().values().find(trial => trial[responseKey])?.[responseKey] || null;
             return avatarResponse;
         },
         trial_duration: 2000,
@@ -550,7 +550,7 @@ FOR LW TRIAL WITH PLUG IN
 
 
 // LW trial
-function LWTrial(shape, group) {
+function LWTrial(shape, group, round) {
     let trialStartTime;
     let trialEndTime;
 
@@ -569,10 +569,10 @@ function LWTrial(shape, group) {
         choices: [" "],
         trial_duration: 2000, // Fallback duration if no response from participant
         response_duration: trialforLose, // Ensure trialforLose is defined globally or passed properly
-
-        selected_color: function() {
-            const lastTrial = jsPsych.data.get().filter({ trial_type: 'html-button-response' }).last(1).values()[0];
-            return lastTrial ? lastTrial.avatarResponse : null;
+        selected_color: () => {
+            let responseKey = round === "R1" ? "avatarResponse1" : "avatarResponse2";
+            let avatarResponse = jsPsych.data.get().values().find(trial => trial[responseKey])?.[responseKey] || null;
+            return avatarResponse;
         },
 
         partner_rt: function(min = 225, max = 235) {
@@ -613,7 +613,7 @@ FOR LL TRIAL WITH PLUG IN
 */
 
 // LL trial
-function LLTrial(shape) {
+function LLTrial(shape, round) {
     let trialStartTime;
     let trialEndTime;
 
@@ -632,7 +632,8 @@ function LLTrial(shape) {
         choices: [" "],
         response_duration: trialforLose, // Fallback duration if no response from participant
         selected_color: () => {
-            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+            let responseKey = round === "R1" ? "avatarResponse1" : "avatarResponse2";
+            let avatarResponse = jsPsych.data.get().values().find(trial => trial[responseKey])?.[responseKey] || null;
             return avatarResponse;
         },
         trial_duration: 2000, // Fallback duration if no response from participant
@@ -843,27 +844,6 @@ function MakeRoundIntro(round) {
     };
 } 
 
-/*
-function MakeRoundIntro(round) {
-    return {
-        type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: `firstRoundIntro_${round}` },
-        stimulus: () => {
-            if (round == 'V1') {
-                return settings.gameTypeOrder == 0  
-                    ? `<div style='font-size:35px'><p>Get ready for the first round!</p></div>` 
-                    : `<div style='font-size:35px'><p>Get ready for the first tile!</p></div>`;
-            } else {
-                return settings.gameTypeOrder == 0  
-                    ? `<div style='font-size:35px'><p>Get ready for the first tile!</p></div>` 
-                    : `<div style='font-size:35px'><p>Get ready for the first round!</p></div>`;
-            }
-        },
-        choices: "NO_KEYS",
-        trial_duration: 2000,
-    };
-} */
-
 var ITI = [250, 500, 750, 1000, 1250, 1500, 1750, 2000]
 
 function MakeDelay(round) {
@@ -1068,24 +1048,47 @@ p.partnerRevealAvatar = {
     }
 };
 
+/*
+
+const shapes = ['Circle', 'Square'];
+const groups = ['Group', 'Solo'];
+const rounds = ['R1', 'R2'];
+
+const trials = {};
+
+// Generate LL, LW, WL, and WW trials dynamically
+rounds.forEach(round => {
+    shapes.forEach(shape => {
+        trials[`LLTrial${shape}${round}`] = new LLTrial(shape, round);
+        trials[`WLTrial${shape}${round}`] = new WLTrial(shape, round);
+        
+        groups.forEach(group => {
+            trials[`LWTrial${shape}${group}${round}`] = new LWTrial(shape, group, round);
+            trials[`WWTrial${shape}${group}${round}`] = new WWTrial(shape, group, round);
+        });
+    });
+}); */
+
+
     // trial variables
-    var LLTrialCircle = new LLTrial('circle'),
-        LLTrialSquare = new LLTrial('square'),
-        LWTrialCircleGroup = new LWTrial('circle', 'group'),
-        LWTrialCircleSolo = new LWTrial('circle', 'solo'),
-        LWTrialSquareGroup = new LWTrial('square', 'group'),
-        LWTrialSquareSolo = new LWTrial('square', 'solo'),
-        WLTrialCircle = new WLTrial('circle'),
-        WLTrialSquare = new WLTrial('square'),
-        WWTrialCircleGroup = new WWTrial('circle', 'group'),
-        WWTrialCircleSolo = new WWTrial('circle', 'solo'),
-        WWTrialSquareGroup = new WWTrial('square', 'group'),
-        WWTrialSquareSolo = new WWTrial('square', 'solo'),
+    var LLTrialCircleR1 = new LLTrial('circle', 'R1'),
+        LLTrialSquareR1 = new LLTrial('square', 'R1'),
+        LWTrialCircleGroupR1 = new LWTrial('circle', 'group', 'R1'),
+        LWTrialCircleSoloR1 = new LWTrial('circle', 'solo', 'R1'),
+        LWTrialSquareGroupR1 = new LWTrial('square', 'group', 'R1'),
+        LWTrialSquareSoloR1 = new LWTrial('square', 'solo', 'R1'),
+        WLTrialCircleR1 = new WLTrial('circle', 'R1'),
+        WLTrialSquareR1 = new WLTrial('square', 'R1'),
+        WWTrialCircleGroupR1 = new WWTrial('circle', 'group', 'R1'),
+        WWTrialCircleSoloR1 = new WWTrial('circle', 'solo', 'R1'),
+        WWTrialSquareGroupR1 = new WWTrial('square', 'group', 'R1'),
+        WWTrialSquareSoloR1 = new WWTrial('square', 'solo', 'R1'), 
         feedbackGroupHigh = new MakeFeedback('groupHigh'),
         feedbackGroupLow = new MakeFeedback('groupLow'),
         feedbackSoloHigh = new MakeFeedback('soloHigh'),
         feedbackSoloLow = new MakeFeedback('soloLow'),
         avatarChoice1 = new MakeAvatarSelection('R1'),
+        avatarChoice2 = new MakeAvatarSelection('R2'),
         delayR1 = new MakeDelay('R1'),
         delayR2 = new MakeDelay('R2'),
         tooFastR1 = new MakeTooFast('R1'),
@@ -1119,203 +1122,204 @@ p.partnerRevealAvatar = {
         timeline: [roundIntroV1],
     }; 
 
-    p.task.round2Intro = {
-        timeline: [roundIntroV2],
-    }; 
-
     p.task.round1Avatars = {
         timeline: [avatarChoice1],
     }; 
  
 
+    p.task.round2Intro = {
+        timeline: [roundIntroV2],
+    }; 
+
+
+
 //Solo Squares - High
- const LLLoopSoloSquareHigh = {
-     timeline: [delayLoopR1, LLTrialSquare, feedbackSoloHigh] 
+ const LLLoopSoloSquareHighR1 = {
+     timeline: [delayLoopR1, LLTrialSquareR1, feedbackSoloHigh] 
     };  
 
     const WWLoopSoloSquareHigh = {
-     timeline: [delayLoopR1, WWTrialSquareSolo, feedbackSoloHigh] 
+     timeline: [delayLoopR1, WWtrialSquareSoloR1, feedbackSoloHigh] 
     };
 
     const LWLoopSoloSquareHigh = {
-     timeline: [delayLoopR1, LWTrialSquareSolo, feedbackSoloHigh]
+     timeline: [delayLoopR1, LWTrialSquareSoloR1, feedbackSoloHigh]
     };  
 
     const WLLoopSoloSquareHigh = {
-     timeline: [delayLoopR1, WLTrialSquare, feedbackSoloHigh]
+     timeline: [delayLoopR1, WLTrialSquareR1, feedbackSoloHigh]
     };  
 
 //Solo Squares - Low
  const LLLoopSoloSquareLow = {
-     timeline: [delayLoopR1, LLTrialSquare, feedbackSoloLow]
+     timeline: [delayLoopR1, LLTrialSquareR1, feedbackSoloLow]
     };  
 
     const WWLoopSoloSquareLow = {
-     timeline: [delayLoopR1, WWTrialSquareSolo, feedbackSoloLow] 
+     timeline: [delayLoopR1, WWTrialSquareSoloR1, feedbackSoloLow] 
     };
 
     const LWLoopSoloSquareLow = {
-     timeline: [delayLoopR1, LWTrialSquareSolo, feedbackSoloLow]
+     timeline: [delayLoopR1, LWTrialSquareSoloR1, feedbackSoloLow]
     };  
 
     const WLLoopSoloSquareLow = {
-     timeline: [delayLoopR1, WLTrialSquare, feedbackSoloLow]
+     timeline: [delayLoopR1, WLTrialSquareR1, feedbackSoloLow]
     };  
 
 //Group Squares - High
     const LLLoopGroupSquareHigh = {
-     timeline: [delayLoopR1, LLTrialSquare, feedbackGroupHigh]
+     timeline: [delayLoopR1, LLTrialSquareR1, feedbackGroupHigh]
     };  
 
     const WWLoopGroupSquareHigh = {
-     timeline: [delayLoopR1, WWTrialSquareGroup, feedbackGroupHigh]
+     timeline: [delayLoopR1, WWTrialSquareGroupR1, feedbackGroupHigh]
     };
 
     const LWLoopGroupSquareHigh = {
-     timeline: [delayLoopR1, LWTrialSquareGroup, feedbackGroupHigh]
+     timeline: [delayLoopR1, LWTrialSquareGroupR1, feedbackGroupHigh]
     };  
 
     const WLLoopGroupSquareHigh = {
-     timeline: [delayLoopR1, WLTrialSquare, feedbackGroupHigh]
+     timeline: [delayLoopR1, WLTrialSquareR1, feedbackGroupHigh]
     };
 
 
 //Group Squares - Low
     const LLLoopGroupSquareLow = {
-     timeline: [delayLoopR1, LLTrialSquare, feedbackGroupLow]
+     timeline: [delayLoopR1, LLTrialSquareR1, feedbackGroupLow]
     }; 
 
     const WWLoopGroupSquareLow = {
-     timeline: [delayLoopR1, WWTrialSquareGroup, feedbackGroupLow] 
+     timeline: [delayLoopR1, WWTrialSquareGroupR1, feedbackGroupLow] 
     };
 
     const LWLoopGroupSquareLow = {
-     timeline: [delayLoopR1, LWTrialSquareGroup, feedbackGroupLow] 
+     timeline: [delayLoopR1, LWTrialSquareGroupR1, feedbackGroupLow] 
     };  
 
     const WLLoopGroupSquareLow = {
-     timeline: [delayLoopR1, WLTrialSquare, feedbackGroupLow]
+     timeline: [delayLoopR1, WLTrialSquareR1, feedbackGroupLow]
     };
 
 //Solo Circles - High
     const LLLoopSoloCircleHigh = {
-     timeline: [delayLoopR1, LLTrialCircle, feedbackSoloHigh]
+     timeline: [delayLoopR1, LLTrialCircleR1, feedbackSoloHigh]
     };
 
     const WWLoopSoloCircleHigh = {
-     timeline: [delayLoopR1, WWTrialCircleSolo, feedbackSoloHigh]
+     timeline: [delayLoopR1, WWTrialCircleSoloR1, feedbackSoloHigh]
     };
 
     const LWLoopSoloCircleHigh = {
-     timeline: [delayLoopR1, LWTrialCircleSolo, feedbackSoloHigh]
+     timeline: [delayLoopR1, LWTrialCircleSoloR1, feedbackSoloHigh]
     };  
 
     const WLLoopSoloCircleHigh = {
-     timeline: [delayLoopR1, WLTrialCircle, feedbackSoloHigh]
+     timeline: [delayLoopR1, WLTrialCircleR1, feedbackSoloHigh]
     };  
 
 //Solo Circles - Low
     const LLLoopSoloCircleLow = {
-     timeline: [delayLoopR1, LLTrialCircle, feedbackSoloLow]
+     timeline: [delayLoopR1, LLTrialCircleR1, feedbackSoloLow]
     };
 
     const WWLoopSoloCircleLow = {
-     timeline: [delayLoopR1, WWTrialCircleSolo, feedbackSoloLow]
+     timeline: [delayLoopR1, WWTrialCircleSoloR1, feedbackSoloLow]
     };
 
     const LWLoopSoloCircleLow = {
-     timeline: [delayLoopR1, LWTrialCircleSolo, feedbackSoloLow]
+     timeline: [delayLoopR1, LWTrialCircleSoloR1, feedbackSoloLow]
     };  
 
     const WLLoopSoloCircleLow = {
-     timeline: [delayLoopR1, WLTrialCircle, feedbackSoloLow] 
+     timeline: [delayLoopR1, WLTrialCircleR1, feedbackSoloLow] 
     };  
 
 //Group Circle High
 
     const LLLoopGroupCircleHigh = {
-     timeline: [delayLoopR1, LLTrialCircle, feedbackGroupHigh]
+     timeline: [delayLoopR1, LLTrialCircleR1, feedbackGroupHigh]
     };  
 
     const WWLoopGroupCircleHigh = {
-     timeline: [delayLoopR1, WWTrialCircleGroup, feedbackGroupHigh]
+     timeline: [delayLoopR1, WWTrialCircleGroupR1, feedbackGroupHigh]
     };
 
     const LWLoopGroupCircleHigh = {
-     timeline: [delayLoopR1, LWTrialCircleGroup, feedbackGroupHigh]
+     timeline: [delayLoopR1, LWTrialCircleGroupR1, feedbackGroupHigh]
     };  
 
     const WLLoopGroupCircleHigh = {
-     timeline: [delayLoopR1, WLTrialCircle, feedbackGroupHigh]
+     timeline: [delayLoopR1, WLTrialCircleR1, feedbackGroupHigh]
     };
 
   //Group Circle Low  
 
     const LLLoopGroupCircleLow = {
-     timeline: [delayLoopR1, LLTrialCircle, feedbackGroupLow]
+     timeline: [delayLoopR1, LLTrialCircleR1, feedbackGroupLow]
     };  
 
     const WWLoopGroupCircleLow = {
-     timeline: [delayLoopR1, WWTrialCircleGroup, feedbackGroupLow]
+     timeline: [delayLoopR1, WWTrialCircleGroupR1, feedbackGroupLow]
     };
 
     const LWLoopGroupCircleLow = {
-     timeline: [delayLoopR1, LWTrialCircleGroup, feedbackGroupLow]
+     timeline: [delayLoopR1, LWTrialCircleGroupR1, feedbackGroupLow]
     };  
 
     const WLLoopGroupCircleLow = {
-     timeline: [delayLoopR1, WLTrialCircle, feedbackGroupLow]
+     timeline: [delayLoopR1, WLTrialCircleR1, feedbackGroupLow]
     };
 
 
-    p.task.SoloCircleLow = {
-        timeline: [WWLoopSoloCircleLow, LLLoopSoloCircleLow, LWLoopSoloCircleLow, WLLoopSoloCircleLow],
+    p.task.SoloCircleLowR1 = {
+        timeline: [WWLoopSoloCircleLowR1, LLLoopSoloCircleLowR1, LWLoopSoloCircleLowR1, WLLoopSoloCircleLowR1],
         randomize_order: true,
         repetitions: noOfTrials,
     };
 
-    p.task.SoloCircleHigh = {
-        timeline: [WWLoopSoloCircleHigh, LLLoopSoloCircleHigh, LWLoopSoloCircleHigh, WLLoopSoloCircleHigh],
+    p.task.SoloCircleHighR1 = {
+        timeline: [WWLoopSoloCircleHighR1, LLLoopSoloCircleHighR1, LWLoopSoloCircleHighR1, WLLoopSoloCircleHighR1],
         randomize_order: true,
         repetitions: noOfTrials,
     }; 
 
-    p.task.GroupCircleLow = {
-        timeline: [WWLoopGroupCircleLow, LLLoopGroupCircleLow, LWLoopGroupCircleLow,  WLLoopGroupCircleLow],
+    p.task.GroupCircleLowR1 = {
+        timeline: [WWLoopGroupCircleLowR1, LLLoopGroupCircleLowR1, LWLoopGroupCircleLowR1,  WLLoopGroupCircleLowR1],
         randomize_order: true,
         repetitions: noOfTrials,
     };
 
-    p.task.GroupCircleHigh = {
-        timeline: [WWLoopGroupCircleHigh, LLLoopGroupCircleHigh, LWLoopGroupCircleHigh,  WLLoopGroupCircleHigh],
+    p.task.GroupCircleHighR1 = {
+        timeline: [WWLoopGroupCircleHighR1, LLLoopGroupCircleHighR1, LWLoopGroupCircleHighR1,  WLLoopGroupCircleHighR1],
         randomize_order: true,
         repetitions: noOfTrials,
     };
 
-    p.task.SoloSquareLow = {
-        timeline: [WWLoopSoloSquareLow, LLLoopSoloSquareLow, LWLoopSoloSquareLow, WLLoopSoloSquareLow],
+    p.task.SoloSquareLowR1 = {
+        timeline: [WWLoopSoloSquareLowR1, LLLoopSoloSquareLowR1, LWLoopSoloSquareLowR1, WLLoopSoloSquareLowR1],
         randomize_order: true,
         repetitions: noOfTrials,
     };
 
-    p.task.SoloSquareHigh = {
-        timeline: [WWLoopSoloSquareHigh, LLLoopSoloSquareHigh, LWLoopSoloSquareHigh, WLLoopSoloSquareHigh],
+    p.task.SoloSquareHighR1 = {
+        timeline: [WWLoopSoloSquareHighR1, LLLoopSoloSquareHighR1, LWLoopSoloSquareHighR1, WLLoopSoloSquareHighR1],
         randomize_order: true,
         repetitions: noOfTrials,
     };  
 
-    p.task.GroupSquareLow = {
-        timeline: [WWLoopGroupSquareLow, LLLoopGroupSquareLow, LWLoopGroupSquareLow,  WLLoopGroupSquareLow],
+    p.task.GroupSquareLowR1 = {
+        timeline: [WWLoopGroupSquareLowR1, LLLoopGroupSquareLowR1, LWLoopGroupSquareLowR1,  WLLoopGroupSquareLowR1],
         randomize_order: true,
         repetitions: noOfTrials,
     };
 
-    p.task.GroupSquareHigh = {
-        timeline: [WWLoopGroupSquareHigh, LLLoopGroupSquareHigh, LWLoopGroupSquareHigh,  WLLoopGroupSquareHigh],
+    p.task.GroupSquareHighR1 = {
+        timeline: [WWLoopGroupSquareHighR1, LLLoopGroupSquareHighR1, LWLoopGroupSquareHighR1,  WLLoopGroupSquareHighR1],
         randomize_order: true,
         repetitions: noOfTrials,
     };
-
 
    /*
     *

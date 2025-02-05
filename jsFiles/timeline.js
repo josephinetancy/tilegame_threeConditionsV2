@@ -11,7 +11,7 @@ if (typeof PROLIFIC_PID !== 'undefined') {
 
 let timeline = [];
 
-//need a tansition in between solocircle and group square 
+//need a transition in between solocircle and group square 
 
 
 /* 
@@ -32,7 +32,7 @@ let timeline = [];
 
 
 const commonTimeline = [
-    p.avatars,
+    p.task.round1Avatars,
 ];
 
 
