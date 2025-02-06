@@ -77,15 +77,37 @@ var textNew = {
         compAns2,
         pages = {
             r1: {
-                part1: [`<div class='parent'>
-                <p> Welcome to the Tile Game! </p>
-                <p>We are interested in your thoughts about a game of skill called the Tile Game.</p>
-                <p>INSERT GIF HERE</p>
-                </div>`,
+                part1: [
+`<div class='parent'>
+        <p> Welcome! </p>
+    <p>Throughout the survey, you'll play two games. </p>
+
+    <div id="shape-wrapper">
+        <!-- Circle Game (Should Be Above Circles) -->
+        <div class="game-container">
+            <p class="game-title">Circle Game</p>
+            <div class="outer-container">
+                <div id="outer-shape" class="circle">
+                    <div id="inner-shape" class="circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Square Game (Should Be Above Squares) -->
+        <div class="game-container">
+            <p class="game-title">Square Game</p>
+            <div class="outer-container">
+                <div id="outer-shape" class="square">
+                    <div id="inner-shape" class="square"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>`,
 
                 `<div class='parent'>
-                <p>Throughout the game, you'll earn points. Each point is worth 2 cents in bonus money. 
-                You'll keep all the bonus money you earn on top of the $10 you earn for your participation. </p>
+                <p> In both games, you'll earn points. Each point is worth 2 cents in bonus money. 
+                You'll keep all the bonus money you earn on top of the $X you earn for your participation. </p>
                 <p>To maximize your earnings, earn as money points as possible!</p>
                 </div>`,
 
