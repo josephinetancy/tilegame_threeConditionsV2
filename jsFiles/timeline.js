@@ -38,6 +38,7 @@ const commonTimeline = [
     p.intro.r1part2,
     p.intro.r1solo,
     p.intro.r1soloHigh,
+    p.intro.r1check,
  //   p.intro.r1part2,
 ];
 

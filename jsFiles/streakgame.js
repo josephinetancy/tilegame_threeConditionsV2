@@ -438,66 +438,150 @@ soloHigh: [
                 <p>Continue to the next screen to begin.</p>
                 </div>`]
             }
-        };
+        }; */
 
 
     // constructor function for round 1 comprehension check loop
-    function MakeLoop(span, game, color, round) {
-        
-        var attnChk1Scale = ['True', 'False'];
-        var attnChk1Prompt = `The <span class='${span}'>${game}</span> is played in multiple rounds, and you have five chances to activate a tile per round.`
-        var attnChk1Name = `attnChk1_${round}`
-        var attnChk2Ans = `${text.value} cent${text.plural}`;
-        var attnChk2Scale = ["0 cents", "1 cent", "2 cents", "5 cents", "8 cents", "10 cents"];
-        var attnChk2Name = `attnChk2_${round}`;
-        var attnChk1Ans = settings.gameTypeOrder == 0 ? `True` : `False`
-        var attnChk2Prompt = (settings.gameTypeOrder == 0) ? `How much money is added to your bonus fund for each round you win?` : `How much money is added to your bonus fund for each tile you activate?`;
-        var instPage = (settings.gameTypeOrder == 0) ? pages.r1.part2Chunk : pages.r1.part2Bern
+function MakeLoop(group, round) {
 
-        var errorMessage = {
-            type: "instructions",
-            pages: [`<div class='parent'><p>You provided a wrong answer.<br>To make sure you understand the game, please continue to re-read the instructions.</p></div>`],
+        const correctAnswers = {
+            attnChk0 : randomAssignment % 2 === 1 ? `Random Chance` : `Another player`, 
+            attnChk1 : `My space bar`, 
+            attnChk2: `+8`,
+            attnChk3: `+6`,
+            attnChk4: `+4`,
+            attnChk5: `+2`
+        };
+
+        const errorMessage = {
+            type: jsPsychInstructions,
+            pages: [`<div class='parent'><p>You provided the wrong answer.<br>To make sure you understand the game, please re-read the instructions.</p></div>`],
             show_clickable_nav: true,
+            allow_keys: false,
         };
 
-        var info = {
-            type: "instructions",
-            pages: instPage,
-            show_clickable_nav: true,
-        };
 
-        var compChk1 = {
-            type: 'survey-multi-choice',
-            preamble: `<div style="font-size:16px"><p>To make sure you understand the <span class='${span}'>${game}</span>, please indicate whether the following statement is true or false:</p></div>`,
-            questions: [{prompt: attnChk1Prompt, name: attnChk1Name, options: attnChk1Scale}],
+        const attnChk = {
+            type: jsPsychSurveyMultiChoice,
+            preamble: `<div class='parent'>
+                   <p>You'll earn points based on these rules:</p> 
+        <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center;">
+            
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;">+8</p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;">+6</p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;">+4</p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;">+2</p></b>
+            </div>
+            </div>
+                <p> Before you continue, please answer the following questions: </p>
+                </div>`,
+            questions: [
+                {
+                    prompt: `What determines if the outer ${textNew.shape1} is activated?`, 
+                    name: `attnChk0`, 
+                    options: ['Random chance', 'Another player'],
+                },
+                {
+                    prompt: `What determines if the inner ${textNew.shape1} is activated?`,
+                    name: `attnChk1`, 
+                    options: ['My space bar', 'Random chance'],
+                },
+                {
+                    prompt: `How many points do you get for activating the inner ${textNew.shape1}, if the outer ${textNew.shape1} is also activated?`,
+                    name: `attnChk2`, 
+                    options: ['+2', '+4', '+6', '+8'],
+                },
+                {
+                    prompt: `How many points do you get for activating the inner ${textNew.shape1}, if the outer ${textNew.shape1} is NOT activated?`, 
+                    name: `attnChk3`, 
+                    options: ['+2', '+4', '+6', '+8'],
+                },
+                {
+                    prompt: `How many points do you get for activating the inner ${textNew.shape1} and the outer ${textNew.shape1} is NOT activated?`, 
+                    name: `attnChk4`, 
+                    options: ['+2', '+4', '+6', '+8'],
+                },
+                {
+                    prompt: `How many points do you get for NOT activating the inner ${textNew.shape1}, and the outer ${textNew.shape1} is also NOT activated?`, 
+                    name: `attnChk5`, 
+                    options: ['+2', '+4', '+6', '+8'],
+                },
+            ],
+            randomize_question_order: false,
             scale_width: 500,
-            on_finish: function(data){
-                compAns1 = JSON.parse(data.responses)[attnChk1Name];
-            }
+            on_finish: (data) => {
+                  const totalErrors = getTotalErrors(data.response, correctAnswers);
+                  data.totalErrors = totalErrors;
+            },
         };
 
-        var compChk2 = {
-            type: 'survey-multi-choice',
-            preamble: `<div style="font-size:16px"><p>To make sure you understand the <span class='${span}'>${game}</span>, please answer the following question:</p></div>`,
-            questions: [{prompt: attnChk2Prompt, name: attnChk2Name, options: attnChk2Scale}],
-            scale_width: 500,
-            on_finish: function(data){
-                compAns2 = JSON.parse(data.responses)[attnChk2Name];
+        function getTotalErrors(response, correctAnswers) {
+            let errorCount = 0;
+
+            // Compare each response with correct answers
+            for (const key in correctAnswers) {
+                if (response[key] !== correctAnswers[key]) {
+                    errorCount++;
+                }
             }
+            return errorCount;
+        }
+
+
+        const conditionalNode = {
+          timeline: [errorMessage],
+          conditional_function: () => {
+            const fail = jsPsych.data.get().last(1).select('totalErrors').sum() > 0 ? true : false;
+            return fail;
+          },
         };
 
-        var conditionalNode = {
-            timeline: [errorMessage],
-            conditional_function: function() {
-                return compAns1 != attnChk1Ans || compAns2 != attnChk2Ans;
-            }
+        const instLoop = {
+          timeline: [p.intro.r1solo, p.intro.r1soloHigh,attnChk, conditionalNode],
+          loop_function: () => {
+            const fail = jsPsych.data.get().last(2).select('totalErrors').sum() > 0 ? true : false;
+            return fail;
+          },
         };
 
-        this.timeline = [info, compChk1, compChk2, conditionalNode];
-        this.loop_function = function(){
-            return compAns1 != attnChk1Ans || compAns2 != attnChk2Ans;
-        };
-    }; */
+
+
+        const introTimeline = {
+            timeline: [instLoop],
+        }
+
+        this.timeline = [introTimeline];
+    }
 
     // consent form
 
@@ -563,7 +647,7 @@ soloHigh: [
     };
 
 
-//    p.intro.r1part2 = new MakeLoop(text.span1, text.game1, text.color1, 'R1');
+    p.intro.r1check = new MakeLoop('R1', 'Solo');
 
  //   p.intro.r2part2 = new MakeLoop(text.span2, text.game2, text.color2, 'R2');
 
