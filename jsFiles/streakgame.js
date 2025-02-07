@@ -52,7 +52,7 @@ var streakGame = (function() {
 
 
 var textNew = {
-    game1: randomAssignment % 2 === 1 ? 'Circle Game' : 'Square Game',
+    game1: randomAssignment % 2 === 1 ? '<b>Circle Game</b>' : '<b>Square Game</b>',
     shape1: randomAssignment % 2 === 1 ? 'circle' : 'square',
     game2: randomAssignment % 2 === 1 ? 'Square Game' : 'Circle Game',
     shape2: randomAssignment % 2 === 1 ? 'square' : 'circle',
@@ -62,6 +62,44 @@ var textNew = {
     partner: randomAssignment % 2 === 1 ? `the outer circle` : `your partner`, //odd numbers = alone, even = group
     sentence: randomAssignment % 2 === 1 ? `will randomly activate to <span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span>.` : `will be activated by your partner and it will activate to their chosen color.`, //odd numbers = alone, even = group
 }
+
+
+/*
+///
+AVATAR 
+CHOICE 
+///
+*/
+
+let selectedAvatarColor = '#2669ee';
+
+
+
+function MakeAvatarSelection(round) {
+    return {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: `
+            <div class='parent'>
+                <p> Choose a color that you'll play with.</p>
+                <div class="avatar-selection" style="display: flex; justify-content: center;">
+                    <img src="./avatar/avatarsAll.jpg">
+                </div>
+            </div>`,
+        choices: ['Pink', 'Green', 'Red'],
+        on_finish: (data) => {
+            const avatarColors = ['#ff00fe', '#90CD4C', '#800000']; // Pink, Green, Red
+            const avatarResponse = avatarColors[data.response] || null;
+
+            if (avatarResponse) {
+                const responseKey = round === "R1" ? "avatarResponse" : "avatarResponse2";
+                let saveData = {};
+                saveData[responseKey] = avatarResponse;
+                jsPsych.data.addProperties(saveData);
+            }
+        }
+    };
+}
+
 
    /*
     *
@@ -78,13 +116,13 @@ var textNew = {
         pages = {
             r1: {
                 part1: [
-`<div class='parent'>
-        <p> Welcome! </p>
-    <p>Throughout the survey, you'll play two games. </p>
+        `<div class='parent'>
+          <p> Welcome! </p>
+          <p>In this survey, you'll play two games. </p>
 
-    <div id="shape-wrapper">
-        <!-- Circle Game (Should Be Above Circles) -->
-        <div class="game-container">
+           <div id="shape-wrapper">
+           <!-- Circle Game (Should Be Above Circles) -->
+              <div class="game-container">
             <p class="game-title">Circle Game</p>
             <div class="outer-container">
                 <div id="outer-shape" class="circle">
@@ -100,61 +138,181 @@ var textNew = {
                 <div id="outer-shape" class="square">
                     <div id="inner-shape" class="square"></div>
                 </div>
+                </div>
+                </div>
+                </div>
+                </div>`
+                ],
+
+                part2: [
+                `<div class='parent'>
+                <p> In both games, you'll earn points. </p>
+                <p>Each point is worth 2 cents in bonus money. </p>
+                You'll keep all the bonus money you earn on top of the $X you earn for your participation. </p>
+                <p>To maximize your winnings, earn as many points as possible!</p>
+                </div>`,
+
+                `<div class='parent'>
+                <p> You'll play the ${textNew.game1} first. </p>
+                <p> Click "Next" to learn more about the ${textNew.game1}. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}">
+                <div id="inner-shape" class="${textNew.shape1}"></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p> In the ${textNew.game1}, ${textNew.shape1}s will appear on your screen. 
+                <p> Initially, the inner ${textNew.shape1} and the outer ${textNew.shape1} are white. </p>
+                <p> Your job is to activate the inner ${textNew.shape1} with your SPACE BAR. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}">
+                    <div id="inner-shape" class="${textNew.shape1}"></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p> If you activate the inner ${textNew.shape1} with your SPACE BAR in time, it will change to your color. </p>
+                <p></p>
+                <p></p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}"">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;""></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p>If you do not activate with your SPACE BAR in time, it will turn gray.</p> 
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}"">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: gray;""></div>
+                </div>
+                </div>
+                </div>`
+                ],
+
+                solo: [
+                `<div class='parent'>
+                <p>Sometimes the outer ${textNew.shape1} will be activated and change to <span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span>. </p> 
+                <p>If the outer ${textNew.shape1} does not activate in time, it will turn gray. </p> 
+                <p>Whether the outer ${textNew.shape1} is activated or not depends on random chance.</p>
+           <div id="shape-wrapper">
+              <div class="game-container">
+            <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;"">
+                <div id="inner-shape" class="${textNew.shape1}""></div>
+                </div>
             </div>
         </div>
-    </div>
-</div>`,
 
-                `<div class='parent'>
-                <p> In both games, you'll earn points. Each point is worth 2 cents in bonus money. 
-                You'll keep all the bonus money you earn on top of the $X you earn for your participation. </p>
-                <p>To maximize your earnings, earn as money points as possible!</p>
+        <div class="game-container">
+            <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: gray;"">
+                <div id="inner-shape" class="${textNew.shape1}""></div>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>`,
 
                 `<div class='parent'>
-                <p> You'll be playing 2 versions of the Tile Game: the ${textNew.game1} and the ${textNew.game2}.</p>
-                <p>In both versions, you'll have X chances to "activate" tiles like this one per each version of the game.<br>
-                <p>INSERT GIF HERE</p>
+                <p> So if you activated the inner ${textNew.shape1} with your SPACEBAR in time, </p>
+                <p> Sometimes the outer ${textNew.shape1} will be activated in time. </p>
+                <p> Sometimes the outer ${textNew.shape1} will not be activated in time. </p>  
+           <div id="shape-wrapper">
+              <div class="game-container">
+            <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;"">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;""></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: gray;"">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;""></div>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>`,
 
-                `<div class='parent'>
-                <p>The tiles will appear on your screen, then disappear very quickly.</p> 
-                <p>To activate a tile, you must press your SPACE BAR before it disappears; whenever you see a tile, you should press your SPACE BAR as fast as possible. </p>
-                <p>If you do not activate the tile in time, it will turn gray.</p> 
-                <p>Watch the video below to see how it works. </p>
-                <p>INSERT GIF HERE</p>
-                </div>`,
+               `<div class='parent'>
+                <p> If you did not activate the inner ${textNew.shape1} with your SPACEBAR in time, </p>
+                <p> Sometimes the outer ${textNew.shape1} will be activated in time. </p>
+                <p> Sometimes the outer ${textNew.shape1} will not be activated in time. </p>  
+           <div id="shape-wrapper">
+              <div class="game-container">
+            <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;"">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: gray;""></div>
+                </div>
+            </div>
+        </div>
 
-                `<div class='parent'>
-                <p>After each chance of activating a tile, you'll see the points you've earned and the total points you've earned so far in that game. </p>
-                <img src="./img/points.png" style="width: 250px; margin: 0 10px;">
-                </div>`,
-
-                `<div class='parent'>
-                <p>The ${textNew.game1} and the ${textNew.game2} are different versions of the same game. </p>
-                <p> In the ${textNew.game1}, the tiles are ${textNew.shape1}, while in the ${textNew.game2}, the tiles are ${textNew.shape2}.
-                <p>The rules will change between games. 
-                <p>In the ${textNew.game1}, you'll be playing ${textNew.group}, while in the ${textNew.game2}, you'll be playing ${textNew.group2}.</p>
-                </div>`,
-
-                `<div class='parent'>
-                <p> You'll play the ${textNew.game1} first, then the ${textNew.game2} second. </p>
-                <p> You'll play the inner tile.</p>
-                <p> Click "next" to learn more about ${textNew.game1}. </p>
-                </div>`,
-
-                `<div class='parent'>
-                <p> In the ${textNew.game1}, the outer ${textNew.shape1} ${textNew.sentence} </p>
-                <p> You will activate the inner ${textNew.shape1} and it will activate to your chosen color. </p>
-                <p><b> Rules: </b></p>
-                <p>If you and ${textNew.partner} are activated at the same time, you'll earn +8 points. </p>
-                <p>If you activated and ${textNew.partner} did not, you'll earn +6 points. </p>
-                <p>If you did not activate but ${textNew.partner} activated, you'll earn +4 points. </p>
-                <p>If you and ${textNew.partner} did not activate, you'll earn +2 points. </p>
-                <p> insert GIF HERE of relevant game </p>
+        <div class="game-container">
+            <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: gray;"">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: gray;""></div>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>`
+                ],
 
+soloHigh: [
+    `<div class='parent'>
+        <p>You'll earn points based on these rules:</p> 
+        <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center;">
+            
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;">+8</p></b>
+            </div>
 
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;">+6</p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;">+4</p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;">+2</p></b>
+            </div>
+
+        </div>
+    </div>`
+]
+            }
+        };
+
+/*
 
                 ],
 
@@ -282,7 +440,7 @@ var textNew = {
             }
         };
 
-/*
+
     // constructor function for round 1 comprehension check loop
     function MakeLoop(span, game, color, round) {
         
@@ -383,74 +541,37 @@ var textNew = {
         post_trial_gap: 500,
     };
 
-    p.intro.r2part1 = {
+    p.intro.r1part2 = {
         type: jsPsychInstructions,
-        pages: pages.r2.part1,
+        pages: pages.r1.part2,
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
+
+    p.intro.r1solo = {
+        type: jsPsychInstructions,
+        pages: pages.r1.solo,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+    };
+
+    p.intro.r1soloHigh = {
+        type: jsPsychInstructions,
+        pages: pages.r1.soloHigh,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+    };
+
 
 //    p.intro.r1part2 = new MakeLoop(text.span1, text.game1, text.color1, 'R1');
 
  //   p.intro.r2part2 = new MakeLoop(text.span2, text.game2, text.color2, 'R2');
-
-    p.intro.r1part3 = {
-        type: jsPsychInstructions,
-        pages: pages.r1.part3,
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-    };
-
-    p.intro.r2part3 = {
-        type: jsPsychInstructions,
-        pages: pages.r2.part3,
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-    };
 
    /*
     *
     *   TASK
     *
     */
-/*
-///
-AVATAR 
-CHOICE 
-///
-*/
-
-let selectedAvatarColor = '#2669ee';
-
-
-
-function MakeAvatarSelection(round) {
-    return {
-        type: jsPsychHtmlButtonResponse,
-        stimulus: `
-            <div class='parent'>
-                <p>Now, you'll choose the color of your avatar to play the game.</p>
-                <p>Choose 1 avatar out of the 3 colors below:</p>
-                <div class="avatar-selection" style="display: flex; justify-content: center;">
-                    <img src="./avatar/avatarsAll.jpg">
-                </div>
-            </div>`,
-        choices: ['Pink', 'Green', 'Red'],
-        on_finish: (data) => {
-            const avatarColors = ['#ff00fe', '#90CD4C', '#800000']; // Pink, Green, Red
-            const avatarResponse = avatarColors[data.response] || null;
-
-            if (avatarResponse) {
-                const responseKey = round === "R1" ? "avatarResponse" : "avatarResponse2";
-                let saveData = {};
-                saveData[responseKey] = avatarResponse;
-
-                jsPsych.data.addProperties(saveData);
-                console.log(`${responseKey} saved globally:`, avatarResponse);
-            }
-        }
-    };
-}
 
     p.task = {}
 
