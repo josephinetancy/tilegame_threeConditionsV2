@@ -71,11 +71,9 @@ CHOICE
 ///
 */
 
-let selectedAvatarColor = '#2669ee';
 
 
-
-function MakeAvatarSelection(round) {
+function MakeAvatarSelection() {
     return {
         type: jsPsychHtmlButtonResponse,
         stimulus: `
@@ -87,15 +85,20 @@ function MakeAvatarSelection(round) {
             </div>`,
         choices: ['Pink', 'Green', 'Red'],
         on_finish: (data) => {
-            const avatarColors = ['#ff00fe', '#90CD4C', '#800000']; // Pink, Green, Red
-            const avatarResponse = avatarColors[data.response] || null;
+            let selectedColor = data.response.toString(); // Ensure it's a string
+            let avatarResponse; 
 
-            if (avatarResponse) {
-                const responseKey = round === "R1" ? "avatarResponse" : "avatarResponse2";
-                let saveData = {};
-                saveData[responseKey] = avatarResponse;
-                jsPsych.data.addProperties(saveData);
+            if (selectedColor === '0') {
+                avatarResponse = '#ff00fe'; // Pink
+            } else if (selectedColor === '1') {
+                avatarResponse = '#90CD4C'; // Green
+            } else if (selectedColor === '2') {
+                avatarResponse = '#800000'; // Red
             }
+
+             jsPsych.data.addProperties({ avatarResponse });
+  //            updateShapeColor(avatarResponse); // Update the shape color
+            console.log(avatarResponse);
         }
     };
 }
@@ -107,6 +110,7 @@ function MakeAvatarSelection(round) {
     *
     */
 
+let avatarResponse = '#2669ee';
 
     p.intro = {}
 
@@ -178,8 +182,8 @@ function MakeAvatarSelection(round) {
                 <p></p>
                 <p></p>
                 <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}"">
-                <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;""></div>
+                <div id="outer-shape" class="${textNew.shape1}">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
                 </div>
                 </div>
                 </div>`,
@@ -187,8 +191,8 @@ function MakeAvatarSelection(round) {
                 `<div class='parent'>
                 <p>If you do not activate with your SPACE BAR in time, it will turn gray.</p> 
                 <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}"">
-                <div id="inner-shape" class="${textNew.shape1}" style="background-color: gray;""></div>
+                <div id="outer-shape" class="${textNew.shape1}">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: gray;"></div>
                 </div>
                 </div>
                 </div>`
@@ -202,16 +206,16 @@ function MakeAvatarSelection(round) {
            <div id="shape-wrapper">
               <div class="game-container">
             <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;"">
-                <div id="inner-shape" class="${textNew.shape1}""></div>
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                <div id="inner-shape" class="${textNew.shape1}"></div>
                 </div>
             </div>
         </div>
 
         <div class="game-container">
             <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: gray;"">
-                <div id="inner-shape" class="${textNew.shape1}""></div>
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: gray;">
+                <div id="inner-shape" class="${textNew.shape1}"></div>
                 </div>
                 </div>
                 </div>
@@ -225,16 +229,16 @@ function MakeAvatarSelection(round) {
            <div id="shape-wrapper">
               <div class="game-container">
             <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;"">
-                <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;""></div>
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
                 </div>
             </div>
         </div>
 
         <div class="game-container">
             <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: gray;"">
-                <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;""></div>
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: gray;">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
                 </div>
                 </div>
                 </div>
@@ -273,7 +277,7 @@ soloHigh: [
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
                     <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
-                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;"></div>
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
                     </div>
                 </div>
                 <b><p style="margin-top: 10px;">+8</p></b>
@@ -282,7 +286,7 @@ soloHigh: [
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
                     <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
-                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;"></div>
+                     <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
                     </div>
                 </div>
                 <b><p style="margin-top: 10px;">+6</p></b>
@@ -614,6 +618,7 @@ function MakeLoop(group, round) {
     Independent Contact: If you are not satisfied with how this study is being conducted, or if you have any concerns, complaints, or general questions about the research or your rights as a participant, please contact the Stanford Institutional Review Board (IRB) to speak to someone independent of the research team at (650)-723-2480 or toll free at 1-866-680-2906, or email at irbnonmed@stanford.edu. You can also write to the Stanford IRB, Stanford University, 1705 El Camino Real, Palo Alto, CA 94306.
     If you agree to participate, press the "Next" button to indicate that you consent to participate in the study.</p>`
 
+
     // create instruction variables
     p.intro.preMessage = {
         type: jsPsychInstructions,
@@ -629,27 +634,57 @@ function MakeLoop(group, round) {
         post_trial_gap: 500,
     };
 
-    p.intro.r1part2 = {
+
+function makeIntroPart2() {
+    return {
         type: jsPsychInstructions,
-        pages: pages.r1.part2,
+        pages: () => {
+            const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+            console.log(avatarResponse + " in makeintropart2");
+            const updatedPages = pages.r1.part2.map(page => {
+                return page.replace(/{{avatarResponse}}/g, avatarResponse);  // Replace with the actual color
+            });
+
+            return updatedPages;
+        },      
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
+}
 
-    p.intro.r1solo = {
+
+function makeR1Solo() {
+    return {
         type: jsPsychInstructions,
-        pages: pages.r1.solo,
+        pages: () => {
+            const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+            const updatedPages = pages.r1.solo.map(page => {
+                return page.replace(/{{avatarResponse}}/g, avatarResponse);  // Replace with the actual color
+            });
+
+            return updatedPages;
+        },      
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
+}
 
-    p.intro.r1soloHigh = {
+
+function makeR1SoloHigh() {
+    return {
         type: jsPsychInstructions,
-        pages: pages.r1.soloHigh,
+        pages: () => {
+            const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+            const updatedPages = pages.r1.soloHigh.map(page => {
+                return page.replace(/{{avatarResponse}}/g, avatarResponse);  // Replace with the actual color
+            });
+
+            return updatedPages;
+        },      
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
-
+}
 
     p.intro.r1check = new MakeLoop('R1', 'Solo');
 
@@ -1337,13 +1372,16 @@ p.partnerRevealAvatar = {
         feedbackGroupLow = new MakeFeedback('groupLow'),
         feedbackSoloHigh = new MakeFeedback('soloHigh'),
         feedbackSoloLow = new MakeFeedback('soloLow'),
-        avatarChoice1 = new MakeAvatarSelection('R1'),
+        avatarChoice1 = new MakeAvatarSelection(),
         delayR1 = new MakeDelay('R1'),
         delayR2 = new MakeDelay('R2'),
         tooFastR1 = new MakeTooFast('R1'),
         tooFastR2 = new MakeTooFast('R2'),
         roundIntroV1 = new MakeRoundIntro('V1'),
-        roundIntroV2 = new MakeRoundIntro('V2')
+        roundIntroV2 = new MakeRoundIntro('V2'),
+        introPart2 = makeIntroPart2(),
+        introR1Solo = makeR1Solo(),
+        introR1SoloHigh = makeR1SoloHigh()
 
     const delayLoopR1 = {
         timeline:[delayR1, tooFastR1],
@@ -1375,7 +1413,19 @@ p.partnerRevealAvatar = {
         timeline: [roundIntroV2],
     }; 
 
-    p.task.round1Avatars = {
+    p.intro.r1part2 = {
+        timeline: [introPart2],
+    }; 
+
+    p.intro.r1solo = {
+        timeline: [introR1Solo],
+    }; 
+
+    p.intro.r1soloHigh = {
+        timeline: [introR1SoloHigh],
+    }; 
+
+    p.intro.round1Avatars = {
         timeline: [avatarChoice1],
     }; 
  

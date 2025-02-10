@@ -34,7 +34,7 @@ let timeline = [];
 const commonTimeline = [
  //   game.intro.preMessage,
    p.intro.r1part1,
-    p.task.round1Avatars,
+    p.intro.round1Avatars,
    p.intro.r1part2,
     p.intro.r1solo,
     p.intro.r1soloHigh,
