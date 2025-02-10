@@ -242,7 +242,7 @@ function MakeAvatarSelection(round) {
                 </div>`,
 
                `<div class='parent'>
-                <p> If you did not activate the inner ${textNew.shape1} with your SPACEBAR in time, </p>
+                <p> Similarly, if you did not activate the inner ${textNew.shape1} with your SPACEBAR in time, </p>
                 <p> Sometimes the outer ${textNew.shape1} will be activated in time. </p>
                 <p> Sometimes the outer ${textNew.shape1} will not be activated in time. </p>  
            <div id="shape-wrapper">
@@ -445,7 +445,7 @@ soloHigh: [
 function MakeLoop(group, round) {
 
         const correctAnswers = {
-            attnChk0 : randomAssignment % 2 === 1 ? `Random Chance` : `Another player`, 
+            attnChk0 : randomAssignment % 2 === 1 ? `Random chance` : `Another player`, 
             attnChk1 : `My space bar`, 
             attnChk2: `+8`,
             attnChk3: `+6`,
@@ -464,7 +464,9 @@ function MakeLoop(group, round) {
         const attnChk = {
             type: jsPsychSurveyMultiChoice,
             preamble: `<div class='parent'>
-                   <p>You'll earn points based on these rules:</p> 
+        <p> To recap, in the ${textNew.game1}: </p>
+        <p> The outer ${textNew.shape1} is activated depending on random chance. </p> 
+        <p> You activate the inner ${textNew.shape1} with your SPACE BAR. </p>
         <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center;">
             
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -503,36 +505,38 @@ function MakeLoop(group, round) {
                 <b><p style="margin-top: 10px;">+2</p></b>
             </div>
             </div>
-                <p> Before you continue, please answer the following questions: </p>
+        <div style="margin-top: 0px; text-align: center;">
+        <p style="font-size: 18px; font-weight: bold;">Before you continue, please answer the following questions:</p>
+            </div>
                 </div>`,
             questions: [
                 {
-                    prompt: `What determines if the outer ${textNew.shape1} is activated?`, 
+                    prompt: `What decides when the outer ${textNew.shape1} is activated?`, 
                     name: `attnChk0`, 
                     options: ['Random chance', 'Another player'],
                 },
                 {
-                    prompt: `What determines if the inner ${textNew.shape1} is activated?`,
+                    prompt: `What determines when the inner ${textNew.shape1} is activated?`,
                     name: `attnChk1`, 
                     options: ['My space bar', 'Random chance'],
                 },
                 {
-                    prompt: `How many points do you get for activating the inner ${textNew.shape1}, if the outer ${textNew.shape1} is also activated?`,
+                    prompt: `How many points do you get when the inner ${textNew.shape1} and the outer ${textNew.shape1} are activated?`,
                     name: `attnChk2`, 
                     options: ['+2', '+4', '+6', '+8'],
                 },
                 {
-                    prompt: `How many points do you get for activating the inner ${textNew.shape1}, if the outer ${textNew.shape1} is NOT activated?`, 
+                    prompt: `How many points do you get when the inner ${textNew.shape1} is activated but the outer ${textNew.shape1} is NOT activated?`, 
                     name: `attnChk3`, 
                     options: ['+2', '+4', '+6', '+8'],
                 },
                 {
-                    prompt: `How many points do you get for activating the inner ${textNew.shape1} and the outer ${textNew.shape1} is NOT activated?`, 
+                    prompt: `How many points do you get when the inner ${textNew.shape1} is NOT activated but the outer ${textNew.shape1} is activated?`, 
                     name: `attnChk4`, 
                     options: ['+2', '+4', '+6', '+8'],
                 },
                 {
-                    prompt: `How many points do you get for NOT activating the inner ${textNew.shape1}, and the outer ${textNew.shape1} is also NOT activated?`, 
+                    prompt: `How many points do you get when the inner ${textNew.shape1} and the outer ${textNew.shape1} are NOT activated?`, 
                     name: `attnChk5`, 
                     options: ['+2', '+4', '+6', '+8'],
                 },
@@ -567,7 +571,7 @@ function MakeLoop(group, round) {
         };
 
         const instLoop = {
-          timeline: [p.intro.r1solo, p.intro.r1soloHigh,attnChk, conditionalNode],
+          timeline: [attnChk, conditionalNode],
           loop_function: () => {
             const fail = jsPsych.data.get().last(2).select('totalErrors').sum() > 0 ? true : false;
             return fail;
