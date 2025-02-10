@@ -527,12 +527,12 @@ function MakeLoop(group, round) {
         },
             questions: [
                 {
-                    prompt: `What decides when the outer ${textNew.shape1} is activated?`, 
+                    prompt: `What decides how the outer ${textNew.shape1} is activated?`, 
                     name: `attnChk0`, 
                     options: ['Random chance', 'Another player'],
                 },
                 {
-                    prompt: `What determines when the inner ${textNew.shape1} is activated?`,
+                    prompt: `What decides how the inner ${textNew.shape1} is activated?`,
                     name: `attnChk1`, 
                     options: ['My space bar', 'Random chance'],
                 },
