@@ -467,52 +467,64 @@ function MakeLoop(group, round) {
 
         const attnChk = {
             type: jsPsychSurveyMultiChoice,
-            preamble: `<div class='parent'>
-        <p> To recap, in the ${textNew.game1}: </p>
-        <p> The outer ${textNew.shape1} is activated depending on random chance. </p> 
-        <p> You activate the inner ${textNew.shape1} with your SPACE BAR. </p>
-        <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center;">
+               preamble: () => {
+            const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+            console.log(avatarResponse + " in makeintropart2");
+         
+            let preambleText = `
+                <div class='parent'>
+                    <p> To recap, in the ${textNew.game1}: </p>
+                    <p> The outer ${textNew.shape1} is activated depending on random chance. </p> 
+                    <p> You activate the inner ${textNew.shape1} with your SPACE BAR. </p>
+                    <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center;">
+                        
+                        <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                            <div class="outer-container">
+                                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                                    <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
+                                </div>
+                            </div>
+                            <b><p style="margin-top: 10px;">+8</p></b>
+                        </div>
             
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                <div class="outer-container">
-                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
-                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;"></div>
+                        <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                            <div class="outer-container">
+                                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                                    <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
+                                </div>
+                            </div>
+                            <b><p style="margin-top: 10px;">+6</p></b>
+                        </div>
+            
+                        <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                            <div class="outer-container">
+                                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                                    <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
+                                </div>
+                            </div>
+                            <b><p style="margin-top: 10px;">+4</p></b>
+                        </div>
+            
+                        <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                            <div class="outer-container">
+                                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                                    <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
+                                </div>
+                            </div>
+                            <b><p style="margin-top: 10px;">+2</p></b>
+                        </div>
+                    </div>
+                    <div style="margin-top: 0px; text-align: center;">
+                        <p style="font-size: 18px; font-weight: bold;">Before you continue, please answer the following questions:</p>
                     </div>
                 </div>
-                <b><p style="margin-top: 10px;">+8</p></b>
-            </div>
+            `;
 
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                <div class="outer-container">
-                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
-                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: red;"></div>
-                    </div>
-                </div>
-                <b><p style="margin-top: 10px;">+6</p></b>
-            </div>
+            // Dynamically replace the color placeholders with avatarResponse
+            preambleText = preambleText.replace(/{{avatarResponse}}/g, avatarResponse); // Replace red with avatarResponse
 
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                <div class="outer-container">
-                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
-                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
-                    </div>
-                </div>
-                <b><p style="margin-top: 10px;">+4</p></b>
-            </div>
-
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                <div class="outer-container">
-                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
-                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
-                    </div>
-                </div>
-                <b><p style="margin-top: 10px;">+2</p></b>
-            </div>
-            </div>
-        <div style="margin-top: 0px; text-align: center;">
-        <p style="font-size: 18px; font-weight: bold;">Before you continue, please answer the following questions:</p>
-            </div>
-                </div>`,
+            return preambleText;
+        },
             questions: [
                 {
                     prompt: `What decides when the outer ${textNew.shape1} is activated?`, 
