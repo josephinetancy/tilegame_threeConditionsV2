@@ -1,6 +1,6 @@
 //randomAssignment
 // const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-randomAssignment = 1;
+randomAssignment = 2;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -56,11 +56,11 @@ var textNew = {
     shape1: randomAssignment % 2 === 1 ? 'circle' : 'square',
     game2: randomAssignment % 2 === 1 ? 'Square Game' : 'Circle Game',
     shape2: randomAssignment % 2 === 1 ? 'square' : 'circle',
-    group: randomAssignment % 2 === 1 ? 'alone' : 'with someone', //odd numbers = alone, even = group
-    group2: randomAssignment % 2 === 1 ? 'with someone else' : 'alone',
-    color: randomAssignment % 2 === 1 ? '<span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span>' : `your partner's color`, //odd numbers = alone, even = group
-    partner: randomAssignment % 2 === 1 ? `the outer circle` : `your partner`, //odd numbers = alone, even = group
-    sentence: randomAssignment % 2 === 1 ? `will randomly activate to <span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span>.` : `will be activated by your partner and it will activate to their chosen color.`, //odd numbers = alone, even = group
+    group: randomAssignment % 2 === 1 ? 'and change to <span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span> randomly' : 'by your partner and change to their color', //odd numbers = alone, even = group
+    groupNext: randomAssignment % 2 === 1 ? 'on random chance' : 'your partner', //odd numbers = alone, even = group
+    color: randomAssignment % 2 === 1 ? 'yellow' : `#2669ee`, //odd numbers = alone, even = group
+    WL: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
+    LL: [1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`,
 }
 
 
@@ -200,13 +200,13 @@ let avatarResponse = '#2669ee';
 
                 solo: [
                 `<div class='parent'>
-                <p>Sometimes the outer ${textNew.shape1} will be activated and change to <span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span>. </p> 
+                <p>The outer ${textNew.shape1} will be activated ${textNew.group}. </p> 
                 <p>If the outer ${textNew.shape1} does not activate in time, it will turn gray. </p> 
-                <p>Whether the outer ${textNew.shape1} is activated or not depends on random chance.</p>
+                <p>Whether the outer ${textNew.shape1} is activated or not depends on ${textNew.groupNext}.</p>
            <div id="shape-wrapper">
               <div class="game-container">
             <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
                 </div>
             </div>
@@ -229,7 +229,7 @@ let avatarResponse = '#2669ee';
            <div id="shape-wrapper">
               <div class="game-container">
             <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
                 <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
                 </div>
             </div>
@@ -252,7 +252,7 @@ let avatarResponse = '#2669ee';
            <div id="shape-wrapper">
               <div class="game-container">
             <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;"">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};"">
                 <div id="inner-shape" class="${textNew.shape1}" style="background-color: gray;""></div>
                 </div>
             </div>
@@ -276,7 +276,7 @@ soloHigh: [
             
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
-                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
                         <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
                     </div>
                 </div>
@@ -289,12 +289,12 @@ soloHigh: [
                      <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
                     </div>
                 </div>
-                <b><p style="margin-top: 10px;">+6</p></b>
+                <b><p style="margin-top: 10px;">${textNew.WL}</p></b>
             </div>
 
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
-                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
                         <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
                     </div>
                 </div>
@@ -307,7 +307,7 @@ soloHigh: [
                         <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
                     </div>
                 </div>
-                <b><p style="margin-top: 10px;">+2</p></b>
+                <b><p style="margin-top: 10px;">${textNew.LL}</p></b>
             </div>
 
         </div>
@@ -449,12 +449,12 @@ soloHigh: [
 function MakeLoop(group, round) {
 
         const correctAnswers = {
-            attnChk0 : randomAssignment % 2 === 1 ? `Random chance` : `Another player`, 
+            attnChk0 : randomAssignment % 2 === 1 ? `Random chance` : `My partner`, 
             attnChk1 : `My space bar`, 
             attnChk2: `+8`,
-            attnChk3: `+6`,
+            attnChk3: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
             attnChk4: `+4`,
-            attnChk5: `+2`
+            attnChk5: [1, 4, 5, 8].includes(randomAssignment) ? `+4` : `+4`,
         };
 
         const errorMessage = {
@@ -474,13 +474,13 @@ function MakeLoop(group, round) {
             let preambleText = `
                 <div class='parent'>
                     <p> To recap, in the ${textNew.game1}: </p>
-                    <p> The outer ${textNew.shape1} is activated depending on random chance. </p> 
+                    <p> The outer ${textNew.shape1} is activated depending on ${textNew.groupNext}. </p> 
                     <p> You activate the inner ${textNew.shape1} with your SPACE BAR. </p>
                     <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center;">
                         
                         <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                             <div class="outer-container">
-                                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
                                     <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
                                 </div>
                             </div>
@@ -493,12 +493,12 @@ function MakeLoop(group, round) {
                                     <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
                                 </div>
                             </div>
-                            <b><p style="margin-top: 10px;">+6</p></b>
+                            <b><p style="margin-top: 10px;">${textNew.WL}</p></b>
                         </div>
             
                         <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                             <div class="outer-container">
-                                <div id="outer-shape" class="${textNew.shape1}" style="background-color: yellow;">
+                                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
                                     <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
                                 </div>
                             </div>
@@ -511,7 +511,7 @@ function MakeLoop(group, round) {
                                     <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
                                 </div>
                             </div>
-                            <b><p style="margin-top: 10px;">+2</p></b>
+                            <b><p style="margin-top: 10px;">${textNew.LL}</p></b>
                         </div>
                     </div>
                     <div style="margin-top: 0px; text-align: center;">
@@ -529,7 +529,7 @@ function MakeLoop(group, round) {
                 {
                     prompt: `What decides how the outer ${textNew.shape1} is activated?`, 
                     name: `attnChk0`, 
-                    options: ['Random chance', 'Another player'],
+                    options: ['Random chance', 'My partner'],
                 },
                 {
                     prompt: `What decides how the inner ${textNew.shape1} is activated?`,
@@ -1248,58 +1248,48 @@ p.findingPartner = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <div style="font-size: 24px; text-align: center;">
-            <p id="loading-text"> Finding a partner....</p>
-            <div class="loading-bar-container">
-                <div class="loading-bar"></div>
+            <p id="loading-text"> Please be patient. <p> <p>This could take a few minutes. </p>
+            <div class="spinner-container">
+                <div class="spinner-wheel"></div>
             </div>
         </div>
     `,
     choices: "NO_KEYS",
-    trial_duration: 10000,  // Duration of the loading screen in milliseconds, 15 seconds
+    trial_duration: 10000,  // Duration of the loading screen in milliseconds
     on_load: () => {
         const css = `
             #loading-text {
                 width: 250px;
                 margin: 0 auto;
             }
-            .loading-bar-container {
-                width: 100%;
-                height: 20px;
-                background-color: #f3f3f3;
-                border-radius: 10px;
-                overflow: hidden;
+            .spinner-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 margin: 20px auto;
             }
-            .loading-bar {
-                width: 0;
-                height: 100%;
-                background-color: #6b6d6e;
-                animation: load 3s forwards;
+            .spinner-wheel {
+                width: 50px;
+                height: 50px;
+                border: 6px solid #f3f3f3;
+                border-top: 6px solid #6b6d6e;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
             }
-            @keyframes load {
-                0% { width: 0; }
-                10% { width: 10%; }
-                30% { width: 30%; }
-                40% { width: 40%; }
-                60% { width: 60%; }
-                75% { width: 75%; }
-                80% { width: 80%; }
-                95% { width: 95%; }
-                100% { width: 100%; }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
             }
         `;
         const style = document.createElement('style');
         style.innerHTML = css;
         document.head.appendChild(style);
-
-        setTimeout(() => {
-            document.getElementById('loading-text').innerText = "Still searching...";
-        }, 9000);
     },
     on_finish: (data) => {
         data.loading_completed = true;
     }
 };
+
 
 p.partnerAvatar = {
     type: jsPsychHtmlKeyboardResponse,
