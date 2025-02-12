@@ -1,6 +1,6 @@
 //randomAssignment
 // const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-randomAssignment = 2;
+randomAssignment = 1;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -56,11 +56,12 @@ var textNew = {
     shape1: randomAssignment % 2 === 1 ? 'circle' : 'square',
     game2: randomAssignment % 2 === 1 ? 'Square Game' : 'Circle Game',
     shape2: randomAssignment % 2 === 1 ? 'square' : 'circle',
-    group: randomAssignment % 2 === 1 ? 'and change to <span style="color: #FFFF00; font-weight: bold; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">yellow</span> randomly' : 'by your partner and change to their color', //odd numbers = alone, even = group
+    group: randomAssignment % 2 === 1 ? 'and change to yellow randomly' : 'by your partner and change to their color', //odd numbers = alone, even = group
     groupNext: randomAssignment % 2 === 1 ? 'on random chance' : 'your partner', //odd numbers = alone, even = group
     color: randomAssignment % 2 === 1 ? 'yellow' : `#2669ee`, //odd numbers = alone, even = group
     WL: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
     LL: [1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`,
+    partnerChose: randomAssignment % 2 === 1 ? ` ` : `Your partner will also choose a color.`,
 }
 
 
@@ -79,6 +80,7 @@ function MakeAvatarSelection() {
         stimulus: `
             <div class='parent'>
                 <p> Choose a color that you'll play with.</p>
+                <p> ${textNew.partnerChose}</p>
                 <div class="avatar-selection" style="display: flex; justify-content: center;">
                     <img src="./avatar/avatarsAll.jpg">
                 </div>
@@ -454,7 +456,7 @@ function MakeLoop(group, round) {
             attnChk2: `+8`,
             attnChk3: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
             attnChk4: `+4`,
-            attnChk5: [1, 4, 5, 8].includes(randomAssignment) ? `+4` : `+4`,
+            attnChk5: [1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`,
         };
 
         const errorMessage = {
@@ -529,12 +531,12 @@ function MakeLoop(group, round) {
                 {
                     prompt: `What decides how the outer ${textNew.shape1} is activated?`, 
                     name: `attnChk0`, 
-                    options: ['Random chance', 'My partner'],
+                    options: ['Random chance', 'My space bar', 'My partner'],
                 },
                 {
                     prompt: `What decides how the inner ${textNew.shape1} is activated?`,
                     name: `attnChk1`, 
-                    options: ['My space bar', 'Random chance'],
+                    options: ['Random chance', 'My space bar', 'My partner'],
                 },
                 {
                     prompt: `How many points do you get when the inner ${textNew.shape1} and the outer ${textNew.shape1} are activated?`,
@@ -1132,9 +1134,9 @@ function MakeRoundIntro(round) {
         data: { Trial_Type: `firstRoundIntro_${round}` },
         stimulus: () => {
             if (round === "V1") {
-                return `<div style='font-size:35px'><p>Get ready for the first version!</p></div>`; 
+                return `<div style='font-size:35px'><p>Get ready to press your SPACE BAR!</p></div>`; 
             } else {
-                return `<div style='font-size:35px'><p>Get ready for the second version!</p></div>`;
+                return `<div style='font-size:35px'><p>Get ready to press your SPACE BAR!</p></div>`;
             }
         },
         choices: "NO_KEYS",
@@ -1202,7 +1204,7 @@ p.foundPartner = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <div style="font-size: 24px; text-align: center;">
-            <p id="loading-text"> We found someone. Loading game now...</p>
+            <p id="loading-text"> Get ready. Loading game now...</p>
             <div class="loading-bar-container">
                 <div class="loading-bar"></div>
             </div>
@@ -1344,7 +1346,7 @@ p.partnerRevealAvatar = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <div style="font-size: 24px; text-align: center;">
-            <p id="loading-text"> Your partner chose this avatar: </p>
+            <p id="loading-text"> Your partner chose this color: </p>
             <img src="./avatar/4.jpg" style="width: 200px; height: 200px; margin: 0 10px">
             </div>
         </div>

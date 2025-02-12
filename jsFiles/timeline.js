@@ -30,33 +30,36 @@ let timeline = [];
 
 */
 
-
 const commonTimeline = [
- //   game.intro.preMessage,
-   p.intro.r1part1,
+    p.intro.r1part1,
     p.intro.round1Avatars,
-   p.intro.r1part2,
+    p.intro.r1part2,
     p.intro.r1solo,
     p.intro.r1soloHigh,
     p.intro.r1check,
- //   p.intro.r1part2,
 ];
 
+// If randomAssignment is 2, add p.partnerRevealAvatar after p.intro.round1Avatars
+if (randomAssignment === 2) {
+    const avatarIndex = commonTimeline.indexOf(p.intro.round1Avatars);
+    if (avatarIndex !== -1) {
+        commonTimeline.splice(avatarIndex + 1, 0, p.partnerRevealAvatar);
+    }
+}
 
 const taskConfigurations = {
-    1: [p.task.round1Intro, p.task.SoloCircleHigh, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareLow], //1
-    2: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round1Intro, p.task.GroupSquareLow, p.task.round2Intro, p.task.SoloCircleHigh], //2
-    3: [p.task.round1Intro, p.task.SoloCircleLow, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareHigh], //3
-    4: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round1Intro, p.task.GroupSquareHigh, p.task.round2Intro, p.task.SoloCircleLow], //4 
-    5: [p.task.round1Intro, p.task.SoloSquareHigh, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupCircleLow], //5 
-    6: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round1Intro, p.task.GroupCircleLow, p.task.round2Intro, p.task.SoloSquareHigh], //6 
-    7: [p.task.round1Intro, p.task.SoloSquareLow, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupCircleHigh], //7 
-    8: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round1Intro, p.task.GroupCircleHigh, p.task.round2Intro, p.task.SoloSquareLow], //8 
-
+    1: [p.task.round1Intro, p.task.SoloCircleHigh, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareLow],
+    2: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.task.round1Intro, p.task.GroupSquareLow, p.task.round2Intro, p.task.SoloCircleHigh],
+    3: [p.task.round1Intro, p.task.SoloCircleLow, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareHigh],
+    4: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.task.round1Intro, p.task.GroupSquareHigh, p.task.round2Intro, p.task.SoloCircleLow],
+    5: [p.task.round1Intro, p.task.SoloSquareHigh, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupCircleLow],
+    6: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.task.round1Intro, p.task.GroupCircleLow, p.task.round2Intro, p.task.SoloSquareHigh],
+    7: [p.task.round1Intro, p.task.SoloSquareLow, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupCircleHigh],
+    8: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.task.round1Intro, p.task.GroupCircleHigh, p.task.round2Intro, p.task.SoloSquareLow],
 };
 
 // Set the timeline based on random assignment
-timeline = [...commonTimeline, ...taskConfigurations[randomAssignment] || []];
+timeline = [...commonTimeline, ...(taskConfigurations[randomAssignment] || [])];
 
 
 /*
