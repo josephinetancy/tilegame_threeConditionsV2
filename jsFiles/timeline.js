@@ -39,13 +39,14 @@ const commonTimeline = [
     p.intro.r1check,
 ];
 
+/*
 // If randomAssignment is 2, add p.partnerRevealAvatar after p.intro.round1Avatars
 if (randomAssignment === 2) {
     const avatarIndex = commonTimeline.indexOf(p.intro.round1Avatars);
     if (avatarIndex !== -1) {
         commonTimeline.splice(avatarIndex + 1, 0, p.partnerRevealAvatar);
     }
-}
+} */
 
 const taskConfigurations = {
     1: [p.task.round1Intro, p.task.SoloCircleHigh, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareLow],
