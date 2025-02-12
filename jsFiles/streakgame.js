@@ -266,10 +266,9 @@ soloHigh: [
         <p>You'll earn points based on these rules:</p> 
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
             <table style="border-collapse: collapse; text-align: center;">
+                <!-- First row: Empty first column, Shapes start from the second column -->
                 <tr>
-                    <td rowspan="2" style="padding: 10px;">
-                        <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
-                    </td>
+                    <td style="padding: 10px;"></td> <!-- Empty first column -->
                     <td style="padding: 10px;">
                         <div class="outer-container">
                             <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
@@ -299,14 +298,21 @@ soloHigh: [
                         </div>
                     </td>
                 </tr>
+
+                <!-- Second row: Points with avatar 3 -->
                 <tr>
+                    <td rowspan="1" style="padding: 2px; vertical-align: middle;">
+                        <img src="./avatar/3.jpg" style="width: 80px; height: auto;">
+                    </td>
                     <td><b>+8</b></td>
                     <td><b>${textNew.WL}</b></td>
                     <td><b>+4</b></td>
                     <td><b>${textNew.LL}</b></td>
                 </tr>
+
+                <!-- Third row: Points with avatar 4 -->
                 <tr>
-                    <td rowspan="2" style="padding: 10px;">
+                    <td rowspan="1" style="padding: 2px; vertical-align: middle;">
                         <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
                     </td>
                     <td><b>+8</b></td>
@@ -318,6 +324,7 @@ soloHigh: [
         </div>
     </div>`
 ]
+
 
             }
         };
