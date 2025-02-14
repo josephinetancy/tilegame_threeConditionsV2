@@ -78,43 +78,66 @@ function MakeAvatarSelection() {
     return {
         type: jsPsychHtmlButtonResponse,
         stimulus: `
+            <style>
+                .avatar-selection img {
+                    width: 200px;
+                    cursor: pointer !important;
+                    pointer-events: auto !important;
+                }
+                .jspsych-content-wrapper {
+                    pointer-events: auto !important; 
+                }
+            </style>
             <div class='parent'>
                 <p> For both games, you'll be playing as one of the following 3 players. </p>
                 <p> Please choose a player: </p>
-                 <div class="avatar-selection" style="display: flex; justify-content: center; gap: 20px;">
-                    <img src="./avatar/1.jpg" class="avatar-option" data-choice="0" style="width:200px; cursor:pointer;">
-                    <img src="./avatar/2.jpg" class="avatar-option" data-choice="1" style="width:200px; cursor:pointer;">
-                    <img src="./avatar/3.jpg" class="avatar-option" data-choice="2" style="width:200px; cursor:pointer;">
+                <div class="avatar-selection" style="display: flex; justify-content: center; gap: 20px;">
+                    <img src="./avatar/1.jpg" class="avatar-option" data-choice="0">
+                    <img src="./avatar/2.jpg" class="avatar-option" data-choice="1">
+                    <img src="./avatar/3.jpg" class="avatar-option" data-choice="2">
                 </div>
             </div>`,
-        choices: [], // No text buttons needed
-        response_ends_trial: true, // Ensure trial ends on image selection
+        choices: [],
+        response_ends_trial: true,
         on_load: () => {
+            // Ensure jsPsych wrapper allows interaction
+            let wrapper = document.querySelector(".jspsych-content-wrapper");
+            if (wrapper) {
+                wrapper.style.pointerEvents = "auto"; 
+            }
+
+            // Delay applying the cursor fix after the trial loads
+            setTimeout(() => {
+                document.querySelectorAll('.avatar-option').forEach(img => {
+                    img.style.cursor = 'pointer'; // Force cursor
+                    img.style.pointerEvents = 'auto'; // Ensure it's clickable
+                });
+            }, 100); // Small delay to override jsPsych's default behavior
+
+            // Add click functionality
             document.querySelectorAll('.avatar-option').forEach(img => {
                 img.addEventListener('click', function() {
-                    let selectedColor = this.getAttribute('data-choice'); // Get the selected avatar index
+                    let selectedColor = this.getAttribute('data-choice');
                     let avatarResponse; 
 
                     if (selectedColor === '0') {
-                        avatarResponse = '#ff00fe'; // Pink
+                        avatarResponse = '#ff00fe';
                     } else if (selectedColor === '1') {
-                        avatarResponse = '#90CD4C'; // Green
+                        avatarResponse = '#90CD4C';
                     } else if (selectedColor === '2') {
-                        avatarResponse = '#800000'; // Red
+                        avatarResponse = '#800000';
                     }
 
                     jsPsych.data.addProperties({ avatarResponse });
                     console.log(avatarResponse);
                     
-                    jsPsych.finishTrial({ response: selectedColor }); // Manually end trial with response
+                    jsPsych.finishTrial({ response: selectedColor });
                 });
             });
         }
     };
 }
-
-   /*
-    *
+/*
     *   INSTRUCTIONS
     *
     */
@@ -220,7 +243,7 @@ let avatarResponse = '#2669ee';
                 </div>`,
 
                 `<div class='parent'>
-                <p> Depending on  (i) whether you activate the inner ${textNew.shape1}, </p> <p>and (ii) whether the outer ${textNew.shape1} randomly activates, you'll see four possible outcomes. </p>
+                <p> Depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1}, </p> <p>and (ii) whether the outer ${textNew.shape1} randomly activates, you'll see four possible outcomes. </p><p></p>
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center;">
             
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -265,35 +288,44 @@ soloHigh: [
     `<div class='parent'>
         <p>You'll earn points based on these rules:</p> 
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
+        <div class="table-container">
             <table style="border-collapse: collapse; text-align: center;">
                 <!-- First row: Empty first column, Shapes start from the second column -->
                 <tr>
                     <td style="padding: 10px;"></td> <!-- Empty first column -->
                     <td style="padding: 10px;">
                         <div class="outer-container">
-                            <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
-                                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
+                            <div id="outer-shape" class="${textNew.shape1}" 
+                                 style="background-color: ${textNew.color}; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape1}" 
+                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
                             </div>
                         </div>
                     </td>
                     <td style="padding: 10px;">
                         <div class="outer-container">
-                            <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
-                                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
+                            <div id="outer-shape" class="${textNew.shape1}" 
+                                 style="background-color: grey; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape1}" 
+                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
                             </div>
                         </div>
                     </td>
                     <td style="padding: 10px;">
                         <div class="outer-container">
-                            <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
-                                <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
+                            <div id="outer-shape" class="${textNew.shape1}" 
+                                 style="background-color: ${textNew.color}; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape1}" 
+                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
                             </div>
                         </div>
                     </td>
                     <td style="padding: 10px;">
                         <div class="outer-container">
-                            <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
-                                <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
+                            <div id="outer-shape" class="${textNew.shape1}" 
+                                 style="background-color: grey; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape1}" 
+                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
                             </div>
                         </div>
                     </td>
@@ -302,7 +334,10 @@ soloHigh: [
                 <!-- Second row: Points with avatar 3 -->
                 <tr>
                     <td rowspan="1" style="padding: 2px; vertical-align: middle;">
-                        <img src="./avatar/3.jpg" style="width: 80px; height: auto;">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <img src="{{avatar1}}" style="width: 80px; height: auto;">
+                            <span style="font-size: 12px; font-weight: bold;">(you)</span>
+                        </div>
                     </td>
                     <td><b>+8</b></td>
                     <td><b>${textNew.WL}</b></td>
@@ -312,8 +347,11 @@ soloHigh: [
 
                 <!-- Third row: Points with avatar 4 -->
                 <tr>
-                    <td rowspan="1" style="padding: 2px; vertical-align: middle;">
-                        <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
+                    <td rowspan="1" style="padding: 2px; vertical-align: middle; text-align: left;">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
+                            <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
+                        </div>
                     </td>
                     <td><b>+8</b></td>
                     <td><b>${textNew.WL}</b></td>
@@ -699,9 +737,15 @@ function makeR1SoloHigh() {
     return {
         type: jsPsychInstructions,
         pages: () => {
-            const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+            let lastTrial = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0];
+            let avatarResponse = lastTrial.avatarResponse; 
+            let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
+            let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
+
             const updatedPages = pages.r1.soloHigh.map(page => {
-                return page.replace(/{{avatarResponse}}/g, avatarResponse);  // Replace with the actual color
+                return page
+                    .replace(/{{avatarResponse}}/g, avatarResponse)  // Replace with the actual color
+                    .replace(/{{avatar1}}/g, selectedAvatarImg);  // Replace with the actual avatar image
             });
 
             return updatedPages;

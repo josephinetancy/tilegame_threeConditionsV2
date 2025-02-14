@@ -63,7 +63,7 @@
   font-size: 14px;
   font-weight: 400;
   font-family: 'Open Sans', 'Arial', sans-serif;
-  cursor: pointer;
+  cursor: pointer; 
   line-height: 1.4;
   text-align: center;
   white-space: nowrap;
@@ -85,7 +85,7 @@
   background-color: #eee;
   color: #aaa;
   border-color: #ccc;
-  cursor: not-allowed;
+ /* cursor: not-allowed; */
 }
 
 /* jsPsych progress bar */
@@ -303,6 +303,7 @@
     justify-content: center; /* Centers both games */
     gap: 50px; /* Spacing between circle and square games */
     width: 100%;
+    margin-bottom: 100px
 }
 
 .game-container {
@@ -326,5 +327,7 @@
     text-align: center;
 }
 
-
-
+.table-container {
+    margin-bottom: 3px; /* Adjust as needed */
+    font-size: 26px; /* Adjust as needed */
+}
