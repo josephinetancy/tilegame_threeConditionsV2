@@ -64,7 +64,6 @@ var textNew = {
     LL: [1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`,
 }
 
-
 /*
 ///
 AVATAR 
@@ -81,11 +80,10 @@ function MakeAvatarSelection() {
             <style>
                 .avatar-selection img {
                     width: 200px;
-                    cursor: pointer !important;
-                    pointer-events: auto !important;
+                    transition: transform 0.2s ease-in-out; /* Smooth transition */
                 }
-                .jspsych-content-wrapper {
-                    pointer-events: auto !important; 
+                .avatar-selection img:hover {
+                    transform: translateY(-5px); /* Move up slightly on hover */
                 }
             </style>
             <div class='parent'>
@@ -105,14 +103,6 @@ function MakeAvatarSelection() {
             if (wrapper) {
                 wrapper.style.pointerEvents = "auto"; 
             }
-
-            // Delay applying the cursor fix after the trial loads
-            setTimeout(() => {
-                document.querySelectorAll('.avatar-option').forEach(img => {
-                    img.style.cursor = 'pointer'; // Force cursor
-                    img.style.pointerEvents = 'auto'; // Ensure it's clickable
-                });
-            }, 100); // Small delay to override jsPsych's default behavior
 
             // Add click functionality
             document.querySelectorAll('.avatar-option').forEach(img => {
@@ -283,8 +273,66 @@ let avatarResponse = '#2669ee';
             </div>
         </div>`
                 ],
+soloPage: [
+    `<div class='parent'>
+        <p>You'll earn points based on these rules:</p> 
+        <div id="shape-wrapper" style="display: flex; justify-content: center;">
+        <div class="table-container">
+            <table style="border-collapse: collapse; text-align: center;">
+                <!-- First row: Empty first column, Shapes start from the second column -->
+                <tr>
+                    <td style="padding: 10px;"></td> <!-- Empty first column -->
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape1}" 
+                                 style="background-color: ${textNew.color}; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape1}" 
+                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape1}" 
+                                 style="background-color: grey; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape1}" 
+                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape1}" 
+                                 style="background-color: ${textNew.color}; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape1}" 
+                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape1}" 
+                                 style="background-color: grey; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape1}" 
+                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
 
-soloHigh: [
+                <!-- Row with points -->
+                <tr>
+                    <td></td> <!-- Empty first column -->
+                    <td><b>+8</b></td>
+                    <td><b>${textNew.WL}</b></td>
+                    <td><b>+4</b></td>
+                    <td><b>${textNew.LL}</b></td>
+                </tr>
+            </table>
+        </div>
+    </div>`
+],
+groupPage: [
     `<div class='parent'>
         <p>You'll earn points based on these rules:</p> 
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
@@ -361,7 +409,7 @@ soloHigh: [
             </table>
         </div>
     </div>`
-]
+] 
 
 
             }
@@ -518,64 +566,58 @@ function MakeLoop(group, round) {
 
         const attnChk = {
             type: jsPsychSurveyMultiChoice,
-               preamble: () => {
-            const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
-            console.log(avatarResponse + " in makeintropart2");
-         
-            let preambleText = `
-                <div class='parent'>
-                    <p> To recap, in the ${textNew.game1}: </p>
-                    <p> The outer ${textNew.shape1} is activated depending on ${textNew.groupNext}. </p> 
-                    <p> You activate the inner ${textNew.shape1} with your SPACE BAR. </p>
-                    <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center;">
-                        
-                        <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                            <div class="outer-container">
-                                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
-                                    <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
-                                </div>
-                            </div>
-                            <b><p style="margin-top: 10px;">+8</p></b>
-                        </div>
-            
-                        <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                            <div class="outer-container">
-                                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
-                                    <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
-                                </div>
-                            </div>
-                            <b><p style="margin-top: 10px;">${textNew.WL}</p></b>
-                        </div>
-            
-                        <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                            <div class="outer-container">
-                                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
-                                    <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
-                                </div>
-                            </div>
-                            <b><p style="margin-top: 10px;">+4</p></b>
-                        </div>
-            
-                        <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                            <div class="outer-container">
-                                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
-                                    <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
-                                </div>
-                            </div>
-                            <b><p style="margin-top: 10px;">${textNew.LL}</p></b>
-                        </div>
-                    </div>
-                    <div style="margin-top: 0px; text-align: center;">
-                        <p style="font-size: 18px; font-weight: bold;">Before you continue, please answer the following questions:</p>
-                    </div>
+preamble: () => {
+    const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+    console.log(avatarResponse + " in makeintropart2"); 
+    let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
+    let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
+
+    const sologroupPages = (randomAssignment % 2 === 1) ? pages.r1.soloPage : pages.r1.groupPage;
+
+    let preambleText = `
+    <style>
+    body, .jspsych-content-wrapper {
+        margin: 0;
+        padding: 0;
+    }
+    .parent {
+        margin-top: 0px !important;
+        padding-top: 0px !important;
+    }
+    p {
+        margin-top: 5px;  /* Reduce spacing between paragraphs */
+    }
+</style>
+        <div class='parent' style = "position: relative; top: -120px;">
+            <p style="margin-top: -20px;"> To recap, in the ${textNew.game1}: </p>
+            <p> The outer ${textNew.shape1} is activated depending on ${textNew.groupNext}. </p> 
+            <p> You activate the inner ${textNew.shape1} with your SPACE BAR. </p>
+            <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; flex-wrap: wrap;">
+                <div style="width: 100%; text-align: center;">  <!-- Ensure it stacks correctly -->
+    `;
+
+    // Replace placeholders in sologroupPages
+    const updatedPages = sologroupPages.map(page => 
+        page
+            .replace(/{{avatarResponse}}/g, avatarResponse)
+            .replace(/{{avatar1}}/g, selectedAvatarImg)
+    ).join(""); // Join all the updated HTML sections into a single string
+
+    // Append the updated pages inside a new div to ensure layout stacking
+    preambleText += `
+                <div style="width: 100%;"> 
+                    ${updatedPages}
                 </div>
-            `;
+            </div>  <!-- Close shape-wrapper properly -->
+            
+            <div style="margin-top: 50px; text-align: center; width: 100%; display: block;">
+                <p style="font-size: 18px; font-weight: bold;">Before you continue, please answer the following questions.</p>
+            </div>
+        </div>
+    `;
 
-            // Dynamically replace the color placeholders with avatarResponse
-            preambleText = preambleText.replace(/{{avatarResponse}}/g, avatarResponse); // Replace red with avatarResponse
-
-            return preambleText;
-        },
+    return preambleText;
+},
             questions: [
                 {
                     prompt: `What decides how the outer ${textNew.shape1} is activated?`, 
@@ -682,6 +724,7 @@ function MakeLoop(group, round) {
     If you agree to participate, press the "Next" button to indicate that you consent to participate in the study.</p>`
 
 
+
     // create instruction variables
     p.intro.preMessage = {
         type: jsPsychInstructions,
@@ -742,7 +785,10 @@ function makeR1SoloHigh() {
             let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
             let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
 
-            const updatedPages = pages.r1.soloHigh.map(page => {
+            const sologroupPages = (randomAssignment % 2 === 1) ? pages.r1.soloPage : pages.r1.groupPage;
+            console.log(sologroupPages)
+
+            const updatedPages = sologroupPages.map(page => {
                 return page
                     .replace(/{{avatarResponse}}/g, avatarResponse)  // Replace with the actual color
                     .replace(/{{avatar1}}/g, selectedAvatarImg);  // Replace with the actual avatar image
