@@ -334,3 +334,6 @@
     font-size: 26px; /* Adjust as needed */
 }
 
+.group-page form#jspsych-survey-multi-choice-form {
+  margin-top: 470px;
+}

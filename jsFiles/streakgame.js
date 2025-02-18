@@ -1,6 +1,6 @@
 //randomAssignment
 // const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-randomAssignment = 2;
+randomAssignment = 1;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -64,7 +64,6 @@ var textNew = {
     color: randomAssignment % 2 === 1 ? 'yellow' : `#2669ee`, //odd numbers = alone, even = group
     WL: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
     LL: [1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`,
-    rulesVsChk: readtwice % 2 == 1 ? `Please take a moment to memorize these rules.` : `Before you continue, please answer the following questions.`,
 }
 
 /*
@@ -334,7 +333,7 @@ soloPage: [
             </table>
         </div>
     </div>
-      <p style="text-align: center; margin-top: 20px;"><b>Before you continue, please answer the following questions.</b></p>`
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 50px; "><b>Please take a moment to memorize these rules.</b></p>`
 ],
 groupPage: [
     `<style>
@@ -418,143 +417,12 @@ groupPage: [
             </table>
         </div>
     </div>
-          <div style="margin-top: 0px; margin-bottom: 50px; text-align: center; width: 100%; display: block;">
-       <p style="font-size: 18px; font-weight: bold;">Before you continue, please answer the following questions.</p>
+          <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
+       <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
 </div>`
-] 
-
-
+]
             }
         };
-
-/*
-
-                ],
-
-                part2Bern: [`<div class='parent'>
-                <p>To earn money, you must achieve wins.<br>
-                The more wins you achieve, the more money you'll earn.</p>
-                </div>`,
-
-                `<div class='parent'>
-                <p>To achieve wins, you'll try to "activate" tiles like this one.<br>
-                Activating a tile results in a win.</p>
-                <div class='box' style='background-color:gray'></div>
-                </div>`,
-
-                `<div class='parent'>
-                <p>Wins are worth money. The more tiles you activate, the more money you'll earn.<br>
-                Specifically, ${settings.val} cent will be added to your bonus fund for each tile you activate.</p>               
-                <div class='box' style='background-color:gray'></div>
-                </div>`,
-
-                `<div class='parent'>
-                <p>Tiles will appear on your screen, then disappear very quickly. To activate a tile, you must press your SPACE BAR 
-                before it disappears; whenever you see a tile, you should press your SPACE BAR as fast as possible.</p>
-                <div class='box' style='background-color:gray'></div>
-                </div>`,
-
-                `<div class='parent'>
-                <p>In the tiles turn 
-                when activated.</p>
-                <div class='box' style='background-color:#1067e8'></div>
-                </div>`,
-
-                `<div class='parent'>
-                <p>If you miss a tile, you'll see that no money was added to your bonus fund.<br>
-                The next tile will appear immediately after.</p>
-                <div style='font-size:35px'><p>You missed</p><p>+0 cents</p><p><br></p><p>(Get ready for the next tile!)</p></div>
-                </div>`],
-
-                part3: [`<div class='parent'>
-                <p>You are now ready to play the <span class='${text.span1}'>${text.game1}</span>.</p>
-                <p>Once you proceed, the <span class='${text.span1}'>${text.game1}</span> will start immediately, 
-                so get ready to press your SPACEBAR.</p>
-                <p>Continue to the next screen to begin.</p>
-                </div>`]
-            },
-            r2: {
-                part1: [`<div class='parent'>
-                <p>Thank you for playing the <span class='${text.span1}'>${text.game1}</span>!</p>
-                When you're ready, continue to learn about and play the <span class='${text.span2}'>${text.game2}</span>.</p>
-                </div>`,
-
-                `<div class='parent'>
-                <p>The <span class='${text.span2}'>${text.game2}</span> is identical to the 
-                <span class='${text.span1}'>${text.game1}</span> with three exceptions.</p>
-                </div>`],
-
-                part2Chunk: [`<div class='parent'>
-                <p>First, in the <span class='${text.span2}'>${text.game2}</span>, tiles turn <span class='${text.span2}'>${text.color2}</span> 
-                when activated.</p>
-                <div class='box' style='background-color:${text.hex2}'></div>
-                </div>`,
-
-                `<div class='parent'>
-                <p>Second, the <span class='${text.span2}'>${text.game2}</span> is divided into multiple, short rounds.</p>
-                <p>In each round, you'll have five chances to activate a tile.<br>
-                If you activate a tile before your five chances are up, you'll win the round.</p>
-                </div>`,
-
-                `<div class='parent'>
-                <p>The more rounds you win, the more money you'll earn.<br>
-                Specifically, ${settings.val} cent${text.plural} will be added to your bonus fund for each round you win.</p>               
-                </div>`,
-
-                `<div class='parent'>
-                <p>If you activate a tile before your five chances are up, you'll see that you won the round<br>
-                and ${text.value} cent${text.plural} ${text.wasWere} to your bonus fund. The next round will start immediately after.</p>
-                <div style='font-size:35px'><p>You won the round!</p><p>+${settings.val} cent${text.plural}</p><p><br></p><p>(Get ready for the next round!)</p></div>
-                </div>`,
-
-                `<div class='parent'>
-                <p>If you fail to activate a tile before your five chances are up, you'll see that you lost the round<br>
-                and no money was added to your bonus fund. The next round will start immediately after.</p>
-                <div style='font-size:35px'><p>You lost the round</p><p>+0 cents</p><p><br></p><p>(Get ready for the next round!)</p></div>
-                </div>`,
-
-                `<div class='parent'>
-                <p>Each time you miss a tile, you'll see how many more chances you have left in the current round.<br>
-                For example, if you have three chances left to activate a tile in the current round, you'll see this message:</p>
-                <div style='font-size:35px'><p><span style='color:${text.color2}; font-size:60px'>3</span></p><p>Chances left</p></div>
-                </div>`],
-
-                part2Bern: [`<div class='parent'>
-                <p>First, in the <span class='${text.span2}'>${text.game2}</span>, tiles turn <span class='${text.span2}'>${text.color2}</span> 
-                when activated.</p>
-                <div class='box' style='background-color:${text.hex2}'></div>
-                </div>`,
-
-                `<div class='parent'>
-                <p>Second the <span class='${text.span2}'>${text.game2}</span> is not divided into multiple, short rounds.<br>
-                Instead, it in played in a single, long round.<p>
-                </div>`,
-
-                `<div class='parent'>
-                <p>Throughout the single, long round of the <span class='${text.span2}'>${text.game2}</span>,<br>you'll earn ${settings.val} cent${text.plural} for each tile you activate.<br>
-                </div>`,
-
-                `<div class='parent'>
-                <p>Each time you activate a tile, you'll see that ${text.value} cent${text.plural} ${text.wasWere} added to your bonus fund.<br>
-                The next tile will appear immediately after.</p>
-                <div style='font-size:35px'><p>You activated it!</p><p>+${settings.val} cent${text.plural}</p><p><br></p><p>(Get ready for the next tile!)</p></div>
-                </div>`,
-
-                `<div class='parent'>
-                <p>Each time you miss a tile, you'll see that no money was added to your bonus fund.<br>
-                The next tile will appear immediately after.</p>
-                <div style='font-size:35px'><p>You missed</p><p>+0 cents</p><p><br></p><p>(Get ready for the next tile!)</p></div>
-                </div>`],
-
-                part3: [`<div class='parent'>
-                <p>You are now ready to play the <span class='${text.span2}'>${text.game2}</span>.</p>
-                <p>Once you proceed, the <span class='${text.span2}'>${text.game2}</span> will start immediately, 
-                so get ready to press your SPACEBAR.</p>
-                <p>Continue to the next screen to begin.</p>
-                </div>`]
-            }
-        }; */
-
 
     // constructor function for round 1 comprehension check loop
 function MakeLoop(group, round) {
@@ -583,10 +451,11 @@ preamble: () => {
     console.log(avatarResponse + " in makeintropart2"); 
     let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
     let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
+    let readtwice = 2;
 
     const sologroupPages = (randomAssignment % 2 === 1) ? pages.r1.soloPage : pages.r1.groupPage;
 
-    let preambleText = `
+       let preambleText = `
         <div class='parent'>
             <p> To recap, in the ${textNew.game1}: </p>
             <p> The outer ${textNew.shape1} is activated depending on ${textNew.groupNext}. </p> 
@@ -598,17 +467,26 @@ preamble: () => {
         page
             .replace(/{{avatarResponse}}/g, avatarResponse)
             .replace(/{{avatar1}}/g, selectedAvatarImg)
+            .replace(/Please take a moment to memorize these rules/g, `Before you continue, please answer the following questions`)
     ).join(""); // Join all the updated HTML sections into a single string
 
     // Append the updated pages inside a new div to ensure layout stacking
     preambleText += `
-                <div> 
-                    ${updatedPages}
-               </div>
-            </div>  <!-- Close shape-wrapper properly -->
-            </div>
-        </div>` 
+        <div class="group-page"> 
+            ${updatedPages}
+        </div>
+    </div>` 
 
+    // Check if the `updatedPages` is `groupPage` and apply styles
+    if (sologroupPages === pages.r1.groupPage) {
+        preambleText += `
+            <style>
+                .group-page #jspsych-survey-multi-choice-form {
+                    margin-top: 470px;
+                }
+            </style>
+        `;
+    }
 
     return preambleText;
 },
