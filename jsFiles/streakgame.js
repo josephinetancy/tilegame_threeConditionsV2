@@ -59,7 +59,7 @@ var textNew = {
     game2: randomAssignment % 2 === 1 ? 'Square Game' : 'Circle Game',
     shape2: randomAssignment % 2 === 1 ? 'square' : 'circle',
     group: randomAssignment % 2 === 1 ? 'randomly' : 'by someone else', //odd numbers = alone, even = group
-    groupNext: randomAssignment % 2 === 1 ? 'on random chance' : `your partner's performance`, //odd numbers = alone, even = group
+    groupNext: randomAssignment % 2 === 1 ? 'random chance' : `your partner's performance`, //odd numbers = alone, even = group
     groupAgain: randomAssignment % 2 === 1 ? 'randomly' : '', //
     color: randomAssignment % 2 === 1 ? 'yellow' : `#2669ee`, //odd numbers = alone, even = group
     WL: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
@@ -276,7 +276,7 @@ let avatarResponse = '#2669ee';
         </div>`
                 ],
 soloPage: [
-    `<div class='parent'>
+    `<div class='specialOnly'>
         <p>You'll earn points based on these rules. Remember that each point is worth 2 cents. </p> 
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container">
@@ -460,6 +460,7 @@ preamble: () => {
             <p> To recap, in the ${textNew.game1}: </p>
             <p> The outer ${textNew.shape1} is activated depending on ${textNew.groupNext}. </p> 
             <p> You activate the inner ${textNew.shape1} with your SPACE BAR. </p>
+
     `;
 
     // Replace placeholders in sologroupPages
@@ -468,15 +469,14 @@ preamble: () => {
             .replace(/{{avatarResponse}}/g, avatarResponse)
             .replace(/{{avatar1}}/g, selectedAvatarImg)
             .replace(/Please take a moment to memorize these rules/g, `Before you continue, please answer the following questions`)
+            .replace(/specialOnly/g, `special`)
     ).join(""); // Join all the updated HTML sections into a single string
 
     // Append the updated pages inside a new div to ensure layout stacking
     preambleText += `
-        <div class="group-page"> 
             ${updatedPages}
-        </div>
-    </div>` 
-
+            </div>` 
+/*
     // Check if the `updatedPages` is `groupPage` and apply styles
     if (sologroupPages === pages.r1.groupPage) {
         preambleText += `
@@ -487,19 +487,19 @@ preamble: () => {
             </style>
         `;
     }
-
+*/
     return preambleText;
 },
             questions: [
                 {
                     prompt: `What determines how the outer ${textNew.shape1} is activated?`, 
                     name: `attnChk0`, 
-                    options: ['Random chance', 'My performance', `My partner's performance`],
+                    options: ['My performance', `My partner's performance`,'Random chance'],
                 },
                 {
                     prompt: `What determines how the inner ${textNew.shape1} is activated?`,
                     name: `attnChk1`, 
-                    options: ['Random chance', 'My performance', `My partner's performance`],
+                    options: ['My performance', `My partner's performance`, 'Random chance'],
                 },
                 {
                     prompt: `How many points do you get when the inner ${textNew.shape1} and the outer ${textNew.shape1} are activated?`,

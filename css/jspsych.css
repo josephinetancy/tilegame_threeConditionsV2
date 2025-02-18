@@ -232,7 +232,20 @@
   width: 950px;
  height: 390px; 
  /* height: auto; */
+}
 
+.special {
+  position: relative;
+  width: 950px;
+ height: 200px; 
+ /* height: auto; */
+}
+
+.specialOnly {
+  position: relative;
+  width: 950px;
+ height: 500px; 
+ /* height: auto; */
 }
 
 .box{
@@ -334,6 +347,3 @@
     font-size: 26px; /* Adjust as needed */
 }
 
-.group-page form#jspsych-survey-multi-choice-form {
-  margin-top: 470px;
-}
