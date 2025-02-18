@@ -51,17 +51,20 @@ var streakGame = (function() {
     }; 
 
 
+let readtwice = 1; 
+
 var textNew = {
     game1: randomAssignment % 2 === 1 ? '<b>Circle Game</b>' : '<b>Square Game</b>',
     shape1: randomAssignment % 2 === 1 ? 'circle' : 'square',
     game2: randomAssignment % 2 === 1 ? 'Square Game' : 'Circle Game',
     shape2: randomAssignment % 2 === 1 ? 'square' : 'circle',
     group: randomAssignment % 2 === 1 ? 'randomly' : 'by someone else', //odd numbers = alone, even = group
-    groupNext: randomAssignment % 2 === 1 ? 'on random chance' : `someone else's performance`, //odd numbers = alone, even = group
+    groupNext: randomAssignment % 2 === 1 ? 'on random chance' : `your partner's performance`, //odd numbers = alone, even = group
     groupAgain: randomAssignment % 2 === 1 ? 'randomly' : '', //
     color: randomAssignment % 2 === 1 ? 'yellow' : `#2669ee`, //odd numbers = alone, even = group
     WL: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
     LL: [1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`,
+    rulesVsChk: readtwice % 2 == 1 ? `Please take a moment to memorize these rules.` : `Before you continue, please answer the following questions.`,
 }
 
 /*
@@ -211,7 +214,7 @@ let avatarResponse = '#2669ee';
                 solo: [
                 `<div class='parent'>
                 <p>The outer ${textNew.shape1} will activate\u2014or\u2014not ${textNew.group}. </p> 
-                <p>If the outer ${textNew.shape1} ${textNew.groupAgain}activates, it will look like this, otherwise it will turn gray. </p> 
+                <p>If the outer ${textNew.shape1} ${textNew.groupAgain} activates, it will look like this, otherwise it will turn gray. </p> 
                 <p>Whether the outer ${textNew.shape1} activates or not depends on ${textNew.groupNext}.</p>
            <div id="shape-wrapper">
               <div class="game-container">
@@ -234,9 +237,9 @@ let avatarResponse = '#2669ee';
 
                 `<div class='parent'>
                 <p> Depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1}, </p> <p>and (ii) whether the outer ${textNew.shape1} randomly activates, you'll see four possible outcomes. </p><p></p>
-                <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center;">
-            
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;",>
                 <div class="outer-container">
                     <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
                         <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
@@ -275,7 +278,7 @@ let avatarResponse = '#2669ee';
                 ],
 soloPage: [
     `<div class='parent'>
-        <p>You'll earn points based on these rules:</p> 
+        <p>You'll earn points based on these rules. Remember that each point is worth 2 cents. </p> 
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container">
             <table style="border-collapse: collapse; text-align: center;">
@@ -330,13 +333,19 @@ soloPage: [
                 </tr>
             </table>
         </div>
-    </div>`
+    </div>
+      <p style="text-align: center; margin-top: 20px;"><b>Before you continue, please answer the following questions.</b></p>`
 ],
 groupPage: [
-    `<div class='parent'>
-        <p>You'll earn points based on these rules:</p> 
+    `<style>
+        #jspsych-survey-multi-choice-form {
+            margin-top: 60px;
+        }
+    </style>
+    <div class="parent">
+        <p>You'll earn points based on these rules. Remember that each point is worth 2 cents.</p> 
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
-        <div class="table-container">
+        <div class="table-container" style="display: block; clear: both;">
             <table style="border-collapse: collapse; text-align: center;">
                 <!-- First row: Empty first column, Shapes start from the second column -->
                 <tr>
@@ -408,7 +417,10 @@ groupPage: [
                 </tr>
             </table>
         </div>
-    </div>`
+    </div>
+          <div style="margin-top: 0px; margin-bottom: 50px; text-align: center; width: 100%; display: block;">
+       <p style="font-size: 18px; font-weight: bold;">Before you continue, please answer the following questions.</p>
+</div>`
 ] 
 
 
@@ -548,8 +560,8 @@ groupPage: [
 function MakeLoop(group, round) {
 
         const correctAnswers = {
-            attnChk0 : randomAssignment % 2 === 1 ? `Random chance` : `My partner`, 
-            attnChk1 : `My space bar`, 
+            attnChk0 : randomAssignment % 2 === 1 ? `Random chance` : `My partner's performance`, 
+            attnChk1 : `My performance`, 
             attnChk2: `+8`,
             attnChk3: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
             attnChk4: `+4`,
@@ -575,25 +587,10 @@ preamble: () => {
     const sologroupPages = (randomAssignment % 2 === 1) ? pages.r1.soloPage : pages.r1.groupPage;
 
     let preambleText = `
-    <style>
-    body, .jspsych-content-wrapper {
-        margin: 0;
-        padding: 0;
-    }
-    .parent {
-        margin-top: 0px !important;
-        padding-top: 0px !important;
-    }
-    p {
-        margin-top: 5px;  /* Reduce spacing between paragraphs */
-    }
-</style>
-        <div class='parent' style = "position: relative; top: -120px;">
-            <p style="margin-top: -20px;"> To recap, in the ${textNew.game1}: </p>
+        <div class='parent'>
+            <p> To recap, in the ${textNew.game1}: </p>
             <p> The outer ${textNew.shape1} is activated depending on ${textNew.groupNext}. </p> 
             <p> You activate the inner ${textNew.shape1} with your SPACE BAR. </p>
-            <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; flex-wrap: wrap;">
-                <div style="width: 100%; text-align: center;">  <!-- Ensure it stacks correctly -->
     `;
 
     // Replace placeholders in sologroupPages
@@ -605,29 +602,26 @@ preamble: () => {
 
     // Append the updated pages inside a new div to ensure layout stacking
     preambleText += `
-                <div style="width: 100%;"> 
+                <div> 
                     ${updatedPages}
-                </div>
+               </div>
             </div>  <!-- Close shape-wrapper properly -->
-            
-            <div style="margin-top: 50px; text-align: center; width: 100%; display: block;">
-                <p style="font-size: 18px; font-weight: bold;">Before you continue, please answer the following questions.</p>
             </div>
-        </div>
-    `;
+        </div>` 
+
 
     return preambleText;
 },
             questions: [
                 {
-                    prompt: `What decides how the outer ${textNew.shape1} is activated?`, 
+                    prompt: `What determines how the outer ${textNew.shape1} is activated?`, 
                     name: `attnChk0`, 
-                    options: ['Random chance', 'My space bar', 'My partner'],
+                    options: ['Random chance', 'My performance', `My partner's performance`],
                 },
                 {
-                    prompt: `What decides how the inner ${textNew.shape1} is activated?`,
+                    prompt: `What determines how the inner ${textNew.shape1} is activated?`,
                     name: `attnChk1`, 
-                    options: ['Random chance', 'My space bar', 'My partner'],
+                    options: ['Random chance', 'My performance', `My partner's performance`],
                 },
                 {
                     prompt: `How many points do you get when the inner ${textNew.shape1} and the outer ${textNew.shape1} are activated?`,

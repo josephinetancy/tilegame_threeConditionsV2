@@ -303,9 +303,9 @@
 #shape-wrapper {
     display: flex;
     justify-content: center; /* Centers both games */
-    gap: 50px; /* Spacing between circle and square games */
+    gap: 50px; /* Spacing between shapes */
     width: 100%;
-    margin-bottom: 100px
+    margin-bottom: 0px
 }
 
 .game-container {
@@ -333,3 +333,4 @@
     margin-bottom: 3px; /* Adjust as needed */
     font-size: 26px; /* Adjust as needed */
 }
+
