@@ -36,21 +36,6 @@ var streakGame = (function() {
     };
 
 
-    var text = {
-        game1: settings.colorOrder == 1 ? 'Green Game' : 'Blue Game', //text.game1 = blue game
-        color1: settings.colorOrder == 1 ? 'green' : 'blue', 
-        hex1: settings.colorOrder == 1 ? '#00aa00' : '#1067e8',
-        span1: settings.colorOrder == 1 ? 'a-span' : 'b-span',
-        game2: settings.colorOrder == 0 ? 'Green Game' : 'Blue Game',
-        color2: settings.colorOrder == 0 ? 'green' : 'blue',
-        hex2: settings.colorOrder == 0 ? '#00aa00' : '#1067e8',
-        span2: settings.colorOrder == 0 ? 'a-span' : 'b-span',
-        value: settings.val.toString(),
-        plural: settings.val == 1 ? '' : 's', 
-        wasWere: settings.val == 1 ? 'was' : 'were'
-    }; 
-
-
 let readtwice = 1; 
 
 var textNew = {
@@ -336,12 +321,7 @@ soloPage: [
       <p style="text-align: center; margin-top: 20px; margin-bottom: 50px; "><b>Please take a moment to memorize these rules.</b></p>`
 ],
 groupPage: [
-    `<style>
-        #jspsych-survey-multi-choice-form {
-            margin-top: 60px;
-        }
-    </style>
-    <div class="parent">
+`<div class='parent'>
         <p>You'll earn points based on these rules. Remember that each point is worth 2 cents.</p> 
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
@@ -425,7 +405,8 @@ groupPage: [
         };
 
     // constructor function for round 1 comprehension check loop
-function MakeLoop(group, round) {
+function MakeLoop(group, round, attnChkDiv) {
+
 
         const correctAnswers = {
             attnChk0 : randomAssignment % 2 === 1 ? `Random chance` : `My partner's performance`, 
@@ -451,12 +432,12 @@ preamble: () => {
     console.log(avatarResponse + " in makeintropart2"); 
     let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
     let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
-    let readtwice = 2;
+    let attnChkDiv = randomAssignment % 2 === 1 ? `parent` : `attnChkGrp`;
 
     const sologroupPages = (randomAssignment % 2 === 1) ? pages.r1.soloPage : pages.r1.groupPage;
 
        let preambleText = `
-        <div class='parent'>
+        <div class='${attnChkDiv}'> 
             <p> To recap, in the ${textNew.game1}: </p>
             <p> The outer ${textNew.shape1} is activated depending on ${textNew.groupNext}. </p> 
             <p> You activate the inner ${textNew.shape1} with your SPACE BAR. </p>
@@ -673,7 +654,7 @@ function makeR1SoloHigh() {
     };
 }
 
-    p.intro.r1check = new MakeLoop('R1', 'Solo');
+    p.intro.r1check = new MakeLoop('R1', 'Solo', 'textNew.attnChkClass');
 
  //   p.intro.r2part2 = new MakeLoop(text.span2, text.game2, text.color2, 'R2');
 

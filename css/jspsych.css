@@ -237,7 +237,7 @@
 .special {
   position: relative;
   width: 950px;
- height: 200px; 
+ height: 250px; 
  /* height: auto; */
 }
 
@@ -245,6 +245,20 @@
   position: relative;
   width: 950px;
  height: 500px; 
+ /* height: auto; */
+}
+
+.specialGrpOnly {
+  position: relative;
+  width: 950px;
+ height: 250px; 
+ /* height: auto; */
+}
+
+.attnChkGrp {
+  position: relative;
+  width: 950px;
+ height: 610px; 
  /* height: auto; */
 }
 
