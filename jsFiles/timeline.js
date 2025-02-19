@@ -49,14 +49,14 @@ if (randomAssignment === 2) {
 } */
 
 const taskConfigurations = {
-    1: [p.task.round1Intro, p.task.SoloCircleHigh, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareLow],
-    2: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.task.round1Intro, p.task.GroupSquareLow, p.task.round2Intro, p.task.SoloCircleHigh],
-    3: [p.task.round1Intro, p.task.SoloCircleLow, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareHigh],
-    4: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.task.round1Intro, p.task.GroupSquareHigh, p.task.round2Intro, p.task.SoloCircleLow],
-    5: [p.task.round1Intro, p.task.SoloSquareHigh, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupCircleLow],
-    6: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.task.round1Intro, p.task.GroupCircleLow, p.task.round2Intro, p.task.SoloSquareHigh],
-    7: [p.task.round1Intro, p.task.SoloSquareLow, p.findingPartner, p.foundPartner, p.partnerAvatar, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupCircleHigh],
-    8: [p.findingPartner, p.foundPartner, p.partnerAvatar, p.task.round1Intro, p.task.GroupCircleHigh, p.task.round2Intro, p.task.SoloSquareLow],
+    1: [p.task.round1Intro, p.task.SoloCircleHigh, p.findingPartner, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareLow],
+    2: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareLow, p.task.round2Intro, p.task.SoloCircleHigh],
+    3: [p.task.round1Intro, p.task.SoloCircleLow, p.findingPartner, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupSquareHigh],
+    4: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareHigh, p.task.round2Intro, p.task.SoloCircleLow],
+    5: [p.task.round1Intro, p.task.SoloSquareHigh, p.findingPartner, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupCircleLow],
+    6: [p.findingPartner, p.task.round1Intro, p.task.GroupCircleLow, p.task.round2Intro, p.task.SoloSquareHigh],
+    7: [p.task.round1Intro, p.task.SoloSquareLow, p.findingPartner, p.partnerRevealAvatar, p.task.round2Intro, p.task.GroupCircleHigh],
+    8: [p.findingPartner,  p.task.round1Intro, p.task.GroupCircleHigh, p.task.round2Intro, p.task.SoloSquareLow],
 };
 
 // Set the timeline based on random assignment

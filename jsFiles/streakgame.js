@@ -1154,6 +1154,7 @@ function MakeTooFast(round) {
     };
 }
 
+/*
 p.foundPartner = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
@@ -1198,7 +1199,7 @@ p.foundPartner = {
     on_finish: (data) => {
         data.loading_completed = true;
     }
-};
+}; */
 
 p.findingPartner = {
     type: jsPsychHtmlKeyboardResponse,
@@ -1246,7 +1247,7 @@ p.findingPartner = {
     }
 };
 
-
+/*
 p.partnerAvatar = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
@@ -1294,7 +1295,7 @@ p.partnerAvatar = {
         console.log(data);
         data.loading_completed = true;
     }
-};
+}; 
 
 p.partnerRevealAvatar = {
     type: jsPsychHtmlKeyboardResponse,
@@ -1311,7 +1312,7 @@ p.partnerRevealAvatar = {
         console.log(data);
         data.loading_completed = true;
     }
-};
+};*/
 
     // trial variables
     var LLTrialCircle = new LLTrial('circle'),
