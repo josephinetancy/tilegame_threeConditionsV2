@@ -69,16 +69,6 @@ function MakeAvatarSelection() {
     return {
         type: jsPsychHtmlButtonResponse,
         stimulus: `
-            <style>
-                .avatar-selection img {
-                    width: 200px;
-                    transition: transform 0.2s ease-in-out; /* Smooth transition */
-                    cursor: pointer; /* Change cursor to pointer */
-                }
-                .avatar-selection img:hover {
-                    transform: translateY(-5px); /* Move up slightly on hover */
-                }
-            </style>
             <div class='parent'>
                 <p> For both games, you'll be playing as one of the following 3 players. </p>
                 <p> Please choose a player: </p>
