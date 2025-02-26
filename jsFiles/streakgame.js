@@ -36,17 +36,22 @@ var streakGame = (function() {
     };
 
 
-let readtwice = 1; 
+let isSecondTime = false; 
 
 var textNew = {
-    game1: randomAssignment % 2 === 1 ? '<b>Circle Game</b>' : '<b>Square Game</b>',
+    game1: randomAssignment % 2 === 1 ? 'Circle Game' : 'Square Game',
     shape1: randomAssignment % 2 === 1 ? 'circle' : 'square',
     game2: randomAssignment % 2 === 1 ? 'Square Game' : 'Circle Game',
+    Old: randomAssignment % 2 === 1 ? 'Circle Game' : 'Square Game',
     shape2: randomAssignment % 2 === 1 ? 'square' : 'circle',
     group: randomAssignment % 2 === 1 ? 'randomly' : 'by someone else', //odd numbers = alone, even = group
+    group2: randomAssignment % 2 === 1 ? 'by someone else' : 'randomly' , //odd numbers = alone, even = group
     groupNext: randomAssignment % 2 === 1 ? 'random chance' : `your partner's performance`, //odd numbers = alone, even = group
+    groupNext2: randomAssignment % 2 === 1 ? `your partner's performance` : 'random chance', //odd numbers = alone, even = group
     groupAgain: randomAssignment % 2 === 1 ? 'randomly' : '', //
+    groupAgain2: randomAssignment % 2 === 1 ? '' : 'randomly', //
     color: randomAssignment % 2 === 1 ? 'yellow' : `#2669ee`, //odd numbers = alone, even = group
+    color2: randomAssignment % 2 === 1 ? `#2669ee` : 'yellow', //odd numbers = alone, even = group
     WL: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
     LL: [1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`,
 }
@@ -68,6 +73,7 @@ function MakeAvatarSelection() {
                 .avatar-selection img {
                     width: 200px;
                     transition: transform 0.2s ease-in-out; /* Smooth transition */
+                    cursor: pointer; /* Change cursor to pointer */
                 }
                 .avatar-selection img:hover {
                     transform: translateY(-5px); /* Move up slightly on hover */
@@ -106,6 +112,8 @@ function MakeAvatarSelection() {
                     }
 
                     jsPsych.data.addProperties({ avatarResponse });
+                    jsPsych.data.addProperties({ isSecondTime: isSecondTime });
+                    console.log(isSecondTime + 'this is secondtime')
                     console.log(avatarResponse);
                     
                     jsPsych.finishTrial({ response: selectedColor });
@@ -118,6 +126,8 @@ function MakeAvatarSelection() {
     *   INSTRUCTIONS
     *
     */
+
+
 
 let avatarResponse = '#2669ee';
 
@@ -133,17 +143,17 @@ let avatarResponse = '#2669ee';
           <p> Welcome! </p>
           <p>We're interested in what makes some games more immersive and engaging than others. </p>
           <p> To help us, you'll play two games. </p>
-                </div>`
-                ],
+                </div>`,
 
-                part2: [
                 `<div class='parent'>
                 <p> For both games, you'll earn points. </p>
                 <p>Each point is worth 2 cents in bonus money. </p>
                 You'll keep all the bonus money you earn on top of the $X you earn for your participation. </p>
-                <p>To maximize your winnings, earn as many points as possible!</p>
-                </div>`,
+                <p>To maximize your earnings, earn as many points as possible!</p>
+                </div>`
+                ],
 
+                part2: [
                 `<div class='parent'>
                 <p> The first game is called the ${textNew.game1}. </p>
                 <p> Click "Next" to learn about the ${textNew.game1}. </p>
@@ -195,9 +205,9 @@ let avatarResponse = '#2669ee';
                 </div>`
                 ],
 
-                solo: [
+                part3: [
                 `<div class='parent'>
-                <p>The outer ${textNew.shape1} will activate\u2014or\u2014not ${textNew.group}. </p> 
+                <p>The outer ${textNew.shape1} will activate\u2014or not\u2014${textNew.group}. </p> 
                 <p>If the outer ${textNew.shape1} ${textNew.groupAgain} activates, it will look like this, otherwise it will turn gray. </p> 
                 <p>Whether the outer ${textNew.shape1} activates or not depends on ${textNew.groupNext}.</p>
            <div id="shape-wrapper">
@@ -220,7 +230,7 @@ let avatarResponse = '#2669ee';
                 </div>`,
 
                 `<div class='parent'>
-                <p> Depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1}, </p> <p>and (ii) whether the outer ${textNew.shape1} randomly activates, you'll see four possible outcomes. </p><p></p>
+                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1} and </p> <p>and (ii) whether the outer ${textNew.shape1} ${textNew.groupAgain} activates. </p><p></p>
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
 
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;",>
@@ -593,36 +603,69 @@ preamble: () => {
         post_trial_gap: 500,
     };
 
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^=!:${}()|\[\]\/\\]/g, '\\$&'); // Escape special characters
+}
 
-function makeIntroPart2() {
+function makeIntroPart2(isSecondTime) {
     return {
         type: jsPsychInstructions,
         pages: () => {
+            const isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
-            console.log(avatarResponse + " in makeintropart2");
+
             const updatedPages = pages.r1.part2.map(page => {
-                return page.replace(/{{avatarResponse}}/g, avatarResponse);  // Replace with the actual color
+                let updatedPage = page.replace(/{{avatarResponse}}/g, avatarResponse);
+                
+                // Only replace "first" → "second" and game1 → game2 if isSecondTime is true
+                if (isSecondTime) {
+                    updatedPage = updatedPage
+                    .replace("first", "second")
+                        .replace(new RegExp(escapeRegExp(textNew.game1), 'g'), textNew.game2) // Use escapeRegExp for safe replacement
+                        .replace(new RegExp(escapeRegExp(textNew.shape1), 'g'), textNew.shape2); // Use escapeRegExp for safe replacement
+     
+                }
+
+                return updatedPage;
             });
 
             return updatedPages;
-        },      
+        },
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
 }
 
 
-function makeR1Solo() {
+function makeR1Part3(isSecondTime) {
     return {
         type: jsPsychInstructions,
         pages: () => {
+            const isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
-            const updatedPages = pages.r1.solo.map(page => {
-                return page.replace(/{{avatarResponse}}/g, avatarResponse);  // Replace with the actual color
+
+            const updatedPages = pages.r1.part3.map(page => {
+                let updatedPage = page.replace(/{{avatarResponse}}/g, avatarResponse);
+                
+                // Only replace "first" → "second" and game1 → game2 if isSecondTime is true
+                if (isSecondTime) {
+                    updatedPage = updatedPage
+                    .replace("first", "second")
+                        .replace(new RegExp(escapeRegExp(textNew.game1), 'g'), textNew.game2) // Use escapeRegExp for safe replacement
+                        .replace(new RegExp(escapeRegExp(textNew.shape1), 'g'), textNew.shape2) // Use escapeRegExp for safe replacement
+                        .replace(new RegExp(escapeRegExp(textNew.group), 'g'), textNew.group2) // Use escapeRegExp for safe replacement
+                        .replace(new RegExp(escapeRegExp(textNew.groupNext), 'g'), textNew.groupNext2)
+                        .replace(new RegExp(escapeRegExp(textNew.color), 'g'), textNew.color2) // Use escapeRegExp for safe replacement
+                        .replace(new RegExp(escapeRegExp(textNew.groupAgain), 'g'), textNew.groupAgain2); // Use escapeRegExp for safe replacement
+ 
+     
+                }
+
+                return updatedPage;
             });
 
             return updatedPages;
-        },      
+        },   
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
@@ -1339,7 +1382,7 @@ p.partnerRevealAvatar = {
         roundIntroV1 = new MakeRoundIntro('V1'),
         roundIntroV2 = new MakeRoundIntro('V2'),
         introPart2 = makeIntroPart2(),
-        introR1Solo = makeR1Solo(),
+        introR1Part3 = makeR1Part3(),
         introR1SoloHigh = makeR1SoloHigh()
 
     const delayLoopR1 = {
@@ -1376,8 +1419,8 @@ p.partnerRevealAvatar = {
         timeline: [introPart2],
     }; 
 
-    p.intro.r1solo = {
-        timeline: [introR1Solo],
+    p.intro.r1part3 = {
+        timeline: [introR1Part3],
     }; 
 
     p.intro.r1soloHigh = {
@@ -1586,6 +1629,61 @@ p.partnerRevealAvatar = {
 
     p.Qs = {};
 
+    const FlowScale = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>Extremely'];
+    
+p.flowMeasure = {
+    type: jsPsychSurveyLikert,
+    preamble: `<div style='padding-top: 50px; width: 900px; font-size:16px'> 
+            <p> Throughout the ${textNew.game1}, to what extent did you feel immersed 
+        and engaged in what you were doing? 
+        <p>To report how immersed and engaged you felt, please answer the following questions.</p>
+            </div>`,
+    questions: [
+        // Update the questions with the dynamic round text
+            {
+                prompt: `How immersed did you feel playing the ${textNew.game1}?`,
+                name: `flow_0`,
+                labels: FlowScale,
+                required: true,
+            },
+            {
+                prompt: `How engaged did you feel playing the ${textNew.game1}?`,
+                name: `flow_1`,
+                labels: FlowScale,
+                required: true,
+            },
+            {
+                prompt: `How engrossed did you feel playing the ${textNew.game1}?`,
+                name: `flow_2`,
+                labels: FlowScale,
+                required: true,
+            },
+            {
+                prompt: `How absorbed did you feel playing the ${textNew.game1}?`,
+                name: `flow_3`,
+                labels: FlowScale,
+                required: true,
+            },
+            {
+                prompt: `How bored did you feel playing the ${textNew.game1}?`,
+                name: `flow_4`,
+                labels: FlowScale,
+                required: true,
+            },
+        ],
+    randomize_question_order: false,
+    scale_width: 600,
+    on_finish: () => {
+        isSecondTime = true;
+        jsPsych.data.addProperties({ isSecondTime: isSecondTime });
+        console.log(isSecondTime)
+    }
+};
+
+
+
+    /*
+
     // scales
     var zeroToExtremely = ['0<br>A little', '1', '2', '3', '4', '5', '6', '7', '8<br>Extremely'];
     var zeroToALot = ['0<br>A little', '1', '2', '3', '4', '5', '6', '7', '8<br>A lot'];
@@ -1660,56 +1758,86 @@ p.partnerRevealAvatar = {
 
     p.Qs.round2 = {
         timeline: [new flowQs(text.span2, text.game2, 'R2'), new enjoyQs(text.span2, text.game2, 'R2'), new pMQ(text.span2, text.game2, 'R2')]
-    };
+    }; */
 
-    p.Qs.demographics = (function() {
-        var gender = {
-            type: 'html-button-response',
-            stimulus: '<p>Gender:</p>',
-            choices: ['Male', 'Female', 'Other'],
-        };
-        var age = {
-            type: 'survey-text',
-            questions: [{prompt: "Age:", name: "age"}],
-        }; 
-        var ethnicity = {
-            type: 'html-button-response',
-            stimulus: '<p>Ethnicity:</p>',
-            choices: ['White / Caucasian', 'Black / African American','Asian / Pacific Islander', 'Hispanic', 'Native American', 'Other'],
-        };
-        var english = {
-            type: 'html-button-response',
-            stimulus: '<p>Is English your native language?:</p>',
-            choices: ['Yes', 'No'],
-        };  
-        var finalWord = {
-            type: 'survey-text',
-            questions: [{prompt: "Questions? Comments? Complains? Provide your feedback here!", rows: 10, columns: 100, name: "finalWord"}],
-            on_finish: function(data){
-                totalJackpotsR1 = jsPsych.data.get().filter({Trial_Type: 'feedback_R1', Jackpot: true}).count();
-                totalJackpotsR2 = jsPsych.data.get().filter({Trial_Type: 'feedback_R2', Jackpot: true}).count();
-                totalJackpots = totalJackpotsR1 + totalJackpotsR2;
-                data.totalJackpots = totalJackpots;
-            },
-        }; 
-        var email = {
-            type: "instructions",
-            pages: function() {
-                var bonusDollars = Math.ceil( (totalJackpots * settings.val) / 100);
-                var totalDollars = bonusDollars + 10
-                var text = `<p>Thank you for participating!</p><p>In total, you won <b>${bonusDollars} cents</b> in bonus money!
-                <br>To receive your earnings, please give the following code to the administrator: <b>DM${totalDollars*2}</b>.</p>`;
-                return [text];
-            },
+
+const html = {        
+    postTask: [
+            `<div class='parent'>
+                <p>Thank you!</p>
+                <p>To finish this study, please continue to answer a few final questions.</p>
+            </div>`
+        ]
+}
+
+
+ p.demographics = (function() {
+
+
+        const taskComplete = {
+            type: jsPsychInstructions,
+            pages: html.postTask,
             show_clickable_nav: true,
             post_trial_gap: 500,
         };
 
-        var demos = {
-            timeline: [gender, age, ethnicity, english, finalWord]
+        const gender = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: '<p>What is your gender?</p>',
+            choices: ['Male', 'Female', 'Other'],
+            on_finish: (data) => {
+                data.gender = data.response;
+            }
+        };
+
+        const age = {
+            type: jsPsychSurveyText,
+            questions: [{prompt: "Age:", name: "age"}],
+            on_finish: (data) => {
+                saveSurveyData(data); 
+            },
+        }; 
+
+        const ethnicity = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: '<p>What is your race?</p>',
+            choices: ['White / Caucasian', 'Black / African American','Asian / Pacific Islander', 'Hispanic', 'Native American', 'Other'],
+            on_finish: (data) => {
+                data.ethnicity = data.response;
+            }
+        };
+
+        const english = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: '<p>Is English your native language?:</p>',
+            choices: ['Yes', 'No'],
+            on_finish: (data) => {
+                data.english = data.response;
+            }
+        };  
+
+        const finalWord = {
+            type: jsPsychSurveyText,
+            questions: [{prompt: "Questions? Comments? Complaints? Provide your feedback here!", rows: 10, columns: 100, name: "finalWord"}],
+            on_finish: (data) => {
+                saveSurveyData(data); 
+            },
+        }; 
+
+        const pid = {
+            type: jsPsychSurveyText,
+            questions: [{prompt: "Please enter your Prolific ID in the space below to receive payment.", rows: 1, columns: 50, name: "pid"}],
+            on_finish: (data) => {
+                saveSurveyData(data); 
+            },
+        }; 
+
+        const demos = {
+            timeline: [taskComplete, gender, age, ethnicity, english, finalWord, pid]
         };
 
         return demos;
+
     }());
 
 
