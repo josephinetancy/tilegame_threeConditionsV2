@@ -361,3 +361,12 @@
     font-size: 26px; /* Adjust as needed */
 }
 
+.avatar-selection img {
+    width: 200px;
+    transition: transform 0.2s ease-in-out; /* Smooth transition */
+    cursor: pointer; /* Change cursor to pointer */
+}
+.avatar-selection img:hover {
+    transform: translateY(-5px); /* Move up slightly on hover */
+}
+
