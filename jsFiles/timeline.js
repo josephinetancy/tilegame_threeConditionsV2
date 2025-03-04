@@ -49,17 +49,29 @@ if (randomAssignment === 2) {
 } */
 
 const taskConfigurations = {
- //   1: [p.task.round1Intro, p.task.SoloCircleHigh, p.flowMeasure, p.intro.r1part2, p.intro.r1part3, p.findingPartner, p.task.round2Intro, p.task.GroupSquareLow, p.flowMeasure, p.demographics],
+    1: [p.task.round1Intro, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.flowMeasure, p.demographics],
+    2: [p.findingPartner, p.task.round1Intro, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro,  p.flowMeasure, p.demographics],
+    3: [p.task.round1Intro, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.flowMeasure, p.demographics],
+    4: [p.findingPartner, p.task.round1Intro, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.flowMeasure, p.demographics],
+    5: [p.task.round1Intro, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.flowMeasure, p.demographics],
+    6: [p.findingPartner, p.task.round1Intro, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro,  p.flowMeasure, p.demographics],
+    7: [p.task.round1Intro,  p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.flowMeasure, p.demographics],
+    8: [p.findingPartner, p.task.round1Intro, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.flowMeasure, p.demographics],
+};
+
+
+/*
+
+const taskConfigurations = {
     1: [p.task.round1Intro, p.task.SoloCircleHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupSquareLow, p.flowMeasure, p.demographics],
     2: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloCircleHigh, p.flowMeasure, p.demographics],
     3: [p.task.round1Intro, p.task.SoloCircleLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupSquareHigh, p.flowMeasure, p.demographics],
-    4: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareHigh, p.flowMeasure, p.task.round2Intro, p.task.SoloCircleLow, p.flowMeasure, p.demographics],
-    5: [p.task.round1Intro, p.task.SoloSquareHigh, p.flowMeasure, p.findingPartner, p.task.round2Intro, p.task.GroupCircleLow, p.flowMeasure, p.demographics],
-    6: [p.findingPartner, p.task.round1Intro, p.task.GroupCircleLow, p.flowMeasure, p.task.round2Intro, p.task.SoloSquareHigh, p.flowMeasure, p.demographics],
-    7: [p.task.round1Intro, p.task.SoloSquareLow, p.flowMeasure, p.findingPartner,  p.task.round2Intro, p.task.GroupCircleHigh, p.flowMeasure, p.demographics],
-    8: [p.findingPartner,  p.task.round1Intro, p.task.GroupCircleHigh, p.flowMeasure, p.task.round2Intro, p.task.SoloSquareLow, p.flowMeasure, p.demographics],
-};
-
+    4: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloCircleLow, p.flowMeasure, p.demographics],
+    5: [p.task.round1Intro, p.task.SoloSquareHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupCircleLow, p.flowMeasure, p.demographics],
+    6: [p.findingPartner, p.task.round1Intro, p.task.GroupCircleLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloSquareHigh, p.flowMeasure, p.demographics],
+    7: [p.task.round1Intro, p.task.SoloSquareLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupCircleHigh, p.flowMeasure, p.demographics],
+    8: [p.findingPartner, p.task.round1Intro, p.task.GroupCircleHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloSquareLow, p.flowMeasure, p.demographics],
+}; */
 // Set the timeline based on random assignment
 timeline = [...commonTimeline, ...(taskConfigurations[randomAssignment] || [])];
 

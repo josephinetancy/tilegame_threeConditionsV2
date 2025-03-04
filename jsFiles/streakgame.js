@@ -1,6 +1,6 @@
 //randomAssignment
 // const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-randomAssignment = 3;
+randomAssignment = 5;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -54,7 +54,11 @@ var textNew = {
     color2: randomAssignment % 2 === 1 ? `#2669ee` : 'yellow', //odd numbers = alone, even = group
     WL: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
     LL: [1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`,
+    WLSwitch: [1, 4, 5, 8].includes(randomAssignment) ? `+4` : `+4`,
+    WLSwitch2: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
     WL2: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+6`,
+    WL2Switch: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+4`,
+    WL2Switch2: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+6`,
     LL2: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+2`,
 }
 
@@ -448,8 +452,8 @@ groupPage: [
                         </div>
                     </td>
                     <td><b>+8</b></td>
-                    <td><b>${textNew.WL}</b></td>
-                    <td><b>+4</b></td>
+                    <td><b>${textNew.WLSwitch}</b></td>
+                    <td><b>${textNew.WLSwitch2}</b></td>
                     <td><b>${textNew.LL}</b></td>
                 </tr>
             </table>
@@ -529,8 +533,8 @@ groupPage2: [
                         </div>
                     </td>
                     <td><b>+8</b></td>
-                    <td><b>${textNew.WL2}</b></td>
-                    <td><b>+4</b></td>
+                    <td><b>${textNew.WL2Switch}</b></td>
+                    <td><b>${textNew.WL2Switch2}</b></td>
                     <td><b>${textNew.LL2}</b></td>
                 </tr>
             </table>
