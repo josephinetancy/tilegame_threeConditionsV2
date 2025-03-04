@@ -36,7 +36,7 @@ const commonTimeline = [
     p.intro.r1part2,
     p.intro.r1part3,
     p.intro.r1soloHigh, 
-    p.intro.r1check,
+   p.intro.r1check,
 ];
 
 /*
@@ -50,7 +50,7 @@ if (randomAssignment === 2) {
 
 const taskConfigurations = {
  //   1: [p.task.round1Intro, p.task.SoloCircleHigh, p.flowMeasure, p.intro.r1part2, p.intro.r1part3, p.findingPartner, p.task.round2Intro, p.task.GroupSquareLow, p.flowMeasure, p.demographics],
-    1: [p.task.round1Intro, p.task.SoloCircleHigh, p.flowMeasure, p.intro.r1part2, p.intro.r1part3, p.findingPartner, p.task.round2Intro, p.task.GroupSquareLow, p.flowMeasure, p.demographics],
+    1: [p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupSquareLow, p.flowMeasure, p.demographics],
    2: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareLow, p.flowMeasure, p.task.round2Intro, p.task.SoloCircleHigh, p.flowMeasure, p.demographics],
  //   2: [p.findingPartner, p.task.round1Intro, p.flowMeasure,p.intro.r1part2, p.intro.r1part3, p.task.round2Intro, p.task.SoloCircleHigh, p.flowMeasure, p.demographics],
 

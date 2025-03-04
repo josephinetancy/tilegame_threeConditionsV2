@@ -49,11 +49,13 @@ var textNew = {
     groupNext: randomAssignment % 2 === 1 ? 'random chance' : `your partner's performance`, //odd numbers = alone, even = group
     groupNext2: randomAssignment % 2 === 1 ? `your partner's performance` : 'random chance', //odd numbers = alone, even = group
     groupAgain: randomAssignment % 2 === 1 ? 'randomly' : '', //
-    groupAgain2: randomAssignment % 2 === 1 ? '' : 'randomly', //
+    groupAgain2: randomAssignment % 2 === 1 ? `` : 'randomly', //
     color: randomAssignment % 2 === 1 ? 'yellow' : `#2669ee`, //odd numbers = alone, even = group
     color2: randomAssignment % 2 === 1 ? `#2669ee` : 'yellow', //odd numbers = alone, even = group
     WL: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
     LL: [1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`,
+    WL2: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+6`,
+    LL2: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+2`,
 }
 
 /*
@@ -112,10 +114,9 @@ function MakeAvatarSelection() {
                     }
 
                     jsPsych.data.addProperties({ avatarResponse });
-                    jsPsych.data.addProperties({ isSecondTime: isSecondTime });
-                    console.log(isSecondTime + 'this is secondtime')
                     console.log(avatarResponse);
-                    
+                    jsPsych.data.addProperties({ isSecondTime: isSecondTime });
+                    console.log(isSecondTime)
                     jsPsych.finishTrial({ response: selectedColor });
                 });
             });
@@ -186,8 +187,6 @@ let avatarResponse = '#2669ee';
 
                 `<div class='parent'>
                 <p> If you press your SPACE BAR fast enough, the inner ${textNew.shape1} will activate like this. </p>
-                <p></p>
-                <p></p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}">
                 <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
@@ -208,26 +207,25 @@ let avatarResponse = '#2669ee';
                 part3: [
                 `<div class='parent'>
                 <p>The outer ${textNew.shape1} will activate\u2014or not\u2014${textNew.group}. </p> 
-                <p>If the outer ${textNew.shape1} ${textNew.groupAgain} activates, it will look like this, otherwise it will turn gray. </p> 
-                <p>Whether the outer ${textNew.shape1} activates or not depends on ${textNew.groupNext}.</p>
-           <div id="shape-wrapper">
-              <div class="game-container">
-            <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
+                <p>If the outer ${textNew.shape1} activates, it will look like this. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="game-container">
-            <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: gray;">
-                <div id="inner-shape" class="${textNew.shape1}"></div>
-                </div>
-                </div>
                 </div>
                 </div>
                 </div>`,
+
+
+                `<div class='parent'>
+                <p>If the outer ${textNew.shape1} ${textNew.groupAgain} does not activate, it will look like this. </p>
+                <p>Whether the outer ${textNew.shape1} activates or not depends on ${textNew.groupNext}.</p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                <div id="inner-shape" class="${textNew.shape1}"></div>
+                </div>
+                </div>
+                </div>`,
+
 
                 `<div class='parent'>
                 <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1} and </p> <p>and (ii) whether the outer ${textNew.shape1} ${textNew.groupAgain} activates. </p><p></p>
@@ -330,6 +328,66 @@ soloPage: [
     </div>
       <p style="text-align: center; margin-top: 20px; margin-bottom: 50px; "><b>Please take a moment to memorize these rules.</b></p>`
 ],
+soloPage2: [
+    `<div class='specialOnly'>
+        <p>You'll earn points based on these rules. Remember that each point is worth 2 cents. </p> 
+        <div id="shape-wrapper" style="display: flex; justify-content: center;">
+        <div class="table-container">
+            <table style="border-collapse: collapse; text-align: center;">
+                <!-- First row: Empty first column, Shapes start from the second column -->
+                <tr>
+                    <td style="padding: 10px;"></td> <!-- Empty first column -->
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape2}" 
+                                 style="background-color: ${textNew.color2}; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape2}" 
+                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape2}" 
+                                 style="background-color: grey; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape2}" 
+                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape2}" 
+                                 style="background-color: ${textNew.color2}; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape2}" 
+                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape2}" 
+                                 style="background-color: grey; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape2}" 
+                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Row with points -->
+                <tr>
+                    <td></td> <!-- Empty first column -->
+                    <td><b>+8</b></td>
+                    <td><b>${textNew.WL2}textNew.WL}</b></td>
+                    <td><b>+4</b></td>
+                    <td><b>${textNew.LL2}</b></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 50px; "><b>Please take a moment to memorize these rules.</b></p>`
+],
 groupPage: [
 `<div class='parent'>
         <p>You'll earn points based on these rules. Remember that each point is worth 2 cents.</p> 
@@ -410,22 +468,240 @@ groupPage: [
           <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
        <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
 </div>`
-]
+],
+groupPage2: [
+`<div class='parent'>
+        <p>You'll earn points based on these rules. Remember that each point is worth 2 cents.</p> 
+        <div id="shape-wrapper" style="display: flex; justify-content: center;">
+        <div class="table-container" style="display: block; clear: both;">
+            <table style="border-collapse: collapse; text-align: center;">
+                <!-- First row: Empty first column, Shapes start from the second column -->
+                <tr>
+                    <td style="padding: 10px;"></td> <!-- Empty first column -->
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape2}" 
+                                 style="background-color: ${textNew.color2}; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape2}" 
+                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape2}" 
+                                 style="background-color: grey; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape2}" 
+                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape2}" 
+                                 style="background-color: ${textNew.color2}; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape2}" 
+                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape2}" 
+                                 style="background-color: grey; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape2}" 
+                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Second row: Points with avatar 3 -->
+                <tr>
+                    <td rowspan="1" style="padding: 2px; vertical-align: middle;">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <img src="{{avatar1}}" style="width: 80px; height: auto;">
+                            <span style="font-size: 12px; font-weight: bold;">(you)</span>
+                        </div>
+                    </td>
+                    <td><b>+8</b></td>
+                    <td><b>${textNew.WL2}</b></td>
+                    <td><b>+4</b></td>
+                    <td><b>${textNew.LL2}</b></td>
+                </tr>
+
+                <!-- Third row: Points with avatar 4 -->
+                <tr>
+                    <td rowspan="1" style="padding: 2px; vertical-align: middle; text-align: left;">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
+                            <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
+                        </div>
+                    </td>
+                    <td><b>+8</b></td>
+                    <td><b>${textNew.WL2}</b></td>
+                    <td><b>+4</b></td>
+                    <td><b>${textNew.LL2}</b></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+          <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
+       <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
+</div>`
+],
+round2: [
+                `<div class='parent'>
+                <p> The second game is called the ${textNew.game2}. </p>
+                <p> Click "Next" to learn about the ${textNew.game2}. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}">
+                <div id="inner-shape" class="${textNew.shape2}"></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p> The ${textNew.game2} is similar to the ${textNew.game1} except that (i) the ${textNew.shape1}s are now ${textNew.shape2}s, </p> and (ii) the outer ${textNew.shape2} activates or not depends on ${textNew.groupNext2}. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}">
+                <div id="inner-shape" class="${textNew.shape2}"></div>
+                </div>
+                </div>
+                </div>`, 
+
+                `<div class='parent'>
+                <p> Like in the ${textNew.game1}, in the ${textNew.game2}, ${textNew.shape2}s will appear on your screen. 
+                <p> Initially, the inner ${textNew.shape2} and the outer ${textNew.shape2} are white. </p>
+                <p> Your job is to activate the inner ${textNew.shape2}. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}">
+                    <div id="inner-shape" class="${textNew.shape2}"></div>
+                </div>
+                </div>
+                </div>`,
+
+                 `<div class='parent'>
+                <p>To activate the inner ${textNew.shape2}, press your SPACE BAR as soon as the ${textNew.shape2}s appear on your screen. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}">
+                    <div id="inner-shape" class="${textNew.shape2}"></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p> If you press your SPACE BAR fast enough, the inner ${textNew.shape2} will activate like this. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}};"></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p>If you're too slow, the inner ${textNew.shape2} will turn gray.</p> 
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: gray;"></div>
+                </div>
+                </div>
+                </div>`
+                ],
+
+round2part2: [
+                `<div class='parent'>
+                <p>The outer ${textNew.shape2} will activate\u2014or not\u2014${textNew.group2}. </p> 
+                <p>If the outer ${textNew.shape2} ${textNew.groupAgain2} activates, it will look like this.</p> 
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2};">
+                <div id="inner-shape" class="${textNew.shape2}"></div>
+                </div>
+                </div>
+                </div>`, 
+
+
+                `<div class='parent'>
+                <p>If the outer ${textNew.shape2} ${textNew.groupAgain2} does not activate, it will look like this. </p>
+                <p>Whether the outer ${textNew.shape2} activates or not depends on ${textNew.groupNext2}.</p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2};">
+                <div id="inner-shape" class="${textNew.shape2}"></div>
+                </div>
+                </div>
+                </div>`, 
+
+
+                `<div class='parent'>
+                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape2} and </p> <p>and (ii) whether the outer ${textNew.shape2} ${textNew.groupAgain2} activates. </p><p></p>
+                <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;",>
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2};">
+                        <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}};"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
+                     <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}};"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2};">
+                        <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
+                        <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+        </div>`
+                ],
             }
         };
 
     // constructor function for round 1 comprehension check loop
-function MakeLoop(group, round, attnChkDiv) {
+function MakeLoop(group, round) {
 
+function getCorrectAnswers(randomAssignment) {
+    let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+    console.log(randomAssignment + 'randomassignment in getcorrect answers.')
+    console.log(isSecondTime + 'in getCorrectAnswers')
+    return {
+        attnChk0: isSecondTime 
+            ? (randomAssignment % 2 === 1 ? `My partner's performance` : `Random chance`)
+            : (randomAssignment % 2 === 1 ? `Random chance` : `My partner's performance`),
 
-        const correctAnswers = {
-            attnChk0 : randomAssignment % 2 === 1 ? `Random chance` : `My partner's performance`, 
-            attnChk1 : `My performance`, 
-            attnChk2: `+8`,
-            attnChk3: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
-            attnChk4: `+4`,
-            attnChk5: [1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`,
-        };
+        attnChk1: `My performance`,
+        attnChk2: `+8`,
+
+        attnChk3: isSecondTime 
+            ? ([1, 4, 5, 8].includes(randomAssignment) ? `+4` : `+6`)
+            : ([1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`),
+
+        attnChk4: `+4`,
+
+        attnChk5: isSecondTime 
+            ? ([1, 4, 5, 8].includes(randomAssignment) ? `+4` : `+2`)
+            : ([1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`),
+    };
+}
 
         const errorMessage = {
             type: jsPsychInstructions,
@@ -437,20 +713,28 @@ function MakeLoop(group, round, attnChkDiv) {
 
         const attnChk = {
             type: jsPsychSurveyMultiChoice,
-preamble: () => {
+    preamble: () => {
     const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
-    console.log(avatarResponse + " in makeintropart2"); 
     let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
     let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
-    let attnChkDiv = randomAssignment % 2 === 1 ? `parent` : `attnChkGrp`;
+    let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+    console.log("is secodntime in attnck" + isSecondTime)
 
-    const sologroupPages = (randomAssignment % 2 === 1) ? pages.r1.soloPage : pages.r1.groupPage;
+        let attnChkDiv = isSecondTime 
+                ? (randomAssignment % 2 === 1 ? `attnChkGrp` : `parent`)
+                : (randomAssignment % 2 === 1 ? `parent` : `attnChkGrp`);
+            
+
+        let sologroupPages = isSecondTime 
+                ? (randomAssignment % 2 === 1 ? pages.r1.groupPage2 : pages.r1.soloPage2)
+                : (randomAssignment % 2 === 1 ? pages.r1.soloPage : pages.r1.groupPage);
+
 
        let preambleText = `
         <div class='${attnChkDiv}'> 
-            <p> To recap, in the ${textNew.game1}: </p>
-            <p> The outer ${textNew.shape1} is activated depending on ${textNew.groupNext}. </p> 
-            <p> You activate the inner ${textNew.shape1} with your SPACE BAR. </p>
+            <p> To recap, in the ${isSecondTime ? textNew.game2 : textNew.game1}: </p>
+            <p> The outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated depending on ${isSecondTime ? textNew.groupNext2 : textNew.groupNext}. </p> 
+            <p> You activate the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} with your SPACE BAR. </p>
 
     `;
 
@@ -467,48 +751,37 @@ preamble: () => {
     preambleText += `
             ${updatedPages}
             </div>` 
-/*
-    // Check if the `updatedPages` is `groupPage` and apply styles
-    if (sologroupPages === pages.r1.groupPage) {
-        preambleText += `
-            <style>
-                .group-page #jspsych-survey-multi-choice-form {
-                    margin-top: 470px;
-                }
-            </style>
-        `;
-    }
-*/
+
     return preambleText;
 },
             questions: [
                 {
-                    prompt: `What determines how the outer ${textNew.shape1} is activated?`, 
+                    prompt: `What determines how the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
                     name: `attnChk0`, 
                     options: ['My performance', `My partner's performance`,'Random chance'],
                 },
                 {
-                    prompt: `What determines how the inner ${textNew.shape1} is activated?`,
+                    prompt: `What determines how the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`,
                     name: `attnChk1`, 
                     options: ['My performance', `My partner's performance`, 'Random chance'],
                 },
                 {
-                    prompt: `How many points do you get when the inner ${textNew.shape1} and the outer ${textNew.shape1} are activated?`,
+                    prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1}  and the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} are activated?`,
                     name: `attnChk2`, 
                     options: ['+2', '+4', '+6', '+8'],
                 },
                 {
-                    prompt: `How many points do you get when the inner ${textNew.shape1} is activated but the outer ${textNew.shape1} is NOT activated?`, 
+                    prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated but the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is NOT activated?`, 
                     name: `attnChk3`, 
                     options: ['+2', '+4', '+6', '+8'],
                 },
                 {
-                    prompt: `How many points do you get when the inner ${textNew.shape1} is NOT activated but the outer ${textNew.shape1} is activated?`, 
+                    prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is NOT activated but the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
                     name: `attnChk4`, 
                     options: ['+2', '+4', '+6', '+8'],
                 },
                 {
-                    prompt: `How many points do you get when the inner ${textNew.shape1} and the outer ${textNew.shape1} are NOT activated?`, 
+                    prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} and the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} are NOT activated?`, 
                     name: `attnChk5`, 
                     options: ['+2', '+4', '+6', '+8'],
                 },
@@ -516,7 +789,7 @@ preamble: () => {
             randomize_question_order: false,
             scale_width: 500,
             on_finish: (data) => {
-                  const totalErrors = getTotalErrors(data.response, correctAnswers);
+                  const totalErrors = getTotalErrors(data.response, getCorrectAnswers(randomAssignment));
                   data.totalErrors = totalErrors;
             },
         };
@@ -607,28 +880,17 @@ function escapeRegExp(string) {
     return string.replace(/[.*+?^=!:${}()|\[\]\/\\]/g, '\\$&'); // Escape special characters
 }
 
-function makeIntroPart2(isSecondTime) {
+function makeIntroPart2() {
     return {
         type: jsPsychInstructions,
         pages: () => {
             const isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
 
-            const updatedPages = pages.r1.part2.map(page => {
-                let updatedPage = page.replace(/{{avatarResponse}}/g, avatarResponse);
-                
-                // Only replace "first" → "second" and game1 → game2 if isSecondTime is true
-                if (isSecondTime) {
-                    updatedPage = updatedPage
-                    .replace("first", "second")
-                        .replace(new RegExp(escapeRegExp(textNew.game1), 'g'), textNew.game2) // Use escapeRegExp for safe replacement
-                        .replace(new RegExp(escapeRegExp(textNew.shape1), 'g'), textNew.shape2); // Use escapeRegExp for safe replacement
-     
-                }
-
-                return updatedPage;
-            });
-
+            // Generate updated pages with avatar response replacements
+            let updatedPages = pages.r1.part2.map(page => 
+                page.replace(/{{avatarResponse}}/g, avatarResponse)
+            );
             return updatedPages;
         },
         show_clickable_nav: true,
@@ -637,35 +899,18 @@ function makeIntroPart2(isSecondTime) {
 }
 
 
-function makeR1Part3(isSecondTime) {
+function makeR1Part3() {
     return {
         type: jsPsychInstructions,
         pages: () => {
             const isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
 
-            const updatedPages = pages.r1.part3.map(page => {
-                let updatedPage = page.replace(/{{avatarResponse}}/g, avatarResponse);
-                
-                // Only replace "first" → "second" and game1 → game2 if isSecondTime is true
-                if (isSecondTime) {
-                    updatedPage = updatedPage
-                    .replace("first", "second")
-                        .replace(new RegExp(escapeRegExp(textNew.game1), 'g'), textNew.game2) // Use escapeRegExp for safe replacement
-                        .replace(new RegExp(escapeRegExp(textNew.shape1), 'g'), textNew.shape2) // Use escapeRegExp for safe replacement
-                        .replace(new RegExp(escapeRegExp(textNew.group), 'g'), textNew.group2) // Use escapeRegExp for safe replacement
-                        .replace(new RegExp(escapeRegExp(textNew.groupNext), 'g'), textNew.groupNext2)
-                        .replace(new RegExp(escapeRegExp(textNew.color), 'g'), textNew.color2) // Use escapeRegExp for safe replacement
-                        .replace(new RegExp(escapeRegExp(textNew.groupAgain), 'g'), textNew.groupAgain2); // Use escapeRegExp for safe replacement
- 
-     
-                }
-
-                return updatedPage;
-            });
-
+            let updatedPages = pages.r1.part3.map(page => 
+                page.replace(/{{avatarResponse}}/g, avatarResponse)
+            );
             return updatedPages;
-        },   
+        },
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
@@ -681,8 +926,11 @@ function makeR1SoloHigh() {
             let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
             let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
 
-            const sologroupPages = (randomAssignment % 2 === 1) ? pages.r1.soloPage : pages.r1.groupPage;
-            console.log(sologroupPages)
+            const sologroupPages = isSecondTime 
+                ? (randomAssignment % 2 === 1 ? pages.r1.groupPage2 : pages.r1.soloPage2)
+                : (randomAssignment % 2 === 1 ? pages.r1.soloPage : pages.r1.groupPage);
+            
+            console.log(sologroupPages);
 
             const updatedPages = sologroupPages.map(page => {
                 return page
@@ -697,7 +945,43 @@ function makeR1SoloHigh() {
     };
 }
 
-    p.intro.r1check = new MakeLoop('R1', 'Solo', 'textNew.attnChkClass');
+
+function makeR2part1() {
+    return {
+        type: jsPsychInstructions,
+        pages: () => {
+            const isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+            const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+
+            let updatedPages = pages.r1.round2.map(page => 
+                page.replace(/{{avatarResponse}}/g, avatarResponse)
+            );
+            return updatedPages;
+        },
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+    };
+}
+
+function makeR2part2() {
+    return {
+        type: jsPsychInstructions,
+        pages: () => {
+            const isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+            const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+
+            let updatedPages = pages.r1.round2part2.map(page => 
+                page.replace(/{{avatarResponse}}/g, avatarResponse)
+            );
+            return updatedPages;
+        },
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+    };
+}
+
+
+    p.intro.r1check = new MakeLoop('R1', 'Solo');
 
  //   p.intro.r2part2 = new MakeLoop(text.span2, text.game2, text.color2, 'R2');
 
@@ -1384,6 +1668,8 @@ p.partnerRevealAvatar = {
         introPart2 = makeIntroPart2(),
         introR1Part3 = makeR1Part3(),
         introR1SoloHigh = makeR1SoloHigh()
+        introR2part1 = makeR2part1()
+        introR2part2 = makeR2part2()
 
     const delayLoopR1 = {
         timeline:[delayR1, tooFastR1],
@@ -1430,7 +1716,15 @@ p.partnerRevealAvatar = {
     p.intro.round1Avatars = {
         timeline: [avatarChoice1],
     }; 
+
+    p.intro.r2part1 = {
+        timeline: [introR2part1],
+    }; 
  
+    p.intro.r2part2 = {
+        timeline: [introR2part2],
+    }; 
+
 
 //Solo Squares - High
  const LLLoopSoloSquareHigh = {
@@ -1641,31 +1935,31 @@ p.flowMeasure = {
     questions: [
         // Update the questions with the dynamic round text
             {
-                prompt: `How immersed did you feel playing the ${textNew.game1}?`,
+                prompt: `How <b>immersed</b> did you feel playing the ${textNew.game1}?`,
                 name: `flow_0`,
                 labels: FlowScale,
                 required: true,
             },
             {
-                prompt: `How engaged did you feel playing the ${textNew.game1}?`,
+                prompt: `How <b>engaged</b> did you feel playing the ${textNew.game1}?`,
                 name: `flow_1`,
                 labels: FlowScale,
                 required: true,
             },
             {
-                prompt: `How engrossed did you feel playing the ${textNew.game1}?`,
+                prompt: `How <b>engrossed</b> did you feel playing the ${textNew.game1}?`,
                 name: `flow_2`,
                 labels: FlowScale,
                 required: true,
             },
             {
-                prompt: `How absorbed did you feel playing the ${textNew.game1}?`,
+                prompt: `How <b>absorbed</b> did you feel playing the ${textNew.game1}?`,
                 name: `flow_3`,
                 labels: FlowScale,
                 required: true,
             },
             {
-                prompt: `How bored did you feel playing the ${textNew.game1}?`,
+                prompt: `How <b>bored</b> did you feel playing the ${textNew.game1}?`,
                 name: `flow_4`,
                 labels: FlowScale,
                 required: true,
