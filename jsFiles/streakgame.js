@@ -1,6 +1,6 @@
 //randomAssignment
 // const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-randomAssignment = 2;
+randomAssignment = 3;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -369,7 +369,7 @@ soloPage2: [
                 <tr>
                     <td></td> <!-- Empty first column -->
                     <td><b>+8</b></td>
-                    <td><b>${textNew.WL2}textNew.WL}</b></td>
+                    <td><b>${textNew.WL2}</b></td>
                     <td><b>+4</b></td>
                     <td><b>${textNew.LL2}</b></td>
                 </tr>
