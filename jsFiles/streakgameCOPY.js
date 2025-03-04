@@ -1,6 +1,6 @@
 //randomAssignment
 // const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-randomAssignment = 2;
+randomAssignment = 1;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -744,42 +744,38 @@ function getCorrectAnswers(randomAssignment) {
 
     return preambleText;
 },
-            questions: () => {
-    let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-    
-    return [
-        {
-            prompt: `What determines how the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
-            name: `attnChk0`, 
-            options: ['My performance', `My partner's performance`, 'Random chance'],
-        },
-        {
-            prompt: `What determines how the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`,
-            name: `attnChk1`, 
-            options: ['My performance', `My partner's performance`, 'Random chance'],
-        },
-        {
-            prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} and the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} are activated?`,
-            name: `attnChk2`, 
-            options: ['+2', '+4', '+6', '+8'],
-        },
-        {
-            prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated but the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is NOT activated?`, 
-            name: `attnChk3`, 
-            options: ['+2', '+4', '+6', '+8'],
-        },
-        {
-            prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is NOT activated but the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
-            name: `attnChk4`, 
-            options: ['+2', '+4', '+6', '+8'],
-        },
-        {
-            prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} and the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} are NOT activated?`, 
-            name: `attnChk5`, 
-            options: ['+2', '+4', '+6', '+8'],
-        },
-    ];
-},
+            questions: [
+                {
+                    prompt: `What determines how the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
+                    name: `attnChk0`, 
+                    options: ['My performance', `My partner's performance`,'Random chance'],
+                },
+                {
+                    prompt: `What determines how the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`,
+                    name: `attnChk1`, 
+                    options: ['My performance', `My partner's performance`, 'Random chance'],
+                },
+                {
+                    prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1}  and the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} are activated?`,
+                    name: `attnChk2`, 
+                    options: ['+2', '+4', '+6', '+8'],
+                },
+                {
+                    prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated but the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is NOT activated?`, 
+                    name: `attnChk3`, 
+                    options: ['+2', '+4', '+6', '+8'],
+                },
+                {
+                    prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is NOT activated but the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
+                    name: `attnChk4`, 
+                    options: ['+2', '+4', '+6', '+8'],
+                },
+                {
+                    prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} and the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} are NOT activated?`, 
+                    name: `attnChk5`, 
+                    options: ['+2', '+4', '+6', '+8'],
+                },
+            ],
             randomize_question_order: false,
             scale_width: 500,
             on_finish: (data) => {
@@ -870,6 +866,9 @@ function getCorrectAnswers(randomAssignment) {
         post_trial_gap: 500,
     };
 
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^=!:${}()|\[\]\/\\]/g, '\\$&'); // Escape special characters
+}
 
 function makeIntroPart2() {
     return {
@@ -1918,50 +1917,44 @@ p.partnerRevealAvatar = {
     
 p.flowMeasure = {
     type: jsPsychSurveyLikert,
-    preamble: () => {
-    let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-    
-    return `<div style='padding-top: 50px; width: 900px; font-size:16px'> 
-        <p> Throughout the ${isSecondTime ? textNew.game2 : textNew.game1}, to what extent did you feel immersed 
+    preamble: `<div style='padding-top: 50px; width: 900px; font-size:16px'> 
+            <p> Throughout the ${textNew.game1}, to what extent did you feel immersed 
         and engaged in what you were doing? 
         <p>To report how immersed and engaged you felt, please answer the following questions.</p>
-        </div>`;
-},
-            questions: () => {
-                let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-                return [
-        {
-            prompt: `How <b>immersed</b> did you feel playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
-            name: `flow_0`,
-            labels: FlowScale,
-            required: true,
-        },
-        {
-            prompt: `How <b>engaged</b> did you feel playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
-            name: `flow_1`,
-            labels: FlowScale,
-            required: true,
-        },
-        {
-            prompt: `How <b>engrossed</b> did you feel playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
-            name: `flow_2`,
-            labels: FlowScale,
-            required: true,
-        },
-        {
-            prompt: `How <b>absorbed</b> did you feel playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
-            name: `flow_3`,
-            labels: FlowScale,
-            required: true,
-        },
-        {
-            prompt: `How <b>bored</b> did you feel playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
-            name: `flow_4`,
-            labels: FlowScale,
-            required: true,
-        },
-    ];
-},
+            </div>`,
+    questions: [
+        // Update the questions with the dynamic round text
+            {
+                prompt: `How <b>immersed</b> did you feel playing the ${textNew.game1}?`,
+                name: `flow_0`,
+                labels: FlowScale,
+                required: true,
+            },
+            {
+                prompt: `How <b>engaged</b> did you feel playing the ${textNew.game1}?`,
+                name: `flow_1`,
+                labels: FlowScale,
+                required: true,
+            },
+            {
+                prompt: `How <b>engrossed</b> did you feel playing the ${textNew.game1}?`,
+                name: `flow_2`,
+                labels: FlowScale,
+                required: true,
+            },
+            {
+                prompt: `How <b>absorbed</b> did you feel playing the ${textNew.game1}?`,
+                name: `flow_3`,
+                labels: FlowScale,
+                required: true,
+            },
+            {
+                prompt: `How <b>bored</b> did you feel playing the ${textNew.game1}?`,
+                name: `flow_4`,
+                labels: FlowScale,
+                required: true,
+            },
+        ],
     randomize_question_order: false,
     scale_width: 600,
     on_finish: () => {
