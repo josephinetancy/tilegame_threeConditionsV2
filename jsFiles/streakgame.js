@@ -1,6 +1,6 @@
 //randomAssignment
 // const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-randomAssignment = 5;
+randomAssignment = 1;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -39,17 +39,16 @@ var streakGame = (function() {
 let isSecondTime = false; 
 
 var textNew = {
-    game1: randomAssignment % 2 === 1 ? 'Circle Game' : 'Square Game',
-    shape1: randomAssignment % 2 === 1 ? 'circle' : 'square',
-    game2: randomAssignment % 2 === 1 ? 'Square Game' : 'Circle Game',
-    Old: randomAssignment % 2 === 1 ? 'Circle Game' : 'Square Game',
-    shape2: randomAssignment % 2 === 1 ? 'square' : 'circle',
+    game1: [1, 3, 6, 8].includes(randomAssignment) ? 'Circle Game' : 'Square Game',
+    shape1: [1, 3, 6, 8].includes(randomAssignment) ? 'circle' : 'square',
+    game2: [2, 4, 5, 7].includes(randomAssignment) ? 'Circle Game' : 'Square Game',
+    shape2: [2, 4, 5, 7].includes(randomAssignment) ? 'circle' : 'square',
     group: randomAssignment % 2 === 1 ? 'randomly' : 'by someone else', //odd numbers = alone, even = group
     group2: randomAssignment % 2 === 1 ? 'by someone else' : 'randomly' , //odd numbers = alone, even = group
     groupNext: randomAssignment % 2 === 1 ? 'random chance' : `your partner's performance`, //odd numbers = alone, even = group
     groupNext2: randomAssignment % 2 === 1 ? `your partner's performance` : 'random chance', //odd numbers = alone, even = group
-    groupAgain: randomAssignment % 2 === 1 ? 'randomly' : '', //
-    groupAgain2: randomAssignment % 2 === 1 ? `` : 'randomly', //
+    groupAgain: randomAssignment % 2 === 1 ? 'randomly' : '',
+    groupAgain2: randomAssignment % 2 === 1 ? '': 'randomly',
     color: randomAssignment % 2 === 1 ? 'yellow' : `#2669ee`, //odd numbers = alone, even = group
     color2: randomAssignment % 2 === 1 ? `#2669ee` : 'yellow', //odd numbers = alone, even = group
     WL: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
@@ -678,7 +677,7 @@ function getCorrectAnswers(randomAssignment) {
     console.log(randomAssignment + 'randomassignment in getcorrect answers.')
     console.log(isSecondTime + 'in getCorrectAnswers')
     return {
-        attnChk0: isSecondTime 
+   attnChk0: isSecondTime 
             ? (randomAssignment % 2 === 1 ? `My partner's performance` : `Random chance`)
             : (randomAssignment % 2 === 1 ? `Random chance` : `My partner's performance`),
 
@@ -714,12 +713,10 @@ function getCorrectAnswers(randomAssignment) {
     let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
     console.log("is secodntime in attnck" + isSecondTime)
 
-        let attnChkDiv = isSecondTime 
+    let attnChkDiv = isSecondTime 
                 ? (randomAssignment % 2 === 1 ? `attnChkGrp` : `parent`)
                 : (randomAssignment % 2 === 1 ? `parent` : `attnChkGrp`);
-            
-
-        let sologroupPages = isSecondTime 
+    let sologroupPages = isSecondTime 
                 ? (randomAssignment % 2 === 1 ? pages.r1.groupPage2 : pages.r1.soloPage2)
                 : (randomAssignment % 2 === 1 ? pages.r1.soloPage : pages.r1.groupPage);
 
@@ -921,9 +918,10 @@ function makeR1SoloHigh() {
             let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
             let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
 
-            const sologroupPages = isSecondTime 
+           const sologroupPages = isSecondTime 
                 ? (randomAssignment % 2 === 1 ? pages.r1.groupPage2 : pages.r1.soloPage2)
                 : (randomAssignment % 2 === 1 ? pages.r1.soloPage : pages.r1.groupPage);
+
             
             console.log(sologroupPages);
 
