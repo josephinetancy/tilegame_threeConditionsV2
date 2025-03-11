@@ -1461,17 +1461,14 @@ function MakeTooFast(round) {
         choices: [],  // Disables any response
         stimulus: () => {
             const lastKeyPress = jsPsych.data.get().last(1).values()[0].response;
-            console.log(lastKeyPress + 'lastkeypress');
             return lastKeyPress === " " ? `<div style='font-size: 20px'><p>Too Fast!</p><p>Please wait for the tile to appear before pressing your SPACE BAR! </p></div>` : '';
         },
         trial_duration: () => {
             const lastKeyPress = jsPsych.data.get().last(1).values()[0].response;
-            console.log(lastKeyPress + 'lastkeypress');
             return lastKeyPress === " " ? 2500 : 0;
         },
         post_trial_gap: () => {
             const lastKeyPress = jsPsych.data.get().last(1).values()[0].response;
-            console.log(lastKeyPress + 'lastkeypress');
             return lastKeyPress === " " ? 1000 : 0;
         }
     };
@@ -1977,86 +1974,6 @@ p.flowMeasure = {
 };
 
 
-
-    /*
-
-    // scales
-    var zeroToExtremely = ['0<br>A little', '1', '2', '3', '4', '5', '6', '7', '8<br>Extremely'];
-    var zeroToALot = ['0<br>A little', '1', '2', '3', '4', '5', '6', '7', '8<br>A lot'];
-
-    // constructor functions
-    var flowQs = function(span, name, round) {
-        this.type = 'survey-likert';
-        this.preamble = `<div style='padding-top: 50px; width: 850px; font-size:16px'>
-
-        <p>Thank you for completing the <span class='${span}'>${name}</span>!</strong></p>
-
-        <p>During the <span class='${span}'>${name}</span>, to what extent did you feel immersed 
-        and engaged in what you were doing?<br>Report how immersed and engaged you felt by 
-        answering the following questions.</p></div>`;
-        this.questions = [
-            {prompt: `During the <span class='${span}'>${name}</span>, to what extent did you feel absorbed in what you were doing?`,
-            name: `absorbed_${round}`,
-            labels: zeroToExtremely},
-            {prompt: `During <span class='${span}'>${name}</span>, to what extent did you feel immersed in what you were doing?`,
-            name: `immersed_${round}`,
-            labels: zeroToExtremely},
-            {prompt: `During <span class='${span}'>${name}</span>, to what extent did you feel engaged in what you were doing?`,
-            name: `engaged_${round}`,
-            labels: zeroToExtremely},
-            {prompt: `During <span class='${span}'>${name}</span>, to what extent did you feel engrossed in what you were doing?`,
-            name: `engrossed_${round}`,
-            labels: zeroToExtremely},
-        ];
-        this.randomize_question_order = false;
-        this.scale_width = 500;
-    };
-
-    var enjoyQs = function(span, name, round) {
-        this.type = 'survey-likert';
-        this.preamble = `<div style='padding-top: 50px; width: 850px; font-size:16px'>
-
-        <p>Below are a few more questions about the <span class='${span}'>${name}</span>.</p><p>Instead of asking about immersion and
-        engagement, these questions ask about <strong>enjoyment</strong>.<br>Report how much you <strong>enjoyed</strong> 
-        the <span class='${span}'>${name}</span> by answering the following questions.</p></div>`;
-        this.questions = [
-            {prompt: `How much did you enjoy playing the <span class='${span}'>${name}</span>?`,
-            name: `enjoyable_${round}`,
-            labels: zeroToALot},
-            {prompt: `How much did you like playing the <span class='${span}'>${name}</span>?`,
-            name: `like_${round}`,
-            labels: zeroToALot},
-            {prompt: `How much did you dislike playing the <span class='${span}'>${name}</span>?`,
-            name: `dislike_${round}`,
-            labels: zeroToALot},
-            {prompt: `How much fun did you have playing the <span class='${span}'>${name}</span>?`,
-            name: `fun_${round}`,
-            labels: zeroToALot},
-            {prompt: `How entertaining was the <span class='${span}'>${name}</span>?`,
-            name: `entertaining_${round}`,
-            labels: zeroToExtremely},
-        ];
-        this.randomize_question_order = false;
-        this.scale_width = 500;
-    };
-
-    var pMQ = function (span, name, round) {
-        this.type = 'survey-html-form';
-        this.preamble = `<p>In the <span class='${span}'>${name}</span>, you attempted to activate many tiles. 
-        <br>What percentage of the tiles do you think you activated successfully?</p>
-        <p>In the space below, type a number from 0 to 100<br>indicating the percentage of tiles you think you activated successfully.`;
-        this.html = `<p>%<input name="pMBlief_${round}" type="text" /></p>`;
-    };
-    
-    p.Qs.round1 = {
-        timeline: [new flowQs(text.span1, text.game1, 'R1'), new enjoyQs(text.span1, text.game1, 'R1'), new pMQ(text.span1, text.game1, 'R1')]
-    };
-
-    p.Qs.round2 = {
-        timeline: [new flowQs(text.span2, text.game2, 'R2'), new enjoyQs(text.span2, text.game2, 'R2'), new pMQ(text.span2, text.game2, 'R2')]
-    }; */
-
-
 const html = {        
     postTask: [
             `<div class='parent'>
@@ -2065,6 +1982,24 @@ const html = {
             </div>`
         ]
 }
+
+  p.end = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: '<p>Thank you! Please press the button to submit your response and exit the page. </p>',
+        choices: ['Submit!'],
+        on_finish: (data) => {
+            saveSurveyData(data); 
+            },
+        };
+
+
+    p.save_data = {
+        type: jsPsychPipe,
+        action: "save",
+        experiment_id: "c0WEQcyEu6GO",
+        filename: filename,
+        data_string: ()=>jsPsych.data.get().csv()
+    }; 
 
 
  p.demographics = (function() {

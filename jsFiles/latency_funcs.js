@@ -30,7 +30,7 @@ jsPsych.data.addProperties({ subject: subject_id });
 const filename = `${subject_id}.csv`;
 
 // define completion code for Prolific
-const completionCode = "050505";
+const completionCode = "050505"; // need to change to prolific completion code
 
 let boot = false;
 

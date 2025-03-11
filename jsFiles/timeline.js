@@ -65,14 +65,14 @@ const taskConfigurations = {
 
 /*with tasks */
 const taskConfigurations = {
-    1: [p.task.round1Intro, p.task.SoloCircleHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupSquareLow, p.flowMeasure, p.demographics],
-    2: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloCircleHigh, p.flowMeasure, p.demographics],
-    3: [p.task.round1Intro, p.task.SoloCircleLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupSquareHigh, p.flowMeasure, p.demographics],
-    4: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloCircleLow, p.flowMeasure, p.demographics],
-    5: [p.task.round1Intro, p.task.SoloSquareHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupCircleLow, p.flowMeasure, p.demographics],
-    6: [p.findingPartner, p.task.round1Intro, p.task.GroupCircleLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloSquareHigh, p.flowMeasure, p.demographics],
-    7: [p.task.round1Intro, p.task.SoloSquareLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupCircleHigh, p.flowMeasure, p.demographics],
-    8: [p.findingPartner, p.task.round1Intro, p.task.GroupCircleHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloSquareLow, p.flowMeasure, p.demographics],
+    1: [p.task.round1Intro, p.task.SoloCircleHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupSquareLow, p.flowMeasure, p.demographics, p.save_data, p.end],
+    2: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloCircleHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
+    3: [p.task.round1Intro, p.task.SoloCircleLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupSquareHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
+    4: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloCircleLow, p.flowMeasure, p.demographics, p.save_data, p.end],
+    5: [p.task.round1Intro, p.task.SoloSquareHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupCircleLow, p.flowMeasure, p.demographics, p.save_data, p.end],
+    6: [p.findingPartner, p.task.round1Intro, p.task.GroupCircleLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloSquareHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
+    7: [p.task.round1Intro, p.task.SoloSquareLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupCircleHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
+    8: [p.findingPartner, p.task.round1Intro, p.task.GroupCircleHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloSquareLow, p.flowMeasure, p.demographics, p.save_data, p.end],
 }; 
 // Set the timeline based on random assignment
 timeline = [...commonTimeline, ...(taskConfigurations[randomAssignment] || [])];
