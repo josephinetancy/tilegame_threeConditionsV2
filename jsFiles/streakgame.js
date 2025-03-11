@@ -1,6 +1,6 @@
 //randomAssignment
 // const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-randomAssignment = 1;
+randomAssignment = 8;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -199,8 +199,8 @@ let avatarResponse = '#2669ee';
 
                 part3: [
                 `<div class='parent'>
-                <p>The outer ${textNew.shape1} will activate\u2014or not\u2014${textNew.group}. </p> 
-                <p>If the outer ${textNew.shape1} activates, it will look like this. </p>
+                <p>The outer ${textNew.shape1} will be activated\u2014or not\u2014${textNew.group}. </p> 
+                <p>If the outer ${textNew.shape1} is activated, it will look like this. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
@@ -210,8 +210,8 @@ let avatarResponse = '#2669ee';
 
 
                 `<div class='parent'>
-                <p>If the outer ${textNew.shape1} ${textNew.groupAgain} does not activate, it will look like this. </p>
-                <p>Whether the outer ${textNew.shape1} activates or not depends on ${textNew.groupNext}.</p>
+                <p>If the outer ${textNew.shape1} ${textNew.groupAgain} is not activated, it will look like this. </p>
+                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on ${textNew.groupNext}.</p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
@@ -221,7 +221,7 @@ let avatarResponse = '#2669ee';
 
 
                 `<div class='parent'>
-                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1} and </p> <p>and (ii) whether the outer ${textNew.shape1} ${textNew.groupAgain} activates. </p><p></p>
+                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1} and </p> <p> (ii) whether the outer ${textNew.shape1} ${textNew.groupAgain} is activated. </p><p></p>
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
 
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;",>
@@ -555,7 +555,7 @@ round2: [
                 </div>`,
 
                 `<div class='parent'>
-                <p> The ${textNew.game2} is similar to the ${textNew.game1} except that (i) the ${textNew.shape1}s are now ${textNew.shape2}s, </p> and (ii) the outer ${textNew.shape2} activates or not depends on ${textNew.groupNext2}. </p>
+                <p> The ${textNew.game2} is similar to the ${textNew.game1} except that (i) the ${textNew.shape1}s are now ${textNew.shape2}s, </p> and (ii) whether the outer ${textNew.shape2} is activated or not is based on ${textNew.groupNext2}. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape2}">
                 <div id="inner-shape" class="${textNew.shape2}"></div>
@@ -604,8 +604,8 @@ round2: [
 
 round2part2: [
                 `<div class='parent'>
-                <p>The outer ${textNew.shape2} will activate\u2014or not\u2014${textNew.group2}. </p> 
-                <p>If the outer ${textNew.shape2} ${textNew.groupAgain2} activates, it will look like this.</p> 
+                <p>The outer ${textNew.shape2} will be activated\u2014or not\u2014${textNew.group2}. </p> 
+                <p>If the outer ${textNew.shape2} is activated, it will look like this.</p> 
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2};">
                 <div id="inner-shape" class="${textNew.shape2}"></div>
@@ -615,10 +615,10 @@ round2part2: [
 
 
                 `<div class='parent'>
-                <p>If the outer ${textNew.shape2} ${textNew.groupAgain2} does not activate, it will look like this. </p>
-                <p>Whether the outer ${textNew.shape2} activates or not depends on ${textNew.groupNext2}.</p>
+                <p>If the outer ${textNew.shape2} is not activated, it will look like this. </p>
+                <p>Whether the outer ${textNew.shape2} is activated or not depends on ${textNew.groupNext2}.</p>
                 <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2};">
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;"">
                 <div id="inner-shape" class="${textNew.shape2}"></div>
                 </div>
                 </div>
@@ -626,7 +626,7 @@ round2part2: [
 
 
                 `<div class='parent'>
-                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape2} and </p> <p>and (ii) whether the outer ${textNew.shape2} ${textNew.groupAgain2} activates. </p><p></p>
+                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape2} and </p> <p>(ii) whether the outer ${textNew.shape2} is activated. </p><p></p>
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
 
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;",>
@@ -724,7 +724,7 @@ function getCorrectAnswers(randomAssignment) {
        let preambleText = `
         <div class='${attnChkDiv}'> 
             <p> To recap, in the ${isSecondTime ? textNew.game2 : textNew.game1}: </p>
-            <p> The outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated depending on ${isSecondTime ? textNew.groupNext2 : textNew.groupNext}. </p> 
+            <p> The outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated based on ${isSecondTime ? textNew.groupNext2 : textNew.groupNext}. </p> 
             <p> You activate the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} with your SPACE BAR. </p>
 
     `;
@@ -1460,15 +1460,18 @@ function MakeTooFast(round) {
         data: { Trial_Type: `tooFastMessage_${round}` },
         choices: [],  // Disables any response
         stimulus: () => {
-            const lastKeyPress = jsPsych.data.get().last(2).values()[0].response;
-            return lastKeyPress === " " ? `<div style='font-size: 20px'><p>Too Fast!</p><p>Please wait for the tile to appear before pressing your SPACEBAR! </p></div>` : '';
+            const lastKeyPress = jsPsych.data.get().last(1).values()[0].response;
+            console.log(lastKeyPress + 'lastkeypress');
+            return lastKeyPress === " " ? `<div style='font-size: 20px'><p>Too Fast!</p><p>Please wait for the tile to appear before pressing your SPACE BAR! </p></div>` : '';
         },
         trial_duration: () => {
             const lastKeyPress = jsPsych.data.get().last(1).values()[0].response;
+            console.log(lastKeyPress + 'lastkeypress');
             return lastKeyPress === " " ? 2500 : 0;
         },
         post_trial_gap: () => {
             const lastKeyPress = jsPsych.data.get().last(1).values()[0].response;
+            console.log(lastKeyPress + 'lastkeypress');
             return lastKeyPress === " " ? 1000 : 0;
         }
     };
@@ -2108,6 +2111,15 @@ const html = {
                 data.english = data.response;
             }
         };  
+
+        const sus = {
+            type: jsPsychSurveyText,
+            questions: [{prompt: "Did you find anything suspicious during the experiment?", rows: 10, columns: 100, name: "sus"}],
+            on_finish: (data) => {
+                saveSurveyData(data); 
+            },
+        }; 
+
 
         const finalWord = {
             type: jsPsychSurveyText,

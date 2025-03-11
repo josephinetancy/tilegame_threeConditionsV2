@@ -48,6 +48,8 @@ if (randomAssignment === 2) {
     }
 } */
 
+/*without tasks */ 
+/*
 const taskConfigurations = {
     1: [p.task.round1Intro, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.flowMeasure, p.demographics],
     2: [p.findingPartner, p.task.round1Intro, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro,  p.flowMeasure, p.demographics],
@@ -58,10 +60,10 @@ const taskConfigurations = {
     7: [p.task.round1Intro,  p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.flowMeasure, p.demographics],
     8: [p.findingPartner, p.task.round1Intro, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.flowMeasure, p.demographics],
 };
+*/
 
 
-/*
-
+/*with tasks */
 const taskConfigurations = {
     1: [p.task.round1Intro, p.task.SoloCircleHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupSquareLow, p.flowMeasure, p.demographics],
     2: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloCircleHigh, p.flowMeasure, p.demographics],
@@ -71,7 +73,7 @@ const taskConfigurations = {
     6: [p.findingPartner, p.task.round1Intro, p.task.GroupCircleLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloSquareHigh, p.flowMeasure, p.demographics],
     7: [p.task.round1Intro, p.task.SoloSquareLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupCircleHigh, p.flowMeasure, p.demographics],
     8: [p.findingPartner, p.task.round1Intro, p.task.GroupCircleHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloSquareLow, p.flowMeasure, p.demographics],
-}; */
+}; 
 // Set the timeline based on random assignment
 timeline = [...commonTimeline, ...(taskConfigurations[randomAssignment] || [])];
 
