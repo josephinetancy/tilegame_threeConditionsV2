@@ -119,16 +119,34 @@ function MakeAvatarSelection() {
                         avatarResponse = '#800000';
                     }
 
-                    jsPsych.data.addProperties({ avatarResponse });
-                    console.log(avatarResponse);
-                    jsPsych.data.addProperties({ isSecondTime: isSecondTime });
-                    console.log(isSecondTime)
-                    jsPsych.finishTrial({ response: selectedColor });
+                    // Finish the trial and store response
+                    jsPsych.finishTrial({ response: selectedColor, avatarResponse });
                 });
             });
+        },
+        on_finish: function (data) {
+            let avatarResponse;
+
+            if (data.response === '0') {
+                avatarResponse = '#ff00fe';
+            } else if (data.response === '1') {
+                avatarResponse = '#90CD4C';
+            } else if (data.response === '2') {
+                avatarResponse = '#800000';
+            }
+
+            data.avatarResponse = avatarResponse;
+            data.isSecondTime = isSecondTime;
+
+            // Add properties globally
+            jsPsych.data.addProperties({ avatarResponse, isSecondTime });
+
+            console.log("Avatar Response:", avatarResponse);
+            console.log("isSecondTime:", isSecondTime);
         }
     };
 }
+
 /*
     *   INSTRUCTIONS
     *
@@ -1076,7 +1094,7 @@ function WWTrial(shape, group) {
             };
             data.trialType = 'WW';
             data.partner_outcome = true;
-            jsPsych.data.addProperties({ shape: shape });
+            data.shape = shape;
             console.log(data)
         },
     };
@@ -1126,7 +1144,7 @@ function WLTrial(shape) {
             };
             data.trialType = 'WL';
             data.partner_outcome = false;
-            jsPsych.data.addProperties({ shape: shape });
+            data.shape = shape;
             console.log(data)
         },
     };
@@ -1192,7 +1210,7 @@ function LWTrial(shape, group) {
             };
             data.trialType = 'LW';
             data.partner_outcome = true;
-            jsPsych.data.addProperties({ shape: shape });
+            data.shape = shape;
             console.log(data)
         }
     };
@@ -1251,8 +1269,8 @@ function LLTrial(shape) {
             };
             data.trialType = 'LL';
             data.partner_outcome = false;
-            console.log(data)
-            jsPsych.data.addProperties({ shape: shape });
+            console.log(data);
+            data.shape = shape;
         }
     };
 }
@@ -1325,7 +1343,6 @@ function MakeFeedback(mode) {
     let avatar2TotalPoints = 0;
 
     const groupOrSolo = mode.includes("group") ? "group" : "solo";
- //   const shape = mode.includes("Circle") ? "circle" : "square";
     const MI = mode.includes("High") ? "high" : "low";
 
     return {
@@ -1420,14 +1437,14 @@ function MakeFeedback(mode) {
         choices: "NO_KEYS",
         trial_duration: 3500,
         on_finish: (data) => {
+            data.randomAssignment = randomAssignment;
             data.avatar1TotalPoints = avatar1TotalPoints;
             data.avatar2TotalPoints = avatar2TotalPoints;
-            jsPsych.data.addProperties({
-                groupOrSolo: groupOrSolo,
-                MI: MI
-            });
+            data.groupOrSolo = groupOrSolo;
+            data.MI = MI;
             data.trialNumber = trialNumber;
             trialNumber++;
+            data.shape = jsPsych.data.get().last(2).values()[0].shape;
             console.log(data);
 
         }
@@ -1996,10 +2013,15 @@ p.flowMeasure = {
 },
     randomize_question_order: false,
     scale_width: 600,
-    on_finish: () => {
+    on_finish: (data) => {
+        data.randomAssignment = randomAssignment;
+        data.trialNumber = trialNumber;
+        data.isSecondTime = isSecondTime;
+        data.shape = jsPsych.data.get().last(2).values()[0].shape;
+        data.MI = jsPsych.data.get().last(2).values()[0].MI;
+        data.groupOrSolo = jsPsych.data.get().last(2).values()[0].groupOrSolo;
+        console.log(data)
         isSecondTime = true;
-        jsPsych.data.addProperties({ isSecondTime: isSecondTime });
-        console.log(isSecondTime)
     }
 };
 
