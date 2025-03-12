@@ -704,7 +704,7 @@ round2part2: [
 function MakeLoop(group, round) {
 
 function getCorrectAnswers(randomAssignment) {
-    let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+    let isSecondTime = jsPsych.data.get().last(2).values()[0].isSecondTime;
     console.log(randomAssignment + 'randomassignment in getcorrect answers.')
     console.log(isSecondTime + 'in getCorrectAnswers')
     return {
@@ -741,7 +741,7 @@ function getCorrectAnswers(randomAssignment) {
     const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
     let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
     let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
-    let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+    let isSecondTime = jsPsych.data.get().last(2).values()[0].isSecondTime;
     console.log("is secodntime in attnck" + isSecondTime)
 
     let attnChkDiv = isSecondTime 
@@ -1445,6 +1445,7 @@ function MakeFeedback(mode) {
             data.trialNumber = trialNumber;
             trialNumber++;
             data.shape = jsPsych.data.get().last(2).values()[0].shape;
+            data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
             console.log(data);
 
         }
@@ -2013,16 +2014,26 @@ p.flowMeasure = {
 },
     randomize_question_order: false,
     scale_width: 600,
-    on_finish: (data) => {
+    on_finish: function(data) {
         data.randomAssignment = randomAssignment;
         data.trialNumber = trialNumber;
         data.isSecondTime = isSecondTime;
         data.shape = jsPsych.data.get().last(2).values()[0].shape;
         data.MI = jsPsych.data.get().last(2).values()[0].MI;
         data.groupOrSolo = jsPsych.data.get().last(2).values()[0].groupOrSolo;
-        console.log(data)
+        data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
+
         isSecondTime = true;
         data.isSecondTime = isSecondTime;
+         const flowKeys = Object.keys(data.response); 
+         const flowResponses = {};
+         flowKeys.forEach(key => {
+         flowResponses[key] = data.response[key];
+     });
+
+    Object.assign(data, flowResponses);
+
+    console.log(data)
     }
 };
 
