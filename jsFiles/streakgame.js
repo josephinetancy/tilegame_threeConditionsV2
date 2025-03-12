@@ -2022,6 +2022,7 @@ p.flowMeasure = {
         data.groupOrSolo = jsPsych.data.get().last(2).values()[0].groupOrSolo;
         console.log(data)
         isSecondTime = true;
+        data.isSecondTime = isSecondTime;
     }
 };
 
