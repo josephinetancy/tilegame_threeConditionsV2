@@ -18,19 +18,7 @@ console.log(randomAssignment + " randomAssignment")
 8 = GroupCircleHigh + SoloSquareLow
 
 */
-
-const conditionMapping = {
-    1: [{ shape: "circle", MI: "high", groupOrSolo: "solo" }, { shape: "square", MI: "low", groupOrSolo: "group" }],
-    2: [{ shape: "square", MI: "low", groupOrSolo: "group" }, { shape: "circle", MI: "high", groupOrSolo: "solo" }],
-    3: [{ shape: "circle", MI: "low", groupOrSolo: "solo" }, { shape: "square", MI: "high", groupOrSolo: "group" }],
-    4: [{ shape: "square", MI: "high", groupOrSolo: "group" }, { shape: "circle", MI: "low", groupOrSolo: "solo" }],
-    5: [{ shape: "square", MI: "high", groupOrSolo: "solo" }, { shape: "circle", MI: "low", groupOrSolo: "group" }],
-    6: [{ shape: "circle", MI: "low", groupOrSolo: "group" }, { shape: "square", MI: "high", groupOrSolo: "solo" }],
-    7: [{ shape: "square", MI: "low", groupOrSolo: "solo" }, { shape: "circle", MI: "high", groupOrSolo: "group" }],
-    8: [{ shape: "circle", MI: "high", groupOrSolo: "group" }, { shape: "square", MI: "low", groupOrSolo: "solo" }]
-};
-
-const assignedConditions = conditionMapping[randomAssignment]; 
+ 
 
 // Define Stimuli
 let p = {};
@@ -139,7 +127,7 @@ function MakeAvatarSelection() {
             data.isSecondTime = isSecondTime;
 
             // Add properties globally
-            jsPsych.data.addProperties({ avatarResponse, isSecondTime });
+            jsPsych.data.addProperties({ avatarResponse, isSecondTime});
 
             console.log("Avatar Response:", avatarResponse);
             console.log("isSecondTime:", isSecondTime);
@@ -704,7 +692,7 @@ round2part2: [
 function MakeLoop(group, round) {
 
 function getCorrectAnswers(randomAssignment) {
-    let isSecondTime = jsPsych.data.get().last(2).values()[0].isSecondTime;
+    let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
     console.log(randomAssignment + 'randomassignment in getcorrect answers.')
     console.log(isSecondTime + 'in getCorrectAnswers')
     return {
@@ -741,7 +729,7 @@ function getCorrectAnswers(randomAssignment) {
     const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
     let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
     let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
-    let isSecondTime = jsPsych.data.get().last(2).values()[0].isSecondTime;
+    let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
     console.log("is secodntime in attnck" + isSecondTime)
 
     let attnChkDiv = isSecondTime 
@@ -1095,6 +1083,7 @@ function WWTrial(shape, group) {
             data.trialType = 'WW';
             data.partner_outcome = true;
             data.shape = shape;
+            isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             console.log(data)
         },
     };
@@ -1145,6 +1134,7 @@ function WLTrial(shape) {
             data.trialType = 'WL';
             data.partner_outcome = false;
             data.shape = shape;
+            isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             console.log(data)
         },
     };
@@ -1211,6 +1201,7 @@ function LWTrial(shape, group) {
             data.trialType = 'LW';
             data.partner_outcome = true;
             data.shape = shape;
+            isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             console.log(data)
         }
     };
@@ -1269,6 +1260,7 @@ function LLTrial(shape) {
             };
             data.trialType = 'LL';
             data.partner_outcome = false;
+            isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             console.log(data);
             data.shape = shape;
         }
@@ -1446,6 +1438,8 @@ function MakeFeedback(mode) {
             trialNumber++;
             data.shape = jsPsych.data.get().last(2).values()[0].shape;
             data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
+
+            isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             console.log(data);
 
         }
@@ -1970,6 +1964,7 @@ p.flowMeasure = {
     type: jsPsychSurveyLikert,
     preamble: () => {
     let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+    console.log(isSecondTime + 'isSecondTime');
     
     return `<div style='padding-top: 50px; width: 900px; font-size:16px'> 
         <p> Throughout the ${isSecondTime ? textNew.game2 : textNew.game1}, to what extent did you feel immersed 
@@ -2025,6 +2020,8 @@ p.flowMeasure = {
 
         isSecondTime = true;
         data.isSecondTime = isSecondTime;
+        jsPsych.data.addProperties({isSecondTime});
+
          const flowKeys = Object.keys(data.response); 
          const flowResponses = {};
          flowKeys.forEach(key => {
