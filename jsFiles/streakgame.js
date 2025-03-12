@@ -19,6 +19,18 @@ console.log(randomAssignment + " randomAssignment")
 
 */
 
+const conditionMapping = {
+    1: [{ shape: "circle", MI: "high", groupOrSolo: "solo" }, { shape: "square", MI: "low", groupOrSolo: "group" }],
+    2: [{ shape: "square", MI: "low", groupOrSolo: "group" }, { shape: "circle", MI: "high", groupOrSolo: "solo" }],
+    3: [{ shape: "circle", MI: "low", groupOrSolo: "solo" }, { shape: "square", MI: "high", groupOrSolo: "group" }],
+    4: [{ shape: "square", MI: "high", groupOrSolo: "group" }, { shape: "circle", MI: "low", groupOrSolo: "solo" }],
+    5: [{ shape: "square", MI: "high", groupOrSolo: "solo" }, { shape: "circle", MI: "low", groupOrSolo: "group" }],
+    6: [{ shape: "circle", MI: "low", groupOrSolo: "group" }, { shape: "square", MI: "high", groupOrSolo: "solo" }],
+    7: [{ shape: "square", MI: "low", groupOrSolo: "solo" }, { shape: "circle", MI: "high", groupOrSolo: "group" }],
+    8: [{ shape: "circle", MI: "high", groupOrSolo: "group" }, { shape: "square", MI: "low", groupOrSolo: "solo" }]
+};
+
+const assignedConditions = conditionMapping[randomAssignment]; 
 
 // Define Stimuli
 let p = {};
@@ -37,6 +49,7 @@ var streakGame = (function() {
 
 
 let isSecondTime = false; 
+let trialNumber = 1;
 
 var textNew = {
     game1: [1, 3, 6, 8].includes(randomAssignment) ? 'Circle Game' : 'Square Game',
@@ -1063,6 +1076,7 @@ function WWTrial(shape, group) {
             };
             data.trialType = 'WW';
             data.partner_outcome = true;
+            jsPsych.data.addProperties({ shape: shape });
             console.log(data)
         },
     };
@@ -1112,6 +1126,7 @@ function WLTrial(shape) {
             };
             data.trialType = 'WL';
             data.partner_outcome = false;
+            jsPsych.data.addProperties({ shape: shape });
             console.log(data)
         },
     };
@@ -1177,6 +1192,7 @@ function LWTrial(shape, group) {
             };
             data.trialType = 'LW';
             data.partner_outcome = true;
+            jsPsych.data.addProperties({ shape: shape });
             console.log(data)
         }
     };
@@ -1236,6 +1252,7 @@ function LLTrial(shape) {
             data.trialType = 'LL';
             data.partner_outcome = false;
             console.log(data)
+            jsPsych.data.addProperties({ shape: shape });
         }
     };
 }
@@ -1301,14 +1318,19 @@ const avatarChoices = [
     { color: 'Red', code: '#800000', img: './avatar/3.jpg' }
 ];
 
+
 function MakeFeedback(mode) {
 
     let avatar1TotalPoints = 0;
     let avatar2TotalPoints = 0;
 
+    const groupOrSolo = mode.includes("group") ? "group" : "solo";
+ //   const shape = mode.includes("Circle") ? "circle" : "square";
+    const MI = mode.includes("High") ? "high" : "low";
+
     return {
         type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: `feedback_${mode}` },
+         data: {type: `${mode}`},
         stimulus: () => {
             const lastTrialData = jsPsych.data.get().last(1).values()[0];
             let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse;
@@ -1400,8 +1422,14 @@ function MakeFeedback(mode) {
         on_finish: (data) => {
             data.avatar1TotalPoints = avatar1TotalPoints;
             data.avatar2TotalPoints = avatar2TotalPoints;
-            data.trialNumber ++;
+            jsPsych.data.addProperties({
+                groupOrSolo: groupOrSolo,
+                MI: MI
+            });
+            data.trialNumber = trialNumber;
+            trialNumber++;
             console.log(data);
+
         }
     };
 }
@@ -1662,8 +1690,8 @@ p.partnerRevealAvatar = {
         roundIntroV2 = new MakeRoundIntro('V2'),
         introPart2 = makeIntroPart2(),
         introR1Part3 = makeR1Part3(),
-        introR1SoloHigh = makeR1SoloHigh()
-        introR2part1 = makeR2part1()
+        introR1SoloHigh = makeR1SoloHigh(),
+        introR2part1 = makeR2part1(),
         introR2part2 = makeR2part2()
 
     const delayLoopR1 = {
