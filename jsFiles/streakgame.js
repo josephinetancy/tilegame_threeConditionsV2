@@ -1056,13 +1056,14 @@ function WWTrial(shape, group) {
             }, trial.partner_rt);
         },
         on_finish: function (data) {
-            trialEndTime = Date.now();
-            const trialDuration = trialEndTime - trialStartTime;
-            data.trial_duration = trialDuration;
+            if (data.response === " ") {
+                data.response = true;
+            } else {
+                data.response = false; 
+            };
+            data.trialType = 'WW';
             data.partner_outcome = true;
-            console.log('Reaction time: ' + data.rt);
-            console.log('Trial duration: ' + trialDuration);
-            console.log('Partner RT: ' + data.partner_rt);
+            console.log(data)
         },
     };
 }
@@ -1104,14 +1105,14 @@ function WLTrial(shape) {
         },
         ending_time: delayTime,
         on_finish: function(data) {
-            trialEndTime = Date.now();
-            const trialDuration = trialEndTime - trialStartTime;
-            data.trial_duration = trialDuration;
+            if (data.response === " ") {
+                data.response = true;
+            } else {
+                data.response = false; 
+            };
+            data.trialType = 'WL';
             data.partner_outcome = false;
-
-            console.log("Reaction time: " + data.rt);
-            console.log("Trial duration: " + trialDuration);
-            console.log("Partner RT: " + data.partner_rt);
+            console.log(data)
         },
     };
 }
@@ -1169,14 +1170,14 @@ function LWTrial(shape, group) {
         },
 
         on_finish: function(data) {
-            trialEndTime = Date.now();
-            const trialDuration = trialEndTime - trialStartTime;
-            data.trial_duration = trialDuration;
+            if (data.response === " ") {
+                data.response = true;
+            } else {
+                data.response = false; 
+            };
+            data.trialType = 'LW';
             data.partner_outcome = true;
-
-            console.log('Reaction time: ' + data.rt);
-            console.log('Trial duration: ' + trialDuration);
-            console.log('Partner RT: ' + data.partner_rt);
+            console.log(data)
         }
     };
 }
@@ -1227,13 +1228,14 @@ function LLTrial(shape) {
             }, trialforLose);
         },
         on_finish: function(data) {
-            trialEndTime = Date.now();
-            const trialDuration = trialEndTime - trialStartTime;
-            data.trial_duration = trialDuration;
+            if (data.response === " ") {
+                data.response = true;
+            } else {
+                data.response = false; 
+            };
+            data.trialType = 'LL';
             data.partner_outcome = false;
-            console.log('Reaction time: ' + data.rt);
-            console.log('Trial duration: ' + trialDuration);
-            console.log('Partner RT: ' + data.partner_rt);
+            console.log(data)
         }
     };
 }
@@ -1396,7 +1398,9 @@ function MakeFeedback(mode) {
         choices: "NO_KEYS",
         trial_duration: 3500,
         on_finish: (data) => {
-            data.trialNumber = (data.trialNumber || 0) + 1; // Update trial number
+            data.avatar1TotalPoints = avatar1TotalPoints;
+            data.avatar2TotalPoints = avatar2TotalPoints;
+            data.trialNumber ++;
             console.log(data);
         }
     };
@@ -1444,7 +1448,6 @@ var ITI = [250, 500, 750, 1000, 1250, 1500, 1750, 2000]
 function MakeDelay(round) {
     return {
         type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: `ITI_${round}` },
         stimulus: "",
         choices: [' '],  // Spacebar response
         trial_duration: () => jsPsych.randomization.sampleWithoutReplacement(ITI, 1)[0],
@@ -1457,7 +1460,6 @@ function MakeDelay(round) {
 function MakeTooFast(round) {
     return {
         type: jsPsychHtmlKeyboardResponse,
-        data: { Trial_Type: `tooFastMessage_${round}` },
         choices: [],  // Disables any response
         stimulus: () => {
             const lastKeyPress = jsPsych.data.get().last(1).values()[0].response;
@@ -2073,7 +2075,7 @@ const html = {
         }; 
 
         const demos = {
-            timeline: [taskComplete, gender, age, ethnicity, english, finalWord, pid]
+            timeline: [taskComplete, gender, age, ethnicity, english, sus, finalWord, pid]
         };
 
         return demos;
