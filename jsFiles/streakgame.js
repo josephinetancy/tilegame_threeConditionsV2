@@ -1,6 +1,6 @@
 //randomAssignment
 // const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-randomAssignment = 6;
+randomAssignment = 3;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -127,7 +127,7 @@ function MakeAvatarSelection() {
             data.isSecondTime = isSecondTime;
 
             // Add properties globally
-            jsPsych.data.addProperties({ avatarResponse, isSecondTime});
+            jsPsych.data.addProperties({ avatarResponse, isSecondTime, randomAssignment});
 
             console.log("Avatar Response:", avatarResponse);
             console.log("isSecondTime:", isSecondTime);
@@ -338,7 +338,7 @@ let avatarResponse = '#2669ee';
 
 
                 `<div class='parent'>
-                <p>If the outer ${textNew.shape1} ${textNew.groupAgain} is not activated, it will look like this. </p>
+                <p>If the outer ${textNew.shape1} is not activated, it will look like this. </p>
                 <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on random chance.</p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
@@ -851,7 +851,7 @@ groupPage2: [
 
 
                 `<div class='parent'>
-                <p>If the outer ${textNew.shape2} ${textNew.groupAgain} is not activated, it will look like this. </p>
+                <p>If the outer ${textNew.shape2} is not activated, it will look like this. </p>
                 <p>Whether the outer ${textNew.shape2} is activated\u2014or not\u2014depends on random chance.</p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
@@ -1671,14 +1671,25 @@ function MakeFeedback(mode) {
         trial_duration: 3500,
         on_finish: (data) => {
             data.randomAssignment = randomAssignment;
+            let previousAvatar1TotalPoints = jsPsych.data.get().last(5).values()[0]?.avatar1TotalPoints || 0;
+            let previousAvatar2TotalPoints = jsPsych.data.get().last(5).values()[0]?.avatar2TotalPoints || 0;
+
             data.avatar1TotalPoints = avatar1TotalPoints;
             data.avatar2TotalPoints = avatar2TotalPoints;
+
+            data.pointsAddedAvatar1 = avatar1TotalPoints - previousAvatar1TotalPoints;
+            data.pointsAddedAvatar2 = avatar2TotalPoints - previousAvatar2TotalPoints;
+
             data.groupOrSolo = groupOrSolo;
             data.MI = MI;
             data.trialNumber = trialNumber;
             trialNumber++;
             data.shape = jsPsych.data.get().last(2).values()[0].shape;
             data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
+            data.trialType = jsPsych.data.get().last(2).values()[0].trialType;
+            data.partner_outcome = jsPsych.data.get().last(2).values()[0].partner_outcome;
+            data.rt = jsPsych.data.get().last(2).values()[0].rt;
+            data.TooFast = jsPsych.data.get().last(4).values()[0].TooFast;
 
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             console.log(data);
