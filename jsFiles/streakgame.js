@@ -243,7 +243,48 @@ let avatarResponse = '#2669ee';
                 <div id="inner-shape" class="${textNew.shape1}"></div>
                 </div>
                 </div>
-                </div>`
+                </div>`, 
+
+                 `<div class='parent'>
+                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1} and </p> <p> (ii) whether your partner activates the outer ${textNew.shape1}. </p><p></p>
+                <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;",>
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                     <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+        </div>`
                 ],
 
                 part2Solo: [
@@ -286,7 +327,7 @@ let avatarResponse = '#2669ee';
                 </div>`,
 
                 `<div class='parent'>
-                <p>The outer ${textNew.shape1} will be activated\u2014or not\u2014 randomly. </p> 
+                <p>The outer ${textNew.shape1} will be activated\u2014or not\u2014randomly. </p> 
                 <p>If the outer ${textNew.shape1} is activated, it will look like this. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}">
@@ -298,16 +339,14 @@ let avatarResponse = '#2669ee';
 
                 `<div class='parent'>
                 <p>If the outer ${textNew.shape1} ${textNew.groupAgain} is not activated, it will look like this. </p>
-                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014 depends on random chance.</p>
+                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on random chance.</p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
                 </div>
                 </div>
-                </div>`
-                ],
+                </div>`, 
 
-                part3: [
                 `<div class='parent'>
                 <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1} and </p> <p> (ii) whether the outer ${textNew.shape1} ${textNew.groupAgain} is activated. </p><p></p>
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
@@ -332,7 +371,7 @@ let avatarResponse = '#2669ee';
 
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
-                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color2};">
                         <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
                     </div>
                 </div>
@@ -630,11 +669,20 @@ groupPage2: [
           <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
        <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
 </div>`
-],
-round2: [
-                `<div class='parent'>
+    ]
+    }, 
+ r2: {
+    part1a: [`<div class='parent'>
                 <p> The second game is called the ${textNew.game2}. </p>
                 <p> Click "Next" to learn about the ${textNew.game2}. </p>
+                </div>
+                </div>`
+                ], 
+
+    part2Group: [`<div class='parent'>
+                <p> Unlike the ${textNew.game1}, The ${textNew.game2} is a 2-player game.</p> 
+                <p> You'll play with another person completing this experiment. </p> 
+                <p>If another person is not available, you'll play with an AI bot. </p> 
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape2}">
                 <div id="inner-shape" class="${textNew.shape2}"></div>
@@ -643,16 +691,7 @@ round2: [
                 </div>`,
 
                 `<div class='parent'>
-                <p> The ${textNew.game2} is similar to the ${textNew.game1} except that (i) the ${textNew.shape1}s are now ${textNew.shape2}s, </p> and (ii) whether the outer ${textNew.shape2} is activated or not is based on ${textNew.groupNext2}. </p>
-                <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape2}">
-                <div id="inner-shape" class="${textNew.shape2}"></div>
-                </div>
-                </div>
-                </div>`, 
-
-                `<div class='parent'>
-                <p> Like in the ${textNew.game1}, in the ${textNew.game2}, ${textNew.shape2}s will appear on your screen. 
+                <p> In the ${textNew.game2}, ${textNew.shape2}s will appear on your screen. </p>
                 <p> Initially, the inner ${textNew.shape2} and the outer ${textNew.shape2} are white. </p>
                 <p> Your job is to activate the inner ${textNew.shape2}. </p>
                 <div class="outer-container">
@@ -687,34 +726,142 @@ round2: [
                 <div id="inner-shape" class="${textNew.shape2}" style="background-color: gray;"></div>
                 </div>
                 </div>
-                </div>`
+                </div>`, 
+
+                `<div class='parent'>
+                <p>Your partner's job is to activate the outer ${textNew.shape2}. </p> 
+                <p>If your partner activates the outer ${textNew.shape2} with their SPACE BAR in time, it will look like this. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2}">
+                <div id="inner-shape" class="${textNew.shape2}"></div>
+                </div>
+                </div>
+                </div>`,
+
+
+                `<div class='parent'>
+                <p>If your partner does NOT activate the outer ${textNew.shape2} with their SPACE BAR in time, it will look like this. </p>
+                <p>Whether the outer ${textNew.shape2} is activated\u2014or not\u2014depends on ${textNew.groupNext}.</p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
+                <div id="inner-shape" class="${textNew.shape2}"></div>
+                </div>
+                </div>
+                </div>`, 
+
+                 `<div class='parent'>
+                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape2} and </p> <p> (ii) whether your partner activates the outer ${textNew.shape2}. </p><p></p>
+                <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
+                <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;",>
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2};">
+                        <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}};"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
+                     <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}};"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2};">
+                        <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
+                        <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+        </div>`
                 ],
 
-round2part2: [
+    part2Solo: [
                 `<div class='parent'>
-                <p>The outer ${textNew.shape2} will be activated\u2014or not\u2014${textNew.group2}. </p> 
-                <p>If the outer ${textNew.shape2} is activated, it will look like this.</p> 
+                <p> Unlike the ${textNew.game1}, the ${textNew.game2} is a 1-player game.</p> 
+                <p> You'll play by yourself. </p> 
                 <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2};">
+                <div id="outer-shape" class="${textNew.shape2}">
+                <div id="inner-shape" class="${textNew.shape2}"></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p> In the ${textNew.game2}, ${textNew.shape2}s will appear on your screen. </p>
+                <p> Initially, the inner ${textNew.shape2} and the outer ${textNew.shape2} are white. </p>
+                <p> Your job is to activate the inner ${textNew.shape2}. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}">
+                    <div id="inner-shape" class="${textNew.shape2}"></div>
+                </div>
+                </div>
+                </div>`,
+
+                 `<div class='parent'>
+                <p>To activate the inner ${textNew.shape2}, press your SPACE BAR as soon as the ${textNew.shape2}s appear on your screen. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}">
+                    <div id="inner-shape" class="${textNew.shape2}"></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p> If you press your SPACE BAR fast enough, the inner ${textNew.shape2} will activate like this. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}};"></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p>If you're too slow, the inner ${textNew.shape2} will turn gray.</p> 
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: gray;"></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p>The outer ${textNew.shape2} will be activated\u2014or not\u2014randomly. </p> 
+                <p>If the outer ${textNew.shape2} is activated, it will look like this. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2}">
+                <div id="inner-shape" class="${textNew.shape2}"></div>
+                </div>
+                </div>
+                </div>`,
+
+
+                `<div class='parent'>
+                <p>If the outer ${textNew.shape2} ${textNew.groupAgain} is not activated, it will look like this. </p>
+                <p>Whether the outer ${textNew.shape2} is activated\u2014or not\u2014depends on random chance.</p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
                 <div id="inner-shape" class="${textNew.shape2}"></div>
                 </div>
                 </div>
                 </div>`, 
 
-
                 `<div class='parent'>
-                <p>If the outer ${textNew.shape2} is not activated, it will look like this. </p>
-                <p>Whether the outer ${textNew.shape2} is activated or not depends on ${textNew.groupNext2}.</p>
-                <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;"">
-                <div id="inner-shape" class="${textNew.shape2}"></div>
-                </div>
-                </div>
-                </div>`, 
-
-
-                `<div class='parent'>
-                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape2} and </p> <p>(ii) whether the outer ${textNew.shape2} is activated. </p><p></p>
+                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape2} and </p> <p> (ii) whether the outer ${textNew.shape2} ${textNew.groupAgain} is activated. </p><p></p>
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
 
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;",>
@@ -754,8 +901,8 @@ round2part2: [
             </div>
         </div>`
                 ],
-            }
-        };
+        }
+    };
 
     // constructor function for round 1 comprehension check loop
 function MakeLoop(group, round) {
@@ -812,7 +959,9 @@ function getCorrectAnswers(randomAssignment) {
        let preambleText = `
         <div class='${attnChkDiv}'> 
             <p> To recap, in the ${isSecondTime ? textNew.game2 : textNew.game1}: </p>
-            <p> The outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated based on ${isSecondTime ? textNew.groupNext2 : textNew.groupNext}. </p> 
+            ${sologroupPages === pages.r1.groupPage2 || sologroupPages === pages.r1.groupPage
+                ? `<p> Your partner activates the outer ${isSecondTime ? textNew.shape2 : textNew.shape1}. </p>` 
+                : `<p> The outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated based on ${isSecondTime ? textNew.groupNext2 : textNew.groupNext}. </p>`}
             <p> You activate the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} with your SPACE BAR. </p>
 
     `;
@@ -840,12 +989,12 @@ function getCorrectAnswers(randomAssignment) {
         {
             prompt: `What determines whether the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
             name: `attnChk0`, 
-            options: ['Whether or not I pressed SPACE BAR fast enough', 'Random chance', `none of the above`],
+            options: ['Whether or not I pressed SPACE BAR fast enough', 'Random chance', `None of the above`],
         },
         {
             prompt: `What determines whether the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`,
             name: `attnChk1`, 
-            options: ['Whether or not I pressed SPACE BAR fast enough', 'Random chance', `none of the above`],
+            options: ['Whether or not I pressed SPACE BAR fast enough', 'Random chance', `None of the above`],
         },
         {
             prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} and the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} are activated?`,
@@ -966,6 +1115,13 @@ function getCorrectAnswers(randomAssignment) {
         post_trial_gap: 500,
     };
 
+    p.intro.r2part1a = {
+        type: jsPsychInstructions,
+        pages: pages.r2.part1a,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+    };
+
 
 function makeIntroPart2() {
     return {
@@ -978,6 +1134,25 @@ function makeIntroPart2() {
             const sologroupPages = isSecondTime 
                 ? (randomAssignment % 2 === 1 ? pages.r1.part2Group : pages.r1.part2Solo)
                 : (randomAssignment % 2 === 1 ? pages.r1.part2Solo : pages.r1.part2Group);
+
+            return sologroupPages.map(page => page.replace(/{{avatarResponse}}/g, avatarResponse));
+        },
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+    };
+}
+
+function makeR2part1() {
+    return {
+        type: jsPsychInstructions,
+        pages: () => {
+            const lastTrialData = jsPsych.data.get().last(1).values()[0];
+            const isSecondTime = lastTrialData ? lastTrialData.isSecondTime : false;
+            const avatarResponse = lastTrialData ? lastTrialData.avatarResponse || '' : ''; // Default to empty string if undefined
+
+            const sologroupPages = isSecondTime 
+                ? (randomAssignment % 2 === 1 ? pages.r2.part2Group : pages.r2.part2Solo)
+                : (randomAssignment % 2 === 1 ? pages.r2.part2Solo : pages.r2.part2Group);
 
             return sologroupPages.map(page => page.replace(/{{avatarResponse}}/g, avatarResponse));
         },
@@ -1040,24 +1215,7 @@ function makeR1SoloHigh() {
     };
 }
 
-
-function makeR2part1() {
-    return {
-        type: jsPsychInstructions,
-        pages: () => {
-            const isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-            const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
-
-            let updatedPages = pages.r1.round2.map(page => 
-                page.replace(/{{avatarResponse}}/g, avatarResponse)
-            );
-            return updatedPages;
-        },
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-    };
-}
-
+/*
 function makeR2part2() {
     return {
         type: jsPsychInstructions,
@@ -1074,7 +1232,7 @@ function makeR2part2() {
         post_trial_gap: 500,
     };
 }
-
+*/
 
     p.intro.r1check = new MakeLoop('R1', 'Solo');
 
@@ -1747,11 +1905,11 @@ p.partnerNext = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <div style="font-size: 24px; text-align: center;">
-            <p id="loading-text"> You've been paired with another participant. Please get ready. The game will start momentarily.</p>
+            <p id="loading-text"> You've been paired with another participant. <p> The game will start momentarily.</p>
         </div>
     `,
     choices: "NO_KEYS",
-    trial_duration: 2000,  // Duration of the loading screen in milliseconds, 15 seconds
+    trial_duration: 4000,  // Duration of the loading screen in milliseconds, 15 seconds
     on_finish: (data) => {
         console.log(data);
         data.loading_completed = true;
@@ -1785,8 +1943,8 @@ p.partnerNext = {
         introPart2 = makeIntroPart2(),
        // introR1Part3 = makeR1Part3(),
         introR1SoloHigh = makeR1SoloHigh(),
-        introR2part1 = makeR2part1(),
-        introR2part2 = makeR2part2()
+        introR2part1 = makeR2part1()
+   //     introR2part2 = makeR2part2()
 
     const delayLoopR1 = {
         timeline:[delayR1, tooFastR1],
@@ -1837,11 +1995,11 @@ p.partnerNext = {
     p.intro.r2part1 = {
         timeline: [introR2part1],
     }; 
- 
+ /*
     p.intro.r2part2 = {
         timeline: [introR2part2],
     }; 
-
+*/
 
 //Solo Squares - High
  const LLLoopSoloSquareHigh = {
