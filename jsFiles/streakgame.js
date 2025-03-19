@@ -77,7 +77,7 @@ function MakeAvatarSelection() {
         stimulus: `
             <div class='parent'>
                 <p> For both games, you'll be playing as one of the following 3 players. </p>
-                <p> Please choose a player: </p>
+                <p> Please select a player: </p>
                 <div class="avatar-selection" style="display: inline-block; justify-content: center; gap: 20px;">
                     <img src="./avatar/1.jpg" class="avatar-option" data-choice="0">
                     <img src="./avatar/2.jpg" class="avatar-option" data-choice="1">
@@ -163,13 +163,22 @@ let avatarResponse = '#2669ee';
                 <p>Each point is worth 2 cents in bonus money. </p>
                 You'll keep all the bonus money you earn on top of the $X you earn for your participation. </p>
                 <p>To maximize your earnings, earn as many points as possible!</p>
-                </div>`
+                </div>`,
                 ],
 
-                part2: [
+                part1a: [
                 `<div class='parent'>
                 <p> The first game is called the ${textNew.game1}. </p>
                 <p> Click "Next" to learn about the ${textNew.game1}. </p>
+                </div>
+                </div>`                 
+                ],
+
+                part2Group: [
+                `<div class='parent'>
+                <p> The ${textNew.game1} is a 2-player game.</p> 
+                <p> You'll play with another person completing this experiment. </p> 
+                <p>If another person is not available, you'll play with an AI bot. </p> 
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
@@ -213,12 +222,71 @@ let avatarResponse = '#2669ee';
                 <div id="inner-shape" class="${textNew.shape1}" style="background-color: gray;"></div>
                 </div>
                 </div>
+                </div>`, 
+
+                `<div class='parent'>
+                <p>Your partner's job is to activate the outer ${textNew.shape1}. </p> 
+                <p>If your partner activates the outer ${textNew.shape1} with their SPACE BAR in time, it will look like this. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}">
+                <div id="inner-shape" class="${textNew.shape1}"></div>
+                </div>
+                </div>
+                </div>`,
+
+
+                `<div class='parent'>
+                <p>If your partner does NOT activate the outer ${textNew.shape1} with their SPACE BAR in time, it will look like this. </p>
+                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on ${textNew.groupNext}.</p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                <div id="inner-shape" class="${textNew.shape1}"></div>
+                </div>
+                </div>
                 </div>`
                 ],
 
-                part3: [
+                part2Solo: [
                 `<div class='parent'>
-                <p>The outer ${textNew.shape1} will be activated\u2014or not\u2014${textNew.group}. </p> 
+                <p> In the ${textNew.game1}, ${textNew.shape1}s will appear on your screen. 
+                <p> Initially, the inner ${textNew.shape1} and the outer ${textNew.shape1} are white. </p>
+                <p> Your job is to activate the inner ${textNew.shape1}. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}">
+                    <div id="inner-shape" class="${textNew.shape1}"></div>
+                </div>
+                </div>
+                </div>`,
+
+                 `<div class='parent'>
+                <p>To activate the inner ${textNew.shape1}, press your SPACE BAR as soon as the ${textNew.shape1}s appear on your screen. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}">
+                    <div id="inner-shape" class="${textNew.shape1}"></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p> If you press your SPACE BAR fast enough, the inner ${textNew.shape1} will activate like this. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p>If you're too slow, the inner ${textNew.shape1} will turn gray.</p> 
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: gray;"></div>
+                </div>
+                </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p>The outer ${textNew.shape1} will be activated\u2014or not\u2014 randomly. </p> 
                 <p>If the outer ${textNew.shape1} is activated, it will look like this. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}">
@@ -230,15 +298,16 @@ let avatarResponse = '#2669ee';
 
                 `<div class='parent'>
                 <p>If the outer ${textNew.shape1} ${textNew.groupAgain} is not activated, it will look like this. </p>
-                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on ${textNew.groupNext}.</p>
+                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014 depends on random chance.</p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
                 </div>
                 </div>
-                </div>`,
+                </div>`
+                ],
 
-
+                part3: [
                 `<div class='parent'>
                 <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1} and </p> <p> (ii) whether the outer ${textNew.shape1} ${textNew.groupAgain} is activated. </p><p></p>
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
@@ -697,10 +766,10 @@ function getCorrectAnswers(randomAssignment) {
     console.log(isSecondTime + 'in getCorrectAnswers')
     return {
    attnChk0: isSecondTime 
-            ? (randomAssignment % 2 === 1 ? `My partner's performance` : `Random chance`)
-            : (randomAssignment % 2 === 1 ? `Random chance` : `My partner's performance`),
+            ? (randomAssignment % 2 === 1 ? `None of the above` : `Random chance`)
+            : (randomAssignment % 2 === 1 ? `Random chance` : `None of the above`),
 
-        attnChk1: `My performance`,
+        attnChk1: `Whether or not I pressed SPACE BAR fast enough`,
         attnChk2: `+8`,
 
         attnChk3: isSecondTime 
@@ -769,14 +838,14 @@ function getCorrectAnswers(randomAssignment) {
     
     return [
         {
-            prompt: `What determines how the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
+            prompt: `What determines whether the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
             name: `attnChk0`, 
-            options: ['My performance', `My partner's performance`, 'Random chance'],
+            options: ['Whether or not I pressed SPACE BAR fast enough', 'Random chance', `none of the above`],
         },
         {
-            prompt: `What determines how the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`,
+            prompt: `What determines whether the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`,
             name: `attnChk1`, 
-            options: ['My performance', `My partner's performance`, 'Random chance'],
+            options: ['Whether or not I pressed SPACE BAR fast enough', 'Random chance', `none of the above`],
         },
         {
             prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} and the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} are activated?`,
@@ -890,19 +959,27 @@ function getCorrectAnswers(randomAssignment) {
         post_trial_gap: 500,
     };
 
+    p.intro.r1part1a = {
+        type: jsPsychInstructions,
+        pages: pages.r1.part1a,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+    };
+
 
 function makeIntroPart2() {
     return {
         type: jsPsychInstructions,
         pages: () => {
-            const isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-            const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+            const lastTrialData = jsPsych.data.get().last(1).values()[0];
+            const isSecondTime = lastTrialData ? lastTrialData.isSecondTime : false;
+            const avatarResponse = lastTrialData ? lastTrialData.avatarResponse || '' : ''; // Default to empty string if undefined
 
-            // Generate updated pages with avatar response replacements
-            let updatedPages = pages.r1.part2.map(page => 
-                page.replace(/{{avatarResponse}}/g, avatarResponse)
-            );
-            return updatedPages;
+            const sologroupPages = isSecondTime 
+                ? (randomAssignment % 2 === 1 ? pages.r1.part2Group : pages.r1.part2Solo)
+                : (randomAssignment % 2 === 1 ? pages.r1.part2Solo : pages.r1.part2Group);
+
+            return sologroupPages.map(page => page.replace(/{{avatarResponse}}/g, avatarResponse));
         },
         show_clickable_nav: true,
         post_trial_gap: 500,
@@ -910,23 +987,30 @@ function makeIntroPart2() {
 }
 
 
+/*
 function makeR1Part3() {
     return {
         type: jsPsychInstructions,
         pages: () => {
-            const isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-            const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
+                let lastTrial = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0];
+                 const isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+                 const avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse;
 
-            let updatedPages = pages.r1.part3.map(page => 
-                page.replace(/{{avatarResponse}}/g, avatarResponse)
-            );
+            const sologroupPages = isSecondTime 
+                ? (randomAssignment % 2 === 1 ? pages.r1.part2Group : pages.r1.part2Solo)
+                : (randomAssignment % 2 === 1 ? pages.r1.part2Solo : pages.r1.part2Group);
+
+            let updatedPages = sologroupPages.map(page => {
+                return page
+                .replace(/{{avatarResponse}}/g, avatarResponse)
+            });
             return updatedPages;
         },
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
 }
-
+*/
 
 function makeR1SoloHigh() {
     return {
@@ -941,7 +1025,6 @@ function makeR1SoloHigh() {
                 ? (randomAssignment % 2 === 1 ? pages.r1.groupPage2 : pages.r1.soloPage2)
                 : (randomAssignment % 2 === 1 ? pages.r1.soloPage : pages.r1.groupPage);
 
-            
             console.log(sologroupPages);
 
             const updatedPages = sologroupPages.map(page => {
@@ -1081,7 +1164,7 @@ function WWTrial(shape, group) {
                 data.response = false; 
             };
             data.trialType = 'WW';
-            data.partner_outcome = true;
+            data.partner_outcome = 1;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             console.log(data)
@@ -1132,7 +1215,7 @@ function WLTrial(shape) {
                 data.response = false; 
             };
             data.trialType = 'WL';
-            data.partner_outcome = false;
+            data.partner_outcome = 0;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             console.log(data)
@@ -1196,7 +1279,7 @@ function LWTrial(shape, group) {
             if (data.response === " ") {
                 data.response = true;
             } else {
-                data.response = false; 
+                data.response = 1; 
             };
             data.trialType = 'LW';
             data.partner_outcome = true;
@@ -1259,7 +1342,7 @@ function LLTrial(shape) {
                 data.response = false; 
             };
             data.trialType = 'LL';
-            data.partner_outcome = false;
+            data.partner_outcome = 0;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             console.log(data);
             data.shape = shape;
@@ -1355,70 +1438,70 @@ function MakeFeedback(mode) {
                  if (mode === 'groupHigh') {
                 const partner_outcome = lastTrialData.partner_outcome;
 
-                if (lastTrialData.outcome && !partner_outcome) {
+                if (lastTrialData.outcome && partner_outcome === 0) {
                     avatar1TotalPoints += 6;
                     avatar2TotalPoints += 4;
                     feedbackText = generateAvatarFeedback(selectedAvatarImg, '+6', '+4', avatar1TotalPoints, avatar2TotalPoints); // You activated it, they didn’t
-                } else if (lastTrialData.outcome && partner_outcome) {
+                } else if (lastTrialData.outcome && partner_outcome === 1) {
                     avatar1TotalPoints += 8;
                     avatar2TotalPoints += 8;
                     feedbackText = generateAvatarFeedback(selectedAvatarImg, '+8', '+8', avatar1TotalPoints, avatar2TotalPoints); // Both activated
-                } else if (!lastTrialData.outcome && !partner_outcome) {
+                } else if (!lastTrialData.outcome && partner_outcome === 0) {
                     avatar1TotalPoints += 2;
                     avatar2TotalPoints += 2;
                     feedbackText = generateAvatarFeedback(selectedAvatarImg, '+2', '+2', avatar1TotalPoints, avatar2TotalPoints); // Both lose
-                } else if (!lastTrialData.outcome && partner_outcome) { 
+                } else if (!lastTrialData.outcome && partner_outcome === 1) { 
                     avatar1TotalPoints += 4;
                     avatar2TotalPoints += 6;
                     feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+6', avatar1TotalPoints, avatar2TotalPoints); // They activated, you didn’t
                 }
             } if (mode === 'soloHigh') {
                 // Solo feedback (ignoring partner outcome)
-                if (lastTrialData.outcome && !partner_outcome) {
+                if (lastTrialData.outcome && partner_outcome === 0) {
                     avatar1TotalPoints += 6;
                     feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+6', avatar1TotalPoints); // You activated it, they didn’t
-                } else if (lastTrialData.outcome && partner_outcome) {
+                } else if (lastTrialData.outcome && partner_outcome === 1) {
                     avatar1TotalPoints += 8;
                     feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+8', avatar1TotalPoints); // Both activated
-                } else if (!lastTrialData.outcome && !partner_outcome) {
+                } else if (!lastTrialData.outcome && partner_outcome === 0) {
                     avatar1TotalPoints += 2;
                     feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+2', avatar1TotalPoints); // Both lose
-                } else if (!lastTrialData.outcome && partner_outcome) { 
+                } else if (!lastTrialData.outcome && partner_outcome === 1) { 
                     avatar1TotalPoints += 4;
                     feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', avatar1TotalPoints); // They activated, you didn’t
                 } 
             } if (mode === 'groupLow') {
                 const partner_outcome = lastTrialData.partner_outcome;
 
-                if (lastTrialData.outcome && !partner_outcome) {
+                if (lastTrialData.outcome && partner_outcome === 0) {
                     avatar1TotalPoints += 4;
                     avatar2TotalPoints += 4;
                     feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+4', avatar1TotalPoints, avatar2TotalPoints); // You activated it, they didn’t
-                } else if (lastTrialData.outcome && partner_outcome) {
+                } else if (lastTrialData.outcome && partner_outcome === 1) {
                     avatar1TotalPoints += 8;
                     avatar2TotalPoints += 8;
                     feedbackText = generateAvatarFeedback(selectedAvatarImg, '+8', '+8', avatar1TotalPoints, avatar2TotalPoints); // Both activated
-                } else if (!lastTrialData.outcome && !partner_outcome) {
+                } else if (!lastTrialData.outcome && partner_outcome === 0) {
                     avatar1TotalPoints += 4;
                     avatar2TotalPoints += 4;
                     feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+4', avatar1TotalPoints, avatar2TotalPoints); // Both lose
-                } else if (!lastTrialData.outcome && partner_outcome) { 
+                } else if (!lastTrialData.outcome && partner_outcome === 1) { 
                     avatar1TotalPoints += 4;
                     avatar2TotalPoints += 4;
                     feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+4', avatar1TotalPoints, avatar2TotalPoints); // They activated, you didn’t
                 }
             } if (mode === 'soloLow') {
                 // Solo feedback (ignoring partner outcome)
-                if (lastTrialData.outcome && !partner_outcome) {
+                if (lastTrialData.outcome && partner_outcome === 0) {
                     avatar1TotalPoints += 4;
                     feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', avatar1TotalPoints); // You activated it, they didn’t
-                } else if (lastTrialData.outcome && partner_outcome) {
+                } else if (lastTrialData.outcome && partner_outcome === 1) {
                     avatar1TotalPoints += 8;
                     feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+8', avatar1TotalPoints); // Both activated
-                } else if (!lastTrialData.outcome && !partner_outcome) {
+                } else if (!lastTrialData.outcome && partner_outcome === 0) {
                     avatar1TotalPoints += 4;
                     feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', avatar1TotalPoints); // Both lose
-                } else if (!lastTrialData.outcome && partner_outcome) { 
+                } else if (!lastTrialData.outcome && partner_outcome === 1) { 
                     avatar1TotalPoints += 4;
                     feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', avatar1TotalPoints); // They activated, you didn’t
                 }
@@ -1614,7 +1697,7 @@ p.partnerAvatar = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <div style="font-size: 24px; text-align: center;">
-            <p id="loading-text"> Now, waiting for your partner to choose their color of their avatar.</p>
+            <p id="loading-text"> You've been paired with another participant. Please get ready. The game will start momentarily.</p>
             <div class="loading-bar-container">
                 <div class="loading-bar"></div>
             </div>
@@ -1659,13 +1742,12 @@ p.partnerAvatar = {
     }
 }; 
 
-p.partnerRevealAvatar = {
+*/
+p.partnerNext = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <div style="font-size: 24px; text-align: center;">
-            <p id="loading-text"> Your partner chose this color: </p>
-            <img src="./avatar/4.jpg" style="width: 200px; height: 200px; margin: 0 10px">
-            </div>
+            <p id="loading-text"> You've been paired with another participant. Please get ready. The game will start momentarily.</p>
         </div>
     `,
     choices: "NO_KEYS",
@@ -1674,7 +1756,7 @@ p.partnerRevealAvatar = {
         console.log(data);
         data.loading_completed = true;
     }
-};*/
+};
 
     // trial variables
     var LLTrialCircle = new LLTrial('circle'),
@@ -1701,7 +1783,7 @@ p.partnerRevealAvatar = {
         roundIntroV1 = new MakeRoundIntro('V1'),
         roundIntroV2 = new MakeRoundIntro('V2'),
         introPart2 = makeIntroPart2(),
-        introR1Part3 = makeR1Part3(),
+       // introR1Part3 = makeR1Part3(),
         introR1SoloHigh = makeR1SoloHigh(),
         introR2part1 = makeR2part1(),
         introR2part2 = makeR2part2()
@@ -1738,11 +1820,11 @@ p.partnerRevealAvatar = {
 
     p.intro.r1part2 = {
         timeline: [introPart2],
-    }; 
-
+    };  
+/*
     p.intro.r1part3 = {
         timeline: [introR1Part3],
-    }; 
+    };  */
 
     p.intro.r1soloHigh = {
         timeline: [introR1SoloHigh],

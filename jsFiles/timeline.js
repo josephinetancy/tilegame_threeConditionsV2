@@ -33,8 +33,9 @@ let timeline = [];
 const commonTimeline = [
     p.intro.r1part1,
     p.intro.round1Avatars,
+    p.intro.r1part1a,
     p.intro.r1part2,
-    p.intro.r1part3,
+ //   p.intro.r1part3,
     p.intro.r1soloHigh, 
    p.intro.r1check,
 ];
