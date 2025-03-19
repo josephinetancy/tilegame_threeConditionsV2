@@ -1252,7 +1252,7 @@ variables for plugins
 ///
 */
 
-let noOfTrials = 5;
+let noOfTrials = 5; //so 20 in total
 
 ///fake participant's activation time for WL and LL trials, that far exceeds trial duration
 let partner_rtL = 20000; //for when partner "loses".
@@ -1325,7 +1325,6 @@ function WWTrial(shape, group) {
             data.partner_outcome = 1;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-            console.log(data)
         },
     };
 }
@@ -1376,7 +1375,6 @@ function WLTrial(shape) {
             data.partner_outcome = 0;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-            console.log(data)
         },
     };
 }
@@ -1443,7 +1441,6 @@ function LWTrial(shape, group) {
             data.partner_outcome = 1;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-            console.log(data)
         }
     };
 }
@@ -1502,7 +1499,6 @@ function LLTrial(shape) {
             data.trialType = 'LL';
             data.partner_outcome = 0;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-            console.log(data);
             data.shape = shape;
         }
     };
@@ -1671,8 +1667,8 @@ function MakeFeedback(mode) {
         trial_duration: 3500,
         on_finish: (data) => {
             data.randomAssignment = randomAssignment;
-            let previousAvatar1TotalPoints = jsPsych.data.get().last(5).values()[0]?.avatar1TotalPoints || 0;
-            let previousAvatar2TotalPoints = jsPsych.data.get().last(5).values()[0]?.avatar2TotalPoints || 0;
+            let previousAvatar1TotalPoints = jsPsych.data.get().last(5).values()[0].avatar1TotalPoints || 0;
+            let previousAvatar2TotalPoints = jsPsych.data.get().last(5).values()[0].avatar2TotalPoints || 0;
 
             data.avatar1TotalPoints = avatar1TotalPoints;
             data.avatar2TotalPoints = avatar2TotalPoints;
@@ -2268,6 +2264,9 @@ p.flowMeasure = {
         data.MI = jsPsych.data.get().last(2).values()[0].MI;
         data.groupOrSolo = jsPsych.data.get().last(2).values()[0].groupOrSolo;
         data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
+        data.avatar1TotalPoints = jsPsych.data.get().last(2).values()[0].avatar1TotalPoints;
+        data.avatar2TotalPoints = jsPsych.data.get().last(2).values()[0].avatar2TotalPoints;
+
 
         isSecondTime = true;
         data.isSecondTime = isSecondTime;
