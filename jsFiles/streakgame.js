@@ -1,6 +1,6 @@
 //randomAssignment
 // const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-randomAssignment = 8;
+randomAssignment = 6;
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -237,7 +237,7 @@ let avatarResponse = '#2669ee';
 
                 `<div class='parent'>
                 <p>If your partner does NOT activate the outer ${textNew.shape1} with their SPACE BAR in time, it will look like this. </p>
-                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on ${textNew.groupNext}.</p>
+                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on your partner's performance. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
@@ -348,7 +348,7 @@ let avatarResponse = '#2669ee';
                 </div>`, 
 
                 `<div class='parent'>
-                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1} and </p> <p> (ii) whether the outer ${textNew.shape1} ${textNew.groupAgain} is activated. </p><p></p>
+                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1} and </p> <p> (ii) whether the outer ${textNew.shape1} is activated randomly. </p><p></p>
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
 
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;",>
@@ -371,7 +371,7 @@ let avatarResponse = '#2669ee';
 
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
-                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color2};">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
                         <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
                     </div>
                 </div>
@@ -741,7 +741,7 @@ groupPage2: [
 
                 `<div class='parent'>
                 <p>If your partner does NOT activate the outer ${textNew.shape2} with their SPACE BAR in time, it will look like this. </p>
-                <p>Whether the outer ${textNew.shape2} is activated\u2014or not\u2014depends on ${textNew.groupNext}.</p>
+                <p>Whether the outer ${textNew.shape2} is activated\u2014or not\u2014depends on your partner's performance.</p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
                 <div id="inner-shape" class="${textNew.shape2}"></div>
@@ -861,7 +861,7 @@ groupPage2: [
                 </div>`, 
 
                 `<div class='parent'>
-                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape2} and </p> <p> (ii) whether the outer ${textNew.shape2} ${textNew.groupAgain} is activated. </p><p></p>
+                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape2} and </p> <p> (ii) whether the outer ${textNew.shape2} is activated randomly. </p><p></p>
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
 
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;",>
@@ -1905,7 +1905,7 @@ p.partnerNext = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <div style="font-size: 24px; text-align: center;">
-            <p id="loading-text"> You've been paired with another participant. <p> The game will start momentarily.</p>
+            <p> You've been paired with another participant. <p> The game will start momentarily.</p>
         </div>
     `,
     choices: "NO_KEYS",
