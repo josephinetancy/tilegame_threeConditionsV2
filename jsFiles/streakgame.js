@@ -1440,7 +1440,7 @@ function LWTrial(shape, group) {
                 data.response = 1; 
             };
             data.trialType = 'LW';
-            data.partner_outcome = true;
+            data.partner_outcome = 1;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             console.log(data)
