@@ -226,7 +226,7 @@ let avatarResponse = '#2669ee';
 
                 `<div class='parent'>
                 <p>Your partner's job is to activate the outer ${textNew.shape1}. </p> 
-                <p>If your partner activates the outer ${textNew.shape1} with their SPACE BAR in time, it will look like this. </p>
+                <p>If your partner presses their SPACE BAR in time, the outer ${textNew.shape2} will activate like this. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
@@ -236,7 +236,15 @@ let avatarResponse = '#2669ee';
 
 
                 `<div class='parent'>
-                <p>If your partner does NOT activate the outer ${textNew.shape1} with their SPACE BAR in time, it will look like this. </p>
+                <p>If your partner does NOT press their SPACE BAR in time, the outer ${textNew.shape1} will not activate like this. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                <div id="inner-shape" class="${textNew.shape1}"></div>
+                </div>
+                </div>
+                </div>`, 
+
+                `<div class='parent'>
                 <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on your partner's performance. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
@@ -339,7 +347,15 @@ let avatarResponse = '#2669ee';
 
                 `<div class='parent'>
                 <p>If the outer ${textNew.shape1} is not activated, it will look like this. </p>
-                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on random chance.</p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                <div id="inner-shape" class="${textNew.shape1}"></div>
+                </div>
+                </div>
+                </div>`, 
+
+                `<div class='parent'>
+                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on your partner's performance. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
@@ -730,7 +746,7 @@ groupPage2: [
 
                 `<div class='parent'>
                 <p>Your partner's job is to activate the outer ${textNew.shape2}. </p> 
-                <p>If your partner activates the outer ${textNew.shape2} with their SPACE BAR in time, it will look like this. </p>
+                <p>If your partner presses their SPACE BAR in time, the outer ${textNew.shape2} will activate like this. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2}">
                 <div id="inner-shape" class="${textNew.shape2}"></div>
@@ -740,7 +756,7 @@ groupPage2: [
 
 
                 `<div class='parent'>
-                <p>If your partner does NOT activate the outer ${textNew.shape2} with their SPACE BAR in time, it will look like this. </p>
+                <p>If your partner does NOT press their SPACE BAR in time, the outer ${textNew.shape2} will not activate like this. </p>
                 <p>Whether the outer ${textNew.shape2} is activated\u2014or not\u2014depends on your partner's performance.</p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
@@ -1685,8 +1701,6 @@ function MakeFeedback(mode) {
             data.trialType = jsPsych.data.get().last(2).values()[0].trialType;
             data.partner_outcome = jsPsych.data.get().last(2).values()[0].partner_outcome;
             data.rt = jsPsych.data.get().last(2).values()[0].rt;
-            data.TooFast = jsPsych.data.get().last(4).values()[0].TooFast;
-
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             console.log(data);
 
