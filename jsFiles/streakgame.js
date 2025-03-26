@@ -1717,6 +1717,7 @@ function MakeDelay(round) {
         trial_duration: () => jsPsych.randomization.sampleWithoutReplacement(ITI, 1)[0],
         on_finish: (data) => {
             data.TooFast = data.response === " " ? 1 : 0;
+            data.trial_Name = 'MakeDelay';
         }
     };
 }
@@ -1736,9 +1737,13 @@ function MakeTooFast(round) {
         post_trial_gap: () => {
             const lastKeyPress = jsPsych.data.get().last(1).values()[0].response;
             return lastKeyPress === " " ? 1000 : 0;
-        }
+        }, // <- Added missing comma here
+        on_finish: (data) => {
+            data.trial_Name = 'MakeTooFast';
+        } 
     };
 }
+
 
 /*
 p.foundPartner = {
@@ -1830,6 +1835,7 @@ p.findingPartner = {
     },
     on_finish: (data) => {
         data.loading_completed = true;
+        data.trial_Name = 'findingPartner';
     }
 };
 
@@ -1896,6 +1902,7 @@ p.partnerNext = {
     on_finish: (data) => {
         console.log(data);
         data.loading_completed = true;
+        data.trial_Name = 'partnerNext'
     }
 };
 
