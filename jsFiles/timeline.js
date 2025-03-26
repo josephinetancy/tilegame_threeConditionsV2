@@ -50,7 +50,7 @@ if (randomAssignment === 2) {
 
 /*without tasks */ 
 
-
+/*
 const taskConfigurations = {
     1: [p.task.round1Intro, p.task.SoloCircleHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupSquareLow, p.flowMeasure, p.demographics, p.save_data, p.end],
     2: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloCircleHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
@@ -62,9 +62,9 @@ const taskConfigurations = {
     8: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.flowMeasure, p.demographics, p.save_data, p.end],
 }; 
 
-
+*/
 /*with tasks */
-/*
+
 const taskConfigurations = {
     1: [p.task.round1Intro, p.task.SoloCircleHigh, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.task.round2Intro, p.task.GroupSquareLow, p.flowMeasure, p.demographics, p.save_data, p.end],
     2: [p.findingPartner, p.task.round1Intro, p.task.GroupSquareLow, p.flowMeasure, p.intro.r2part1, p.intro.r2part2, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloCircleHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
@@ -76,7 +76,7 @@ const taskConfigurations = {
     8: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.task.GroupCircleHigh, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloSquareLow, p.flowMeasure, p.demographics, p.save_data, p.end],
 }; 
 
-*/
+
 
 // Set the timeline based on random assignment
 timeline = [...commonTimeline, ...(taskConfigurations[randomAssignment] || [])];

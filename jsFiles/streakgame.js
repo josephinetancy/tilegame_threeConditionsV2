@@ -1583,115 +1583,80 @@ const avatarChoices = [
 
 
 function MakeFeedback(mode) {
-
     let avatar1TotalPoints = 0;
     let avatar2TotalPoints = 0;
+    let pointsAddedAvatar1 = 0;
+    let pointsAddedAvatar2 = 0;
 
     const groupOrSolo = mode.includes("group") ? "group" : "solo";
     const MI = mode.includes("High") ? "high" : "low";
 
     return {
         type: jsPsychHtmlKeyboardResponse,
-         data: {type: `${mode}`},
+        data: { type: `${mode}` },
         stimulus: () => {
             const lastTrialData = jsPsych.data.get().last(1).values()[0];
-            let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse;
+            let avatarResponse = jsPsych.data.get().filter({ trial_type: 'html-button-response' }).last(1).values()[0].avatarResponse;
             let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
             let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
-            console.log(selectedAvatarImg);
 
             const partner_rt = lastTrialData.partner_rt;
             const partner_outcome = lastTrialData.partner_outcome;
 
             let feedbackText = '';
 
-                 if (mode === 'groupHigh') {
-                const partner_outcome = lastTrialData.partner_outcome;
-
+            if (mode === 'groupHigh') {
                 if (lastTrialData.outcome && partner_outcome === 0) {
-                    avatar1TotalPoints += 6;
-                    avatar2TotalPoints += 4;
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+6', '+4', avatar1TotalPoints, avatar2TotalPoints); // You activated it, they didn’t
+                    pointsAddedAvatar1 = 6;
+                    pointsAddedAvatar2 = 4;
                 } else if (lastTrialData.outcome && partner_outcome === 1) {
-                    avatar1TotalPoints += 8;
-                    avatar2TotalPoints += 8;
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+8', '+8', avatar1TotalPoints, avatar2TotalPoints); // Both activated
+                    pointsAddedAvatar1 = 8;
+                    pointsAddedAvatar2 = 8;
                 } else if (!lastTrialData.outcome && partner_outcome === 0) {
-                    avatar1TotalPoints += 2;
-                    avatar2TotalPoints += 2;
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+2', '+2', avatar1TotalPoints, avatar2TotalPoints); // Both lose
+                    pointsAddedAvatar1 = 2;
+                    pointsAddedAvatar2 = 2;
                 } else if (!lastTrialData.outcome && partner_outcome === 1) { 
-                    avatar1TotalPoints += 4;
-                    avatar2TotalPoints += 6;
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+6', avatar1TotalPoints, avatar2TotalPoints); // They activated, you didn’t
+                    pointsAddedAvatar1 = 4;
+                    pointsAddedAvatar2 = 6;
                 }
-            } if (mode === 'soloHigh') {
-                // Solo feedback (ignoring partner outcome)
-                if (lastTrialData.outcome && partner_outcome === 0) {
-                    avatar1TotalPoints += 6;
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+6', avatar1TotalPoints); // You activated it, they didn’t
-                } else if (lastTrialData.outcome && partner_outcome === 1) {
-                    avatar1TotalPoints += 8;
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+8', avatar1TotalPoints); // Both activated
-                } else if (!lastTrialData.outcome && partner_outcome === 0) {
-                    avatar1TotalPoints += 2;
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+2', avatar1TotalPoints); // Both lose
-                } else if (!lastTrialData.outcome && partner_outcome === 1) { 
-                    avatar1TotalPoints += 4;
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', avatar1TotalPoints); // They activated, you didn’t
-                } 
-            } if (mode === 'groupLow') {
-                const partner_outcome = lastTrialData.partner_outcome;
-
-                if (lastTrialData.outcome && partner_outcome === 0) {
-                    avatar1TotalPoints += 4;
-                    avatar2TotalPoints += 4;
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+4', avatar1TotalPoints, avatar2TotalPoints); // You activated it, they didn’t
-                } else if (lastTrialData.outcome && partner_outcome === 1) {
-                    avatar1TotalPoints += 8;
-                    avatar2TotalPoints += 8;
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+8', '+8', avatar1TotalPoints, avatar2TotalPoints); // Both activated
-                } else if (!lastTrialData.outcome && partner_outcome === 0) {
-                    avatar1TotalPoints += 4;
-                    avatar2TotalPoints += 4;
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+4', avatar1TotalPoints, avatar2TotalPoints); // Both lose
-                } else if (!lastTrialData.outcome && partner_outcome === 1) { 
-                    avatar1TotalPoints += 4;
-                    avatar2TotalPoints += 4;
-                    feedbackText = generateAvatarFeedback(selectedAvatarImg, '+4', '+4', avatar1TotalPoints, avatar2TotalPoints); // They activated, you didn’t
+            } else if (mode === 'soloHigh') {
+                if (lastTrialData.outcome) {
+                    pointsAddedAvatar1 = partner_outcome === 0 ? 6 : 8;
+                } else {
+                    pointsAddedAvatar1 = partner_outcome === 0 ? 2 : 4;
                 }
-            } if (mode === 'soloLow') {
-                // Solo feedback (ignoring partner outcome)
+            } else if (mode === 'groupLow') {
                 if (lastTrialData.outcome && partner_outcome === 0) {
-                    avatar1TotalPoints += 4;
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', avatar1TotalPoints); // You activated it, they didn’t
+                    pointsAddedAvatar1 = 4;
+                    pointsAddedAvatar2 = 4;
                 } else if (lastTrialData.outcome && partner_outcome === 1) {
-                    avatar1TotalPoints += 8;
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+8', avatar1TotalPoints); // Both activated
-                } else if (!lastTrialData.outcome && partner_outcome === 0) {
-                    avatar1TotalPoints += 4;
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', avatar1TotalPoints); // Both lose
-                } else if (!lastTrialData.outcome && partner_outcome === 1) { 
-                    avatar1TotalPoints += 4;
-                    feedbackText = generateSoloAvatarFeedback(selectedAvatarImg, '+4', avatar1TotalPoints); // They activated, you didn’t
+                    pointsAddedAvatar1 = 8;
+                    pointsAddedAvatar2 = 8;
+                } else {
+                    pointsAddedAvatar1 = 4;
+                    pointsAddedAvatar2 = 4;
                 }
-
+            } else if (mode === 'soloLow') {
+                pointsAddedAvatar1 = lastTrialData.outcome ? (partner_outcome === 0 ? 4 : 8) : 4;
             }
+
+            avatar1TotalPoints += pointsAddedAvatar1;
+            avatar2TotalPoints += pointsAddedAvatar2;
+
+            feedbackText = groupOrSolo === "group"
+                ? generateAvatarFeedback(selectedAvatarImg, `+${pointsAddedAvatar1}`, `+${pointsAddedAvatar2}`, avatar1TotalPoints, avatar2TotalPoints)
+                : generateSoloAvatarFeedback(selectedAvatarImg, `+${pointsAddedAvatar1}`, avatar1TotalPoints);
+
             return feedbackText;
         },
         choices: "NO_KEYS",
         trial_duration: 3500,
         on_finish: (data) => {
             data.randomAssignment = randomAssignment;
-            let previousAvatar1TotalPoints = jsPsych.data.get().last(5).values()[0].avatar1TotalPoints || 0;
-            let previousAvatar2TotalPoints = jsPsych.data.get().last(5).values()[0].avatar2TotalPoints || 0;
-
             data.avatar1TotalPoints = avatar1TotalPoints;
             data.avatar2TotalPoints = avatar2TotalPoints;
-
-            data.pointsAddedAvatar1 = avatar1TotalPoints - previousAvatar1TotalPoints;
-            data.pointsAddedAvatar2 = avatar2TotalPoints - previousAvatar2TotalPoints;
-
+            data.pointsAddedAvatar1 = pointsAddedAvatar1; 
+            data.pointsAddedAvatar2 = pointsAddedAvatar2;
             data.groupOrSolo = groupOrSolo;
             data.MI = MI;
             data.trialNumber = trialNumber;
@@ -1702,11 +1667,11 @@ function MakeFeedback(mode) {
             data.partner_outcome = jsPsych.data.get().last(2).values()[0].partner_outcome;
             data.rt = jsPsych.data.get().last(2).values()[0].rt;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-            console.log(data);
-
+            console.log(data); 
         }
     };
 }
+
 
 function MakeRoundIntro(round) {
     return {
