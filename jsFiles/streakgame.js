@@ -1521,29 +1521,27 @@ function LLTrial(shape) {
 }
 
 
-function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points, avatar2Points) {
+function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1TotalPoints, avatar2TotalPoints, color) {
     return `
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
             <!-- Left Avatar -->
             <div style="text-align: center;">
-                <img src="${avatar1}" style="width: 200px; height: 200px; margin: 0 10px;">
-                <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
+                <div style="font-size:40px; font-weight: bold; margin-bottom: 5px; color: ${color};">
                     ${avatar1Text}
                 </div>
-                <!-- Second text box for accumulating points -->
+                <img src="${avatar1}" style="width: 200px; height: 200px; margin: 0 10px;">
                 <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-                    ${avatar1Points} Points
+                    ${avatar1TotalPoints} Points 
                 </div>
             </div>
             <!-- Right Avatar -->
             <div style="text-align: center;">
-                <img src="./avatar/4.jpg" style="width: 200px; height: 200px; margin: 0 10px;">
-                <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
+                <div style="font-size:40px; font-weight: bold; margin-bottom: 5px; color: #2669ee;">
                     ${avatar2Text}
                 </div>
-                <!-- Second text box for accumulating points -->
+                <img src="./avatar/4.jpg" style="width: 200px; height: 200px; margin: 0 10px;">
                 <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-                    ${avatar2Points} Points
+                    ${avatar2TotalPoints} Points 
                 </div>
             </div>
         </div>
@@ -1554,17 +1552,15 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1Points
     `;
 }
 
-function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1Points) {
+function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, color) {
     return `
-          <div style="display: flex; flex-direction: column; align-items: center;">
-                <img src="${avatar1}" style="width: 200px; height: 200px;">
-                <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-                    ${avatar1Text}
-                </div>
-                <!-- Second text box for accumulating points -->
-                <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-                    ${avatar1Points} Points
-                </div>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div style="font-size: 40px; font-weight: bold; margin-bottom: 5px; color: ${color};">
+                ${avatar1Text}
+            </div>
+            <img src="${avatar1}" style="width: 200px; height: 200px;">
+            <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
+                ${avatar1TotalPoints} Points
             </div>
         </div>
         <!-- Line at the bottom -->
@@ -1573,6 +1569,7 @@ function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1Points) {
         </div>
     `;
 }
+
 
 
 const avatarChoices = [
@@ -1644,8 +1641,8 @@ function MakeFeedback(mode) {
             avatar2TotalPoints += pointsAddedAvatar2;
 
             feedbackText = groupOrSolo === "group"
-                ? generateAvatarFeedback(selectedAvatarImg, `+${pointsAddedAvatar1}`, `+${pointsAddedAvatar2}`, avatar1TotalPoints, avatar2TotalPoints)
-                : generateSoloAvatarFeedback(selectedAvatarImg, `+${pointsAddedAvatar1}`, avatar1TotalPoints);
+                ? generateAvatarFeedback(selectedAvatarImg, `+${pointsAddedAvatar1}`, `+${pointsAddedAvatar2}`, avatar1TotalPoints, avatar2TotalPoints, avatarResponse)
+                : generateSoloAvatarFeedback(selectedAvatarImg, `+${pointsAddedAvatar1}`, avatar1TotalPoints, avatarResponse);
 
             return feedbackText;
         },
