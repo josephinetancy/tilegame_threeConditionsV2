@@ -754,16 +754,23 @@ groupPage2: [
                 </div>
                 </div>`,
 
-
                 `<div class='parent'>
-                <p>If your partner does NOT press their SPACE BAR in time, the outer ${textNew.shape2} will not activate like this. </p>
-                <p>Whether the outer ${textNew.shape2} is activated\u2014or not\u2014depends on your partner's performance.</p>
+                <p>If your partner does NOT press their SPACE BAR in time, the outer ${textNew.shape1} will not activate like this. </p>
                 <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
-                <div id="inner-shape" class="${textNew.shape2}"></div>
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                <div id="inner-shape" class="${textNew.shape1}"></div>
                 </div>
                 </div>
                 </div>`, 
+
+                `<div class='parent'>
+                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on your partner's performance. </p>
+                <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                <div id="inner-shape" class="${textNew.shape1}"></div>
+                </div>
+                </div>
+                </div>`,  
 
                  `<div class='parent'>
                 <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape2} and </p> <p> (ii) whether your partner activates the outer ${textNew.shape2}. </p><p></p>
