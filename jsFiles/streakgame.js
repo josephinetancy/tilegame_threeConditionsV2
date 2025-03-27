@@ -236,7 +236,7 @@ let avatarResponse = '#2669ee';
 
 
                 `<div class='parent'>
-                <p>If your partner does NOT press their SPACE BAR in time, the outer ${textNew.shape1} will not activate like this. </p>
+                <p>If your partner does NOT press their SPACE BAR in time, the outer ${textNew.shape1} will turn gray. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
@@ -755,7 +755,7 @@ groupPage2: [
                 </div>`,
 
                 `<div class='parent'>
-                <p>If your partner does NOT press their SPACE BAR in time, the outer ${textNew.shape1} will not activate like this. </p>
+                <p>If your partner does NOT press their SPACE BAR in time, the outer ${textNew.shape1} will turn gray like this. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
