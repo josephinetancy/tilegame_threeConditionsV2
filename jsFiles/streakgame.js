@@ -355,7 +355,7 @@ let avatarResponse = '#2669ee';
                 </div>`, 
 
                 `<div class='parent'>
-                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014is based on random chance. </p>
+                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on random chance. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
