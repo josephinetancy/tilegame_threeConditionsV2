@@ -226,7 +226,7 @@ let avatarResponse = '#2669ee';
 
                 `<div class='parent'>
                 <p>Your partner's job is to activate the outer ${textNew.shape1}. </p> 
-                <p>If your partner presses their SPACE BAR in time, the outer ${textNew.shape2} will activate like this. </p>
+                <p>If your partner presses their SPACE BAR in time, the outer ${textNew.shape1} will activate like this. </p>
                 <div class="outer-container">
                 <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}">
                 <div id="inner-shape" class="${textNew.shape1}"></div>
@@ -755,19 +755,19 @@ groupPage2: [
                 </div>`,
 
                 `<div class='parent'>
-                <p>If your partner does NOT press their SPACE BAR in time, the outer ${textNew.shape1} will turn gray like this. </p>
+                <p>If your partner does NOT press their SPACE BAR in time, the outer ${textNew.shape2} will turn gray like this. </p>
                 <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
-                <div id="inner-shape" class="${textNew.shape1}"></div>
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
+                <div id="inner-shape" class="${textNew.shape2}"></div>
                 </div>
                 </div>
                 </div>`, 
 
                 `<div class='parent'>
-                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on your partner's performance. </p>
+                <p>Whether the outer ${textNew.shape2} is activated\u2014or not\u2014depends on your partner's performance. </p>
                 <div class="outer-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
-                <div id="inner-shape" class="${textNew.shape1}"></div>
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
+                <div id="inner-shape" class="${textNew.shape2}"></div>
                 </div>
                 </div>
                 </div>`,  
