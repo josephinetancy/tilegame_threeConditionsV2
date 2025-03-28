@@ -1348,6 +1348,7 @@ function WWTrial(shape, group) {
             data.partner_outcome = 1;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+            data.trial_Name = 'MakeTrial';
         },
     };
 }
@@ -1398,6 +1399,7 @@ function WLTrial(shape) {
             data.partner_outcome = 0;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+            data.trial_Name = 'MakeTrial';
         },
     };
 }
@@ -1464,6 +1466,7 @@ function LWTrial(shape, group) {
             data.partner_outcome = 1;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+            data.trial_Name = 'MakeTrial';
         }
     };
 }
@@ -1523,6 +1526,7 @@ function LLTrial(shape) {
             data.partner_outcome = 0;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             data.shape = shape;
+            data.trial_Name = 'MakeTrial';
         }
     };
 }
@@ -1669,8 +1673,10 @@ function MakeFeedback(mode) {
             data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
             data.trialType = jsPsych.data.get().last(2).values()[0].trialType;
             data.partner_outcome = jsPsych.data.get().last(2).values()[0].partner_outcome;
+            data.partner_outcome = jsPsych.data.get().last(2).values()[0].outcome;
             data.rt = jsPsych.data.get().last(2).values()[0].rt;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+            data.trial_Name = 'MakeFeedback';
             console.log(data); 
         }
     };

@@ -124,6 +124,7 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
                   partner_rt: trial.partner_rt,
                   delay: response.delay || null,
                   outcome: response.rt != null & response.rt <= trial.response_duration,
+                  selected_color: trial.selected_color,
               };
               // clear the display
               display_element.innerHTML = "";
