@@ -2262,6 +2262,7 @@ p.flowMeasure = {
         data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
         data.avatar1TotalPoints = jsPsych.data.get().last(2).values()[0].avatar1TotalPoints;
         data.avatar2TotalPoints = jsPsych.data.get().last(2).values()[0].avatar2TotalPoints;
+        data.trial_Name = 'FlowMeasure';
 
 
         isSecondTime = true;
