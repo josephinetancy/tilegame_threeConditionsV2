@@ -1532,28 +1532,31 @@ function LLTrial(shape) {
 }
 
 
+/*
+                <div style="width: 100%; height: 30px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
+                    ${avatar1TotalPoints} Points 
+                                <div style="width: 100%; height: 30px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
+                    ${avatar2TotalPoints} Points 
+ 
+                </div> */
+
+
 function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1TotalPoints, avatar2TotalPoints, color) {
     return `
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 20px;">
             <!-- Left Avatar -->
-            <div style="text-align: center;">
-                <div style="font-size:40px; font-weight: bold; margin-bottom: 5px; color: ${color};">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
                     ${avatar1Text}
                 </div>
-                <img src="${avatar1}" style="width: 200px; height: 200px; margin: 0 10px;">
-                <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-                    ${avatar1TotalPoints} Points 
-                </div>
+                <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
             </div>
             <!-- Right Avatar -->
-            <div style="text-align: center;">
-                <div style="font-size:40px; font-weight: bold; margin-bottom: 5px; color: #2669ee;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: #2669ee;">
                     ${avatar2Text}
                 </div>
-                <img src="./avatar/4.jpg" style="width: 200px; height: 200px; margin: 0 10px;">
-                <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-                    ${avatar2TotalPoints} Points 
-                </div>
+                <div><img src="./avatar/4.jpg" style="width: 178px; height: 189px; margin-top: 25px;"></div>
             </div>
         </div>
         <!-- Line at the bottom -->
@@ -1563,16 +1566,14 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1TotalP
     `;
 }
 
+
 function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, color) {
     return `
         <div style="display: flex; flex-direction: column; align-items: center;">
-            <div style="font-size: 40px; font-weight: bold; margin-bottom: 5px; color: ${color};">
+            <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
                 ${avatar1Text}
             </div>
-            <img src="${avatar1}" style="width: 200px; height: 200px;">
-            <div style="width: 100%; height: 40px; background-color: #ddd; display: flex; justify-content: center; align-items: center; font-size: 20px;">
-                ${avatar1TotalPoints} Points
-            </div>
+            <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
         </div>
         <!-- Line at the bottom -->
         <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold;">
@@ -1580,6 +1581,7 @@ function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, co
         </div>
     `;
 }
+
 
 
 
