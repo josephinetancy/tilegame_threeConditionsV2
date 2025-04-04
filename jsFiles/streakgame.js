@@ -2146,52 +2146,65 @@ p.partnerNext = {
     };
 
 
-    p.task.SoloCircleLow = {
-        timeline: [WWLoopSoloCircleLow, LLLoopSoloCircleLow, LWLoopSoloCircleLow, WLLoopSoloCircleLow],
-        randomize_order: true,
-        repetitions: noOfTrials,
-    };
+function createRandomizedTimeline(loopBlocks, noOfTrials) {
+    let randomizedTimeline = [];
+    for (let i = 0; i < noOfTrials; i++) {
+        let shuffled = jsPsych.randomization.shuffle([...loopBlocks]);
+        randomizedTimeline.push(...shuffled);
+    }
+    return randomizedTimeline;
+}
 
-    p.task.SoloCircleHigh = {
-        timeline: [WWLoopSoloCircleHigh, LLLoopSoloCircleHigh, LWLoopSoloCircleHigh, WLLoopSoloCircleHigh],
-        randomize_order: true,
-        repetitions: noOfTrials,
-    }; 
+p.task.SoloCircleLow = {
+    timeline: createRandomizedTimeline(
+        [WWLoopSoloCircleLow, LLLoopSoloCircleLow, LWLoopSoloCircleLow, WLLoopSoloCircleLow],
+        noOfTrials
+    )
+};
 
-    p.task.GroupCircleLow = {
-        timeline: [WWLoopGroupCircleLow, LLLoopGroupCircleLow, LWLoopGroupCircleLow,  WLLoopGroupCircleLow],
-        randomize_order: true,
-        repetitions: noOfTrials,
-    };
+p.task.SoloCircleHigh = {
+    timeline: createRandomizedTimeline(
+        [WWLoopSoloCircleHigh, LLLoopSoloCircleHigh, LWLoopSoloCircleHigh, WLLoopSoloCircleHigh],
+        noOfTrials
+    )
+};
+
+p.task.GroupCircleLow = {
+    timeline: createRandomizedTimeline(
+        [WWLoopGroupCircleLow, LLLoopGroupCircleLow, LWLoopGroupCircleLow, WLLoopGroupCircleLow],
+        noOfTrials
+    )
+};
 
     p.task.GroupCircleHigh = {
-        timeline: [WWLoopGroupCircleHigh, LLLoopGroupCircleHigh, LWLoopGroupCircleHigh,  WLLoopGroupCircleHigh],
-        randomize_order: true,
-        repetitions: noOfTrials,
+        timeline: createRandomizedTimeline(
+            [WWLoopGroupCircleHigh, LLLoopGroupCircleHigh, LWLoopGroupCircleHigh,  WLLoopGroupCircleHigh],
+            noOfTrials
+        )
     };
 
     p.task.SoloSquareLow = {
-        timeline: [WWLoopSoloSquareLow, LLLoopSoloSquareLow, LWLoopSoloSquareLow, WLLoopSoloSquareLow],
-        randomize_order: true,
-        repetitions: noOfTrials,
+        timeline: createRandomizedTimeline([WWLoopSoloSquareLow, LLLoopSoloSquareLow, LWLoopSoloSquareLow, WLLoopSoloSquareLow],
+        noOfTrials
+        )
     };
 
     p.task.SoloSquareHigh = {
-        timeline: [WWLoopSoloSquareHigh, LLLoopSoloSquareHigh, LWLoopSoloSquareHigh, WLLoopSoloSquareHigh],
-        randomize_order: true,
-        repetitions: noOfTrials,
+        timeline: createRandomizedTimeline([WWLoopSoloSquareHigh, LLLoopSoloSquareHigh, LWLoopSoloSquareHigh, WLLoopSoloSquareHigh],
+        noOfTrials
+        )
     };  
 
     p.task.GroupSquareLow = {
-        timeline: [WWLoopGroupSquareLow, LLLoopGroupSquareLow, LWLoopGroupSquareLow,  WLLoopGroupSquareLow],
-        randomize_order: true,
-        repetitions: noOfTrials,
+        timeline: createRandomizedTimeline([WWLoopGroupSquareLow, LLLoopGroupSquareLow, LWLoopGroupSquareLow,  WLLoopGroupSquareLow],
+        noOfTrials
+        )
     };
 
     p.task.GroupSquareHigh = {
-        timeline: [WWLoopGroupSquareHigh, LLLoopGroupSquareHigh, LWLoopGroupSquareHigh,  WLLoopGroupSquareHigh],
-        randomize_order: true,
-        repetitions: noOfTrials,
+        timeline: createRandomizedTimeline([WWLoopGroupSquareHigh, LLLoopGroupSquareHigh, LWLoopGroupSquareHigh,  WLLoopGroupSquareHigh],
+        noOfTrials
+        )
     };
 
 
