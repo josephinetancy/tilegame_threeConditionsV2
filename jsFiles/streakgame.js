@@ -50,8 +50,8 @@ var textNew = {
     groupNext2: randomAssignment % 2 === 1 ? `your partner's performance` : 'random chance', //odd numbers = alone, even = group
     groupAgain: randomAssignment % 2 === 1 ? 'randomly' : '',
     groupAgain2: randomAssignment % 2 === 1 ? '': 'randomly',
-    color: randomAssignment % 2 === 1 ? 'yellow' : `#2669ee`, //odd numbers = alone, even = group
-    color2: randomAssignment % 2 === 1 ? `#2669ee` : 'yellow', //odd numbers = alone, even = group
+    color: randomAssignment % 2 === 1 ? '#2669ee' : `#2669ee`, //odd numbers = alone, even = group
+    color2: randomAssignment % 2 === 1 ? `#2669ee` : '#2669ee', //odd numbers = alone, even = group
     WL: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
     LL: [1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`,
     WLSwitch: [1, 4, 5, 8].includes(randomAssignment) ? `+4` : `+4`,
@@ -937,20 +937,15 @@ function getCorrectAnswers(randomAssignment) {
     console.log(randomAssignment + 'randomassignment in getcorrect answers.')
     console.log(isSecondTime + 'in getCorrectAnswers')
     return {
-   attnChk0: isSecondTime 
-            ? (randomAssignment % 2 === 1 ? `None of the above` : `Random chance`)
-            : (randomAssignment % 2 === 1 ? `Random chance` : `None of the above`),
+        attnChk1: `+8`,
 
-        attnChk1: `Whether or not I pressed SPACE BAR fast enough`,
-        attnChk2: `+8`,
-
-        attnChk3: isSecondTime 
+        attnChk2: isSecondTime 
             ? ([1, 4, 5, 8].includes(randomAssignment) ? `+4` : `+6`)
             : ([1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`),
 
-        attnChk4: `+4`,
+        attnChk3: `+4`,
 
-        attnChk5: isSecondTime 
+        attnChk4: isSecondTime 
             ? ([1, 4, 5, 8].includes(randomAssignment) ? `+4` : `+2`)
             : ([1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`),
     };
@@ -1012,33 +1007,23 @@ function getCorrectAnswers(randomAssignment) {
     
     return [
         {
-            prompt: `What determines whether the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
-            name: `attnChk0`, 
-            options: ['Whether or not I pressed SPACE BAR fast enough', 'Random chance', `None of the above`],
-        },
-        {
-            prompt: `What determines whether the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`,
-            name: `attnChk1`, 
-            options: ['Whether or not I pressed SPACE BAR fast enough', 'Random chance', `None of the above`],
-        },
-        {
             prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} and the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} are activated?`,
-            name: `attnChk2`, 
+            name: `attnChk1`, 
             options: ['+2', '+4', '+6', '+8'],
         },
         {
             prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated but the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is NOT activated?`, 
-            name: `attnChk3`, 
+            name: `attnChk2`, 
             options: ['+2', '+4', '+6', '+8'],
         },
         {
             prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is NOT activated but the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
-            name: `attnChk4`, 
+            name: `attnChk3`, 
             options: ['+2', '+4', '+6', '+8'],
         },
         {
             prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} and the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} are NOT activated?`, 
-            name: `attnChk5`, 
+            name: `attnChk4`, 
             options: ['+2', '+4', '+6', '+8'],
         },
     ];
@@ -1595,7 +1580,7 @@ function generateAvatarFeedbackLast(avatar1, avatar1Text, avatar2Text, avatar1To
         </div>
         <!-- Line at the bottom -->
         <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold;">
-            The trial is now complete!
+            The game is now complete!
         </div>
     `;
 }
@@ -1626,7 +1611,7 @@ function generateSoloAvatarFeedbackLast(avatar1, avatar1Text, avatar1TotalPoints
         </div>
         <!-- Line at the bottom -->
         <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold;">
-            The trial is now complete!
+            The game is now complete!
         </div>
     `;
 }
@@ -1716,7 +1701,7 @@ function MakeFeedback(mode) {
             return feedbackText;
         },
         choices: "NO_KEYS",
-        trial_duration: 3500,
+        trial_duration: 2500,
         on_finish: (data) => {
             data.randomAssignment = randomAssignment;
             data.avatar1TotalPoints = avatar1TotalPoints;
