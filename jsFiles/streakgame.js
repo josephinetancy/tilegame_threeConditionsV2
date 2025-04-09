@@ -1314,7 +1314,7 @@ function WWTrial(shape, group) {
             trialStartTime = Date.now();
             console.log('Selected color:', trial.selected_color); // Log the selected color
 
-            let color = group === 'solo' ? '#FFFF00' : '#2669ee';
+            let color = group === 'solo' ? '#2669ee' : '#2669ee';
 
             jsPsych.pluginAPI.setTimeout(() => {
                 const outerCircle = document.getElementById('outer-shape');
@@ -1435,7 +1435,7 @@ function LWTrial(shape, group) {
 
         on_start: function(trial) {
             trialStartTime = Date.now();
-            let color = group === 'solo' ? '#FFFF00' : '#2669ee';
+            let color = group === 'solo' ? '#2669ee' : '#2669ee';
 
             jsPsych.pluginAPI.setTimeout(() => {
                 const outerCircle = document.getElementById('outer-shape');
