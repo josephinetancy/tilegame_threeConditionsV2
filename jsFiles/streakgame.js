@@ -1350,7 +1350,6 @@ function WWTrial(shape, group) {
             data.partner_outcome = 1;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-            trialNumber = jsPsych.data.get().last(1).values()[0].trialNumber;
             data.trialNumber = trialNumber;
             console.log(trialNumber);
             data.trial_Name = 'MakeTrial';
@@ -1404,7 +1403,6 @@ function WLTrial(shape) {
             data.partner_outcome = 0;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-            trialNumber = jsPsych.data.get().last(1).values()[0].trialNumber;
             data.trialNumber = trialNumber;
             console.log(trialNumber);
             data.trial_Name = 'MakeTrial';
@@ -1474,7 +1472,6 @@ function LWTrial(shape, group) {
             data.partner_outcome = 1;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-            trialNumber = jsPsych.data.get().last(1).values()[0].trialNumber;
             data.trialNumber = trialNumber;
             console.log(trialNumber);
             data.trial_Name = 'MakeTrial';
@@ -1537,9 +1534,7 @@ function LLTrial(shape) {
             data.partner_outcome = 0;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             data.shape = shape;
-            trialNumber = jsPsych.data.get().last(1).values()[0].trialNumber;
             data.trialNumber = trialNumber;
-            console.log(trialNumber);
             data.trial_Name = 'MakeTrial';
         }
     };
@@ -1730,6 +1725,7 @@ function MakeFeedback(mode) {
             data.pointsAddedAvatar2 = pointsAddedAvatar2;
             data.groupOrSolo = groupOrSolo;
             data.MI = MI;
+            console.log(trialNumber);
             data.trialNumber = trialNumber;
             trialNumber++;
             data.shape = jsPsych.data.get().last(2).values()[0].shape;
