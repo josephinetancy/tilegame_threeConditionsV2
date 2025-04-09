@@ -125,6 +125,8 @@ function MakeAvatarSelection() {
 
             data.avatarResponse = avatarResponse;
             data.isSecondTime = isSecondTime;
+            data.trialNumber = trialNumber;
+            console.log(trialNumber)
 
             // Add properties globally
             jsPsych.data.addProperties({ avatarResponse, isSecondTime, randomAssignment});
@@ -160,7 +162,7 @@ let avatarResponse = '#2669ee';
 
                 `<div class='parent'>
                 <p> For both games, you'll earn points. </p>
-                <p>Each point is worth 2 cents in bonus money. </p>
+                <p>Every 5 points is worth 1 cent in bonus money. </p>
                 You'll keep all the bonus money you earn on top of the $X you earn for your participation. </p>
                 <p>To maximize your earnings, earn as many points as possible!</p>
                 </div>`,
@@ -406,7 +408,7 @@ let avatarResponse = '#2669ee';
                 ],
 soloPage: [
     `<div class='specialOnly'>
-        <p>You'll earn points based on these rules. Remember that each point is worth 2 cents. </p> 
+        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p> 
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container">
             <table style="border-collapse: collapse; text-align: center;">
@@ -466,7 +468,7 @@ soloPage: [
 ],
 soloPage2: [
     `<div class='specialOnly'>
-        <p>You'll earn points based on these rules. Remember that each point is worth 2 cents. </p> 
+        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p> 
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container">
             <table style="border-collapse: collapse; text-align: center;">
@@ -526,7 +528,7 @@ soloPage2: [
 ],
 groupPage: [
 `<div class='parent'>
-        <p>You'll earn points based on these rules. Remember that each point is worth 2 cents.</p> 
+        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p> 
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
             <table style="border-collapse: collapse; text-align: center;">
@@ -607,7 +609,7 @@ groupPage: [
 ],
 groupPage2: [
 `<div class='parent'>
-        <p>You'll earn points based on these rules. Remember that each point is worth 2 cents.</p> 
+        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p> 
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
             <table style="border-collapse: collapse; text-align: center;">
@@ -1094,16 +1096,16 @@ function getCorrectAnswers(randomAssignment) {
     <p><b>Consent Form<br>
 
     <p><b>Description</b><br>
-    You are invited to participate in a research study on how humans enjoy different tasks. You'll be asked to participate in a short game that involves hitting a space bar to activate a tile. Then you'll be asked to answer various questions about your experience./p>
+    You are invited to participate in a research study on how humans enjoy different tasks. You'll be asked to participate in a short game that involves hitting a space bar to activate a tile. Then you'll be asked to answer various questions about your experience.</p>
 
     <p><b>Time Involvement</b><br>
-    Your participation will take approximately 20 minutes. 
+    Your participation will take approximately 18 minutes. 
 
     <p><b>Risks and Benefits</b><br>
     The risks associated with this study are not anticipated to be beyond those involved in normal, daily computer use. There are no foreseeable psychological risks and benefits beyond those involved in normal, daily life. The benefits which may reasonably be expected to result from this study are none. We cannot and do not guarantee or promise that you will receive any benefits from this study.
     
     <p><b>Payment</b><br>
-    You will receive $4.60 payment for your participation.
+    You will receive $4.60 payment for your participation. You'll receive an additional bonus based on your performance in the experiment.  
 
      <p><b>Payment</b><br>
     If you have read this form and have decided to participate in this project, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. The alternative is not to participate. You have the right to refuse to answer particular questions. The results of this research study may be presented at scientific or professional meetings or published in scientific journals. Your individual privacy will be maintained in all published and written data resulting from the study.
@@ -1111,8 +1113,8 @@ function getCorrectAnswers(randomAssignment) {
 
     <p><b>Contact Information:</b><br>
     Questions: If you have any questions, concerns or complaints about this research, its procedures, risks and benefits, contact the Protocol Director, Josephine Tan (josetan@stanford.edu) or Assistant Professor David Melnikoff (dmelnik@stanford.edu).
-    Independent Contact: If you are not satisfied with how this study is being conducted, or if you have any concerns, complaints, or general questions about the research or your rights as a participant, please contact the Stanford Institutional Review Board (IRB) to speak to someone independent of the research team at (650)-723-2480 or toll free at 1-866-680-2906, or email at irbnonmed@stanford.edu. You can also write to the Stanford IRB, Stanford University, 1705 El Camino Real, Palo Alto, CA 94306.
-    If you agree to participate, press the "Next" button to indicate that you consent to participate in the study.</p>`
+    Independent Contact: If you are not satisfied with how this study is being conducted, or if you have any concerns, complaints, or general questions about the research or your rights as a participant, please contact the Stanford Institutional Review Board (IRB) to speak to someone independent of the research team at (650)-723-2480 or toll free at 1-866-680-2906, or email at irbnonmed@stanford.edu. You can also write to the Stanford IRB, Stanford University, 1705 El Camino Real, Palo Alto, CA 94306. </p>
+    <p>If you agree to participate, press the "Next" button to indicate that you consent to participate in the study.</p>`
 
 
 
@@ -1275,7 +1277,7 @@ variables for plugins
 ///
 */
 
-let noOfTrials = 15; //so 60 in total
+let noOfTrials = 2; //so 60 in total
 
 ///fake participant's activation time for WL and LL trials, that far exceeds trial duration
 let partner_rtL = 20000; //for when partner "loses".
@@ -1348,6 +1350,9 @@ function WWTrial(shape, group) {
             data.partner_outcome = 1;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+            trialNumber = jsPsych.data.get().last(1).values()[0].trialNumber;
+            data.trialNumber = trialNumber;
+            console.log(trialNumber);
             data.trial_Name = 'MakeTrial';
         },
     };
@@ -1399,6 +1404,9 @@ function WLTrial(shape) {
             data.partner_outcome = 0;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+            trialNumber = jsPsych.data.get().last(1).values()[0].trialNumber;
+            data.trialNumber = trialNumber;
+            console.log(trialNumber);
             data.trial_Name = 'MakeTrial';
         },
     };
@@ -1466,6 +1474,9 @@ function LWTrial(shape, group) {
             data.partner_outcome = 1;
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+            trialNumber = jsPsych.data.get().last(1).values()[0].trialNumber;
+            data.trialNumber = trialNumber;
+            console.log(trialNumber);
             data.trial_Name = 'MakeTrial';
         }
     };
@@ -1526,6 +1537,9 @@ function LLTrial(shape) {
             data.partner_outcome = 0;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             data.shape = shape;
+            trialNumber = jsPsych.data.get().last(1).values()[0].trialNumber;
+            data.trialNumber = trialNumber;
+            console.log(trialNumber);
             data.trial_Name = 'MakeTrial';
         }
     };
@@ -1566,6 +1580,31 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1TotalP
     `;
 }
 
+function generateAvatarFeedbackLast(avatar1, avatar1Text, avatar2Text, avatar1TotalPoints, avatar2TotalPoints, color) {
+    return `
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 20px;">
+            <!-- Left Avatar -->
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
+                    ${avatar1Text}
+                </div>
+                <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
+            </div>
+            <!-- Right Avatar -->
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: #2669ee;">
+                    ${avatar2Text}
+                </div>
+                <div><img src="./avatar/4.jpg" style="width: 178px; height: 189px; margin-top: 25px;"></div>
+            </div>
+        </div>
+        <!-- Line at the bottom -->
+        <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold;">
+            That was your last tile!
+        </div>
+    `;
+}
+
 
 function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, color) {
     return `
@@ -1582,7 +1621,20 @@ function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, co
     `;
 }
 
-
+function generateSoloAvatarFeedbackLast(avatar1, avatar1Text, avatar1TotalPoints, color) {
+    return `
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
+                ${avatar1Text}
+            </div>
+            <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
+        </div>
+        <!-- Line at the bottom -->
+        <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold;">
+            That was your last tile!
+        </div>
+    `;
+}
 
 
 const avatarChoices = [
@@ -1606,10 +1658,12 @@ function MakeFeedback(mode) {
         data: { type: `${mode}` },
         stimulus: () => {
             const lastTrialData = jsPsych.data.get().last(1).values()[0];
+            console.log(lastTrialData);
             let avatarResponse = jsPsych.data.get().filter({ trial_type: 'html-button-response' }).last(1).values()[0].avatarResponse;
+            let trialNumber = lastTrialData.trialNumber;
+            console.log(trialNumber)
             let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
             let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
-
             const partner_rt = lastTrialData.partner_rt;
             const partner_outcome = lastTrialData.partner_outcome;
 
@@ -1653,9 +1707,16 @@ function MakeFeedback(mode) {
             avatar1TotalPoints += pointsAddedAvatar1;
             avatar2TotalPoints += pointsAddedAvatar2;
 
-            feedbackText = groupOrSolo === "group"
-                ? generateAvatarFeedback(selectedAvatarImg, `+${pointsAddedAvatar1}`, `+${pointsAddedAvatar2}`, avatar1TotalPoints, avatar2TotalPoints, avatarResponse)
-                : generateSoloAvatarFeedback(selectedAvatarImg, `+${pointsAddedAvatar1}`, avatar1TotalPoints, avatarResponse);
+
+            if (trialNumber === 8 || trialNumber === 119) {
+                feedbackText = groupOrSolo === "group"
+        ? generateAvatarFeedbackLast(selectedAvatarImg, `+${pointsAddedAvatar1}`, `+${pointsAddedAvatar2}`, avatar1TotalPoints, avatar2TotalPoints, avatarResponse)
+        : generateSoloAvatarFeedbackLast(selectedAvatarImg, `+${pointsAddedAvatar1}`, avatar1TotalPoints, avatarResponse);
+    } else {
+        feedbackText = groupOrSolo === "group"
+        ? generateAvatarFeedback(selectedAvatarImg, `+${pointsAddedAvatar1}`, `+${pointsAddedAvatar2}`, avatar1TotalPoints, avatar2TotalPoints, avatarResponse)
+        : generateSoloAvatarFeedback(selectedAvatarImg, `+${pointsAddedAvatar1}`, avatar1TotalPoints, avatarResponse);
+}
 
             return feedbackText;
         },
@@ -1675,11 +1736,11 @@ function MakeFeedback(mode) {
             data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
             data.trialType = jsPsych.data.get().last(2).values()[0].trialType;
             data.partner_outcome = jsPsych.data.get().last(2).values()[0].partner_outcome;
-            data.partner_outcome = jsPsych.data.get().last(2).values()[0].outcome;
+            data.outcome = jsPsych.data.get().last(2).values()[0].outcome;
             data.rt = jsPsych.data.get().last(2).values()[0].rt;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-            data.trial_Name = 'MakeFeedback';
-            console.log(data); 
+            data.trial_Name = 'MakeFeedback'; 
+            console.log(data)
         }
     };
 }
