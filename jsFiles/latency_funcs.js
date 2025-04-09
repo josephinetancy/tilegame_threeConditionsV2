@@ -14,9 +14,9 @@ const jsPsych = initJsPsych({
                     <p>Thank you for participating!<p>
                     <b>You will be automatically re-directed to Prolific in a few moments.</b>
                 </div>`;
-//            setTimeout(() => { 
-//                location.href = `https://app.prolific.co/submissions/complete?cc=${completionCode}`
-//            }, 1000);
+            setTimeout(() => { 
+                location.href = `https://app.prolific.co/submissions/complete?cc=${completionCode}`
+            }, 1000);
         }
     },
 }); 
@@ -30,7 +30,7 @@ jsPsych.data.addProperties({ subject: subject_id });
 const filename = `${subject_id}.csv`;
 
 // define completion code for Prolific
-const completionCode = "050505"; // need to change to prolific completion code
+const completionCode = "CX5ABNV3"; // need to change to prolific completion code
 
 let boot = false;
 
