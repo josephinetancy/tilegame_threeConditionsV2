@@ -1084,7 +1084,7 @@ function getCorrectAnswers(randomAssignment) {
     You are invited to participate in a research study on how humans enjoy different tasks. You'll be asked to participate in a short game that involves hitting a space bar to activate a tile. Then you'll be asked to answer various questions about your experience.</p>
 
     <p><b>Time Involvement</b><br>
-    Your participation will take approximately 18 minutes. 
+    Your participation will take approximately 16 minutes. 
 
     <p><b>Risks and Benefits</b><br>
     The risks associated with this study are not anticipated to be beyond those involved in normal, daily computer use. There are no foreseeable psychological risks and benefits beyond those involved in normal, daily life. The benefits which may reasonably be expected to result from this study are none. We cannot and do not guarantee or promise that you will receive any benefits from this study.
@@ -1701,7 +1701,7 @@ function MakeFeedback(mode) {
             return feedbackText;
         },
         choices: "NO_KEYS",
-        trial_duration: 2500,
+        trial_duration: 2000,
         on_finish: (data) => {
             data.randomAssignment = randomAssignment;
             data.avatar1TotalPoints = avatar1TotalPoints;
