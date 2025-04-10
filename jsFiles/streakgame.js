@@ -1,6 +1,6 @@
 //randomAssignment
 const randomAssignment = Math.floor(Math.random() * 8) + 1; 
-//randomAssignment = 3;
+
 console.log(randomAssignment + " randomAssignment")
 
 /* 
@@ -1273,7 +1273,7 @@ let delayTime = 400;
 let trialforWins = 750;
 
 //trial duration times for LL and LW times 
-let trialforLose = 250;
+let trialforLose = 215;
 
 /* 
 //
@@ -1429,7 +1429,7 @@ function LWTrial(shape, group) {
             return lastTrial ? lastTrial.avatarResponse : null;
         },
 
-        partner_rt: function(min = 225, max = 235) {
+        partner_rt: function(min = 200, max = 213) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
 
