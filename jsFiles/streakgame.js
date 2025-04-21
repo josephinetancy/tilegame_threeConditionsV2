@@ -398,8 +398,6 @@ let avatarResponse = '#2669ee';
     </div>
 </div>`
 
-
-
                 ],
 soloPage: [
     `<div class='specialOnly'>
@@ -1296,7 +1294,6 @@ function WWTrial(shape, group) {
     </div>
     <div class="shape-label">
         <div id="outer-shape" class="${outerShapeClass}"></div>
-        <div class="label">Your Partner</div>
     </div>
 </div>
 
@@ -1371,7 +1368,6 @@ function WLTrial(shape) {
     </div>
     <div class="shape-label">
         <div id="outer-shape" class="${outerShapeClass}"></div>
-        <div class="label">Your Partner</div>
     </div>
 </div>
         `,
@@ -1430,7 +1426,6 @@ function LWTrial(shape, group) {
     </div>
     <div class="shape-label">
         <div id="outer-shape" class="${outerShapeClass}"></div>
-        <div class="label">Your Partner</div>
     </div>
 </div>
 
@@ -1504,7 +1499,6 @@ function LLTrial(shape) {
     </div>
     <div class="shape-label">
         <div id="outer-shape" class="${outerShapeClass}"></div>
-        <div class="label">Your Partner</div>
     </div>
 </div>
 
