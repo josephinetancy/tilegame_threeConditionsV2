@@ -31,13 +31,13 @@ let timeline = [];
 */
 
 const commonTimeline = [
-    p.intro.preMessage,
+ //   p.intro.preMessage,
     p.intro.r1part1,
     p.intro.round1Avatars,
-    p.intro.r1part1a,
-    p.intro.r1part2,
-    p.intro.r1soloHigh, 
-   p.intro.r1check,
+   p.intro.r1part1a,
+   p.intro.r1part2,
+   p.intro.r1soloHigh, 
+ //  p.intro.r1check, 
 ];
 
 /*

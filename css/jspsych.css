@@ -230,7 +230,7 @@
 .parent {
   position: relative;
   width: 950px;
- height: 390px; 
+ height: 600px; 
  /* height: auto; */
 }
 
@@ -303,11 +303,52 @@
     border-radius: 0; /* No rounding */
 }
 
+.shapes-container {
+    display: flex;
+    gap: 80px; /* space between shapes */
+    justify-content: center; /* center the pair horizontally */
+}
+
+.shape-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.table-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    align-items: center;
+}
+
+#inner-shape, #outer-shape {
+    width: 150px;
+    height: 150px;
+    border: 10px solid black;
+    background-color: white;
+}
+
+.label {
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+}
+
 /* Sizes for outer and inner shapes */
+
+/*
 #outer-shape {
     width: 150px;
     height: 150px;
-    position: relative; /* So inner shape is positioned relative to this */
+    position: relative; 
     border: 5px solid black;
     background-color: white;
     display: flex;
@@ -320,12 +361,12 @@
     height: 100px;
     background-color: white;
     border: 5px solid black;
-    position: absolute; /* Positioned inside the outer shape */
+    position: absolute; 
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centers the inner shape inside the outer shape */
+    transform: translate(-50%, -50%); 
 }
-
+*/
 
 #shape-wrapper {
     display: flex;
