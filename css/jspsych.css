@@ -230,14 +230,14 @@
 .parent {
   position: relative;
   width: 950px;
- height: 600px; 
+ height: 400px; 
  /* height: auto; */
 }
 
 .special {
   position: relative;
   width: 950px;
- height: 250px; 
+ height: 600px; 
  /* height: auto; */
 }
 

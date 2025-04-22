@@ -16,17 +16,17 @@ let timeline = [];
 
 /* 
 
-1 = SoloCircleHigh + GroupSquareLow 
-2 = GroupSquareLow + SoloCircleHigh
+1 = IndCircle + IntSquareLow 
+2 = IndCircle + IntSquareHigh
 
-3 = SoloCircleLow + GroupSquareHigh
-4 = GroupSquareHigh + SoloCircleLow
+3 = IntSquareLow + IndCircle 
+4 = IntSquareHigh + IndCircle
 
-5 = SoloSquareHigh + GroupCircleLow 
-6 = GroupCircleLow + SoloSquareHigh 
+5 = IndSquare + IntCircleLow 
+6 = IndSquare + IntCircleHigh
 
-7 = SoloSquareLow + GroupCircleHigh 
-8 = GroupCircleHigh + SoloSquareLow
+7 = IntCircleLow + IndSquare
+8 = IntCircleHigh + IndSquare
 
 */
 
@@ -36,7 +36,7 @@ const commonTimeline = [
     p.intro.round1Avatars,
    p.intro.r1part1a,
    p.intro.r1part2,
- //  p.intro.r1soloHigh, 
+   p.intro.r1soloHigh, 
  //  p.intro.r1check, 
 ];
 
