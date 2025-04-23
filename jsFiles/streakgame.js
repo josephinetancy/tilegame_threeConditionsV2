@@ -1572,7 +1572,7 @@ function LLTrial(shape) {
 
 function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, color) {
     return `
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 20px;">
+        <div style="display: flex; justify-content: center; align-items: flex-start; gap: 80px; padding: 20px;">
             <!-- Left Avatar -->
             <div style="display: flex; flex-direction: column; align-items: center;">
                 <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
