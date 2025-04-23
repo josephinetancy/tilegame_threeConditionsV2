@@ -262,6 +262,14 @@
  /* height: auto; */
 }
 
+.attnChkOnly {
+  position: relative;
+  width: 950px;
+ height: 300px; 
+ /* height: auto; */
+}
+
+
 .box{
   position: absolute;
   top: 50%;

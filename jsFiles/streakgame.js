@@ -18,6 +18,18 @@ console.log(randomAssignment + " randomAssignment")
 7 = SoloSquareLow + GroupCircleHigh 
 8 = GroupCircleHigh + SoloSquareLow
 
+1 = IntSquareLow + IndCircle 
+2 = IntSquareHigh + IndCircle
+
+3 = IndCircle + IntSquareLow 
+4 = IndCircle + IntSquareHigh
+
+5 = IntCircleLow + IndSquare
+6 = IntCircleHigh + IndSquare
+
+7 = IndSquare + IntCircleLow 
+8 = IndSquare + IntCircleHigh
+
 */
  
 
@@ -422,8 +434,8 @@ soloPage: [
             <td>
                 <div class="${textNew.shape1}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+6</td>
-            <td>+6</td>
+            <td>+8</td>
+            <td>+8</td>
         </tr>
         <tr>
             <td style="padding-right: 40px;">
@@ -432,7 +444,7 @@ soloPage: [
             <td>
                 <div class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+6</td>
+            <td>+8</td>
             <td>+2</td>
         </tr>
         <tr>
@@ -443,7 +455,7 @@ soloPage: [
                 <div class="${textNew.shape1}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
             <td>+2</td>
-            <td>+6</td>
+            <td>+8</td>
         </tr>
         <tr>
             <td>
@@ -934,14 +946,16 @@ function getCorrectAnswers(randomAssignment) {
         attnChk1: `+8`,
 
         attnChk2: isSecondTime 
-            ? ([1, 4, 5, 8].includes(randomAssignment) ? `+4` : `+6`)
-            : ([1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`),
+            ? ([3, 4, 7, 8].includes(randomAssignment) ? `+4` : `+6`)
+            : ([3, 4, 7, 8].includes(randomAssignment) ? `+8` : `+4`),
 
-        attnChk3: `+4`,
+       attnChk3: isSecondTime 
+            ? ([3, 4, 7, 8].includes(randomAssignment) ? `+4` : `+6`)
+            : ([3, 4, 7, 8].includes(randomAssignment) ? `+2` : `+4`),
 
         attnChk4: isSecondTime 
-            ? ([1, 4, 5, 8].includes(randomAssignment) ? `+4` : `+2`)
-            : ([1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`),
+            ? ([3, 4, 7, 8].includes(randomAssignment) ? `+4` : `+2`)
+            : ([3, 4, 7, 8].includes(randomAssignment) ? `+2` : `+4`),
     };
 }
 
@@ -964,7 +978,7 @@ function getCorrectAnswers(randomAssignment) {
 
     let attnChkDiv = isSecondTime 
                 ? (randomAssignment % 2 === 1 ? `attnChkGrp` : `parent`)
-                : (randomAssignment % 2 === 1 ? `parent` : `attnChkGrp`);
+                : (randomAssignment % 2 === 1 ? `attnChkOnly` : `attnChkGrp`);
     let sologroupPages = isSecondTime 
                 ? (randomAssignment % 2 === 1 ? pages.r1.groupPage2 : pages.r1.soloPage2)
                 : (randomAssignment % 2 === 1 ? pages.r1.soloPage : pages.r1.groupPage);
@@ -973,10 +987,10 @@ function getCorrectAnswers(randomAssignment) {
        let preambleText = `
         <div class='${attnChkDiv}'> 
             <p> To recap, in the ${isSecondTime ? textNew.game2 : textNew.game1}: </p>
+            <p> You activate the left ${isSecondTime ? textNew.shape2 : textNew.shape1} with your SPACE BAR. </p>
             ${sologroupPages === pages.r1.groupPage2 || sologroupPages === pages.r1.groupPage
-                ? `<p> Your partner activates the outer ${isSecondTime ? textNew.shape2 : textNew.shape1}. </p>` 
-                : `<p> The outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated based on ${isSecondTime ? textNew.groupNext2 : textNew.groupNext}. </p>`}
-            <p> You activate the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} with your SPACE BAR. </p>
+                ? `<p> Your partner activates the right ${isSecondTime ? textNew.shape2 : textNew.shape1}. </p>` 
+                : `<p> Your partner activates the right ${isSecondTime ? textNew.shape2 : textNew.shape1}. </p>`}
 
     `;
 
@@ -1001,22 +1015,22 @@ function getCorrectAnswers(randomAssignment) {
     
     return [
         {
-            prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} and the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} are activated?`,
+            prompt: `How many points do you get when the left ${isSecondTime ? textNew.shape2 : textNew.shape1} and the right ${isSecondTime ? textNew.shape2 : textNew.shape1} are activated?`,
             name: `attnChk1`, 
             options: ['+2', '+4', '+6', '+8'],
         },
         {
-            prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated but the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is NOT activated?`, 
+            prompt: `How many points do you get when the left ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated but the right ${isSecondTime ? textNew.shape2 : textNew.shape1} is NOT activated?`, 
             name: `attnChk2`, 
             options: ['+2', '+4', '+6', '+8'],
         },
         {
-            prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} is NOT activated but the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
+            prompt: `How many points do you get when the left ${isSecondTime ? textNew.shape2 : textNew.shape1} is NOT activated but the right ${isSecondTime ? textNew.shape2 : textNew.shape1} is activated?`, 
             name: `attnChk3`, 
             options: ['+2', '+4', '+6', '+8'],
         },
         {
-            prompt: `How many points do you get when the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} and the outer ${isSecondTime ? textNew.shape2 : textNew.shape1} are NOT activated?`, 
+            prompt: `How many points do you get when the left ${isSecondTime ? textNew.shape2 : textNew.shape1} and the right ${isSecondTime ? textNew.shape2 : textNew.shape1} are NOT activated?`, 
             name: `attnChk4`, 
             options: ['+2', '+4', '+6', '+8'],
         },
@@ -1556,20 +1570,20 @@ function LLTrial(shape) {
                 </div> */
 
 
-function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1TotalPoints, avatar2TotalPoints, color) {
+function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, color) {
     return `
         <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 20px;">
             <!-- Left Avatar -->
             <div style="display: flex; flex-direction: column; align-items: center;">
                 <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
-                    ${avatar1Text}
+                    +${avatar1Text}
                 </div>
                 <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
             </div>
             <!-- Right Avatar -->
             <div style="display: flex; flex-direction: column; align-items: center;">
                 <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: #2669ee;">
-                    ${avatar2Text}
+                    +${avatar2Text}
                 </div>
                 <div><img src="./avatar/4.jpg" style="width: 178px; height: 189px; margin-top: 25px;"></div>
             </div>
@@ -1581,7 +1595,7 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, avatar1TotalP
     `;
 }
 
-function generateAvatarFeedbackLast(avatar1, avatar1Text, avatar2Text, avatar1TotalPoints, avatar2TotalPoints, color) {
+function generateAvatarFeedbackLast(avatar1, avatar1Text, avatar2Text, color) {
     return `
         <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 20px;">
             <!-- Left Avatar -->
@@ -1606,7 +1620,7 @@ function generateAvatarFeedbackLast(avatar1, avatar1Text, avatar2Text, avatar1To
     `;
 }
 
-
+/*
 function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, color) {
     return `
         <div style="display: flex; flex-direction: column; align-items: center;">
@@ -1635,7 +1649,7 @@ function generateSoloAvatarFeedbackLast(avatar1, avatar1Text, avatar1TotalPoints
             The game is now complete!
         </div>
     `;
-}
+} */
 
 
 const avatarChoices = [
@@ -1644,14 +1658,13 @@ const avatarChoices = [
     { color: 'Red', code: '#800000', img: './avatar/3.jpg' }
 ];
 
-
 function MakeFeedback(mode) {
     let avatar1TotalPoints = 0;
     let avatar2TotalPoints = 0;
     let pointsAddedAvatar1 = 0;
     let pointsAddedAvatar2 = 0;
 
-    const groupOrSolo = mode.includes("group") ? "group" : "solo";
+    const groupOrind = mode.includes("group") ? "group" : "ind";
     const MI = mode.includes("High") ? "high" : "low";
 
     return {
@@ -1659,10 +1672,8 @@ function MakeFeedback(mode) {
         data: { type: `${mode}` },
         stimulus: () => {
             const lastTrialData = jsPsych.data.get().last(1).values()[0];
-            console.log(lastTrialData);
             let avatarResponse = jsPsych.data.get().filter({ trial_type: 'html-button-response' }).last(1).values()[0].avatarResponse;
             let trialNumber = lastTrialData.trialNumber;
-            console.log(trialNumber)
             let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
             let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
             const partner_rt = lastTrialData.partner_rt;
@@ -1684,11 +1695,19 @@ function MakeFeedback(mode) {
                     pointsAddedAvatar1 = 4;
                     pointsAddedAvatar2 = 6;
                 }
-            } else if (mode === 'soloHigh') {
-                if (lastTrialData.outcome) {
-                    pointsAddedAvatar1 = partner_outcome === 0 ? 6 : 8;
-                } else {
-                    pointsAddedAvatar1 = partner_outcome === 0 ? 2 : 4;
+            } else if (mode === 'ind') {
+                if (lastTrialData.outcome && partner_outcome === 0) {
+                    pointsAddedAvatar1 = 8;
+                    pointsAddedAvatar2 = 2;
+                } else if (lastTrialData.outcome && partner_outcome === 1) {
+                    pointsAddedAvatar1 = 8;
+                    pointsAddedAvatar2 = 8;
+                } else if (!lastTrialData.outcome && partner_outcome === 0) {
+                    pointsAddedAvatar1 = 2;
+                    pointsAddedAvatar2 = 2;
+                } else if (!lastTrialData.outcome && partner_outcome === 1) { 
+                    pointsAddedAvatar1 = 2;
+                    pointsAddedAvatar2 = 8;
                 }
             } else if (mode === 'groupLow') {
                 if (lastTrialData.outcome && partner_outcome === 0) {
@@ -1701,51 +1720,53 @@ function MakeFeedback(mode) {
                     pointsAddedAvatar1 = 4;
                     pointsAddedAvatar2 = 4;
                 }
-            } else if (mode === 'soloLow') {
-                pointsAddedAvatar1 = lastTrialData.outcome ? (partner_outcome === 0 ? 4 : 8) : 4;
             }
 
             avatar1TotalPoints += pointsAddedAvatar1;
             avatar2TotalPoints += pointsAddedAvatar2;
 
-
             if (trialNumber === 60 || trialNumber === 120) {
-                feedbackText = groupOrSolo === "group"
-        ? generateAvatarFeedbackLast(selectedAvatarImg, `+${pointsAddedAvatar1}`, `+${pointsAddedAvatar2}`, avatar1TotalPoints, avatar2TotalPoints, avatarResponse)
-        : generateSoloAvatarFeedbackLast(selectedAvatarImg, `+${pointsAddedAvatar1}`, avatar1TotalPoints, avatarResponse);
-    } else {
-        feedbackText = groupOrSolo === "group"
-        ? generateAvatarFeedback(selectedAvatarImg, `+${pointsAddedAvatar1}`, `+${pointsAddedAvatar2}`, avatar1TotalPoints, avatar2TotalPoints, avatarResponse)
-        : generateSoloAvatarFeedback(selectedAvatarImg, `+${pointsAddedAvatar1}`, avatar1TotalPoints, avatarResponse);
-}
+                feedbackText = generateAvatarFeedbackLast(
+                    selectedAvatarImg,
+                    +pointsAddedAvatar1,
+                    +pointsAddedAvatar2,
+                    avatarResponse
+                );
+            } else {
+                feedbackText = generateAvatarFeedback(
+                    selectedAvatarImg,
+                    +pointsAddedAvatar1,
+                    +pointsAddedAvatar2,
+                    avatarResponse
+                );
+            }
 
             return feedbackText;
         },
         choices: "NO_KEYS",
         trial_duration: 2000,
         on_finish: (data) => {
+            const lastTrial = jsPsych.data.get().last(2).values()[0];
             data.randomAssignment = randomAssignment;
             data.avatar1TotalPoints = avatar1TotalPoints;
             data.avatar2TotalPoints = avatar2TotalPoints;
-            data.pointsAddedAvatar1 = pointsAddedAvatar1; 
+            data.pointsAddedAvatar1 = pointsAddedAvatar1;
             data.pointsAddedAvatar2 = pointsAddedAvatar2;
-            data.groupOrSolo = groupOrSolo;
+            data.groupOrSolo = groupOrind;
             data.MI = MI;
-            console.log(trialNumber);
-            data.trialNumber = trialNumber;
-            trialNumber++;
-            data.shape = jsPsych.data.get().last(2).values()[0].shape;
-            data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
-            data.trialType = jsPsych.data.get().last(2).values()[0].trialType;
-            data.partner_outcome = jsPsych.data.get().last(2).values()[0].partner_outcome;
-            data.outcome = jsPsych.data.get().last(2).values()[0].outcome;
-            data.rt = jsPsych.data.get().last(2).values()[0].rt;
+            data.trialNumber = lastTrial.trialNumber + 1;
+            data.shape = lastTrial.shape;
+            data.selected_color = lastTrial.selected_color;
+            data.trialType = lastTrial.trialType;
+            data.partner_outcome = lastTrial.partner_outcome;
+            data.outcome = lastTrial.outcome;
+            data.rt = lastTrial.rt;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             data.trial_Name = 'MakeFeedback'; 
-            console.log(data)
         }
     };
 }
+
 
 
 function MakeRoundIntro(round) {
@@ -1988,19 +2009,19 @@ p.partnerNext = {
     var LLTrialCircle = new LLTrial('circle'),
         LLTrialSquare = new LLTrial('square'),
         LWTrialCircleGroup = new LWTrial('circle', 'group'),
-        LWTrialCircleSolo = new LWTrial('circle', 'solo'),
+        LWTrialCircleind = new LWTrial('circle', 'ind'),
         LWTrialSquareGroup = new LWTrial('square', 'group'),
-        LWTrialSquareSolo = new LWTrial('square', 'solo'),
+        LWTrialSquareind = new LWTrial('square', 'ind'),
         WLTrialCircle = new WLTrial('circle'),
         WLTrialSquare = new WLTrial('square'),
         WWTrialCircleGroup = new WWTrial('circle', 'group'),
-        WWTrialCircleSolo = new WWTrial('circle', 'solo'),
+        WWTrialCircleind = new WWTrial('circle', 'ind'),
         WWTrialSquareGroup = new WWTrial('square', 'group'),
-        WWTrialSquareSolo = new WWTrial('square', 'solo'),
+        WWTrialSquareind = new WWTrial('square', 'ind'),
         feedbackGroupHigh = new MakeFeedback('groupHigh'),
         feedbackGroupLow = new MakeFeedback('groupLow'),
-        feedbackSoloHigh = new MakeFeedback('soloHigh'),
-        feedbackSoloLow = new MakeFeedback('soloLow'),
+ //       feedbackSoloHigh = new MakeFeedback('ind'),
+        feedbackind = new MakeFeedback('ind'),
         avatarChoice1 = new MakeAvatarSelection(),
         delayR1 = new MakeDelay('R1'),
         delayR2 = new MakeDelay('R2'),
@@ -2071,36 +2092,36 @@ p.partnerNext = {
 
 //Solo Squares - High
  const LLLoopSoloSquareHigh = {
-     timeline: [delayLoopR1, LLTrialSquare, feedbackSoloHigh] 
+     timeline: [delayLoopR1, LLTrialSquare, feedbackind] 
     };  
 
     const WWLoopSoloSquareHigh = {
-     timeline: [delayLoopR1, WWTrialSquareSolo, feedbackSoloHigh] 
+     timeline: [delayLoopR1, WWTrialSquareind, feedbackind] 
     };
 
     const LWLoopSoloSquareHigh = {
-     timeline: [delayLoopR1, LWTrialSquareSolo, feedbackSoloHigh]
+     timeline: [delayLoopR1, LWTrialSquareind, feedbackind]
     };  
 
     const WLLoopSoloSquareHigh = {
-     timeline: [delayLoopR1, WLTrialSquare, feedbackSoloHigh]
+     timeline: [delayLoopR1, WLTrialSquare, feedbackind]
     };  
 
 //Solo Squares - Low
  const LLLoopSoloSquareLow = {
-     timeline: [delayLoopR1, LLTrialSquare, feedbackSoloLow]
+     timeline: [delayLoopR1, LLTrialSquare, feedbackind]
     };  
 
     const WWLoopSoloSquareLow = {
-     timeline: [delayLoopR1, WWTrialSquareSolo, feedbackSoloLow] 
+     timeline: [delayLoopR1, WWTrialSquareind, feedbackind] 
     };
 
     const LWLoopSoloSquareLow = {
-     timeline: [delayLoopR1, LWTrialSquareSolo, feedbackSoloLow]
+     timeline: [delayLoopR1, LWTrialSquareind, feedbackind]
     };  
 
     const WLLoopSoloSquareLow = {
-     timeline: [delayLoopR1, WLTrialSquare, feedbackSoloLow]
+     timeline: [delayLoopR1, WLTrialSquare, feedbackind]
     };  
 
 //Group Squares - High
@@ -2140,36 +2161,36 @@ p.partnerNext = {
 
 //Solo Circles - High
     const LLLoopSoloCircleHigh = {
-     timeline: [delayLoopR1, LLTrialCircle, feedbackSoloHigh]
+     timeline: [delayLoopR1, LLTrialCircle, feedbackind]
     };
 
     const WWLoopSoloCircleHigh = {
-     timeline: [delayLoopR1, WWTrialCircleSolo, feedbackSoloHigh]
+     timeline: [delayLoopR1, WWTrialCircleind, feedbackind]
     };
 
     const LWLoopSoloCircleHigh = {
-     timeline: [delayLoopR1, LWTrialCircleSolo, feedbackSoloHigh]
+     timeline: [delayLoopR1, LWTrialCircleind, feedbackind]
     };  
 
     const WLLoopSoloCircleHigh = {
-     timeline: [delayLoopR1, WLTrialCircle, feedbackSoloHigh]
+     timeline: [delayLoopR1, WLTrialCircle, feedbackind]
     };  
 
 //Solo Circles - Low
     const LLLoopSoloCircleLow = {
-     timeline: [delayLoopR1, LLTrialCircle, feedbackSoloLow]
+     timeline: [delayLoopR1, LLTrialCircle, feedbackind]
     };
 
     const WWLoopSoloCircleLow = {
-     timeline: [delayLoopR1, WWTrialCircleSolo, feedbackSoloLow]
+     timeline: [delayLoopR1, WWTrialCircleind, feedbackind]
     };
 
     const LWLoopSoloCircleLow = {
-     timeline: [delayLoopR1, LWTrialCircleSolo, feedbackSoloLow]
+     timeline: [delayLoopR1, LWTrialCircleind, feedbackind]
     };  
 
     const WLLoopSoloCircleLow = {
-     timeline: [delayLoopR1, WLTrialCircle, feedbackSoloLow] 
+     timeline: [delayLoopR1, WLTrialCircle, feedbackind] 
     };  
 
 //Group Circle High

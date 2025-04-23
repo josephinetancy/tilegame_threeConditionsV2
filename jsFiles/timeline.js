@@ -16,17 +16,18 @@ let timeline = [];
 
 /* 
 
-1 = IndCircle + IntSquareLow 
-2 = IndCircle + IntSquareHigh
+1 = IntSquareLow + IndCircle 
+2 = IntSquareHigh + IndCircle
 
-3 = IntSquareLow + IndCircle 
-4 = IntSquareHigh + IndCircle
+3 = IndCircle + IntSquareLow 
+4 = IndCircle + IntSquareHigh
 
-5 = IndSquare + IntCircleLow 
-6 = IndSquare + IntCircleHigh
+5 = IntCircleLow + IndSquare
+6 = IntCircleHigh + IndSquare
 
-7 = IntCircleLow + IndSquare
-8 = IntCircleHigh + IndSquare
+7 = IndSquare + IntCircleLow 
+8 = IndSquare + IntCircleHigh
+
 
 */
 
@@ -37,7 +38,7 @@ const commonTimeline = [
    p.intro.r1part1a,
    p.intro.r1part2,
    p.intro.r1soloHigh, 
- //  p.intro.r1check, 
+   p.intro.r1check, 
 ];
 
 /*
