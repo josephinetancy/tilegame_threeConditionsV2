@@ -409,7 +409,7 @@ let avatarResponse = '#2669ee';
 soloPage: [
     `<div class='specialOnly'>
         <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
-        <p>Specifically, regardless of your partner's performance, you get 8 points if you activate the right ${textNew.shape1} and 2 points if you do not activate the right ${textNew.shape1}. </p>
+        <p>Specifically, you'll get 8 points if you activate the right ${textNew.shape1}. You'll get 2 points if you do not activate the right ${textNew.shape1}, regardless of your partner's performance. </p>
         <p>Your outcome depends on your performance only. </p>
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container">
@@ -1280,7 +1280,7 @@ variables for plugins
 ///
 */
 
-let noOfTrials = 1; //so 60 in total
+let noOfTrials = 4; //so 60 in total
 
 ///fake participant's activation time for WL and LL trials, that far exceeds trial duration
 let partner_rtL = 20000; //for when partner "loses".
@@ -1741,7 +1741,7 @@ function MakeFeedback(mode) {
             avatar1TotalPoints += pointsAddedAvatar1;
             avatar2TotalPoints += pointsAddedAvatar2;
 
-            if (trialNumber === 4 || trialNumber === 120) { //should be 60 and 120
+            if (trialNumber === 16 || trialNumber === 120) { //should be 60 and 120
                 feedbackText = generateAvatarFeedbackLast(
                     selectedAvatarImg,
                     +pointsAddedAvatar1,
