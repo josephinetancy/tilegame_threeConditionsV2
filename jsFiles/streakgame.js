@@ -621,85 +621,75 @@ groupPage: [
 </div>`
 ],
 groupPage2: [
-`<div class='parent'>
-        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p> 
+    `<div class='specialOnly'>
+        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
+        <p>Specifically, you'll get 8 points if you and your partner activate the ${textNew.shape2}s. </p> 
+        <p> You'll get 4 points if you activate the right ${textNew.shape2} and your partner does not activate the left ${textNew.shape2}. </p> 
+        <p> You'll get 4 points if you do not activate the right ${textNew.shape2} and your partner activates the left ${textNew.shape2}. </p>
+       <p>You'll get 4 points if you and your partner do not activate the ${textNew.shape2}s. </p> 
+        <p>Your outcome depends on you and your partner's performance. </p>
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
-        <div class="table-container" style="display: block; clear: both;">
-            <table style="border-collapse: collapse; text-align: center;">
-                <!-- First row: Empty first column, Shapes start from the second column -->
-                <tr>
-                    <td style="padding: 10px;"></td> <!-- Empty first column -->
-                    <td style="padding: 10px;">
-                        <div class="shapes-container">
-                            <div id="outer-shape" class="${textNew.shape2}" 
-                                 style="background-color: ${textNew.color2}; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape2}" 
-                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 10px;">
-                        <div class="shapes-container">
-                            <div id="outer-shape" class="${textNew.shape2}" 
-                                 style="background-color: grey; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape2}" 
-                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 10px;">
-                        <div class="shapes-container">
-                            <div id="outer-shape" class="${textNew.shape2}" 
-                                 style="background-color: ${textNew.color2}; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape2}" 
-                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 10px;">
-                        <div class="shapes-container">
-                            <div id="outer-shape" class="${textNew.shape2}" 
-                                 style="background-color: grey; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape2}" 
-                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+        <div class="table-container">
+<table style="border-collapse: separate; border-spacing: 0 20px; text-align: center;">
+    <thead>
+        <tr>
+            <th style="padding: 10px; font-size: 20px; text-align: center;">Partner</th>
+            <th style="padding: 10px; font-size: 20px; text-align: center;">
+                <p style="margin: 0;">Their</p>
+                <p style="margin: 0;">Outcome</p>
+            </th>
+            <th style="padding: 10px; font-size: 20px; text-align: center;">You</th>
+            <th style="padding: 10px; font-size: 20px; text-align: center;">
+                <p style="margin: 0;">Your</p>
+                <p style="margin: 0;">Outcome</p>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <div class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+8</td>
+            <td style="padding-right: 40px;">
+                <div class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+8</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+4</td>
+            <td style="padding-right: 40px;">
+                <div class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>${textNew.WL}</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>${textNew.WL}</td>
+            <td>
+                <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+4</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>${textNew.LL}</td>
+            <td>
+                <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>${textNew.LL}</td>
+        </tr>
+    </tbody>
+</table>
 
-                <!-- Second row: Points with avatar 3 -->
-                <tr>
-                    <td rowspan="1" style="padding: 2px; vertical-align: middle;">
-                        <div style="display: flex; flex-direction: column; align-items: center;">
-                            <img src="{{avatar1}}" style="width: 80px; height: auto;">
-                            <span style="font-size: 12px; font-weight: bold;">(you)</span>
-                        </div>
-                    </td>
-                    <td><b>+8</b></td>
-                    <td><b>${textNew.WL2}</b></td>
-                    <td><b>+4</b></td>
-                    <td><b>${textNew.LL2}</b></td>
-                </tr>
-
-                <!-- Third row: Points with avatar 4 -->
-                <tr>
-                    <td rowspan="1" style="padding: 2px; vertical-align: middle; text-align: left;">
-                        <div style="display: flex; flex-direction: column; align-items: center;">
-                            <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
-                            <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
-                        </div>
-                    </td>
-                    <td><b>+8</b></td>
-                    <td><b>${textNew.WL2Switch}</b></td>
-                    <td><b>${textNew.WL2Switch2}</b></td>
-                    <td><b>${textNew.LL2}</b></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-          <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
-       <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
-</div>`
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 50px; font-size: 20px;">Please take a moment to memorize these rules.</p>`
     ]
     }, 
  r2: {
