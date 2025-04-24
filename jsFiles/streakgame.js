@@ -946,7 +946,7 @@ function getCorrectAnswers(randomAssignment) {
     console.log(randomAssignment + 'randomassignment in getcorrect answers.')
     console.log(isSecondTime + 'in getCorrectAnswers')
     return {
-        attnChk0: `My earnings depends on my own performance.`,
+        attnChk0: `My earnings depend on my own performance.`,
 
         attnChk1: `+8`,
 
@@ -1022,7 +1022,7 @@ function getCorrectAnswers(randomAssignment) {
         {
             prompt: `Which of the following statements is true?`,
             name: `attnChk0`, 
-            options: [`My earnings depends on my own performance.`,`My earnings depends on both my performance and my partner's performance.`],
+            options: [`My earnings depend on my own performance.`,`My earnings depend on both my performance and my partner's performance.`],
         },
         {
             prompt: `How many points do you get when you and your partner activate the ${isSecondTime ? textNew.shape2 : textNew.shape1}s?`,
@@ -1280,7 +1280,7 @@ variables for plugins
 ///
 */
 
-let noOfTrials = 4; //so 60 in total
+let noOfTrials = 1; //so 60 in total
 
 ///fake participant's activation time for WL and LL trials, that far exceeds trial duration
 let partner_rtL = 20000; //for when partner "loses".
@@ -1314,12 +1314,12 @@ function WWTrial(shape, group) {
         stimulus: `
 <div class="shapes-container">
     <div class="shape-label">
-        <div id="inner-shape" class="${innerShapeClass}"></div>
-        <div class="label">You</div>
-    </div>
-    <div class="shape-label">
         <div id="outer-shape" class="${outerShapeClass}"></div>
         <div class="label">Partner</div>
+    </div>
+    <div class="shape-label">
+        <div id="inner-shape" class="${innerShapeClass}"></div>
+        <div class="label">You</div>
     </div>
 </div>
 
@@ -1389,12 +1389,12 @@ function WLTrial(shape) {
         stimulus: `
 <div class="shapes-container">
     <div class="shape-label">
-        <div id="inner-shape" class="${innerShapeClass}"></div>
-        <div class="label">You</div>
-    </div>
-    <div class="shape-label">
         <div id="outer-shape" class="${outerShapeClass}"></div>
         <div class="label">Partner</div>
+    </div>
+    <div class="shape-label">
+        <div id="inner-shape" class="${innerShapeClass}"></div>
+        <div class="label">You</div>
     </div>
 </div>
         `,
@@ -1448,12 +1448,12 @@ function LWTrial(shape, group) {
         stimulus: `
 <div class="shapes-container">
     <div class="shape-label">
-        <div id="inner-shape" class="${innerShapeClass}"></div>
-        <div class="label">You</div>
-    </div>
-    <div class="shape-label">
         <div id="outer-shape" class="${outerShapeClass}"></div>
         <div class="label">Partner</div>
+    </div>
+    <div class="shape-label">
+        <div id="inner-shape" class="${innerShapeClass}"></div>
+        <div class="label">You</div>
     </div>
 </div>
 
@@ -1522,12 +1522,12 @@ function LLTrial(shape) {
         stimulus: `
 <div class="shapes-container">
     <div class="shape-label">
-        <div id="inner-shape" class="${innerShapeClass}"></div>
-        <div class="label">You</div>
-    </div>
-    <div class="shape-label">
         <div id="outer-shape" class="${outerShapeClass}"></div>
         <div class="label">Partner</div>
+    </div>
+    <div class="shape-label">
+        <div id="inner-shape" class="${innerShapeClass}"></div>
+        <div class="label">You</div>
     </div>
 </div>
 
@@ -1585,17 +1585,19 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, color) {
         <div style="display: flex; justify-content: center; align-items: flex-start; gap: 80px; padding: 20px;">
             <!-- Left Avatar -->
             <div style="display: flex; flex-direction: column; align-items: center;">
-                <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
-                    +${avatar1Text}
-                </div>
-                <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
-            </div>
-            <!-- Right Avatar -->
-            <div style="display: flex; flex-direction: column; align-items: center;">
                 <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: #2669ee;">
                     +${avatar2Text}
                 </div>
                 <div><img src="./avatar/4.jpg" style="width: 178px; height: 189px; margin-top: 25px;"></div>
+                <div style="margin-top: 10px; font-size: 20px; font-weight: 600;">Partner</div>
+            </div>
+            <!-- Right Avatar -->
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
+                    +${avatar1Text}
+                </div>
+                <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
+                <div style="margin-top: 10px; font-size: 20px; font-weight: 600;">You</div>
             </div>
         </div>
         <!-- Line at the bottom -->
@@ -1605,22 +1607,25 @@ function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, color) {
     `;
 }
 
+
 function generateAvatarFeedbackLast(avatar1, avatar1Text, avatar2Text, color) {
     return `
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 20px;">
+        <div style="display: flex; justify-content: center; align-items: flex-start; gap: 80px; padding: 20px;">
             <!-- Left Avatar -->
             <div style="display: flex; flex-direction: column; align-items: center;">
-                <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
-                    ${avatar1Text}
+                <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: #2669ee;">
+                    +${avatar2Text}
                 </div>
-                <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
+                <div><img src="./avatar/4.jpg" style="width: 178px; height: 189px; margin-top: 25px;"></div>
+                <div style="margin-top: 10px; font-size: 20px; font-weight: 600;">Partner</div>
             </div>
             <!-- Right Avatar -->
             <div style="display: flex; flex-direction: column; align-items: center;">
-                <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: #2669ee;">
-                    ${avatar2Text}
+                <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
+                    +${avatar1Text}
                 </div>
-                <div><img src="./avatar/4.jpg" style="width: 178px; height: 189px; margin-top: 25px;"></div>
+                <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
+                <div style="margin-top: 10px; font-size: 20px; font-weight: 600;">You</div>
             </div>
         </div>
         <!-- Line at the bottom -->
@@ -1629,6 +1634,7 @@ function generateAvatarFeedbackLast(avatar1, avatar1Text, avatar2Text, color) {
         </div>
     `;
 }
+
 
 /*
 function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, color) {
@@ -1735,7 +1741,7 @@ function MakeFeedback(mode) {
             avatar1TotalPoints += pointsAddedAvatar1;
             avatar2TotalPoints += pointsAddedAvatar2;
 
-            if (trialNumber === 60 || trialNumber === 120) {
+            if (trialNumber === 4 || trialNumber === 120) {
                 feedbackText = generateAvatarFeedbackLast(
                     selectedAvatarImg,
                     +pointsAddedAvatar1,
