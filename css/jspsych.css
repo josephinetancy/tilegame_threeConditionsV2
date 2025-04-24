@@ -244,7 +244,7 @@
 .specialOnly {
   position: relative;
   width: 950px;
- height: 500px; 
+ height: 1000px; 
  /* height: auto; */
 }
 
@@ -269,6 +269,12 @@
  /* height: auto; */
 }
 
+.attnChkNow {
+  position: relative;
+  width: 950px;
+ height: 1000px; 
+ /* height: auto; */
+}
 
 .box{
   position: absolute;
