@@ -409,7 +409,8 @@ let avatarResponse = '#2669ee';
 soloPage: [
     `<div class='specialOnly'>
         <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
-        <p>Specifically, you'll get 8 points if you activate the right ${textNew.shape1}. You'll get 2 points if you do not activate the right ${textNew.shape1}, regardless of your partner's performance. </p>
+        <p>Specifically, you'll get 8 points if you activate the right ${textNew.shape1}. </p> 
+        <p>You'll get 2 points if you do not activate the right ${textNew.shape1}. </p>
         <p>Your outcome depends on your performance only. </p>
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container">
@@ -1030,12 +1031,12 @@ function getCorrectAnswers(randomAssignment) {
             options: ['+2', '+4', '+6', '+8'],
         },
         {
-            prompt: `How many points do you get when you activate the ${isSecondTime ? textNew.shape2 : textNew.shape1} but your partner does not activate the ${isSecondTime ? textNew.shape2 : textNew.shape1}?`, 
+            prompt: `How many points do you get when you activate your ${isSecondTime ? textNew.shape2 : textNew.shape1} but your partner does not activate their ${isSecondTime ? textNew.shape2 : textNew.shape1}?`, 
             name: `attnChk2`, 
             options: ['+2', '+4', '+6', '+8'],
         },
         {
-            prompt: `How many points do you get when you do not activate the ${isSecondTime ? textNew.shape2 : textNew.shape1} but your partner activates the ${isSecondTime ? textNew.shape2 : textNew.shape1}?`, 
+            prompt: `How many points do you get when you do not activate your ${isSecondTime ? textNew.shape2 : textNew.shape1} but your partner activates their ${isSecondTime ? textNew.shape2 : textNew.shape1}?`, 
             name: `attnChk3`, 
             options: ['+2', '+4', '+6', '+8'],
         },
