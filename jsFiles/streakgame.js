@@ -1741,7 +1741,7 @@ function MakeFeedback(mode) {
             avatar1TotalPoints += pointsAddedAvatar1;
             avatar2TotalPoints += pointsAddedAvatar2;
 
-            if (trialNumber === 4 || trialNumber === 120) {
+            if (trialNumber === 4 || trialNumber === 120) { //should be 60 and 120
                 feedbackText = generateAvatarFeedbackLast(
                     selectedAvatarImg,
                     +pointsAddedAvatar1,
@@ -1762,23 +1762,24 @@ function MakeFeedback(mode) {
         choices: "NO_KEYS",
         trial_duration: 2000,
         on_finish: (data) => {
-            const lastTrial = jsPsych.data.get().last(2).values()[0];
             data.randomAssignment = randomAssignment;
             data.avatar1TotalPoints = avatar1TotalPoints;
             data.avatar2TotalPoints = avatar2TotalPoints;
             data.pointsAddedAvatar1 = pointsAddedAvatar1;
             data.pointsAddedAvatar2 = pointsAddedAvatar2;
-            data.groupOrSolo = groupOrind;
+            data.groupOrInd = groupOrind;
             data.MI = MI;
-            data.trialNumber = lastTrial.trialNumber + 1;
-            data.shape = lastTrial.shape;
-            data.selected_color = lastTrial.selected_color;
-            data.trialType = lastTrial.trialType;
-            data.partner_outcome = lastTrial.partner_outcome;
-            data.outcome = lastTrial.outcome;
-            data.rt = lastTrial.rt;
+            console.log(trialNumber);
+            trialNumber++;
+            data.shape = jsPsych.data.get().last(2).values()[0].shape;
+            data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
+            data.trialType = jsPsych.data.get().last(2).values()[0].trialType;
+            data.partner_outcome = jsPsych.data.get().last(2).values()[0].partner_outcome;
+            data.outcome = jsPsych.data.get().last(2).values()[0].outcome;
+            data.rt = jsPsych.data.get().last(2).values()[0].rt;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             data.trial_Name = 'MakeFeedback'; 
+            console.log(data)
         }
     };
 }
