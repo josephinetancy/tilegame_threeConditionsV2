@@ -920,7 +920,13 @@ function getCorrectAnswers(randomAssignment) {
     console.log(randomAssignment + 'randomassignment in getcorrect answers.')
     console.log(isSecondTime + 'in getCorrectAnswers')
     return {
-        attnChk0: `My earnings depend on my own performance.`,
+    attnChk0: isSecondTime 
+        ? ([3, 4, 7, 8].includes(randomAssignment) 
+            ? `My earnings depend on both my performance and my partner's performance.` 
+            : `My earnings depend on my own performance.` )
+        : ([3, 4, 7, 8].includes(randomAssignment) 
+            ? `My earnings depend on my own performance.`
+            : `My earnings depend on both my performance and my partner's performance.` ),
 
         attnChk1: `+8`,
 
