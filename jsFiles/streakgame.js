@@ -923,9 +923,9 @@ function getCorrectAnswers(randomAssignment) {
     attnChk0: isSecondTime 
         ? ([3, 4, 7, 8].includes(randomAssignment) 
             ? `My earnings depend on both my performance and my partner's performance.` 
-            : `My earnings depend on my own performance.` )
+            : `My earnings depend on my performance only.` )
         : ([3, 4, 7, 8].includes(randomAssignment) 
-            ? `My earnings depend on my own performance.`
+            ? `My earnings depend on my performance only.`
             : `My earnings depend on both my performance and my partner's performance.` ),
 
         attnChk1: `+8`,
@@ -1002,7 +1002,7 @@ function getCorrectAnswers(randomAssignment) {
         {
             prompt: `Which of the following statements is true?`,
             name: `attnChk0`, 
-            options: [`My earnings depend on my own performance.`,`My earnings depend on both my performance and my partner's performance.`],
+            options: [`My earnings depend on my performance only.`,`My earnings depend on both my performance and my partner's performance.`],
         },
         {
             prompt: `How many points do you get when you and your partner activate the ${isSecondTime ? textNew.shape2 : textNew.shape1}s?`,
