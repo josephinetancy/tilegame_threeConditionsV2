@@ -22,17 +22,17 @@ OLD
 
 NEW
 
-1 = IntSquareLow + IndCircle 
-2 = IntSquareHigh + IndCircle
+1 = IndCircle + IntSquareLow
+2 = IntSquareLow + IndCircle
 
-3 = IndCircle + IntSquareLow 
-4 = IndCircle + IntSquareHigh
+3 = IndCircle + IntSquareHigh 
+4 = IntSquareHigh + IndCircle
 
-5 = IntCircleLow + IndSquare
-6 = IntCircleHigh + IndSquare
+5 = IndSquare + IntCircleLow
+6 = IntCircleLow + IndSquare
 
-7 = IndSquare + IntCircleLow 
-8 = IndSquare + IntCircleHigh
+7 = IndSquare + IntCircleHigh 
+8 = IntCircleHigh + IndSquare
 
 */
  
@@ -69,6 +69,7 @@ var textNew = {
     groupAgain2: randomAssignment % 2 === 1 ? '': 'randomly',
     color: randomAssignment % 2 === 1 ? '#2669ee' : `#2669ee`, //odd numbers = alone, even = group
     color2: randomAssignment % 2 === 1 ? `#2669ee` : '#2669ee', //odd numbers = alone, even = group
+/* 
     WL: [1, 4, 5, 8].includes(randomAssignment) ? `+6` : `+4`,
     LL: [1, 4, 5, 8].includes(randomAssignment) ? `+2` : `+4`,
     WLSwitch: [1, 4, 5, 8].includes(randomAssignment) ? `+4` : `+4`,
@@ -76,7 +77,36 @@ var textNew = {
     WL2: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+6`,
     WL2Switch: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+4`,
     WL2Switch2: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+6`,
-    LL2: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+2`,
+    LL2: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+2`, */
+ // Corresponds to attnChk2 when secondTime is false
+WL: [1, 3, 5, 7].includes(randomAssignment)
+  ? `+8`
+  : ([2, 6].includes(randomAssignment) ? `4` : `6`),
+
+// Corresponds to attnChk2 when secondTime is true
+WL2: [1, 3, 5, 7].includes(randomAssignment)
+  ? ([1, 5].includes(randomAssignment) ? `4` : `6`)
+  : `8`,
+
+// Corresponds to attnChk3 when secondTime is false
+LW: [1, 3, 5, 7].includes(randomAssignment)
+  ? `2`
+  : `4`,
+
+// Corresponds to attnChk3 when secondTime is true
+LW2: [1, 3, 5, 7].includes(randomAssignment)
+  ? `4`
+  : `2`,
+
+// Corresponds to attnChk4 when secondTime is false
+LL: [1, 3, 5, 7].includes(randomAssignment)
+  ? `2`
+  : ([2, 6].includes(randomAssignment) ? `4` : `2`),
+
+// Corresponds to attnChk4 when secondTime is true
+LL2: [1, 3, 5, 7].includes(randomAssignment)
+  ? ([1, 5].includes(randomAssignment) ? `4` : `2`)
+  : `2`,
 }
 
 /*
@@ -624,9 +654,9 @@ groupPage2: [
     `<div class='specialOnly'>
         <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
         <p>Specifically, you'll get 8 points if you and your partner activate the ${textNew.shape2}s. </p> 
-        <p> You'll get 4 points if you activate the right ${textNew.shape2} and your partner does not activate the left ${textNew.shape2}. </p> 
-        <p> You'll get 4 points if you do not activate the right ${textNew.shape2} and your partner activates the left ${textNew.shape2}. </p>
-       <p>You'll get 4 points if you and your partner do not activate the ${textNew.shape2}s. </p> 
+        <p> You'll get ${textNew.WL2} points if you activate the right ${textNew.shape2} and your partner does not activate the left ${textNew.shape2}. </p> 
+        <p> You'll get ${textNew.LW2} points if you do not activate the right ${textNew.shape2} and your partner activates the left ${textNew.shape2}. </p>
+       <p>You'll get ${textNew.LL2} points if you and your partner do not activate the ${textNew.shape2}s. </p> 
         <p>Your outcome depends on you and your partner's performance. </p>
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container">
@@ -664,13 +694,13 @@ groupPage2: [
             <td style="padding-right: 40px;">
                 <div class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>${textNew.WL}</td>
+            <td>+${textNew.WL2}</td>
         </tr>
         <tr>
             <td>
                 <div class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>${textNew.WL}</td>
+            <td>+${textNew.WL2}</td>
             <td>
                 <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
@@ -680,11 +710,11 @@ groupPage2: [
             <td>
                 <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>${textNew.LL}</td>
+            <td>+${textNew.LL2}</td>
             <td>
                 <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>${textNew.LL}</td>
+            <td>+${textNew.LL2}</td>
         </tr>
     </tbody>
 </table>
@@ -920,27 +950,45 @@ function getCorrectAnswers(randomAssignment) {
     console.log(randomAssignment + 'randomassignment in getcorrect answers.')
     console.log(isSecondTime + 'in getCorrectAnswers')
     return {
-    attnChk0: isSecondTime 
-        ? ([3, 4, 7, 8].includes(randomAssignment) 
-            ? `My earnings depend on both my performance and my partner's performance.` 
-            : `My earnings depend on my performance only.` )
-        : ([3, 4, 7, 8].includes(randomAssignment) 
-            ? `My earnings depend on my performance only.`
-            : `My earnings depend on both my performance and my partner's performance.` ),
+attnChk0: !isSecondTime
+  ? ([1, 3, 5, 7].includes(randomAssignment)
+      ? `My earnings depend on my performance only.`
+      : `My earnings depend on both my performance and my partner's performance.`)
+  : ([1, 3, 5, 7].includes(randomAssignment)
+      ? `My earnings depend on both my performance and my partner's performance.`
+      : `My earnings depend on my performance only.`),
 
-        attnChk1: `+8`,
+attnChk1: `+8`,
 
-        attnChk2: isSecondTime 
-            ? ([3, 4, 7, 8].includes(randomAssignment) ? `+4` : `+6`)
-            : ([3, 4, 7, 8].includes(randomAssignment) ? `+8` : `+4`),
+attnChk2: !isSecondTime
+  ? ([1, 3, 5, 7].includes(randomAssignment)
+      ? `+8`
+      : ([2, 6].includes(randomAssignment) ? `+4` : `+6`)
+    )
+  : ([1, 3, 5, 7].includes(randomAssignment)
+      ? ([1, 5].includes(randomAssignment) ? `+4` : `+6`)
+      : `+8`
+    ),
 
-       attnChk3: isSecondTime 
-            ? ([3, 4, 7, 8].includes(randomAssignment) ? `+4` : `+6`)
-            : ([3, 4, 7, 8].includes(randomAssignment) ? `+2` : `+4`),
+attnChk3: !isSecondTime
+  ? ([1, 3, 5, 7].includes(randomAssignment)
+      ? `+2`
+      : `+4`
+    )
+  : ([1, 3, 5, 7].includes(randomAssignment)
+      ? `+4`
+      : `+2`
+    ),
 
-        attnChk4: isSecondTime 
-            ? ([3, 4, 7, 8].includes(randomAssignment) ? `+4` : `+2`)
-            : ([3, 4, 7, 8].includes(randomAssignment) ? `+2` : `+4`),
+attnChk4: !isSecondTime
+  ? ([1, 3, 5, 7].includes(randomAssignment)
+      ? `+2`
+      : ([2, 6].includes(randomAssignment) ? `+4` : `+2`)
+    )
+  : ([1, 3, 5, 7].includes(randomAssignment)
+      ? ([1, 5].includes(randomAssignment) ? `+4` : `+2`)
+      : `+2`
+    ),
     };
 }
 
