@@ -16,17 +16,17 @@ let timeline = [];
 
 /* 
 
-1 = IntSquareLow + IndCircle 
-2 = IntSquareHigh + IndCircle
+1 = IndCircle + IntSquareLow
+2 = IntSquareLow + IndCircle
 
-3 = IndCircle + IntSquareLow 
-4 = IndCircle + IntSquareHigh
+3 = IndCircle + IntSquareHigh 
+4 = IntSquareHigh + IndCircle
 
-5 = IntCircleLow + IndSquare
-6 = IntCircleHigh + IndSquare
+5 = IndSquare + IntCircleLow
+6 = IntCircleLow + IndSquare
 
-7 = IndSquare + IntCircleLow 
-8 = IndSquare + IntCircleHigh
+7 = IndSquare + IntCircleHigh 
+8 = IntCircleHigh + IndSquare
 
 
 */
@@ -71,13 +71,13 @@ const taskConfigurations = {
 
 const taskConfigurations = {
     1: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.task.SoloCircleLow, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.partnerNext, p.task.round2Intro, p.task.GroupSquareHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
-    2: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.task.GroupSquareLow, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloCircleHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
+    2: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.task.GroupSquareLow, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.partnerNext, p.task.round2Intro, p.task.SoloCircleHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
     3: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.task.SoloCircleLow, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.partnerNext, p.task.round2Intro, p.task.GroupSquareHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
     4: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.task.GroupSquareHigh, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.partnerNext, p.task.round2Intro, p.task.SoloCircleLow, p.flowMeasure, p.demographics, p.save_data, p.end],
-    5: [p.task.round1Intro, p.task.SoloSquareHigh, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.partnerNext, p.task.round2Intro, p.task.GroupCircleLow, p.flowMeasure, p.demographics, p.save_data, p.end],
-    6: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.task.GroupCircleLow, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloSquareHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
-    7: [p.task.round1Intro, p.task.SoloSquareLow, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.partnerNext, p.task.round2Intro, p.task.GroupCircleHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
-    8: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.task.GroupCircleHigh, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.task.SoloSquareLow, p.flowMeasure, p.demographics, p.save_data, p.end],
+    5: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.task.SoloSquareHigh, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.partnerNext, p.task.round2Intro, p.task.GroupCircleLow, p.flowMeasure, p.demographics, p.save_data, p.end],
+    6: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.task.GroupCircleLow, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.findingPartner, p.partnerNext, p.task.SoloSquareHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
+    7: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.task.SoloSquareLow, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.findingPartner, p.partnerNext, p.task.round2Intro, p.task.GroupCircleHigh, p.flowMeasure, p.demographics, p.save_data, p.end],
+    8: [p.findingPartner, p.partnerNext, p.task.round1Intro, p.task.GroupCircleHigh, p.flowMeasure, p.intro.r2part1a, p.intro.r2part1, p.intro.r1soloHigh, p.intro.r1check, p.task.round2Intro, p.findingPartner, p.partnerNext, p.task.SoloSquareLow, p.flowMeasure, p.demographics, p.save_data, p.end],
 }; 
 
 

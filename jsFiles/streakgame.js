@@ -1,5 +1,5 @@
 //randomAssignment
-const randomAssignment = 3;
+const randomAssignment = 4;
 //const randomAssignment = Math.floor(Math.random() * 8) + 1; 
 
 console.log(randomAssignment + " randomAssignment")
@@ -231,113 +231,103 @@ let avatarResponse = '#2669ee';
                 ],
 
                 part2Group: [
-                `<div class='parent'>
-                <p> In the ${textNew.game1}, ${textNew.shape1}s will appear on your screen. 
-                <p> Initially, the inner ${textNew.shape1} and the outer ${textNew.shape1} are white. </p>
-                <p> Your job is to activate the inner ${textNew.shape1}. </p>
+               `<div class='parent'>
+                <p> In the ${textNew.game1}, ${textNew.shape1}s will appear on your screen. </p>
+                <p> Initially, both ${textNew.shape1} ${textNew.shape1}s are white. </p>
+                <p> Your job is to activate the right ${textNew.shape1}. </p>
                 <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape1}">
+                    <div id="outer-shape" class="${textNew.shape1}"></div>
                     <div id="inner-shape" class="${textNew.shape1}"></div>
-                </div>
                 </div>
                 </div>`,
 
                  `<div class='parent'>
-                <p>To activate the inner ${textNew.shape1}, press your SPACE BAR as soon as the ${textNew.shape1}s appear on your screen. </p>
+                <p>To activate the right ${textNew.shape1}, press your SPACE BAR as soon as the ${textNew.shape1}s appear on your screen. </p>
                 <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape1}">
+                    <div id="outer-shape" class="${textNew.shape1}"></div>
                     <div id="inner-shape" class="${textNew.shape1}"></div>
                 </div>
+                </div>`,
+
+                `<div class='parent'>
+                <p> If you press your SPACE BAR fast enough, the right ${textNew.shape1} will activate like this. </p>
+                <div class="shapes-container">
+                     <div id="outer-shape" class="${textNew.shape1}"></div>
+                    <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
                 </div>
                 </div>`,
 
                 `<div class='parent'>
-                <p> If you press your SPACE BAR fast enough, the inner ${textNew.shape1} will activate like this. </p>
-                <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape1}">
-                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
-                </div>
-                </div>
-                </div>`,
-
-                `<div class='parent'>
-                <p>If you're too slow, the inner ${textNew.shape1} will turn gray.</p> 
-                <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape1}">
+                <p>If you're too slow, the right ${textNew.shape1} will turn gray.</p> 
+               <div class="shapes-container">
+                <div id="outer-shape" class="${textNew.shape1}"></div>
                 <div id="inner-shape" class="${textNew.shape1}" style="background-color: gray;"></div>
                 </div>
-                </div>
-                </div>`, 
+                </div>`,
 
                 `<div class='parent'>
-                <p>Your partner's job is to activate the outer ${textNew.shape1}. </p> 
-                <p>If your partner presses their SPACE BAR in time, the outer ${textNew.shape1} will activate like this. </p>
-                <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}">
+                <p>Your partner's job is to activate the left ${textNew.shape1}. </p> 
+                <p>If your partner presses their SPACE BAR in time, the left ${textNew.shape1} will activate like this. </p>
+               <div class="shapes-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color2};"></div>
                 <div id="inner-shape" class="${textNew.shape1}"></div>
-                </div>
                 </div>
                 </div>`,
 
 
                 `<div class='parent'>
-                <p>If your partner does NOT press their SPACE BAR in time, the right ${textNew.shape1} will turn gray. </p>
+                <p>If your partner does NOT press their SPACE BAR in time, the left ${textNew.shape1} will turn gray like this. </p>
                 <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
                 <div id="inner-shape" class="${textNew.shape1}"></div>
-                </div>
                 </div>
                 </div>`, 
 
                 `<div class='parent'>
-                <p>Whether the outer ${textNew.shape1} is activated\u2014or not\u2014depends on your partner's performance. </p>
-                <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+               <p>Whether the left ${textNew.shape1} is activated\u2014or not\u2014depends on your partner's performance. </p>
+                 <div class="shapes-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
                 <div id="inner-shape" class="${textNew.shape1}"></div>
-                </div>
                 </div>
                 </div>`, 
 
-                 `<div class='special'>
-                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape1} and </p> <p> (ii) whether your partner activates the outer ${textNew.shape1}. </p><p></p>
-                <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
+                `<div class='special'>
+    <p> You'll see one of four possible outcomes depending on: </p>
+    <p> (i) whether you activate the right ${textNew.shape1} and </p>
+    <p> (ii) whether your partner activates the left ${textNew.shape1}. </p>
+    <p></p>
 
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;",>
-                <div class="shapes-container">
-                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
-                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
-                    </div>
-                </div>
-                <b><p style="margin-top: 10px;"></p></b>
+    <div id="shape-wrapper" style="display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center; margin-bottom: 50px;">
+        <div class="game-row" style="display: flex; gap: 10px; justify-content: center;">
+            <div class="shapes-container"; style="gap: 30px">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}; width: 70px; height: 70px;border: 3px solid black"></div>
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </div>
+        </div>
 
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                <div class="shapes-container">
-                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
-                     <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
-                    </div>
-                </div>
-                <b><p style="margin-top: 10px;"></p></b>
+        <div class="game-row" style="display: flex; gap: 10px; justify-content: center;">
+            <div class="shapes-container"; style="gap: 30px">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px;border: 3px solid black"></div>
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px;border: 3px solid black;"></div>
             </div>
+        </div>
 
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                <div class="shapes-container">
-                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
-                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
-                    </div>
-                </div>
-                <b><p style="margin-top: 10px;"></p></b>
+        <div class="game-row" style="display: flex; gap: 10px; justify-content: center;">
+            <div class="shapes-container"; style="gap: 30px">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}; width: 70px; height: 70px;border: 3px solid black"></div>
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px;border: 3px solid black"></div>
             </div>
+        </div>
 
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                <div class="shapes-container">
-                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
-                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
-                    </div>
-                </div>
-                <b><p style="margin-top: 10px;"></p></b>
+        <div class="game-row" style="display: flex; gap: 10px; justify-content: center;">
+            <div class="shapes-container"; style="gap: 30px">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px;border: 3px solid black"></div>
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px;border: 3px solid black"></div>
             </div>
-        </div>`
+        </div>
+
+    </div>
+</div>`
                 ],
 
                 part2Solo: [
@@ -510,145 +500,145 @@ soloPage: [
       <p style="text-align: center; margin-top: 20px; margin-bottom: 50px; font-size: 20px;">Please take a moment to memorize these rules.</p>`
 ],
 soloPage2: [
-    `<div class='specialOnly'>
-        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p> 
+     `<div class='specialOnly'>
+        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
+        <p>Specifically, you'll get 8 points if you activate the right ${textNew.shape2}. </p> 
+        <p>You'll get 2 points if you do not activate the right ${textNew.shape2}. </p>
+        <p>Your outcome depends on your performance only. </p>
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container">
-            <table style="border-collapse: collapse; text-align: center;">
-                <!-- First row: Empty first column, Shapes start from the second column -->
-                <tr>
-                    <td style="padding: 10px;"></td> <!-- Empty first column -->
-                    <td style="padding: 10px;">
-                        <div class="shapes-container">
-                            <div id="outer-shape" class="${textNew.shape2}" 
-                                 style="background-color: ${textNew.color2}; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape2}" 
-                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 10px;">
-                        <div class="shapes-container">
-                            <div id="outer-shape" class="${textNew.shape2}" 
-                                 style="background-color: grey; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape2}" 
-                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 10px;">
-                        <div class="shapes-container">
-                            <div id="outer-shape" class="${textNew.shape2}" 
-                                 style="background-color: ${textNew.color2}; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape2}" 
-                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 10px;">
-                        <div class="shapes-container">
-                            <div id="outer-shape" class="${textNew.shape2}" 
-                                 style="background-color: grey; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape2}" 
-                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+<table style="border-collapse: separate; border-spacing: 0 20px; text-align: center;">
+    <thead>
+        <tr>
+            <th style="padding: 10px; font-size: 20px; text-align: center;">Partner</th>
+            <th style="padding: 10px; font-size: 20px; text-align: center;">
+                <p style="margin: 0;">Their</p>
+                <p style="margin: 0;">Outcome</p>
+            </th>
+            <th style="padding: 10px; font-size: 20px; text-align: center;">You</th>
+            <th style="padding: 10px; font-size: 20px; text-align: center;">
+                <p style="margin: 0;">Your</p>
+                <p style="margin: 0;">Outcome</p>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <div class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+8</td>
+            <td style="padding-right: 40px;">
+                <div class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+8</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+2</td>
+            <td style="padding-right: 40px;">
+                <div class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+8</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+8</td>
+            <td>
+                <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+2</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+2</td>
+            <td>
+                <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+2</td>
+        </tr>
+    </tbody>
+</table>
 
-                <!-- Row with points -->
-                <tr>
-                    <td></td> <!-- Empty first column -->
-                    <td><b>+8</b></td>
-                    <td><b>${textNew.WL2}</b></td>
-                    <td><b>+4</b></td>
-                    <td><b>${textNew.LL2}</b></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-      <p style="text-align: center; margin-top: 20px; margin-bottom: 50px; "><b>Please take a moment to memorize these rules.</b></p>`
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 50px; font-size: 20px;">Please take a moment to memorize these rules.</p>`
 ],
 groupPage: [
-`<div class='parent'>
-        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p> 
+   `<div class='specialOnly'>
+        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
+        <p>Specifically, you'll get 8 points if you and your partner activate the ${textNew.shape1}s. </p> 
+        <p> You'll get ${textNew.WL} points if you activate the right ${textNew.shape1} and your partner does not activate the left ${textNew.shape1}. </p> 
+        <p> You'll get ${textNew.LW} points if you do not activate the right ${textNew.shape1} and your partner activates the left ${textNew.shape1}. </p>
+       <p>You'll get ${textNew.LL} points if you and your partner do not activate the ${textNew.shape1}s. </p> 
+        <p>Your outcome depends on you and your partner's performance. </p>
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
-        <div class="table-container" style="display: block; clear: both;">
-            <table style="border-collapse: collapse; text-align: center;">
-                <!-- First row: Empty first column, Shapes start from the second column -->
-                <tr>
-                    <td style="padding: 10px;"></td> <!-- Empty first column -->
-                    <td style="padding: 10px;">
-                        <div class="shapes-container">
-                            <div id="outer-shape" class="${textNew.shape1}" 
-                                 style="background-color: ${textNew.color}; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape1}" 
-                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 10px;">
-                        <div class="shapes-container">
-                            <div id="outer-shape" class="${textNew.shape1}" 
-                                 style="background-color: grey; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape1}" 
-                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 10px;">
-                        <div class="shapes-container">
-                            <div id="outer-shape" class="${textNew.shape1}" 
-                                 style="background-color: ${textNew.color}; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape1}" 
-                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 10px;">
-                        <div class="shapes-container">
-                            <div id="outer-shape" class="${textNew.shape1}" 
-                                 style="background-color: grey; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape1}" 
-                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+        <div class="table-container">
+<table style="border-collapse: separate; border-spacing: 0 20px; text-align: center;">
+    <thead>
+        <tr>
+            <th style="padding: 10px; font-size: 20px; text-align: center;">Partner</th>
+            <th style="padding: 10px; font-size: 20px; text-align: center;">
+                <p style="margin: 0;">Their</p>
+                <p style="margin: 0;">Outcome</p>
+            </th>
+            <th style="padding: 10px; font-size: 20px; text-align: center;">You</th>
+            <th style="padding: 10px; font-size: 20px; text-align: center;">
+                <p style="margin: 0;">Your</p>
+                <p style="margin: 0;">Outcome</p>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <div class="${textNew.shape1}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+8</td>
+            <td style="padding-right: 40px;">
+                <div class="${textNew.shape1}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+8</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+4</td>
+            <td style="padding-right: 40px;">
+                <div class="${textNew.shape1}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+${textNew.WL}</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="${textNew.shape1}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+${textNew.WL}</td>
+            <td>
+                <div class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+4</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+${textNew.LL}</td>
+            <td>
+                <div class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
+            </td>
+            <td>+${textNew.LL}</td>
+        </tr>
+    </tbody>
+</table>
 
-                <!-- Second row: Points with avatar 3 -->
-                <tr>
-                    <td rowspan="1" style="padding: 2px; vertical-align: middle;">
-                        <div style="display: flex; flex-direction: column; align-items: center;">
-                            <img src="{{avatar1}}" style="width: 80px; height: auto;">
-                            <span style="font-size: 12px; font-weight: bold;">(you)</span>
-                        </div>
-                    </td>
-                    <td><b>+8</b></td>
-                    <td><b>${textNew.WL}</b></td>
-                    <td><b>+4</b></td>
-                    <td><b>${textNew.LL}</b></td>
-                </tr>
-
-                <!-- Third row: Points with avatar 4 -->
-                <tr>
-                    <td rowspan="1" style="padding: 2px; vertical-align: middle; text-align: left;">
-                        <div style="display: flex; flex-direction: column; align-items: center;">
-                            <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
-                            <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
-                        </div>
-                    </td>
-                    <td><b>+8</b></td>
-                    <td><b>${textNew.WLSwitch}</b></td>
-                    <td><b>${textNew.WLSwitch2}</b></td>
-                    <td><b>${textNew.LL}</b></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-          <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
-       <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
-</div>`
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 50px; font-size: 20px;">Please take a moment to memorize these rules.</p>`
+ 
 ],
 groupPage2: [
     `<div class='specialOnly'>
@@ -830,114 +820,101 @@ groupPage2: [
 
     part2Solo: [
                 `<div class='parent'>
-                <p> Unlike the ${textNew.game1}, the ${textNew.game2} is a 1-player game.</p> 
-                <p> You'll play by yourself. </p> 
-                <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape2}">
-                <div id="inner-shape" class="${textNew.shape2}"></div>
-                </div>
-                </div>
-                </div>`,
-
-                `<div class='parent'>
                 <p> In the ${textNew.game2}, ${textNew.shape2}s will appear on your screen. </p>
-                <p> Initially, the inner ${textNew.shape2} and the outer ${textNew.shape2} are white. </p>
-                <p> Your job is to activate the inner ${textNew.shape2}. </p>
+                <p> Like the ${textNew.game1}, initially, the left ${textNew.shape2} and the right ${textNew.shape2} are white. </p>
+                <p> Your job is to activate the right ${textNew.shape2}. </p>
                 <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape2}">
+                    <div id="outer-shape" class="${textNew.shape2}"></div>
                     <div id="inner-shape" class="${textNew.shape2}"></div>
-                </div>
                 </div>
                 </div>`,
 
                  `<div class='parent'>
-                <p>To activate the inner ${textNew.shape2}, press your SPACE BAR as soon as the ${textNew.shape2}s appear on your screen. </p>
+                <p>To activate the right ${textNew.shape2}, press your SPACE BAR as soon as the ${textNew.shape2}s appear on your screen. </p>
                 <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape2}">
+                <div id="outer-shape" class="${textNew.shape2}"></div>
                     <div id="inner-shape" class="${textNew.shape2}"></div>
                 </div>
-                </div>
                 </div>`,
 
                 `<div class='parent'>
-                <p> If you press your SPACE BAR fast enough, the inner ${textNew.shape2} will activate like this. </p>
+                <p> If you press your SPACE BAR fast enough, the right ${textNew.shape2} will activate like this. </p>
                 <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape2}">
+                <div id="outer-shape" class="${textNew.shape2}"></div>
                 <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}};"></div>
                 </div>
-                </div>
                 </div>`,
 
                 `<div class='parent'>
-                <p>If you're too slow, the inner ${textNew.shape2} will turn gray.</p> 
+                <p>If you're too slow, the right ${textNew.shape2} will turn gray.</p> 
                 <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape2}">
+                <div id="outer-shape" class="${textNew.shape2}"></div>
                 <div id="inner-shape" class="${textNew.shape2}" style="background-color: gray;"></div>
-                </div>
-                </div>
-                </div>`,
-
-                `<div class='parent'>
-                <p>The outer ${textNew.shape2} will be activated\u2014or not\u2014randomly. </p> 
-                <p>If the outer ${textNew.shape2} is activated, it will look like this. </p>
-                <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2}">
-                <div id="inner-shape" class="${textNew.shape2}"></div>
-                </div>
-                </div>
-                </div>`,
-
-
-                `<div class='parent'>
-                <p>If the outer ${textNew.shape2} is not activated, it will look like this. </p>
-                <p>Whether the outer ${textNew.shape2} is activated\u2014or not\u2014depends on random chance.</p>
-                <div class="shapes-container">
-                <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
-                <div id="inner-shape" class="${textNew.shape2}"></div>
-                </div>
                 </div>
                 </div>`, 
 
                 `<div class='parent'>
-                <p> You'll see one of four possible outcomes depending on: </p> <p> (i) whether you activate the inner ${textNew.shape2} and </p> <p> (ii) whether the outer ${textNew.shape2} is activated randomly. </p><p></p>
-                <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
-
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;",>
+                <p>Your partner's job is to activate the left ${textNew.shape2}. </p> 
+                <p>If your partner presses their SPACE BAR in time, the left ${textNew.shape2} will activate like this. </p>
                 <div class="shapes-container">
-                    <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2};">
-                        <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}};"></div>
-                    </div>
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2}"></div>
+                <div id="inner-shape" class="${textNew.shape2}"></div>
                 </div>
-                <b><p style="margin-top: 10px;"></p></b>
-            </div>
+                </div>`,
 
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                `<div class='parent'>
+                <p>If your partner does NOT press their SPACE BAR in time, the left ${textNew.shape2} will turn gray like this. </p>
                 <div class="shapes-container">
-                    <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
-                     <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}};"></div>
-                    </div>
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;"></div>
+                <div id="inner-shape" class="${textNew.shape2}"></div>
                 </div>
-                <b><p style="margin-top: 10px;"></p></b>
-            </div>
+                </div>`, 
 
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                `<div class='parent'>
+                <p>Whether the left ${textNew.shape2} is activated\u2014or not\u2014depends on your partner's performance. </p>
                 <div class="shapes-container">
-                    <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color2};">
-                        <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey;"></div>
-                    </div>
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;"></div>
+                <div id="inner-shape" class="${textNew.shape2}"></div>
                 </div>
-                <b><p style="margin-top: 10px;"></p></b>
-            </div>
+                </div>`,  
 
-            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                <div class="shapes-container">
-                    <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey;">
-                        <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey;"></div>
-                    </div>
-                </div>
-                <b><p style="margin-top: 10px;"></p></b>
+                 `<div class='special'>
+    <p> You'll see one of four possible outcomes depending on: </p>
+    <p> (i) whether you activate the right ${textNew.shape2} and </p>
+    <p> (ii) whether your partner activates the left ${textNew.shape2}. </p>
+    <p></p>
+
+    <div id="shape-wrapper" style="display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center; margin-bottom: 50px;">
+        <div class="game-row" style="display: flex; gap: 10px; justify-content: center;">
+            <div class="shapes-container"; style="gap: 30px">
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 70px; height: 70px;border: 3px solid black"></div>
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </div>
-        </div>`
+        </div>
+
+        <div class="game-row" style="display: flex; gap: 10px; justify-content: center;">
+            <div class="shapes-container"; style="gap: 30px">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px;border: 3px solid black"></div>
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px;border: 3px solid black;"></div>
+            </div>
+        </div>
+
+        <div class="game-row" style="display: flex; gap: 10px; justify-content: center;">
+            <div class="shapes-container"; style="gap: 30px">
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 70px; height: 70px;border: 3px solid black"></div>
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px;border: 3px solid black"></div>
+            </div>
+        </div>
+
+        <div class="game-row" style="display: flex; gap: 10px; justify-content: center;">
+            <div class="shapes-container"; style="gap: 30px">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px;border: 3px solid black"></div>
+                <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px;border: 3px solid black"></div>
+            </div>
+        </div>
+
+    </div>
+</div>`
                 ],
         }
     };
@@ -1010,7 +987,7 @@ attnChk4: !isSecondTime
     console.log("is secodntime in attnck" + isSecondTime)
 
     let attnChkDiv = isSecondTime 
-                ? (randomAssignment % 2 === 1 ? `attnChkGrp` : `parent`)
+                ? (randomAssignment % 2 === 1 ? `attnChkGrp` : `attnChkNow`)
                 : (randomAssignment % 2 === 1 ? `attnChkNow` : `attnChkGrp`);
     let sologroupPages = isSecondTime 
                 ? (randomAssignment % 2 === 1 ? pages.r1.groupPage2 : pages.r1.soloPage2)
