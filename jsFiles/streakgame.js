@@ -1,5 +1,5 @@
 //randomAssignment
-const randomAssignment = 4;
+const randomAssignment = 3;
 //const randomAssignment = Math.floor(Math.random() * 8) + 1; 
 
 console.log(randomAssignment + " randomAssignment")
@@ -2425,7 +2425,7 @@ const html = {
     p.save_data = {
         type: jsPsychPipe,
         action: "save",
-        experiment_id: "c0WEQcyEu6GO",
+        experiment_id: "s98H1jpa7tBT",
         filename: filename,
         data_string: ()=>jsPsych.data.get().csv()
     }; 
