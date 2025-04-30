@@ -2384,6 +2384,79 @@ p.flowMeasure = {
         data.avatar1TotalPoints = jsPsych.data.get().last(2).values()[0].avatar1TotalPoints;
         data.avatar2TotalPoints = jsPsych.data.get().last(2).values()[0].avatar2TotalPoints;
         data.trial_Name = 'FlowMeasure';
+        jsPsych.data.addProperties({isSecondTime});
+
+         const flowKeys = Object.keys(data.response); 
+         const flowResponses = {};
+         flowKeys.forEach(key => {
+         flowResponses[key] = data.response[key];
+     });
+
+    Object.assign(data, flowResponses);
+
+    console.log(data)
+    }
+};
+
+p.enjoymentMeasure = {
+    type: jsPsychSurveyLikert,
+    preamble: () => {
+    let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+    console.log(isSecondTime + 'isSecondTime');
+    
+    return `<div style='padding-top: 50px; width: 900px; font-size:16px'> 
+        <p> Throughout the ${isSecondTime ? textNew.game2 : textNew.game1}, to what extent did you enjoy and felt entertained in what you were doing? 
+        <p>To report how much you enjoyed and felt entertained, please answer the following questions.</p>
+        </div>`;
+},
+            questions: () => {
+                let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
+                return [
+        {
+            prompt: `How much did you <b>enjoy</b> playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
+            name: `enjoy_0`,
+            labels: FlowScale,
+            required: true,
+        },
+        {
+            prompt: `How much <b>fun</b> did you have playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
+            name: `enjoy_1`,
+            labels: FlowScale,
+            required: true,
+        },
+        {
+            prompt: `How <b>entertained</b> did you feel playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
+            name: `enjoy_2`,
+            labels: FlowScale,
+            required: true,
+        },
+        {
+            prompt: `How much did you <b>like</b> playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
+            name: `enjoy_3`,
+            labels: FlowScale,
+            required: true,
+        },
+        {
+            prompt: `How much did you <b>dislike</b> playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
+            name: `enjoy_4`,
+            labels: FlowScale,
+            required: true,
+        },
+    ];
+},
+    randomize_question_order: false,
+    scale_width: 600,
+    on_finish: function(data) {
+        data.randomAssignment = randomAssignment;
+        data.trialNumber = trialNumber;
+        data.isSecondTime = isSecondTime;
+        data.shape = jsPsych.data.get().last(2).values()[0].shape;
+        data.MI = jsPsych.data.get().last(2).values()[0].MI;
+        data.groupOrSolo = jsPsych.data.get().last(2).values()[0].groupOrSolo;
+        data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
+        data.avatar1TotalPoints = jsPsych.data.get().last(2).values()[0].avatar1TotalPoints;
+        data.avatar2TotalPoints = jsPsych.data.get().last(2).values()[0].avatar2TotalPoints;
+        data.trial_Name = 'EnjoymentMeasure';
 
 
         isSecondTime = true;
@@ -2401,6 +2474,7 @@ p.flowMeasure = {
     console.log(data)
     }
 };
+
 
 
 const html = {        
