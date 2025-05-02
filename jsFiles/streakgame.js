@@ -32,7 +32,7 @@ NEW
 6 = IntCircleLow + IndSquare CHECKED
 
 7 = IndSquare + IntCircleHigh CHECKED
-8 = IntCircleHigh + IndSquare
+8 = IntCircleHigh + IndSquare CHECKED
 
 */
  
@@ -1772,8 +1772,10 @@ function MakeFeedback(mode) {
             data.avatar2TotalPoints = avatar2TotalPoints;
             data.pointsAddedAvatar1 = pointsAddedAvatar1;
             data.pointsAddedAvatar2 = pointsAddedAvatar2;
-            data.groupOrInd = groupOrind;
-            data.MI = MI;
+            data.groupOrInd = groupOrInd;
+            if (groupOrInd !== "ind") {
+                data.MI = MI;
+            }
             console.log(trialNumber);
             trialNumber++;
             data.shape = jsPsych.data.get().last(2).values()[0].shape;
