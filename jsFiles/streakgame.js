@@ -1772,8 +1772,8 @@ function MakeFeedback(mode) {
             data.avatar2TotalPoints = avatar2TotalPoints;
             data.pointsAddedAvatar1 = pointsAddedAvatar1;
             data.pointsAddedAvatar2 = pointsAddedAvatar2;
-            data.groupOrInd = groupOrInd;
-            if (groupOrInd !== "ind") {
+            data.groupOrInd = groupOrind;
+            if (groupOrind !== "ind") {
                 data.MI = MI;
             }
             console.log(trialNumber);
