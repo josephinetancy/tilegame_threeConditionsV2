@@ -1,5 +1,5 @@
 //randomAssignment
-const randomAssignment = 3;
+const randomAssignment = 8;
 //const randomAssignment = Math.floor(Math.random() * 8) + 1; 
 
 console.log(randomAssignment + " randomAssignment")
@@ -9,7 +9,7 @@ console.log(randomAssignment + " randomAssignment")
 OLD 
 
 1 = SoloCircleHigh + GroupSquareLow 
-2 = GroupSquareLow + SoloCircleHigh
+2 = GroupSquareLow + SoloCircleHigh 
 
 3 = SoloCircleLow + GroupSquareHigh
 4 = GroupSquareHigh + SoloCircleLow
@@ -22,16 +22,16 @@ OLD
 
 NEW
 
-1 = IndCircle + IntSquareLow
-2 = IntSquareLow + IndCircle
+1 = IndCircle + IntSquareLow CHEKCED
+2 = IntSquareLow + IndCircle CHECKED
 
-3 = IndCircle + IntSquareHigh 
-4 = IntSquareHigh + IndCircle
+3 = IndCircle + IntSquareHigh CHECKED
+4 = IntSquareHigh + IndCircle CHECKED
 
-5 = IndSquare + IntCircleLow
-6 = IntCircleLow + IndSquare
+5 = IndSquare + IntCircleLow CHECKED
+6 = IntCircleLow + IndSquare CHECKED
 
-7 = IndSquare + IntCircleHigh 
+7 = IndSquare + IntCircleHigh CHECKED
 8 = IntCircleHigh + IndSquare
 
 */
