@@ -1,4 +1,8 @@
 //randomAssignment
+
+//const randomAssignment = 7;
+
+
 const randomAssignment = Math.floor(Math.random() * 8) + 1; 
 
 console.log(randomAssignment + " randomAssignment")
@@ -1745,7 +1749,7 @@ function MakeFeedback(mode) {
             avatar1TotalPoints += pointsAddedAvatar1;
             avatar2TotalPoints += pointsAddedAvatar2;
 
-            if (trialNumber === 16 || trialNumber === 120) { //should be 60 and 120
+            if (trialNumber === 60 || trialNumber === 120) { //should be 60 and 120
                 feedbackText = generateAvatarFeedbackLast(
                     selectedAvatarImg,
                     +pointsAddedAvatar1,
