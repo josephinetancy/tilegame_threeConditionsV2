@@ -32,7 +32,7 @@ let timeline = [];
 */
 
 const commonTimeline = [
- //   p.intro.preMessage,
+   p.intro.preMessage,
     p.intro.r1part1,
     p.intro.round1Avatars,
    p.intro.r1part1a,
