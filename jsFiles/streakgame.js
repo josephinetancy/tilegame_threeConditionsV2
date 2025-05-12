@@ -1778,6 +1778,7 @@ function MakeFeedback(mode) {
             }
             console.log(trialNumber);
             trialNumber++;
+            data.trialNumber = trialNumber;
             data.shape = jsPsych.data.get().last(2).values()[0].shape;
             data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
             data.trialType = jsPsych.data.get().last(2).values()[0].trialType;
