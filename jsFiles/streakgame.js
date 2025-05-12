@@ -1776,9 +1776,9 @@ function MakeFeedback(mode) {
             if (groupOrind !== "ind") {
                 data.MI = MI;
             }
-            console.log(trialNumber);
             trialNumber++;
             data.trialNumber = trialNumber;
+            console.log(trialNumber);
             data.shape = jsPsych.data.get().last(2).values()[0].shape;
             data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
             data.trialType = jsPsych.data.get().last(2).values()[0].trialType;
