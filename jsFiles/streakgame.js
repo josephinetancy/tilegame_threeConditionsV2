@@ -1584,7 +1584,7 @@ function LLTrial(shape) {
  
                 </div> */
 
-
+/*
 function generateAvatarFeedback(avatar1, avatar1Text, avatar2Text, color) {
     return `
         <div style="display: flex; justify-content: center; align-items: flex-start; gap: 80px; padding: 20px;">
@@ -1640,13 +1640,13 @@ function generateAvatarFeedbackLast(avatar1, avatar1Text, avatar2Text, color) {
     `;
 }
 
+*/
 
-/*
 function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, color) {
     return `
         <div style="display: flex; flex-direction: column; align-items: center;">
             <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
-                ${avatar1Text}
+                +${avatar1Text}
             </div>
             <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
         </div>
@@ -1661,7 +1661,7 @@ function generateSoloAvatarFeedbackLast(avatar1, avatar1Text, avatar1TotalPoints
     return `
         <div style="display: flex; flex-direction: column; align-items: center;">
             <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
-                ${avatar1Text}
+                +${avatar1Text}
             </div>
             <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
         </div>
@@ -1670,7 +1670,7 @@ function generateSoloAvatarFeedbackLast(avatar1, avatar1Text, avatar1TotalPoints
             The game is now complete!
         </div>
     `;
-} */
+} 
 
 
 const avatarChoices = [
@@ -1747,14 +1747,14 @@ function MakeFeedback(mode) {
             avatar2TotalPoints += pointsAddedAvatar2;
 
             if (trialNumber === 60 || trialNumber === 120) { //should be 60 and 120
-                feedbackText = generateAvatarFeedbackLast(
+                feedbackText = generateSoloAvatarFeedbackLast(
                     selectedAvatarImg,
                     +pointsAddedAvatar1,
                     +pointsAddedAvatar2,
                     avatarResponse
                 );
             } else {
-                feedbackText = generateAvatarFeedback(
+                feedbackText = generateSoloAvatarFeedback(
                     selectedAvatarImg,
                     +pointsAddedAvatar1,
                     +pointsAddedAvatar2,
@@ -2501,7 +2501,7 @@ const html = {
     p.save_data = {
         type: jsPsychPipe,
         action: "save",
-        experiment_id: "HaCNN1WRXVPX",
+        experiment_id: "eErQ3TFRMtki",
         filename: filename,
         data_string: ()=>jsPsych.data.get().csv()
     }; 
