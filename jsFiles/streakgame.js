@@ -1719,7 +1719,7 @@ function MakeFeedback(mode) {
                     pointsAddedAvatar2 = 3;
                 } else if (lastTrialData.outcome && partner_outcome === 1) {
                     pointsAddedAvatar1 = 7;
-                    pointsAddedAvatar2 = 3;
+                    pointsAddedAvatar2 = 7;
                 } else if (!lastTrialData.outcome && partner_outcome === 0) {
                     pointsAddedAvatar1 = 3;
                     pointsAddedAvatar2 = 3;
