@@ -22,14 +22,14 @@ OLD
 
 NEW
 
-1 = IndCircle + IntSquareLow CHEKCED
+1 = IndCircle + IntSquareLow CHECKED
 2 = IntSquareLow + IndCircle CHECKED
 
 3 = IndCircle + IntSquareHigh CHECKED
 4 = IntSquareHigh + IndCircle CHECKED
 
 5 = IndSquare + IntCircleLow CHECKED
-6 = IntCircleLow + IndSquare CHECKED
+6 = IntCircleLow + IndSquare CHECKED  
 
 7 = IndSquare + IntCircleHigh CHECKED
 8 = IntCircleHigh + IndSquare CHECKED
@@ -79,34 +79,30 @@ var textNew = {
     WL2Switch2: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+6`,
     LL2: [1, 4, 5, 8].includes(randomAssignment) ? `+4`:`+2`, */
  // Corresponds to attnChk2 when secondTime is false
+
+WW: [1, 3, 5, 7].includes(randomAssignment) ? `7` : `8`,
+
+WW2: [1, 3, 5, 7].includes(randomAssignment) ? `8` : `7`,
+
 WL: [1, 3, 5, 7].includes(randomAssignment)
-  ? `+8`
+  ? `7`
   : ([2, 6].includes(randomAssignment) ? `4` : `6`),
 
-// Corresponds to attnChk2 when secondTime is true
 WL2: [1, 3, 5, 7].includes(randomAssignment)
   ? ([1, 5].includes(randomAssignment) ? `4` : `6`)
-  : `8`,
+  : `7`,
 
-// Corresponds to attnChk3 when secondTime is false
-LW: [1, 3, 5, 7].includes(randomAssignment)
-  ? `2`
-  : `4`,
+LW: [1, 3, 5, 7].includes(randomAssignment) ? `3` : `4`,
 
-// Corresponds to attnChk3 when secondTime is true
-LW2: [1, 3, 5, 7].includes(randomAssignment)
-  ? `4`
-  : `2`,
+LW2: [1, 3, 5, 7].includes(randomAssignment) ? `4` : `3`,
 
-// Corresponds to attnChk4 when secondTime is false
 LL: [1, 3, 5, 7].includes(randomAssignment)
-  ? `2`
+  ? `3`
   : ([2, 6].includes(randomAssignment) ? `4` : `2`),
 
-// Corresponds to attnChk4 when secondTime is true
 LL2: [1, 3, 5, 7].includes(randomAssignment)
   ? ([1, 5].includes(randomAssignment) ? `4` : `2`)
-  : `2`,
+  : `3`,
 }
 
 /*
@@ -433,8 +429,8 @@ let avatarResponse = '#2669ee';
 soloPage: [
     `<div class='specialOnly'>
         <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
-        <p>Specifically, you'll get 8 points if you activate the right ${textNew.shape1}. </p> 
-        <p>You'll get 2 points if you do not activate the right ${textNew.shape1}. </p>
+        <p>Specifically, you'll get 7 points if you activate the right ${textNew.shape1}. </p> 
+        <p>You'll get 3 points if you do not activate the right ${textNew.shape1}. </p>
         <p>Your outcome depends on your performance only. </p>
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container">
@@ -458,41 +454,41 @@ soloPage: [
             <td>
                 <div class="${textNew.shape1}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+8</td>
+            <td>+7</td>
             <td style="padding-right: 40px;">
                 <div class="${textNew.shape1}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+8</td>
+            <td>+7</td>
         </tr>
         <tr>
             <td>
                 <div class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+2</td>
+            <td>+3</td>
             <td style="padding-right: 40px;">
                 <div class="${textNew.shape1}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+8</td>
+            <td>+7</td>
         </tr>
         <tr>
             <td>
                 <div class="${textNew.shape1}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+8</td>
+            <td>+7</td>
             <td>
                 <div class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+2</td>
+            <td>+3</td>
         </tr>
         <tr>
             <td>
                 <div class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+2</td>
+            <td>+3</td>
             <td>
                 <div class="${textNew.shape1}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+2</td>
+            <td>+3</td>
         </tr>
     </tbody>
 </table>
@@ -502,8 +498,8 @@ soloPage: [
 soloPage2: [
      `<div class='specialOnly'>
         <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
-        <p>Specifically, you'll get 8 points if you activate the right ${textNew.shape2}. </p> 
-        <p>You'll get 2 points if you do not activate the right ${textNew.shape2}. </p>
+        <p>Specifically, you'll get 7 points if you activate the right ${textNew.shape2}. </p> 
+        <p>You'll get 3 points if you do not activate the right ${textNew.shape2}. </p>
         <p>Your outcome depends on your performance only. </p>
         <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container">
@@ -527,41 +523,41 @@ soloPage2: [
             <td>
                 <div class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+8</td>
+            <td>+7</td>
             <td style="padding-right: 40px;">
                 <div class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+8</td>
+            <td>+7</td>
         </tr>
         <tr>
             <td>
                 <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+2</td>
+            <td>+3</td>
             <td style="padding-right: 40px;">
                 <div class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+8</td>
+            <td>+7</td>
         </tr>
         <tr>
             <td>
                 <div class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+8</td>
+            <td>+7</td>
             <td>
                 <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+2</td>
+            <td>+3</td>
         </tr>
         <tr>
             <td>
                 <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+2</td>
+            <td>+3</td>
             <td>
                 <div class="${textNew.shape2}" style="background-color: grey; width: 70px; height: 70px; border: 3px solid black;"></div>
             </td>
-            <td>+2</td>
+            <td>+3</td>
         </tr>
     </tbody>
 </table>
@@ -934,37 +930,38 @@ attnChk0: !isSecondTime
   : ([1, 3, 5, 7].includes(randomAssignment)
       ? `My earnings depend on both my performance and my partner's performance.`
       : `My earnings depend on my performance only.`),
-
-attnChk1: `+8`,
+attnChk1: !isSecondTime
+  ? ([1, 3, 5, 7].includes(randomAssignment) ? `+7` : `+8`)
+  : ([1, 3, 5, 7].includes(randomAssignment) ? `+8` : `+7`),
 
 attnChk2: !isSecondTime
   ? ([1, 3, 5, 7].includes(randomAssignment)
-      ? `+8`
+      ? `+7`
       : ([2, 6].includes(randomAssignment) ? `+4` : `+6`)
     )
   : ([1, 3, 5, 7].includes(randomAssignment)
       ? ([1, 5].includes(randomAssignment) ? `+4` : `+6`)
-      : `+8`
+      : `+7`
     ),
 
 attnChk3: !isSecondTime
   ? ([1, 3, 5, 7].includes(randomAssignment)
-      ? `+2`
+      ? `+3`
       : `+4`
     )
   : ([1, 3, 5, 7].includes(randomAssignment)
       ? `+4`
-      : `+2`
+      : `+3`
     ),
 
 attnChk4: !isSecondTime
   ? ([1, 3, 5, 7].includes(randomAssignment)
-      ? `+2`
+      ? `+3`
       : ([2, 6].includes(randomAssignment) ? `+4` : `+2`)
     )
   : ([1, 3, 5, 7].includes(randomAssignment)
       ? ([1, 5].includes(randomAssignment) ? `+4` : `+2`)
-      : `+2`
+      : `+3`
     ),
     };
 }
@@ -1032,22 +1029,22 @@ attnChk4: !isSecondTime
         {
             prompt: `How many points do you get when you and your partner activate the ${isSecondTime ? textNew.shape2 : textNew.shape1}s?`,
             name: `attnChk1`, 
-            options: ['+2', '+4', '+6', '+8'],
+            options: ['+2', '+3', '+4', '+6', '+7','+8'],
         },
         {
             prompt: `How many points do you get when you activate your ${isSecondTime ? textNew.shape2 : textNew.shape1} but your partner does not activate their ${isSecondTime ? textNew.shape2 : textNew.shape1}?`, 
             name: `attnChk2`, 
-            options: ['+2', '+4', '+6', '+8'],
+            options: ['+2', '+3', '+4', '+6', '+7','+8'],
         },
         {
             prompt: `How many points do you get when you do not activate your ${isSecondTime ? textNew.shape2 : textNew.shape1} but your partner activates their ${isSecondTime ? textNew.shape2 : textNew.shape1}?`, 
             name: `attnChk3`, 
-            options: ['+2', '+4', '+6', '+8'],
+            options: ['+2', '+3', '+4', '+6', '+7','+8'],
         },
         {
             prompt: `How many points do you get when you and your partner do not activate the ${isSecondTime ? textNew.shape2 : textNew.shape1}s?`, 
             name: `attnChk4`, 
-            options: ['+2', '+4', '+6', '+8'],
+            options: ['+2', '+3', '+4', '+6', '+7','+8'],
         },
     ];
 },
@@ -1718,17 +1715,17 @@ function MakeFeedback(mode) {
                 }
             } else if (mode === 'ind') {
                 if (lastTrialData.outcome && partner_outcome === 0) {
-                    pointsAddedAvatar1 = 8;
-                    pointsAddedAvatar2 = 2;
+                    pointsAddedAvatar1 = 7;
+                    pointsAddedAvatar2 = 3;
                 } else if (lastTrialData.outcome && partner_outcome === 1) {
-                    pointsAddedAvatar1 = 8;
-                    pointsAddedAvatar2 = 8;
+                    pointsAddedAvatar1 = 7;
+                    pointsAddedAvatar2 = 3;
                 } else if (!lastTrialData.outcome && partner_outcome === 0) {
-                    pointsAddedAvatar1 = 2;
-                    pointsAddedAvatar2 = 2;
+                    pointsAddedAvatar1 = 3;
+                    pointsAddedAvatar2 = 3;
                 } else if (!lastTrialData.outcome && partner_outcome === 1) { 
-                    pointsAddedAvatar1 = 2;
-                    pointsAddedAvatar2 = 8;
+                    pointsAddedAvatar1 = 3;
+                    pointsAddedAvatar2 = 7;
                 }
             } else if (mode === 'groupLow') {
                 if (lastTrialData.outcome && partner_outcome === 0) {
