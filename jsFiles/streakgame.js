@@ -202,7 +202,7 @@ let avatarResponse = '#2669ee';
                 `<div class='parent'>
                 <p> For both games, you'll earn points. </p>
                 <p>Every 5 points is worth 1 cent in bonus money. </p>
-                You'll keep all the bonus money you earn on top of the $2.80 you earn for your participation. </p>
+                You'll keep all the bonus money you earn on top of the $3.20 you earn for your participation. </p>
                 <p>To maximize your earnings, earn as many points as possible!</p>
                 </div>`,
 
