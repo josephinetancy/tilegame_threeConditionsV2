@@ -163,14 +163,12 @@ var jsPsychWWHtmlKeyboardResponse = (function (jspsych) {
             clearTimeout(timeoutID);
             clearTimeout(timeoutID_partner);
             innerCircle.style.backgroundColor = trial.selected_color; // change to participant's color
-            console.log("inner shape is", trial.selected_color)
             setTimeout(() => {
               if (trial.partner_rt <= 100) {
                 outerCircle.style.backgroundColor = "grey"; // Change to orange
               };
             }, trial.partner_rt);
         } else {
-            console.log("inner-circle element not found");
         }
 
     };

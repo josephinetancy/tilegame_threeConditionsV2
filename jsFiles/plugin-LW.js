@@ -146,7 +146,6 @@ var jsPsychLWHtmlKeyboardResponse = (function (jspsych) {
             clearTimeout(timeoutID);
             innerCircle.style.backgroundColor = trial.selected_color; // Change to orange
         } else {
-            console.log("inner-circle element not found");
         }
     };
         // Handle conditions

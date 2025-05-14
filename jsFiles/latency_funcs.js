@@ -106,7 +106,6 @@ const makeRT = function(n, p) {
     rt.push(750);
   }
 
-  console.log(geoms, nTrials, nLossTot);
 
   return rt;
 }

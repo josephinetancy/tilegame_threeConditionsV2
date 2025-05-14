@@ -2,7 +2,6 @@
 
 const randomAssignment = Math.floor(Math.random() * 8) + 1; 
 
-console.log(randomAssignment + " randomAssignment")
 
 /* 
 
@@ -169,13 +168,10 @@ function MakeAvatarSelection() {
             data.avatarResponse = avatarResponse;
             data.isSecondTime = isSecondTime;
             data.trialNumber = trialNumber;
-            console.log(trialNumber)
 
             // Add properties globally
             jsPsych.data.addProperties({ avatarResponse, isSecondTime, randomAssignment});
 
-            console.log("Avatar Response:", avatarResponse);
-            console.log("isSecondTime:", isSecondTime);
         }
     };
 }
@@ -920,8 +916,6 @@ function MakeLoop(group, round) {
 
 function getCorrectAnswers(randomAssignment) {
     let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-    console.log(randomAssignment + 'randomassignment in getcorrect answers.')
-    console.log(isSecondTime + 'in getCorrectAnswers')
     return {
 attnChk0: !isSecondTime
   ? ([1, 3, 5, 7].includes(randomAssignment)
@@ -981,7 +975,6 @@ attnChk4: !isSecondTime
     let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
     let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
     let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-    console.log("is secodntime in attnck" + isSecondTime)
 
     let attnChkDiv = isSecondTime 
                 ? (randomAssignment % 2 === 1 ? `attnChkGrp` : `attnChkNow`)
@@ -1230,7 +1223,6 @@ function makeR1SoloHigh() {
                 ? (randomAssignment % 2 === 1 ? pages.r1.groupPage2 : pages.r1.soloPage2)
                 : (randomAssignment % 2 === 1 ? pages.r1.soloPage : pages.r1.groupPage);
 
-            console.log(sologroupPages);
 
             const updatedPages = sologroupPages.map(page => {
                 return page
@@ -1332,14 +1324,13 @@ function WWTrial(shape, group) {
             let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
             return avatarResponse;
         },
-        trial_duration: 2000, // Fallback duration if no response from participant
+        trial_duration: 1500, // Fallback duration if no response from participant
         partner_rt: function forWW(min = 225, max = 400) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
         ending_time: delayTime, // Must be larger than partner_rt
         on_start: function (trial) {
             trialStartTime = Date.now();
-            console.log('Selected color:', trial.selected_color); // Log the selected color
 
             let color = group === 'solo' ? '#2669ee' : '#2669ee';
 
@@ -1348,7 +1339,6 @@ function WWTrial(shape, group) {
                 if (outerCircle) {
                     outerCircle.style.backgroundColor = color;
                 } else {
-                    console.log('outer-shape element not found');
                 }
             }, trial.partner_rt);
         },
@@ -1363,7 +1353,6 @@ function WWTrial(shape, group) {
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             data.trialNumber = trialNumber;
-            console.log(trialNumber);
             data.trial_Name = 'MakeTrial';
         },
     };
@@ -1406,7 +1395,7 @@ function WLTrial(shape) {
             let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
             return avatarResponse;
         },
-        trial_duration: 2000,
+        trial_duration: 1500,
         partner_rt: function forWW(min = 0, max = 100) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
@@ -1422,7 +1411,6 @@ function WLTrial(shape) {
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             data.trialNumber = trialNumber;
-            console.log(trialNumber);
             data.trial_Name = 'MakeTrial';
         },
     };
@@ -1461,7 +1449,7 @@ function LWTrial(shape, group) {
 
         `,
         choices: [" "],
-        trial_duration: 2000, // Fallback duration if no response from participant
+        trial_duration: 1500, // Fallback duration if no response from participant
         response_duration: trialforLose, // Ensure trialforLose is defined globally or passed properly
 
         selected_color: function() {
@@ -1482,7 +1470,6 @@ function LWTrial(shape, group) {
                 if (outerCircle) {
                     outerCircle.style.backgroundColor = color;
                 } else {
-                    console.log('outer-shape element not found');
                 }
             }, trial.partner_rt);
         },
@@ -1498,7 +1485,6 @@ function LWTrial(shape, group) {
             data.shape = shape;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             data.trialNumber = trialNumber;
-            console.log(trialNumber);
             data.trial_Name = 'MakeTrial';
         }
     };
@@ -1540,19 +1526,17 @@ function LLTrial(shape) {
             let avatarResponse = jsPsych.data.get().filter({trial_type: 'html-button-response'}).last(1).values()[0].avatarResponse; 
             return avatarResponse;
         },
-        trial_duration: 2000, // Fallback duration if no response from participant
+        trial_duration: 1500, // Fallback duration if no response from participant
         partner_rt: partner_rtL,
         response_ends_trial: false,
         on_start: function(trial) {
             trialStartTime = Date.now(); 
-            console.log('Outer circle becomes highlighted at partner reaction time: ' + trial.partner_rt);
 
             jsPsych.pluginAPI.setTimeout(function() {
                 const outerCircle = document.getElementById('outer-shape');
                 if (outerCircle) {
                     outerCircle.style.backgroundColor = 'grey';
                 } else {
-                    console.log('outer-circle element not found');
                 }
             }, trialforLose);
         },
@@ -1762,7 +1746,7 @@ function MakeFeedback(mode) {
             return feedbackText;
         },
         choices: "NO_KEYS",
-        trial_duration: 2000,
+        trial_duration: 1500,
         on_finish: (data) => {
             data.randomAssignment = randomAssignment;
             data.avatar1TotalPoints = avatar1TotalPoints;
@@ -1775,7 +1759,6 @@ function MakeFeedback(mode) {
             }
             trialNumber++;
             data.trialNumber = trialNumber;
-            console.log(trialNumber);
             data.shape = jsPsych.data.get().last(2).values()[0].shape;
             data.selected_color = jsPsych.data.get().last(2).values()[0].selected_color;
             data.trialType = jsPsych.data.get().last(2).values()[0].trialType;
@@ -1784,7 +1767,6 @@ function MakeFeedback(mode) {
             data.rt = jsPsych.data.get().last(2).values()[0].rt;
             isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
             data.trial_Name = 'MakeFeedback'; 
-            console.log(data)
         }
     };
 }
@@ -1828,7 +1810,7 @@ function MakeRoundIntro(round) {
     };
 } */
 
-var ITI = [250, 500, 750, 1000, 1250, 1500, 1750, 2000]
+var ITI = [250, 500, 750, 1000]
 
 function MakeDelay(round) {
     return {
@@ -2005,7 +1987,6 @@ p.partnerAvatar = {
 
     },
     on_finish: (data) => {
-        console.log(data);
         data.loading_completed = true;
     }
 }; 
@@ -2021,7 +2002,6 @@ p.partnerNext = {
     choices: "NO_KEYS",
     trial_duration: 4000,  // Duration of the loading screen in milliseconds, 15 seconds
     on_finish: (data) => {
-        console.log(data);
         data.loading_completed = true;
         data.trial_Name = 'partnerNext'
     }
@@ -2062,7 +2042,6 @@ p.partnerNext = {
         loop_function: function(data) {
             let tooFastArray = jsPsych.data.get().select('TooFast').values;
             let loop = tooFastArray[tooFastArray.length - 1];
-            console.log(tooFastArray, loop);
             if (loop) { return true }
             return false
         }
@@ -2073,7 +2052,6 @@ p.partnerNext = {
         loop_function: function(data) {
             let tooFastArray = jsPsych.data.get().select('TooFast').values;
             let loop = tooFastArray[tooFastArray.length - 1];
-            console.log(tooFastArray, loop);
             if (loop) { return true }
             return false
         }
@@ -2328,7 +2306,6 @@ p.flowMeasure = {
     type: jsPsychSurveyLikert,
     preamble: () => {
     let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-    console.log(isSecondTime + 'isSecondTime');
     
     return `<div style='padding-top: 50px; width: 900px; font-size:16px'> 
         <p> Throughout the ${isSecondTime ? textNew.game2 : textNew.game1}, to what extent did you feel immersed 
@@ -2394,7 +2371,6 @@ p.flowMeasure = {
 
     Object.assign(data, flowResponses);
 
-    console.log(data)
     }
 };
 
@@ -2402,7 +2378,6 @@ p.enjoymentMeasure = {
     type: jsPsychSurveyLikert,
     preamble: () => {
     let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
-    console.log(isSecondTime + 'isSecondTime');
     
     return `<div style='padding-top: 50px; width: 900px; font-size:16px'> 
         <p> Throughout the ${isSecondTime ? textNew.game2 : textNew.game1}, to what extent did you enjoy and felt entertained in what you were doing? 
@@ -2471,7 +2446,6 @@ p.enjoymentMeasure = {
 
     Object.assign(data, flowResponses);
 
-    console.log(data)
     }
 };
 
