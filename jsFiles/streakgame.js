@@ -28,7 +28,7 @@ NEW
 4 = IntSquareHigh + IndCircle CHECKED
 
 5 = IndSquare + IntCircleLow CHECKED
-6 = IntCircleLow + IndSquare CHECKED  
+6 = IntCircleLow + IndSquare CHECKED   
 
 7 = IndSquare + IntCircleHigh CHECKED
 8 = IntCircleHigh + IndSquare CHECKED
@@ -1274,7 +1274,7 @@ variables for plugins
 ///
 */
 
-let noOfTrials = 15; //so 60 in total
+let noOfTrials = 1; //so 60 in total
 
 ///fake participant's activation time for WL and LL trials, that far exceeds trial duration
 let partner_rtL = 20000; //for when partner "loses".
@@ -2300,7 +2300,19 @@ p.task.GroupCircleLow = {
 
     p.Qs = {};
 
-    const FlowScale = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>Extremely'];
+    const FlowScale0 = ['0<br>Not at all immersed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More immersed than I've ever felt`];
+    const FlowScale1 = ['0<br>Not at all engaged', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engaged than I've ever felt`];
+    const FlowScale2 = ['0<br>Not at all engrossed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engrossed than I've ever felt`];
+    const FlowScale3 = ['0<br>Not at all absorbed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More absorbed than I've ever felt`];
+    const FlowScale4 = ['0<br>Not at all bored', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More bored than I've ever felt`];
+
+    const EnjoyScale0 = ['0<br>Not at all enjoying it', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More enjoyment than I've ever felt`];
+    const EnjoyScale1 = ['0<br>Not at all fun', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More fun than I've ever felt`];
+    const EnjoyScale2 = ['0<br>Not at all entertained', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More entertained than I've ever felt`];
+    const EnjoyScale3 = ['0<br>Not at all liking it', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More liking than I've ever felt`];
+    const EnjoyScale4 = ['0<br>Not at all disliking it', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More disliking than I've ever felt`];
+
+
     
 p.flowMeasure = {
     type: jsPsychSurveyLikert,
@@ -2319,31 +2331,31 @@ p.flowMeasure = {
         {
             prompt: `How <b>immersed</b> did you feel playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
             name: `flow_0`,
-            labels: FlowScale,
+            labels: FlowScale0,
             required: true,
         },
         {
             prompt: `How <b>engaged</b> did you feel playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
             name: `flow_1`,
-            labels: FlowScale,
+            labels: FlowScale1,
             required: true,
         },
         {
             prompt: `How <b>engrossed</b> did you feel playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
             name: `flow_2`,
-            labels: FlowScale,
+            labels: FlowScale2,
             required: true,
         },
         {
             prompt: `How <b>absorbed</b> did you feel playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
             name: `flow_3`,
-            labels: FlowScale,
+            labels: FlowScale3,
             required: true,
         },
         {
             prompt: `How <b>bored</b> did you feel playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
             name: `flow_4`,
-            labels: FlowScale,
+            labels: FlowScale4,
             required: true,
         },
     ];
@@ -2390,31 +2402,31 @@ p.enjoymentMeasure = {
         {
             prompt: `How much did you <b>enjoy</b> playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
             name: `enjoy_0`,
-            labels: FlowScale,
+            labels: EnjoyScale0,
             required: true,
         },
         {
             prompt: `How much <b>fun</b> did you have playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
             name: `enjoy_1`,
-            labels: FlowScale,
+            labels: EnjoyScale1,
             required: true,
         },
         {
             prompt: `How <b>entertained</b> did you feel playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
             name: `enjoy_2`,
-            labels: FlowScale,
+            labels: EnjoyScale2,
             required: true,
         },
         {
             prompt: `How much did you <b>like</b> playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
             name: `enjoy_3`,
-            labels: FlowScale,
+            labels: EnjoyScale3,
             required: true,
         },
         {
             prompt: `How much did you <b>dislike</b> playing the ${isSecondTime ? textNew.game2 : textNew.game1}?`,
             name: `enjoy_4`,
-            labels: FlowScale,
+            labels: EnjoyScale4,
             required: true,
         },
     ];
