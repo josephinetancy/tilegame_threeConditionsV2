@@ -230,21 +230,21 @@
 .parent {
   position: relative;
   width: 950px;
- height: 400px; 
+ height: 390px; 
  /* height: auto; */
 }
 
 .special {
   position: relative;
   width: 950px;
- height: 600px; 
+ height: 250px; 
  /* height: auto; */
 }
 
 .specialOnly {
   position: relative;
   width: 950px;
- height: 1000px; 
+ height: 500px; 
  /* height: auto; */
 }
 
@@ -258,7 +258,7 @@
 .attnChkGrp {
   position: relative;
   width: 950px;
- height: 1010px; 
+ height: 820px; 
  /* height: auto; */
 }
 
@@ -272,7 +272,7 @@
 .attnChkNow {
   position: relative;
   width: 950px;
- height: 1000px; 
+ height: 730px; 
  /* height: auto; */
 }
 
@@ -343,12 +343,13 @@
     align-items: center;
 }
 
+/*
 #inner-shape, #outer-shape {
     width: 150px;
     height: 150px;
     border: 10px solid black;
     background-color: white;
-}
+} */
 
 .label {
     margin-top: 10px;
@@ -359,7 +360,7 @@
 
 /* Sizes for outer and inner shapes */
 
-/*
+
 #outer-shape {
     width: 150px;
     height: 150px;
@@ -381,7 +382,7 @@
     left: 50%;
     transform: translate(-50%, -50%); 
 }
-*/
+
 
 #shape-wrapper {
     display: flex;
