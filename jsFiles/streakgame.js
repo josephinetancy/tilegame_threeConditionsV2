@@ -2366,11 +2366,11 @@ p.task.GroupCircleLow = {
     const FlowScale3 = ['0<br>Not at all absorbed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More absorbed than I've ever felt`];
     const FlowScale4 = ['0<br>Not at all bored', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More bored than I've ever felt`];
 
-    const EnjoyScale0 = ['0<br>Not at all enjoying it', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More enjoyment than I've ever felt`];
-    const EnjoyScale1 = ['0<br>Not at all fun', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More fun than I've ever felt`];
-    const EnjoyScale2 = ['0<br>Not at all entertained', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More entertained than I've ever felt`];
-    const EnjoyScale3 = ['0<br>Not at all liking it', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More liking than I've ever felt`];
-    const EnjoyScale4 = ['0<br>Not at all disliking it', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More disliking than I've ever felt`];
+    const EnjoyScale0 = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More than I've enjoyed anything`];
+    const EnjoyScale1 = ['0<br>Zero fun', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More fun than I've ever had`];
+    const EnjoyScale2 = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More entertained than I've ever felt`];
+    const EnjoyScale3 = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More I've ever liked anything`];
+    const EnjoyScale4 = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More I've ever disliked anything`];
 
 
     
