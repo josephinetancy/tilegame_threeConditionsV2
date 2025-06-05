@@ -1,7 +1,8 @@
 //randomAssignment
 
-const randomAssignment = Math.floor(Math.random() * 8) + 1; 
+//const randomAssignment = Math.floor(Math.random() * 8) + 1; 
 
+randomAssignment = 2;
 
 /* 
 
@@ -428,12 +429,13 @@ let avatarResponse = '#2669ee';
         </div>`
                 ],
 soloPage: [
-    `<div class='specialOnly'>
-        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
-        <p>Specifically, you'll get 7 points if you activate the inner ${textNew.shape1}. </p> 
-        <p>You'll get 3 points if you do not activate the inner ${textNew.shape1}. </p>
-        <p>Your outcome depends on your performance only. </p>
-         <div id="shape-wrapper" style="display: flex; justify-content: center;">
+`<div class='specialOnly'>
+    <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent.</p>
+    <p>Specifically, if you activate the inner ${textNew.shape1}, you have a 50% chance of getting 8 points or 6 points.</p> 
+    <p>If you do not activate the inner ${textNew.shape1}, you have a 50% chance of getting 4 points or 2 points.</p>
+    <p>Your outcome depends on your performance only.</p>
+
+    <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
             <table style="border-collapse: collapse; text-align: center;">
                 <!-- First row: Empty first column, Shapes start from the second column -->
@@ -477,38 +479,64 @@ soloPage: [
                     </td>
                 </tr>
 
-                <!-- Second row: Points with avatar 3 -->
+                <!-- Second row: Points for (you) -->
                 <tr>
-                    <td rowspan="1" style="padding: 2px; vertical-align: middle;">
+                    <td style="padding: 2px; vertical-align: middle;">
                         <div style="display: flex; flex-direction: column; align-items: center;">
                             <img src="{{avatar1}}" style="width: 80px; height: auto;">
                             <span style="font-size: 12px; font-weight: bold;">(you)</span>
                         </div>
                     </td>
-                    <td><b>+7</b></td>
-                    <td><b>+7</b></td>
-                    <td><b>+3</b></td>
-                    <td><b>+3</b></td>
+                    <td>
+                        <div><b>+8</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+6</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
+                    <td>
+                        <div><b>+8</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+6</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
+                    <td>
+                        <div><b>+4</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+2</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
+                    <td>
+                        <div><b>+4</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+2</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
                 </tr>
 
-                <!-- Third row: Points with avatar 4 -->
+                <!-- Third row: Points for (your partner) -->
                 <tr>
-                    <td rowspan="1" style="padding: 2px; vertical-align: middle; text-align: left;">
+                    <td style="padding: 2px; vertical-align: middle; text-align: left;">
                         <div style="display: flex; flex-direction: column; align-items: center;">
                             <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
                             <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
                         </div>
                     </td>
-                    <td><b>+7</b></td>
-                    <td><b>+3</b></td>
-                    <td><b>+7</b></td>
-                    <td><b>+3</b></td>
+                    <td>
+                        <div><b>+8</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+6</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
+                    <td>
+                        <div><b>+4</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+2</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
+                    <td>
+                        <div><b>+8</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+6</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
+                    <td>
+                        <div><b>+4</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+2</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
                 </tr>
             </table>
         </div>
     </div>
-          <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
-       <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
+
+    <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
+        <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
+    </div>
 </div>`
 
 ],
@@ -597,93 +625,115 @@ soloPage2: [
 </div>`
 ],
 groupPage: [
-   `<div class='specialOnly'>
-        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
-        <p>Specifically, you'll get 8 points if you and your partner activate the ${textNew.shape1}s. </p> 
-        <p> You'll get ${textNew.WL} points if you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}. </p> 
-        <p> You'll get ${textNew.LW} points if you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}. </p>
-       <p>You'll get ${textNew.LL} points if you and your partner do not activate the ${textNew.shape1}s. </p> 
-        <p>Your outcome depends on you and your partner's performance. </p>
-          <div id="shape-wrapper" style="display: flex; justify-content: center;">
-        <div class="table-container" style="display: block; clear: both;">
-            <table style="border-collapse: collapse; text-align: center;">
-                <!-- First row: Empty first column, Shapes start from the second column -->
-                <tr>
-                    <td style="padding: 10px;"></td> <!-- Empty first column -->
-                    <td style="padding: 10px;">
-                        <div class="outer-container">
-                            <div id="outer-shape" class="${textNew.shape1}" 
-                                 style="background-color: ${textNew.color}; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape1}" 
-                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 10px;">
-                        <div class="outer-container">
-                            <div id="outer-shape" class="${textNew.shape1}" 
-                                 style="background-color: grey; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape1}" 
-                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 10px;">
-                        <div class="outer-container">
-                            <div id="outer-shape" class="${textNew.shape1}" 
-                                 style="background-color: ${textNew.color}; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape1}" 
-                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 10px;">
-                        <div class="outer-container">
-                            <div id="outer-shape" class="${textNew.shape1}" 
-                                 style="background-color: grey; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape1}" 
-                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+`<div class='specialGrpOnly'>
+  <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent.</p>
+  <p>Specifically, if you and your partner activate the ${textNew.shape1}s, you will each get 8 points.</p> 
+  <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}, you have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>
+  <p>If you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}, you have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>
+  <p>If you and your partner do not activate the ${textNew.shape1}s, you have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>
 
-                <!-- Second row: Points with avatar 3 -->
-                <tr>
-                    <td rowspan="1" style="padding: 2px; vertical-align: middle;">
-                        <div style="display: flex; flex-direction: column; align-items: center;">
-                            <img src="{{avatar1}}" style="width: 80px; height: auto;">
-                            <span style="font-size: 12px; font-weight: bold;">(you)</span>
-                        </div>
-                    </td>
-                    <td><b>+8</b></td>
-                    <td><b>+${textNew.WL}</b></td>
-                    <td><b>+${textNew.LW}</b></td>
-                    <td><b>+${textNew.LL}</b></td>
-                </tr>
+  <div id="shape-wrapper" style="display: flex; justify-content: center;">
+    <div class="table-container" style="display: block; clear: both;">
+      <table style="border-collapse: collapse; text-align: center;">
+        <!-- Shape row -->
+        <tr>
+          <td></td>
+          <td>
+            <div class="outer-container">
+              <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}; width: 100px; height: 100px;">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="outer-container">
+              <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey; width: 100px; height: 100px;">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="outer-container">
+              <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}; width: 100px; height: 100px;">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="outer-container">
+              <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey; width: 100px; height: 100px;">
+                <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+              </div>
+            </div>
+          </td>
+        </tr>
 
-                <!-- Third row: Points with avatar 4 -->
-                <tr>
-                    <td rowspan="1" style="padding: 2px; vertical-align: middle; text-align: left;">
-                        <div style="display: flex; flex-direction: column; align-items: center;">
-                            <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
-                            <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
-                        </div>
-                    </td>
-                    <td><b>+8</b></td>
-                    <td><b>+${textNew.LW}</b></td>
-                    <td><b>+${textNew.WL}</b></td>
-                    <td><b>+${textNew.LL}</b></td>
-                </tr>
-            </table>
-        </div>
+<!-- Points for you -->
+<tr>
+  <td style="padding: 2px; vertical-align: middle;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <img src="{{avatar1}}" style="width: 80px; height: auto;">
+      <span style="font-size: 12px; font-weight: bold;">(you)</span>
     </div>
-          <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
-       <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
+  </td>
+  <td>
+    <div><b>+8</b> <span style="font-size: 12px;">(100%)</span></div>
+  </td>
+  <td>
+    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+  </td>
+  <td>
+    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+  </td>
+  <td>
+    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+  </td>
+</tr>
+
+<!-- Points for your partner -->
+<tr>
+  <td style="padding: 2px; vertical-align: middle;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
+      <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
+    </div>
+  </td>
+  <td>
+    <div><b>+8</b> <span style="font-size: 12px;">(100%)</span></div>
+  </td>
+  <td>
+    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+  </td>
+  <td>
+    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+  </td>
+  <td>
+    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+  </td>
+</tr>
+      </table>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
+    <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
+  </div>
 </div>`
 ],
 groupPage2: [
-   `<div class='specialOnly'>
+   `<div class='specialGrpOnly'>
         <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
         <p>Specifically, you'll get 8 points if you and your partner activate the ${textNew.shape2}s. </p> 
         <p> You'll get ${textNew.WL2} points if you activate the inner ${textNew.shape2} and your partner does not activate the outer ${textNew.shape2}. </p> 
@@ -1012,37 +1062,37 @@ attnChk0: !isSecondTime
       ? `My earnings depend on both my performance and my partner's performance.`
       : `My earnings depend on my performance only.`),
 attnChk1: !isSecondTime
-  ? ([1, 3, 5, 7].includes(randomAssignment) ? `+7` : `+8`)
-  : ([1, 3, 5, 7].includes(randomAssignment) ? `+8` : `+7`),
+  ? ([1, 3, 5, 7].includes(randomAssignment) ? '50% chance of 8 or 6 points' : `+8`)
+  : ([1, 3, 5, 7].includes(randomAssignment) ? `+8` : '50% chance of 8 or 6 points'),
 
 attnChk2: !isSecondTime
   ? ([1, 3, 5, 7].includes(randomAssignment)
-      ? `+7`
+      ? '50% chance of 8 or 6 points'
       : ([2, 6].includes(randomAssignment) ? `+4` : `+6`)
     )
   : ([1, 3, 5, 7].includes(randomAssignment)
       ? ([1, 5].includes(randomAssignment) ? `+4` : `+6`)
-      : `+7`
+      : '50% chance of 8 or 6 points'
     ),
 
 attnChk3: !isSecondTime
   ? ([1, 3, 5, 7].includes(randomAssignment)
-      ? `+3`
+      ? '+2 or +4'
       : `+4`
     )
   : ([1, 3, 5, 7].includes(randomAssignment)
       ? `+4`
-      : `+3`
+      : '+2 or +4'
     ),
 
 attnChk4: !isSecondTime
   ? ([1, 3, 5, 7].includes(randomAssignment)
-      ? `+3`
+      ? '+2 or +4'
       : ([2, 6].includes(randomAssignment) ? `+4` : `+2`)
     )
   : ([1, 3, 5, 7].includes(randomAssignment)
       ? ([1, 5].includes(randomAssignment) ? `+4` : `+2`)
-      : `+3`
+      : '+2 or +4'
     ),
     };
 }
@@ -1109,22 +1159,22 @@ attnChk4: !isSecondTime
         {
             prompt: `How many points do you get when you and your partner activate the ${isSecondTime ? textNew.shape2 : textNew.shape1}s?`,
             name: `attnChk1`, 
-            options: ['+2', '+3', '+4', '+6', '+7','+8'],
+            options: ['33.3% chance of 2, 4 or 6 points','50% chance of 2 or 4 points', '50% chance of 8 or 6 points', '100% chance of 8 points', '100% chance of 6 points', '100% chance of 4 points', '100% chance of 2 points'],
         },
         {
             prompt: `How many points do you get when you activate your ${isSecondTime ? textNew.shape2 : textNew.shape1} but your partner does not activate their ${isSecondTime ? textNew.shape2 : textNew.shape1}?`, 
             name: `attnChk2`, 
-            options: ['+2', '+3', '+4', '+6', '+7','+8'],
+            options: ['33.3% chance of 2, 4 or 6 points','50% chance of 2 or 4 points', '50% chance of 8 or 6 points', '100% chance of 8 points', '100% chance of 6 points', '100% chance of 4 points', '100% chance of 2 points'],
         },
         {
             prompt: `How many points do you get when you do not activate your ${isSecondTime ? textNew.shape2 : textNew.shape1} but your partner activates their ${isSecondTime ? textNew.shape2 : textNew.shape1}?`, 
             name: `attnChk3`, 
-            options: ['+2', '+3', '+4', '+6', '+7','+8'],
-        },
+            options: ['33.3% chance of 2, 4 or 6 points','50% chance of 2 or 4 points', '50% chance of 8 or 6 points', '100% chance of 8 points', '100% chance of 6 points', '100% chance of 4 points', '100% chance of 2 points'],
+       },
         {
             prompt: `How many points do you get when you and your partner do not activate the ${isSecondTime ? textNew.shape2 : textNew.shape1}s?`, 
             name: `attnChk4`, 
-            options: ['+2', '+3', '+4', '+6', '+7','+8'],
+            options: ['33.3% chance of 2, 4 or 6 points','50% chance of 2 or 4 points', '50% chance of 8 or 6 points', '100% chance of 8 points', '100% chance of 6 points', '100% chance of 4 points', '100% chance of 2 points'],
         },
     ];
 },
@@ -1683,14 +1733,23 @@ function generateAvatarFeedbackLast(avatar1, avatar1Text, avatar2Text, color) {
 
 */
 
-function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, color) {
+function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, color, deductionAmount = 0) {
+    const displayText = `+${avatar1Text}`;
+    const deductionText = deductionAmount > 0
+        ? `<div style="font-size: 50px; color: red; font-weight: bold; margin-top: 10px;">-${deductionAmount}</div>`
+        : `<div style="height: 60px;"></div>`; // Empty space for visual consistency
+
     return `
         <div style="display: flex; flex-direction: column; align-items: center;">
             <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
-                +${avatar1Text}
+                ${displayText}
             </div>
-            <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
+            <div>
+                <img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;">
+            </div>
+            ${deductionText}
         </div>
+
         <!-- Line at the bottom -->
         <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold;">
             Get ready for the next tile!
@@ -1698,20 +1757,29 @@ function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, co
     `;
 }
 
-function generateSoloAvatarFeedbackLast(avatar1, avatar1Text, avatar1TotalPoints, color) {
+function generateSoloAvatarFeedbackLast(avatar1, avatar1Text, avatar1TotalPoints, color, deductionAmount = 0) {
+    const displayText = `+${avatar1Text}`;
+    const deductionText = deductionAmount > 0
+        ? `<div style="font-size: 50px; color: font-weight: bold; red; margin-top: 10px;">-${deductionAmount}</div>`
+        : `<div style="height: 60px;"></div>`; // Empty space for visual consistency
+
     return `
         <div style="display: flex; flex-direction: column; align-items: center;">
             <div style="font-size: 80px; font-weight: bold; margin-bottom: 0px; color: ${color};">
-                +${avatar1Text}
+                ${displayText}
             </div>
-            <div><img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;"></div>
+            <div>
+                <img src="${avatar1}" style="width: 178px; height: 189px; margin-top: 25px;">
+            </div>
+            ${deductionText}
         </div>
+
         <!-- Line at the bottom -->
         <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold;">
             The game is now complete!
         </div>
     `;
-} 
+}
 
 
 const avatarChoices = [
@@ -1719,6 +1787,14 @@ const avatarChoices = [
     { color: 'Green', code: '#90CD4C', img: './avatar/2.jpg' },
     { color: 'Red', code: '#800000', img: './avatar/3.jpg' }
 ];
+
+const deductionVector = Array(noOfTrials*1).fill(1).concat(Array(noOfTrials*3).fill(0)); //assuming 25%
+
+// Fisher-Yates shuffle
+for (let i = deductionVector.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [deductionVector[i], deductionVector[j]] = [deductionVector[j], deductionVector[i]];
+}
 
 function MakeFeedback(mode) {
     let avatar1TotalPoints = 0;
@@ -1728,6 +1804,9 @@ function MakeFeedback(mode) {
 
     const groupOrind = mode.includes("group") ? "group" : "ind";
     const MI = mode.includes("High") ? "high" : "low";
+
+    const shouldDeduct = deductionVector.shift(); // if you've implemented the 15-of-60 deduction logic
+    const deductionAmount = shouldDeduct ? 2 : 0;
 
     return {
         type: jsPsychHtmlKeyboardResponse,
@@ -1740,6 +1819,15 @@ function MakeFeedback(mode) {
             let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
             const partner_rt = lastTrialData.partner_rt;
             const partner_outcome = lastTrialData.partner_outcome;
+
+            const currentTrial = jsPsych.data.get().last(1).values()[0].trialNumber;
+            const deductionApplied = deductionVector[currentTrial - 1] === 1;
+            const deductionAmount = deductionApplied ? 2 : 0;
+
+              // Adjust the points for display
+            const finalPointsAvatar1 = pointsAddedAvatar1 - deductionAmount;
+             avatar1TotalPoints += finalPointsAvatar1;
+             avatar2TotalPoints += pointsAddedAvatar2; 
 
             let feedbackText = '';
 
@@ -1757,32 +1845,35 @@ function MakeFeedback(mode) {
                     pointsAddedAvatar1 = 4;
                     pointsAddedAvatar2 = 6;
                 }
-            } else if (mode === 'ind') {
-                if (lastTrialData.outcome && partner_outcome === 0) {
-                    pointsAddedAvatar1 = 7;
-                    pointsAddedAvatar2 = 3;
-                } else if (lastTrialData.outcome && partner_outcome === 1) {
-                    pointsAddedAvatar1 = 7;
-                    pointsAddedAvatar2 = 7;
-                } else if (!lastTrialData.outcome && partner_outcome === 0) {
-                    pointsAddedAvatar1 = 3;
-                    pointsAddedAvatar2 = 3;
-                } else if (!lastTrialData.outcome && partner_outcome === 1) { 
-                    pointsAddedAvatar1 = 3;
-                    pointsAddedAvatar2 = 7;
-                }
-            } else if (mode === 'groupLow') {
-                if (lastTrialData.outcome && partner_outcome === 0) {
-                    pointsAddedAvatar1 = 4;
-                    pointsAddedAvatar2 = 4;
-                } else if (lastTrialData.outcome && partner_outcome === 1) {
-                    pointsAddedAvatar1 = 8;
-                    pointsAddedAvatar2 = 8;
-                } else {
-                    pointsAddedAvatar1 = 4;
-                    pointsAddedAvatar2 = 4;
-                }
-            }
+} else if (mode === 'ind') {
+    const getHighPoints = () => (Math.random() < 0.5 ? 8 : 6);
+    const getLowPoints = () => (Math.random() < 0.5 ? 2 : 4);
+
+    if (lastTrialData.outcome && partner_outcome === 0) {
+        pointsAddedAvatar1 = getHighPoints();
+        pointsAddedAvatar2 = getLowPoints();
+    } else if (lastTrialData.outcome && partner_outcome === 1) {
+        pointsAddedAvatar1 = getHighPoints();
+        pointsAddedAvatar2 = getHighPoints();
+    } else if (!lastTrialData.outcome && partner_outcome === 0) {
+        pointsAddedAvatar1 = getLowPoints();
+        pointsAddedAvatar2 = getLowPoints();
+    } else if (!lastTrialData.outcome && partner_outcome === 1) {
+        pointsAddedAvatar1 = getLowPoints();
+        pointsAddedAvatar2 = getHighPoints();
+    }
+} else if (mode === 'groupLow') {
+    if (lastTrialData.outcome && partner_outcome === 1) {
+        pointsAddedAvatar1 = 8;
+        pointsAddedAvatar2 = 8;
+    } else {
+        const options = [2, 4, 6];
+        const randomIndex = Math.floor(Math.random() * options.length);
+        const randomPoints = options[randomIndex];
+        pointsAddedAvatar1 = randomPoints;
+        pointsAddedAvatar2 = randomPoints;
+    }
+}
 
             avatar1TotalPoints += pointsAddedAvatar1;
             avatar2TotalPoints += pointsAddedAvatar2;
@@ -1792,14 +1883,16 @@ function MakeFeedback(mode) {
                     selectedAvatarImg,
                     +pointsAddedAvatar1,
                     +pointsAddedAvatar2,
-                    avatarResponse
+                    avatarResponse,
+                    deductionAmount
                 );
             } else {
                 feedbackText = generateSoloAvatarFeedback(
                     selectedAvatarImg,
                     +pointsAddedAvatar1,
                     +pointsAddedAvatar2,
-                    avatarResponse
+                    avatarResponse,
+                    deductionAmount
                 );
             }
 
@@ -1813,6 +1906,8 @@ function MakeFeedback(mode) {
             data.avatar2TotalPoints = avatar2TotalPoints;
             data.pointsAddedAvatar1 = pointsAddedAvatar1;
             data.pointsAddedAvatar2 = pointsAddedAvatar2;
+            data.deductionAmount = deductionAmount;
+            console.log(deductionAmount);
             data.groupOrInd = groupOrind;
             if (groupOrind !== "ind") {
                 data.MI = MI;
@@ -2360,11 +2455,11 @@ p.task.GroupCircleLow = {
 
     p.Qs = {};
 
-    const FlowScale0 = ['0<br>Not at all immersed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More immersed than I've ever felt`];
-    const FlowScale1 = ['0<br>Not at all engaged', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engaged than I've ever felt`];
-    const FlowScale2 = ['0<br>Not at all engrossed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engrossed than I've ever felt`];
-    const FlowScale3 = ['0<br>Not at all absorbed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More absorbed than I've ever felt`];
-    const FlowScale4 = ['0<br>Not at all bored', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More bored than I've ever felt`];
+    const FlowScale0 = ['0<br>A little immersed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very immersed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More immersed than I've ever felt`];
+    const FlowScale1 = ['0<br>A little engaged', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very engaged', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engaged than I've ever felt`];
+    const FlowScale2 = ['0<br>A little engrossed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very engrosed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engrossed than I've ever felt`];
+    const FlowScale3 = ['0<br>A little absorbed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very absorbed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More absorbed than I've ever felt`];
+    const FlowScale4 = ['0<br>A little bored', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very bored', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More bored than I've ever felt`];
 
     const EnjoyScale0 = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More than I've enjoyed anything`];
     const EnjoyScale1 = ['0<br>Zero fun', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More fun than I've ever had`];
