@@ -1694,7 +1694,7 @@ variables for plugins
 ///
 */
 
-let noOfTrials = 1; //so 60 in total
+let noOfTrials = 15; //so 60 in total
 
 ///fake participant's activation time for WL and LL trials, that far exceeds trial duration
 let partner_rtL = 20000; //for when partner "loses".
@@ -2071,25 +2071,36 @@ const avatarChoices = [
     { color: 'Red', code: '#800000', img: './avatar/3.jpg' }
 ];
 
-const deductionVector = Array(noOfTrials*1).fill(1).concat(Array(noOfTrials*3).fill(0)); //assuming 25%
+const trialsPerRound = noOfTrials * 4;  // 60
+const numWithDeductionPerRound = Math.floor(trialsPerRound / 4);  // 15
 
-// Fisher-Yates shuffle
-for (let i = deductionVector.length - 1; i > 0; i--) {
-  const j = Math.floor(Math.random() * (i + 1));
-  [deductionVector[i], deductionVector[j]] = [deductionVector[j], deductionVector[i]];
+function createDeductionVectorForRound() {
+  const vector = Array(numWithDeductionPerRound).fill(1).concat(
+    Array(trialsPerRound - numWithDeductionPerRound).fill(0)
+  );
+
+  // Fisher-Yates shuffle
+  for (let i = vector.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [vector[i], vector[j]] = [vector[j], vector[i]];
+  }
+
+  return vector;
 }
+
+const deductionVector = createDeductionVectorForRound().concat(createDeductionVectorForRound());
+console.log(deductionVector);
 
 function MakeFeedback(mode) {
     let avatar1TotalPoints = 0;
     let avatar2TotalPoints = 0;
     let pointsAddedAvatar1 = 0;
     let pointsAddedAvatar2 = 0;
+    let deductionAmount = 0; 
+    let finalPointsAvatar1 = 0; 
 
     const groupOrind = mode.includes("group") ? "group" : "ind";
     const MI = mode.includes("High") ? "high" : "low";
-
-    const shouldDeduct = deductionVector.shift(); // if you've implemented the 15-of-60 deduction logic
-    const deductionAmount = shouldDeduct ? 2 : 0;
 
     return {
         type: jsPsychHtmlKeyboardResponse,
@@ -2104,11 +2115,11 @@ function MakeFeedback(mode) {
             const partner_outcome = lastTrialData.partner_outcome;
 
             const currentTrial = jsPsych.data.get().last(1).values()[0].trialNumber;
-            const deductionApplied = deductionVector[currentTrial - 1] === 1;
-            const deductionAmount = deductionApplied ? 2 : 0;
+            const shouldDeduct = deductionVector.shift();
+            deductionAmount = shouldDeduct ? 2 : 0;
+            console.log(deductionVector);
 
-              // Adjust the points for display
-            const finalPointsAvatar1 = pointsAddedAvatar1 - deductionAmount;
+            finalPointsAvatar1 = pointsAddedAvatar1 - deductionAmount;
              avatar1TotalPoints += finalPointsAvatar1;
              avatar2TotalPoints += pointsAddedAvatar2; 
 
@@ -2190,7 +2201,7 @@ function MakeFeedback(mode) {
             data.pointsAddedAvatar1 = pointsAddedAvatar1;
             data.pointsAddedAvatar2 = pointsAddedAvatar2;
             data.deductionAmount = deductionAmount;
-            console.log(deductionAmount);
+            data.finalPointsAvatar1 = finalPointsAvatar1;
             data.groupOrInd = groupOrind;
             if (groupOrind !== "ind") {
                 data.MI = MI;
