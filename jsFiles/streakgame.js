@@ -2,7 +2,7 @@
 
 //const randomAssignment = Math.floor(Math.random() * 8) + 1; 
 
-randomAssignment = 2;
+randomAssignment = 3;
 
 /* 
 
@@ -1358,23 +1358,32 @@ attnChk4: !isSecondTime
     let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
     let isSecondTime = jsPsych.data.get().last(1).values()[0].isSecondTime;
 
-    let attnChkDiv = isSecondTime 
-                ? (randomAssignment % 2 === 1 ? `attnChkGrp` : `attnChkNow`)
-                : (randomAssignment % 2 === 1 ? `attnChkNow` : `attnChkGrp`);
-    let sologroupPages = isSecondTime 
-                ? (randomAssignment % 2 === 1 ? pages.r1.groupPage2 : pages.r1.soloPage2)
-                : (randomAssignment % 2 === 1 ? pages.r1.soloPage : pages.r1.groupPage);
+    let sologroupPages = 
+    !isSecondTime && [1, 3, 5, 7].includes(randomAssignment) ? pages.r1.soloPage :
+    isSecondTime && [1, 5].includes(randomAssignment)        ? pages.r1.groupPage332 :
+    isSecondTime && [3, 7].includes(randomAssignment)        ? pages.r1.groupPage2 :
+    !isSecondTime && [2, 6].includes(randomAssignment)       ? pages.r1.groupPage33 :
+    !isSecondTime && [4, 8].includes(randomAssignment)       ? pages.r1.groupPage :
+    isSecondTime && [2, 4, 6, 8].includes(randomAssignment)  ? pages.r1.soloPage2 :
+    null; // fallback in case of unexpected input
 
+    let attnChkDiv = 
+  [pages.r1.groupPage, pages.r1.groupPage33, pages.r1.groupPage2, pages.r1.groupPage332].includes(sologroupPages)
+    ? `attnChkGrp`
+    : `attnChkNow`;
 
-       let preambleText = `
-        <div class='${attnChkDiv}'> 
-            <p> To recap, in the ${isSecondTime ? textNew.game2 : textNew.game1}: </p>
-            <p> You activate the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} with your SPACE BAR. </p>
-            ${sologroupPages === pages.r1.groupPage2 || sologroupPages === pages.r1.groupPage
-                ? `<p> Your partner activates the outer ${isSecondTime ? textNew.shape2 : textNew.shape1}. </p>` 
-                : `<p> Your partner activates the outer ${isSecondTime ? textNew.shape2 : textNew.shape1}. </p>`}
-
-    `;
+            let preambleText = `
+                <div class='${attnChkDiv}'> 
+                    <p> To recap, in the ${isSecondTime ? textNew.game2 : textNew.game1}: </p>
+                    <p> You activate the inner ${isSecondTime ? textNew.shape2 : textNew.shape1} with your SPACE BAR. </p>
+                    ${[
+                        pages.r1.groupPage,
+                        pages.r1.groupPage33,
+                        pages.r1.groupPage2,
+                        pages.r1.groupPage332,
+                    ].includes(sologroupPages)
+                        ? `<p> Your partner activates the outer ${isSecondTime ? textNew.shape2 : textNew.shape1}. </p>`
+                        : ``}`;
 
     // Replace placeholders in sologroupPages
     const updatedPages = sologroupPages.map(page => 
@@ -1616,19 +1625,33 @@ function makeR1SoloHigh() {
             let selectedAvatar = avatarChoices.find(avatar => avatar.code === avatarResponse);
             let selectedAvatarImg = selectedAvatar ? selectedAvatar.img : null;
 
-           const sologroupPages = isSecondTime 
-                ? (randomAssignment % 2 === 1 ? pages.r1.groupPage2 : pages.r1.soloPage2)
-                : (randomAssignment % 2 === 1 ? pages.r1.soloPage : pages.r1.groupPage);
+            let sologroupPages;
 
+            if ([1, 3, 5, 7].includes(randomAssignment) && !isSecondTime) {
+                sologroupPages = pages.r1.soloPage;
+            } else if ([1, 5].includes(randomAssignment) && isSecondTime) {
+                sologroupPages = pages.r1.groupPage332;
+            } else if ([3, 7].includes(randomAssignment) && isSecondTime) {
+                sologroupPages = pages.r1.groupPage2;
+            } else if ([2, 6].includes(randomAssignment) && !isSecondTime) {
+                sologroupPages = pages.r1.groupPage33;
+            } else if ([4, 8].includes(randomAssignment) && !isSecondTime) {
+                sologroupPages = pages.r1.groupPage;
+            } else if ([2, 4, 6, 8].includes(randomAssignment) && isSecondTime) {
+                sologroupPages = pages.r1.soloPage2;
+            } else {
+                console.warn("Unhandled RA/isSecondTime combination:", randomAssignment, isSecondTime);
+                sologroupPages = []; // Fallback
+            }
 
             const updatedPages = sologroupPages.map(page => {
                 return page
-                    .replace(/{{avatarResponse}}/g, avatarResponse)  // Replace with the actual color
-                    .replace(/{{avatar1}}/g, selectedAvatarImg);  // Replace with the actual avatar image
+                    .replace(/{{avatarResponse}}/g, avatarResponse)
+                    .replace(/{{avatar1}}/g, selectedAvatarImg);
             });
 
             return updatedPages;
-        },      
+        },
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
@@ -1671,7 +1694,7 @@ variables for plugins
 ///
 */
 
-let noOfTrials = 15; //so 60 in total
+let noOfTrials = 1; //so 60 in total
 
 ///fake participant's activation time for WL and LL trials, that far exceeds trial duration
 let partner_rtL = 20000; //for when partner "loses".
