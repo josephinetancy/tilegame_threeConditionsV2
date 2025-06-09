@@ -209,6 +209,16 @@ let avatarResponse = '#2669ee';
                 </div>`                 
                 ],
 
+                deduction: [
+                `<div class='parent'>
+                <p> In the ${textNew.game1}, there's a 25% random chance of getting a 2 point deduction. </p>
+                <p> This deduction is random and not based on your performance or your partner's performance. </p>
+                <p> Sometimes this deduction will happen, and sometimes it won't&mdash;you'll see it clearly marked when it does.</p>
+                </div>
+                </div>`                 
+                ],
+
+
                 part2Group: [
                `<div class='parent'>
                 <p> In the ${textNew.game1}, ${textNew.shape1}s will appear on your screen. </p>
@@ -541,12 +551,13 @@ soloPage: [
 
 ],
 soloPage2: [
-     `<div class='specialOnly'>
-        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
-        <p>Specifically, you'll get 7 points if you activate the inner ${textNew.shape2}. </p> 
-        <p>You'll get 3 points if you do not activate the inner ${textNew.shape2}. </p>
-        <p>Your outcome depends on your performance only. </p>
-         <div id="shape-wrapper" style="display: flex; justify-content: center;">
+`<div class='specialOnly'>
+    <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent.</p>
+    <p>Specifically, if you activate the inner ${textNew.shape2}, you have a 50% chance of getting 8 points or 6 points.</p> 
+    <p>If you do not activate the inner ${textNew.shape2}, you have a 50% chance of getting 4 points or 2 points.</p>
+    <p>Your outcome depends on your performance only.</p>
+
+    <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
             <table style="border-collapse: collapse; text-align: center;">
                 <!-- First row: Empty first column, Shapes start from the second column -->
@@ -590,44 +601,70 @@ soloPage2: [
                     </td>
                 </tr>
 
-                <!-- Second row: Points with avatar 3 -->
+                <!-- Second row: Points for (you) -->
                 <tr>
-                    <td rowspan="1" style="padding: 2px; vertical-align: middle;">
+                    <td style="padding: 2px; vertical-align: middle;">
                         <div style="display: flex; flex-direction: column; align-items: center;">
                             <img src="{{avatar1}}" style="width: 80px; height: auto;">
                             <span style="font-size: 12px; font-weight: bold;">(you)</span>
                         </div>
                     </td>
-                    <td><b>+7</b></td>
-                    <td><b>+7</b></td>
-                    <td><b>+3</b></td>
-                    <td><b>+3</b></td>
+                    <td>
+                        <div><b>+8</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+6</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
+                    <td>
+                        <div><b>+8</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+6</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
+                    <td>
+                        <div><b>+4</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+2</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
+                    <td>
+                        <div><b>+4</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+2</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
                 </tr>
 
-                <!-- Third row: Points with avatar 4 -->
+                <!-- Third row: Points for (your partner) -->
                 <tr>
-                    <td rowspan="1" style="padding: 2px; vertical-align: middle; text-align: left;">
+                    <td style="padding: 2px; vertical-align: middle; text-align: left;">
                         <div style="display: flex; flex-direction: column; align-items: center;">
                             <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
                             <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
                         </div>
                     </td>
-                    <td><b>+7</b></td>
-                    <td><b>+3</b></td>
-                    <td><b>+7</b></td>
-                    <td><b>+3</b></td>
+                    <td>
+                        <div><b>+8</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+6</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
+                    <td>
+                        <div><b>+4</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+2</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
+                    <td>
+                        <div><b>+8</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+6</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
+                    <td>
+                        <div><b>+4</b> <span style="font-size: 12px;">(50%)</span></div>
+                        <div><b>+2</b> <span style="font-size: 12px;">(50%)</span></div>
+                    </td>
                 </tr>
             </table>
         </div>
     </div>
-          <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
-       <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
+
+    <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
+        <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
+    </div>
 </div>`
 ],
-groupPage: [
+groupPage33: [
 `<div class='specialGrpOnly'>
   <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent.</p>
-  <p>Specifically, if you and your partner activate the ${textNew.shape1}s, you will each get 8 points.</p> 
+  <p>Specifically, if you and your partner activate the ${textNew.shape1}s, you'll get 8 points.</p> 
   <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}, you have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>
   <p>If you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}, you have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>
   <p>If you and your partner do not activate the ${textNew.shape1}s, you have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>
@@ -732,13 +769,206 @@ groupPage: [
   </div>
 </div>`
 ],
+groupPage332: [
+`<div class='specialGrpOnly'>
+  <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent.</p>
+  <p>Specifically, if you and your partner activate the ${textNew.shape2}s, you'll get 8 points.</p> 
+  <p>If you activate the inner ${textNew.shape2} and your partner does not activate the outer ${textNew.shape2}, you have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>
+  <p>If you do not activate the inner ${textNew.shape2} and your partner activates the outer ${textNew.shape2}, you have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>
+  <p>If you and your partner do not activate the ${textNew.shape2}s, you have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>
+
+  <div id="shape-wrapper" style="display: flex; justify-content: center;">
+    <div class="table-container" style="display: block; clear: both;">
+      <table style="border-collapse: collapse; text-align: center;">
+        <!-- Shape row -->
+        <tr>
+          <td></td>
+          <td>
+            <div class="outer-container">
+              <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 100px; height: 100px;">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="outer-container">
+              <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey; width: 100px; height: 100px;">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="outer-container">
+              <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 100px; height: 100px;">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="outer-container">
+              <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey; width: 100px; height: 100px;">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+<!-- Points for you -->
+<tr>
+  <td style="padding: 2px; vertical-align: middle;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <img src="{{avatar1}}" style="width: 80px; height: auto;">
+      <span style="font-size: 12px; font-weight: bold;">(you)</span>
+    </div>
+  </td>
+  <td>
+    <div><b>+8</b> <span style="font-size: 12px;">(100%)</span></div>
+  </td>
+  <td>
+    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+  </td>
+  <td>
+    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+  </td>
+  <td>
+    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+  </td>
+</tr>
+
+<!-- Points for your partner -->
+<tr>
+  <td style="padding: 2px; vertical-align: middle;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
+      <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
+    </div>
+  </td>
+  <td>
+    <div><b>+8</b> <span style="font-size: 12px;">(100%)</span></div>
+  </td>
+  <td>
+    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+  </td>
+  <td>
+    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+  </td>
+  <td>
+    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+  </td>
+</tr>
+      </table>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
+    <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
+  </div>
+</div>`
+],
+groupPage: [
+`<div class='specialGrpOnly'>
+        <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
+        <p>Specifically, you'll get 8 points if you and your partner activate the ${textNew.shape1}s. </p> 
+        <p> You'll get 6 points if you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}. </p> 
+        <p> You'll get 4 points if you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}. </p>
+       <p>You'll get 2 points if you and your partner do not activate the ${textNew.shape1}s. </p> 
+        <p>Your outcome depends on you and your partner's performance. </p>
+          <div id="shape-wrapper" style="display: flex; justify-content: center;">
+        <div class="table-container" style="display: block; clear: both;">
+            <table style="border-collapse: collapse; text-align: center;">
+                <!-- First row: Empty first column, Shapes start from the second column -->
+                <tr>
+                    <td style="padding: 10px;"></td> <!-- Empty first column -->
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape1}" 
+                                 style="background-color: ${textNew.color}; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape1}" 
+                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape1}" 
+                                 style="background-color: grey; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape1}" 
+                                     style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape1}" 
+                                 style="background-color: ${textNew.color}; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape1}" 
+                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div class="outer-container">
+                            <div id="outer-shape" class="${textNew.shape1}" 
+                                 style="background-color: grey; width: 100px; height: 100px;">
+                                <div id="inner-shape" class="${textNew.shape1}" 
+                                     style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Second row: Points with avatar 3 -->
+                <tr>
+                    <td rowspan="1" style="padding: 2px; vertical-align: middle;">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <img src="{{avatar1}}" style="width: 80px; height: auto;">
+                            <span style="font-size: 12px; font-weight: bold;">(you)</span>
+                        </div>
+                    </td>
+                    <td><b>+8</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+6</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+4</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+2</b><span style="font-size: 12px;">(100%)</span></div></td>
+                </tr>
+
+                <!-- Third row: Points with avatar 4 -->
+                <tr>
+                    <td rowspan="1" style="padding: 2px; vertical-align: middle; text-align: left;">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <img src="./avatar/4.jpg" style="width: 80px; height: auto;">
+                            <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
+                        </div>
+                    </td>
+                    <td><b>+8</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+4</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+6</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+2</b><span style="font-size: 12px;">(100%)</span></div></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+          <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
+       <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
+</div>`],
 groupPage2: [
    `<div class='specialGrpOnly'>
         <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent. </p>
         <p>Specifically, you'll get 8 points if you and your partner activate the ${textNew.shape2}s. </p> 
-        <p> You'll get ${textNew.WL2} points if you activate the inner ${textNew.shape2} and your partner does not activate the outer ${textNew.shape2}. </p> 
-        <p> You'll get ${textNew.LW2} points if you do not activate the inner ${textNew.shape2} and your partner activates the outer ${textNew.shape2}. </p>
-       <p>You'll get ${textNew.LL2} points if you and your partner do not activate the ${textNew.shape2}s. </p> 
+        <p> You'll get 6 points if you activate the inner ${textNew.shape2} and your partner does not activate the outer ${textNew.shape2}. </p> 
+        <p> You'll get 4 points if you do not activate the inner ${textNew.shape2} and your partner activates the outer ${textNew.shape2}. </p>
+       <p>You'll get 2 points if you and your partner do not activate the ${textNew.shape2}s. </p> 
         <p>Your outcome depends on you and your partner's performance. </p>
           <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
@@ -792,10 +1022,10 @@ groupPage2: [
                             <span style="font-size: 12px; font-weight: bold;">(you)</span>
                         </div>
                     </td>
-                    <td><b>+8</b></td>
-                    <td><b>+${textNew.WL2}</b></td>
-                    <td><b>+${textNew.LW2}</b></td>
-                    <td><b>+${textNew.LL2}</b></td>
+                    <td><b>+8</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+6</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+4</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+2</b><span style="font-size: 12px;">(100%)</span></div></td>
                 </tr>
 
                 <!-- Third row: Points with avatar 4 -->
@@ -806,18 +1036,17 @@ groupPage2: [
                             <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
                         </div>
                     </td>
-                    <td><b>+8</b></td>
-                    <td><b>+${textNew.LW2}</b></td>
-                    <td><b>+${textNew.WL2}</b></td>
-                    <td><b>+${textNew.LL2}</b></td>
+                    <td><b>+8</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+4</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+6</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+2</b><span style="font-size: 12px;">(100%)</span></div></td>
                 </tr>
             </table>
         </div>
     </div>
           <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
        <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
-</div>`
-    ]
+</div>`]
     }, 
  r2: {
     part1a: [`<div class='parent'>
@@ -826,6 +1055,14 @@ groupPage2: [
                 </div>
                 </div>`
                 ], 
+                    deduction: [
+                `<div class='parent'>
+                <p> In the ${textNew.game2}, there's a 25% random chance of getting a 2 point deduction. </p>
+                <p> This deduction is random and not based on your performance or your partner's performance. </p>
+                <p> Sometimes this deduction will happen, and sometimes it won't&mdash;you'll see it clearly marked when it does.</p>
+                </div>
+                </div>`                 
+                ],
 
     part2Group: [`<div class='parent'>
                 <p> In the ${textNew.game2}, ${textNew.shape2}s will appear on your screen. </p>
@@ -1062,38 +1299,46 @@ attnChk0: !isSecondTime
       ? `My earnings depend on both my performance and my partner's performance.`
       : `My earnings depend on my performance only.`),
 attnChk1: !isSecondTime
-  ? ([1, 3, 5, 7].includes(randomAssignment) ? '50% chance of 8 or 6 points' : `+8`)
-  : ([1, 3, 5, 7].includes(randomAssignment) ? `+8` : '50% chance of 8 or 6 points'),
+  ? ([1, 3, 5, 7].includes(randomAssignment)
+      ? '50% chance of 8 or 6 points'
+      : '100% chance of 8 points')
+  : '100% chance of 8 points',
 
 attnChk2: !isSecondTime
   ? ([1, 3, 5, 7].includes(randomAssignment)
       ? '50% chance of 8 or 6 points'
-      : ([2, 6].includes(randomAssignment) ? `+4` : `+6`)
-    )
-  : ([1, 3, 5, 7].includes(randomAssignment)
-      ? ([1, 5].includes(randomAssignment) ? `+4` : `+6`)
-      : '50% chance of 8 or 6 points'
-    ),
+      : ([2, 6].includes(randomAssignment)
+          ? '33.3% chance of 2, 4 or 6 points'
+          : '100% chance of 6 points'))
+  : ([1, 5].includes(randomAssignment)
+      ? '33.3% chance of 2, 4 or 6 points'
+      : ([3, 7].includes(randomAssignment)
+          ? '100% chance of 6 points'
+          : '50% chance of 8 or 6 points')),
 
 attnChk3: !isSecondTime
   ? ([1, 3, 5, 7].includes(randomAssignment)
-      ? '+2 or +4'
-      : `+4`
-    )
-  : ([1, 3, 5, 7].includes(randomAssignment)
-      ? `+4`
-      : '+2 or +4'
-    ),
+      ? '50% chance of 2 or 4 points'
+      : ([2, 6].includes(randomAssignment)
+          ? '33.3% chance of 2, 4 or 6 points'
+          : '100% chance of 4 points'))
+  : ([1, 5].includes(randomAssignment)
+      ? '33.3% chance of 2, 4 or 6 points'
+      : ([3, 7].includes(randomAssignment)
+          ? '100% chance of 4 points'
+          : '50% chance of 2 or 4 points')),
 
 attnChk4: !isSecondTime
   ? ([1, 3, 5, 7].includes(randomAssignment)
-      ? '+2 or +4'
-      : ([2, 6].includes(randomAssignment) ? `+4` : `+2`)
-    )
-  : ([1, 3, 5, 7].includes(randomAssignment)
-      ? ([1, 5].includes(randomAssignment) ? `+4` : `+2`)
-      : '+2 or +4'
-    ),
+      ? '50% chance of 2 or 4 points'
+      : ([2, 6].includes(randomAssignment)
+          ? '33.3% chance of 2, 4 or 6 points'
+          : '100% chance of 2 points'))
+  : ([1, 5].includes(randomAssignment)
+      ? '33.3% chance of 2, 4 or 6 points'
+      : ([3, 7].includes(randomAssignment)
+          ? '100% chance of 2 points'
+          : '50% chance of 2 or 4 points')),
     };
 }
 
@@ -1278,6 +1523,21 @@ attnChk4: !isSecondTime
     p.intro.r2part1a = {
         type: jsPsychInstructions,
         pages: pages.r2.part1a,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+    };
+
+
+    p.intro.r1deduction = {
+        type: jsPsychInstructions,
+        pages: pages.r1.deduction,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+    };
+
+    p.intro.r2deduction = {
+        type: jsPsychInstructions,
+        pages: pages.r2.deduction,
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
@@ -2457,7 +2717,7 @@ p.task.GroupCircleLow = {
 
     const FlowScale0 = ['0<br>A little immersed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very immersed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More immersed than I've ever felt`];
     const FlowScale1 = ['0<br>A little engaged', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very engaged', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engaged than I've ever felt`];
-    const FlowScale2 = ['0<br>A little engrossed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very engrosed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engrossed than I've ever felt`];
+    const FlowScale2 = ['0<br>A little engrossed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very engrossed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engrossed than I've ever felt`];
     const FlowScale3 = ['0<br>A little absorbed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very absorbed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More absorbed than I've ever felt`];
     const FlowScale4 = ['0<br>A little bored', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very bored', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More bored than I've ever felt`];
 
