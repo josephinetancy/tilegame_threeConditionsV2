@@ -2143,7 +2143,7 @@ function makeR1SoloHigh() {
             } else if ([1, 5].includes(randomAssignment) && isSecondTime) {
                 sologroupPages = pages.r1.groupPage332;
             } else if ([3, 7].includes(randomAssignment) && isSecondTime) {
-                sologroupPages = pages.r1.groupPage2;
+                sologroupPages = [...pages.r1.pregroupPage2, pages.r1.groupPage2];
             } else if ([2, 6].includes(randomAssignment) && !isSecondTime) {
                 sologroupPages = pages.r1.groupPage33;
             } else if ([4, 8].includes(randomAssignment) && !isSecondTime) {
