@@ -1236,7 +1236,7 @@ groupPage: [
 </div>`],
 pregroupPage2: [ 
 `<div class='parent'>
-  <p>If you and your partner activate the ${textNew.shape2}s, you'd have a 100% chance of getting 8 points.</p> 
+  <p>If you and your partner activate the ${textNew.shape2}s,</p> <p> you'd have a 100% chance of getting 8 points.</p> 
     <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
         <!-- Outcome 1 -->
         <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -1246,6 +1246,7 @@ pregroupPage2: [
                 </div>
             </div>
             <b><p style="margin-top: 10px;"></p></b>
+            </div>
         </div>`,
 
 `<div class="parent" style="text-align: center;">
@@ -1294,7 +1295,7 @@ pregroupPage2: [
 </div>`,
 
 `<div class='parent'>
-  <p>If you activate the inner ${textNew.shape2} but your partner does not active the outer ${textNew.shape2}, you'd have a 100% chance of getting 6 points.</p> 
+  <p>If you activate the inner ${textNew.shape2} but your partner does not active the outer ${textNew.shape2}, </p> <p>you'd have a 100% chance of getting 6 points.</p> 
     <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
         <!-- Outcome 1 -->
         <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -1304,6 +1305,7 @@ pregroupPage2: [
                 </div>
             </div>
             <b><p style="margin-top: 10px;"></p></b>
+            </div>
         </div>`,
 
 `<div class="parent" style="text-align: center;">
@@ -1351,7 +1353,7 @@ pregroupPage2: [
   </div>
 </div>`,
                  `<div class='parent'>
-                 <p>If you did not activate the inner ${textNew.shape2} but your partner activated the outer ${textNew.shape2}, you'd have a 100% chance of getting 4 points.</p> 
+                 <p>If you did not activate the inner ${textNew.shape2} but your partner activated the outer ${textNew.shape2}, </p> <p>you'd have a 100% chance of getting 4 points.</p> 
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
@@ -1360,6 +1362,7 @@ pregroupPage2: [
                     </div>
                 </div>
                 <b><p style="margin-top: 10px;"></p></b>
+                </div>
             </div>`,
 
 `<div class="parent" style="text-align: center;">
@@ -1409,7 +1412,7 @@ pregroupPage2: [
 
 
                  `<div class='parent'>
-                 <p>If you and your partner did not activate the ${textNew.shape2}s, you'd have a 100% chance of getting 2 points.</p> 
+                 <p>If you and your partner did not activate the ${textNew.shape2}s, </p><p>you'd have a 100% chance of getting 2 points.</p> 
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
@@ -1418,6 +1421,7 @@ pregroupPage2: [
                     </div>
                 </div>
                 <b><p style="margin-top: 10px;"></p></b>
+                </div>
             </div>`,
 
 `<div class="parent" style="text-align: center;">
@@ -2143,7 +2147,7 @@ function makeR1SoloHigh() {
             } else if ([1, 5].includes(randomAssignment) && isSecondTime) {
                 sologroupPages = pages.r1.groupPage332;
             } else if ([3, 7].includes(randomAssignment) && isSecondTime) {
-                sologroupPages = [...pages.r1.pregroupPage2, pages.r1.groupPage2];
+                sologroupPages = [...pages.r1.pregroupPage2, ...pages.r1.groupPage2];
             } else if ([2, 6].includes(randomAssignment) && !isSecondTime) {
                 sologroupPages = pages.r1.groupPage33;
             } else if ([4, 8].includes(randomAssignment) && !isSecondTime) {
@@ -2205,7 +2209,7 @@ variables for plugins
 ///
 */
 
-let noOfTrials = 12; //so 48 in total
+let noOfTrials = 1; //so 48 in total
 
 ///fake participant's activation time for WL and LL trials, that far exceeds trial duration
 let partner_rtL = 20000; //for when partner "loses".
