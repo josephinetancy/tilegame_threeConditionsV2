@@ -211,12 +211,54 @@ let avatarResponse = '#2669ee';
 
                 deduction: [
                 `<div class='parent'>
-                <p> In the ${textNew.game1}, there's a 25% random chance of getting a 2 point deduction. </p>
+                <p> In this game, there's also a 25% random chance of getting a 2 point deduction. </p>
                 <p> This deduction is random and not based on your performance or your partner's performance. </p>
-                <p> Sometimes this deduction will happen, and sometimes it won't&mdash;you'll see it clearly marked when it does.</p>
                 </div>
-                </div>`                 
-                ],
+                </div>`,
+
+                `<div class="parent" style="text-align: center;">
+  <p>For instance, if you've earned 8 points and got a random 2 points deduction, you'll see this:</p>
+
+  <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+    <div style="
+      font-size: 70px;
+      font-weight: bold;
+      -webkit-text-stroke: 2px black;
+      color: {{avatarResponse}};
+      text-align: center;
+      line-height: 1;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    ">
+      +8
+    </div>
+
+    <div style="
+      font-size: 70px;
+      font-weight: bold;
+      -webkit-text-stroke: 2px black;
+      color: red;
+      text-align: center;
+      line-height: 1;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    ">
+      -2
+    </div>
+  </div>
+
+  <div style="
+    margin-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+  ">
+    Get ready for the next tile!
+  </div>
+</div>`],
 
 
                 part2Group: [
@@ -326,7 +368,11 @@ let avatarResponse = '#2669ee';
                 </div>
                 <b><p style="margin-top: 10px;"></p></b>
             </div>
-        </div>`
+        </div>`,
+                `<div class='parent'>
+        <p>On the next page, you'll learn more about the points you'll earn for each outcome. </p> 
+        <p> Every 5 points is worth 1 cent. </p> 
+        </div>` 
                 ],
 
                 part2Solo: [
@@ -438,13 +484,241 @@ let avatarResponse = '#2669ee';
             </div>
         </div>`
                 ],
-soloPage: [
+
+presoloPage: [ 
+`<div class='parent'>
+  <p>If you activate the inner ${textNew.shape1}, you'd have a 50% chance of getting 8 points or 6 points.</p> 
+    <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
+        <!-- Outcome 1 -->
+        <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+            <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
+                    <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
+                </div>
+            </div>
+            <b><p style="margin-top: 10px;"></p></b>
+        </div>
+
+        <!-- Outcome 2 -->
+        <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+            <div class="outer-container">
+                <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                    <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}};"></div>
+                </div>
+            </div>
+            <b><p style="margin-top: 10px;"></p></b>
+        </div>
+    </div>
+</div>`,
+
+`<div class="parent" style="text-align: center;">
+  <p>If you've earned 8 points, you'll see this:</p>
+
+  <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+    <div style="
+      font-size: 70px;
+      font-weight: bold;
+      -webkit-text-stroke: 2px black;
+      color: {{avatarResponse}};
+      text-align: center;
+      line-height: 1;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    ">
+      +8
+    </div>
+
+    <div style="
+      font-size: 70px;
+      font-weight: bold;
+      -webkit-text-stroke: 2px black;
+      color: red;
+      text-align: center;
+      line-height: 1;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+    ">
+      placeholder
+    </div>
+  </div>
+
+  <div style="
+    margin-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+  ">
+    Get ready for the next tile!
+  </div>
+</div>`,
+
+`<div class="parent" style="text-align: center;">
+  <p>If you've earned 6 points, you'll see this:</p>
+
+  <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+    <div style="
+      font-size: 70px;
+      font-weight: bold;
+      -webkit-text-stroke: 2px black;
+      color: {{avatarResponse}};
+      text-align: center;
+      line-height: 1;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    ">
+      +6
+    </div>
+
+    <div style="
+      font-size: 70px;
+      font-weight: bold;
+      -webkit-text-stroke: 2px black;
+      color: red;
+      text-align: center;
+      line-height: 1;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+    ">
+      placeholder
+    </div>
+  </div>
+
+  <div style="
+    margin-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+  ">
+    Get ready for the next tile!
+  </div>
+</div>`,
+                 `<div class='parent'>
+                 <p>If you did not activate the inner ${textNew.shape1}, you'd have a 50% chance of getting 2 points or 4 points.</p> 
+                <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color};">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+            </div>
+
+            <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="outer-container">
+                    <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey;">
+                        <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey;"></div>
+                    </div>
+                </div>
+                <b><p style="margin-top: 10px;"></p></b>
+                </div>
+            </div>
+        </div>`,
+
+`<div class="parent" style="text-align: center;">
+  <p>If you've earned 2 points, you'll see this:</p>
+
+  <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+    <div style="
+      font-size: 70px;
+      font-weight: bold;
+      -webkit-text-stroke: 2px black;
+      color: {{avatarResponse}};
+      text-align: center;
+      line-height: 1;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    ">
+      +2
+    </div>
+
+    <div style="
+      font-size: 70px;
+      font-weight: bold;
+      -webkit-text-stroke: 2px black;
+      color: red;
+      text-align: center;
+      line-height: 1;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+    ">
+      placeholder
+    </div>
+  </div>
+
+  <div style="
+    margin-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+  ">
+    Get ready for the next tile!
+  </div>
+</div>`, 
+
+`<div class="parent" style="text-align: center;">
+  <p>If you've earned 4 points, you'll see this:</p>
+
+  <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+    <div style="
+      font-size: 70px;
+      font-weight: bold;
+      -webkit-text-stroke: 2px black;
+      color: {{avatarResponse}};
+      text-align: center;
+      line-height: 1;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    ">
+      +4
+    </div>
+
+    <div style="
+      font-size: 70px;
+      font-weight: bold;
+      -webkit-text-stroke: 2px black;
+      color: red;
+      text-align: center;
+      line-height: 1;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+    ">
+      placeholder
+    </div>
+  </div>
+
+  <div style="
+    margin-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+  ">
+    Get ready for the next tile!
+  </div>
+</div>`
+],
+soloPage: [ 
 `<div class='specialOnly'>
-    <p>You'll earn points based on these rules. Remember that every 5 points is worth 1 cent.</p>
+    <p>You and your partner will earn points based on these rules. Remember that every 5 points is worth 1 cent.</p>
     <p>Specifically, if you activate the inner ${textNew.shape1}, you have a 50% chance of getting 8 points or 6 points.</p> 
     <p>If you do not activate the inner ${textNew.shape1}, you have a 50% chance of getting 4 points or 2 points.</p>
     <p>Your outcome depends on your performance only.</p>
-
     <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
             <table style="border-collapse: collapse; text-align: center;">
@@ -543,12 +817,10 @@ soloPage: [
             </table>
         </div>
     </div>
-
     <div style="margin-top: 20px; margin-bottom: 50px; text-align: center; width: 100%; display: block; clear: both;">
         <p style="font-size: 18px; font-weight: bold;">Please take a moment to memorize these rules.</p>
     </div>
-</div>`
-
+</div>`,
 ],
 soloPage2: [
 `<div class='specialOnly'>
@@ -1536,21 +1808,12 @@ attnChk4: !isSecondTime
         post_trial_gap: 500,
     };
 
-
-    p.intro.r1deduction = {
-        type: jsPsychInstructions,
-        pages: pages.r1.deduction,
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-    };
-
     p.intro.r2deduction = {
         type: jsPsychInstructions,
         pages: pages.r2.deduction,
         show_clickable_nav: true,
         post_trial_gap: 500,
     };
-
 
 function makeIntroPart2() {
     return {
@@ -1565,6 +1828,23 @@ function makeIntroPart2() {
                 : (randomAssignment % 2 === 1 ? pages.r1.part2Solo : pages.r1.part2Group);
 
             return sologroupPages.map(page => page.replace(/{{avatarResponse}}/g, avatarResponse));
+        },
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+    };
+}
+
+
+function makeIntroDeduction() {
+    return {
+        type: jsPsychInstructions,
+        pages: () => {
+            const lastTrialData = jsPsych.data.get().last(1).values()[0];
+            const isSecondTime = lastTrialData ? lastTrialData.isSecondTime : false;
+            const avatarResponse = lastTrialData ? lastTrialData.avatarResponse || '' : ''; // Default to empty string if undefined
+
+            const deductionPage = pages.r1.deduction
+            return deductionPage.map(page => page.replace(/{{avatarResponse}}/g, avatarResponse));
         },
         show_clickable_nav: true,
         post_trial_gap: 500,
@@ -1628,7 +1908,7 @@ function makeR1SoloHigh() {
             let sologroupPages;
 
             if ([1, 3, 5, 7].includes(randomAssignment) && !isSecondTime) {
-                sologroupPages = pages.r1.soloPage;
+                sologroupPages = [...pages.r1.presoloPage, ...pages.r1.soloPage];
             } else if ([1, 5].includes(randomAssignment) && isSecondTime) {
                 sologroupPages = pages.r1.groupPage332;
             } else if ([3, 7].includes(randomAssignment) && isSecondTime) {
@@ -1694,7 +1974,7 @@ variables for plugins
 ///
 */
 
-let noOfTrials = 15; //so 60 in total
+let noOfTrials = 12; //so 48 in total
 
 ///fake participant's activation time for WL and LL trials, that far exceeds trial duration
 let partner_rtL = 20000; //for when partner "loses".
@@ -2017,6 +2297,39 @@ function generateAvatarFeedbackLast(avatar1, avatar1Text, avatar2Text, color) {
 */
 
 function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, color, deductionAmount = 0) {
+    const textStyleBase = `
+        font-size: 70px;
+        font-weight: bold;
+        -webkit-text-stroke: 2px black;
+        text-align: center;
+        line-height: 1;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    `;
+
+    const displayText = `<div style="${textStyleBase} color: ${color};">+${avatar1Text}</div>`;
+
+    const deductionText = deductionAmount > 0
+        ? `<div style="${textStyleBase} color: red;">-${deductionAmount}</div>`
+        : `<div style="${textStyleBase} visibility: hidden;">placeholder</div>`; // Keeps spacing equal
+
+    return `
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            ${displayText}
+            ${deductionText}
+        </div>
+
+        <!-- Line at the bottom -->
+        <div style="text-align: center; margin-top: 30px; font-size: 24px; font-weight: bold;">
+            Get ready for the next tile!
+        </div>
+    `;
+}
+
+/*
+function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, color, deductionAmount = 0) {
     const displayText = `+${avatar1Text}`;
     const deductionText = deductionAmount > 0
         ? `<div style="font-size: 50px; color: red; font-weight: bold; margin-top: 10px;">-${deductionAmount}</div>`
@@ -2038,7 +2351,7 @@ function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, co
             Get ready for the next tile!
         </div>
     `;
-}
+}*/
 
 function generateSoloAvatarFeedbackLast(avatar1, avatar1Text, avatar1TotalPoints, color, deductionAmount = 0) {
     const displayText = `+${avatar1Text}`;
@@ -2071,8 +2384,8 @@ const avatarChoices = [
     { color: 'Red', code: '#800000', img: './avatar/3.jpg' }
 ];
 
-const trialsPerRound = noOfTrials * 4;  // 60
-const numWithDeductionPerRound = Math.floor(trialsPerRound / 4);  // 15
+const trialsPerRound = noOfTrials * 4;  // 48
+const numWithDeductionPerRound = Math.floor(trialsPerRound / 4);  // 12
 
 function createDeductionVectorForRound() {
   const vector = Array(numWithDeductionPerRound).fill(1).concat(
@@ -2172,7 +2485,7 @@ function MakeFeedback(mode) {
             avatar1TotalPoints += pointsAddedAvatar1;
             avatar2TotalPoints += pointsAddedAvatar2;
 
-            if (trialNumber === 60 || trialNumber === 120) { //should be 60 and 120
+            if (trialNumber === 48 || trialNumber === 96) { //should be 48 and 96
                 feedbackText = generateSoloAvatarFeedbackLast(
                     selectedAvatarImg,
                     +pointsAddedAvatar1,
@@ -2193,7 +2506,7 @@ function MakeFeedback(mode) {
             return feedbackText;
         },
         choices: "NO_KEYS",
-        trial_duration: 1500,
+        trial_duration: 1800,
         on_finish: (data) => {
             data.randomAssignment = randomAssignment;
             data.avatar1TotalPoints = avatar1TotalPoints;
@@ -2481,6 +2794,7 @@ p.partnerNext = {
         roundIntroV1 = new MakeRoundIntro('V1'),
         roundIntroV2 = new MakeRoundIntro('V2'),
         introPart2 = makeIntroPart2(),
+        introDeduction = makeIntroDeduction(),
        // introR1Part3 = makeR1Part3(),
         introR1SoloHigh = makeR1SoloHigh(),
         introR2part1 = makeR2part1()
@@ -2516,6 +2830,10 @@ p.partnerNext = {
 
     p.intro.r1part2 = {
         timeline: [introPart2],
+    };  
+
+    p.intro.deduction = {
+        timeline: [introDeduction],
     };  
 /*
     p.intro.r1part3 = {
