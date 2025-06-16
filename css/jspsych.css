@@ -244,21 +244,35 @@
 .specialOnly {
   position: relative;
   width: 950px;
- height: 600px; 
+ height: 650px; 
  /* height: auto; */
 }
 
-.specialGrpOnly {
+.GrpOnly {
   position: relative;
   width: 950px;
  height: 750px; 
  /* height: auto; */
 }
 
-.attnChkGrp {
+.specialGrpOnly {
   position: relative;
   width: 950px;
  height: 800px; 
+ /* height: auto; */
+}
+
+.attnChkGrp {
+  position: relative;
+  width: 950px;
+ height: 850px; 
+ /* height: auto; */
+}
+
+.attnChkGrpSpecial {
+  position: relative;
+  width: 950px;
+ height: 880px; 
  /* height: auto; */
 }
 
@@ -272,7 +286,7 @@
 .attnChkNow {
   position: relative;
   width: 950px;
- height: 700px; 
+ height: 730px; 
  /* height: auto; */
 }
 
