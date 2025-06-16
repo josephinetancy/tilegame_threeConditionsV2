@@ -9,17 +9,17 @@ console.log(randomAssignment)
 
 NEW
 
-1 = IndCircle + IntSquareLow CHECKED
-2 = IntSquareLow + IndCircle CHECKED
+1 = IndCircle + IntSquareLow 
+2 = IntSquareLow + IndCircle 
 
-3 = IndCircle + IntSquareHigh CHECKED
-4 = IntSquareHigh + IndCircle CHECKED
+3 = IndCircle + IntSquareHigh 
+4 = IntSquareHigh + IndCircle 
 
 5 = IndSquare + IntCircleLow CHECKED
-6 = IntCircleLow + IndSquare CHECKED   
+6 = IntCircleLow + IndSquare 
 
-7 = IndSquare + IntCircleHigh CHECKED  
-8 = IntCircleHigh + IndSquare CHECKED
+7 = IndSquare + IntCircleHigh 
+8 = IntCircleHigh + IndSquare 
 
 */
  
@@ -3358,7 +3358,6 @@ function MakeFeedback(mode) {
     let pointsAddedAvatar1 = 0;
     let pointsAddedAvatar2 = 0;
     let deductionAmount = 0; 
-    let finalPointsAvatar1 = 0; 
 
     const groupOrind = mode.includes("group") ? "group" : "ind";
     const MI = mode.includes("High") ? "high" : "low";
@@ -3379,7 +3378,6 @@ function MakeFeedback(mode) {
             const shouldDeduct = deductionVector.shift();
             deductionAmount = shouldDeduct ? 2 : 0;
 
-            finalPointsAvatar1 = pointsAddedAvatar1 - deductionAmount;
              avatar1TotalPoints += finalPointsAvatar1;
              avatar2TotalPoints += pointsAddedAvatar2; 
 
@@ -3428,8 +3426,7 @@ function MakeFeedback(mode) {
         pointsAddedAvatar2 = randomPoints;
     }
 }
-
-            avatar1TotalPoints += pointsAddedAvatar1;
+            avatar1TotalPoints += (pointsAddedAvatar1 - deductionAmount);
             avatar2TotalPoints += pointsAddedAvatar2;
 
             if (trialNumber === 48 || trialNumber === 96) { //should be 48 and 96
@@ -3461,7 +3458,6 @@ function MakeFeedback(mode) {
             data.pointsAddedAvatar1 = pointsAddedAvatar1;
             data.pointsAddedAvatar2 = pointsAddedAvatar2;
             data.deductionAmount = deductionAmount;
-            data.finalPointsAvatar1 = finalPointsAvatar1;
             data.groupOrInd = groupOrind;
             if (groupOrind !== "ind") {
                 data.MI = MI;
