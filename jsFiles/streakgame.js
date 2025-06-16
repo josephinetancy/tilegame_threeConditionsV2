@@ -2507,11 +2507,11 @@ attnChk0: !isSecondTime
   : ([1, 3, 5, 7].includes(randomAssignment)
       ? `My earnings depend on both my performance and my partner's performance.`
       : `My earnings depend on my performance only.`),
-attnChk1: !isSecondTime
-  ? ([1, 3, 5, 7].includes(randomAssignment)
-      ? '50% chance of 8 or 6 points'
-      : '100% chance of 8 points')
-  : '100% chance of 8 points',
+attnChk1:
+  (isSecondTime && [2, 4, 6, 8].includes(randomAssignment)) ||
+  (!isSecondTime && [1, 3, 5, 7].includes(randomAssignment))
+    ? '50% chance of 8 or 6 points'
+    : '100% chance of 8 points',
 
 attnChk2: !isSecondTime
   ? ([1, 3, 5, 7].includes(randomAssignment)
@@ -2625,22 +2625,22 @@ let attnChkDiv =
         {
             prompt: `How many points do you get when you and your partner activate the ${isSecondTime ? textNew.shape2 : textNew.shape1}s?`,
             name: `attnChk1`, 
-            options: ['33.3% chance of 6, 4 or 2 points','50% chance of 4 or 2 points', '50% chance of 8 or 6 points', '100% chance of 8 points', '100% chance of 6 points', '100% chance of 4 points', '100% chance of 2 points'],
+            options: ['33.3% chance of 6, 4 or 2 points','50% chance of 8 or 6 points', '50% chance of 4 or 2 points', '100% chance of 8 points', '100% chance of 6 points', '100% chance of 4 points', '100% chance of 2 points'],
         },
         {
             prompt: `How many points do you get when you activate your ${isSecondTime ? textNew.shape2 : textNew.shape1} but your partner does not activate their ${isSecondTime ? textNew.shape2 : textNew.shape1}?`, 
             name: `attnChk2`, 
-            options: ['33.3% chance of 6, 4 or 2 points','50% chance of 4 or 2 points', '50% chance of 8 or 6 points', '100% chance of 8 points', '100% chance of 6 points', '100% chance of 4 points', '100% chance of 2 points'],
+            options: ['33.3% chance of 6, 4 or 2 points', '50% chance of 8 or 6 points', '50% chance of 4 or 2 points', '100% chance of 8 points', '100% chance of 6 points', '100% chance of 4 points', '100% chance of 2 points'],
         },
         {
             prompt: `How many points do you get when you do not activate your ${isSecondTime ? textNew.shape2 : textNew.shape1} but your partner activates their ${isSecondTime ? textNew.shape2 : textNew.shape1}?`, 
             name: `attnChk3`, 
-            options: ['33.3% chance of 6, 4 or 2 points','50% chance of 4 or 2 points', '50% chance of 8 or 6 points', '100% chance of 8 points', '100% chance of 6 points', '100% chance of 4 points', '100% chance of 2 points'],
+            options: ['33.3% chance of 6, 4 or 2 points', '50% chance of 8 or 6 points', '50% chance of 4 or 2 points', '100% chance of 8 points', '100% chance of 6 points', '100% chance of 4 points', '100% chance of 2 points'],
        },
         {
             prompt: `How many points do you get when you and your partner do not activate the ${isSecondTime ? textNew.shape2 : textNew.shape1}s?`, 
             name: `attnChk4`, 
-            options: ['33.3% chance of 6, 4 or 2 points','50% chance of 4 or 2 points', '50% chance of 8 or 6 points', '100% chance of 8 points', '100% chance of 6 points', '100% chance of 4 points', '100% chance of 2 points'],
+            options: ['33.3% chance of 6, 4 or 2 points', '50% chance of 8 or 6 points', '50% chance of 4 or 2 points', '100% chance of 8 points', '100% chance of 6 points', '100% chance of 4 points', '100% chance of 2 points'],
         },
     ];
 },
