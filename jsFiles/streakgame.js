@@ -1,6 +1,7 @@
 //randomAssignment
 
 const randomAssignment = Math.floor(Math.random() * 8) + 1; 
+console.log(randomAssignment)
 
 //randomAssignment = 6;
 
@@ -3350,7 +3351,6 @@ function createDeductionVectorForRound() {
 }
 
 const deductionVector = createDeductionVectorForRound().concat(createDeductionVectorForRound());
-console.log(deductionVector);
 
 function MakeFeedback(mode) {
     let avatar1TotalPoints = 0;
@@ -3378,7 +3378,6 @@ function MakeFeedback(mode) {
             const currentTrial = jsPsych.data.get().last(1).values()[0].trialNumber;
             const shouldDeduct = deductionVector.shift();
             deductionAmount = shouldDeduct ? 2 : 0;
-            console.log(deductionVector);
 
             finalPointsAvatar1 = pointsAddedAvatar1 - deductionAmount;
              avatar1TotalPoints += finalPointsAvatar1;
