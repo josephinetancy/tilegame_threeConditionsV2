@@ -483,6 +483,10 @@ let avatarResponse = '#2669ee';
                 </div>
                 <b><p style="margin-top: 10px;"></p></b>
             </div>
+        </div>`,
+                        `<div class='parent'>
+        <p>On the next page, you'll learn more about the points you'll earn for each outcome. </p> 
+        <p> Every 5 points is worth 1 cent. </p> 
         </div>`
                 ],
 
