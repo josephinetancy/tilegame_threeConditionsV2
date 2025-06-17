@@ -10,7 +10,7 @@ console.log(randomAssignment)
 NEW
 
 1 = IndCircle + IntSquareLow 
-2 = IntSquareLow + IndCircle 
+2 = IntSquareLow + IndCircle CHECKED
 
 3 = IndCircle + IntSquareHigh 
 4 = IntSquareHigh + IndCircle 
@@ -3377,9 +3377,6 @@ function MakeFeedback(mode) {
             const currentTrial = jsPsych.data.get().last(1).values()[0].trialNumber;
             const shouldDeduct = deductionVector.shift();
             deductionAmount = shouldDeduct ? 2 : 0;
-
-             avatar1TotalPoints += finalPointsAvatar1;
-             avatar2TotalPoints += pointsAddedAvatar2; 
 
             let feedbackText = '';
 
