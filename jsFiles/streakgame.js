@@ -231,6 +231,7 @@ let avatarResponse = '#2669ee';
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +8 points
     </div>
@@ -370,8 +371,8 @@ let avatarResponse = '#2669ee';
             </div>
         </div>`,
                 `<div class='parent'>
-        <p>On the next page, you'll learn more about the points you'll earn for each outcome. </p> 
-        <p> Every 5 points is worth 1 cent. </p> 
+        <p>Next, you'll learn how many points each outcome is worth.</p> 
+        <p> Remember: Every 5 points is worth 1 cent.</p> 
         </div>` 
                 ],
 
@@ -484,14 +485,14 @@ let avatarResponse = '#2669ee';
             </div>
         </div>`,
                         `<div class='parent'>
-        <p>On the next page, you'll learn more about the points you'll earn for each outcome. </p> 
-        <p> Every 5 points is worth 1 cent. </p> 
+        <p>Next, you'll learn how many points each outcome is worth.</p> 
+        <p> Remember: Every 5 points is worth 1 cent.</p> 
         </div>`
                 ],
 
 presoloPage: [ 
 `<div class='parent'>
-  <p>If you activate the inner ${textNew.shape1}, you'll have a 50% chance of getting 8 points or 6 points.</p> 
+  <p>If you activate the inner ${textNew.shape1}, you'll have a 50% chance of getting 8 points and a 50% chance of getting 6 points. (Your partner's performance doesn't matter).</p> 
     <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
         <!-- Outcome 1 -->
         <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -530,6 +531,7 @@ presoloPage: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +8 points
     </div>
@@ -575,6 +577,7 @@ presoloPage: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +6 points
     </div>
@@ -605,7 +608,7 @@ presoloPage: [
   </div>
 </div>`,
                  `<div class='parent'>
-                 <p>If you do not activate the inner ${textNew.shape1}, you'll have a 50% chance of getting 4 points or 2 points.</p> 
+                 <p>If you activate the inner ${textNew.shape1}, you'll have a 50% chance of getting 4 points and a 50% chance of getting 2 points. (Your partner's performance doesn't matter).</p> 
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
@@ -641,6 +644,7 @@ presoloPage: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +4 points
     </div>
@@ -685,6 +689,7 @@ presoloPage: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +2 points
     </div>
@@ -718,10 +723,9 @@ presoloPage: [
 soloPage: [ 
 `<div class='specialOnly'>
     <p>To summarize, you and your partner will earn points based on these rules. </p>
-    <p>Remember that every 5 points is worth 1 cent.</p>
     <p>If you activate the inner ${textNew.shape1}, you'll have a 50% chance of getting 8 points or 6 points.</p> 
     <p>If you do not activate the inner ${textNew.shape1}, you'll have a 50% chance of getting 4 points or 2 points.</p>
-    <p>Your outcome depends on your performance only.</p>
+    <p>Your outcome depends on your performance only. Remember: Every 5 points is worth 1 cent.</p>
     <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
             <table style="border-collapse: collapse; text-align: center;">
@@ -827,8 +831,8 @@ soloPage: [
 ],
 presoloPage2: [ 
 `<div class='parent'>
-  <p>If you activate the inner ${textNew.shape2}, you'll have a 50% chance of getting 8 points or 6 points.</p> 
-    <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
+    <p>If you activate the inner ${textNew.shape2}, you'll have a 50% chance of getting 8 points and a 50% chance of getting 6 points. (Your partner's performance doesn't matter).</p> 
+   <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
         <!-- Outcome 1 -->
         <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
             <div class="outer-container">
@@ -866,6 +870,7 @@ presoloPage2: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +8 points
     </div>
@@ -911,6 +916,7 @@ presoloPage2: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +6 points
     </div>
@@ -941,7 +947,7 @@ presoloPage2: [
   </div>
 </div>`,
                  `<div class='parent'>
-                 <p>If you do not activate the inner ${textNew.shape2}, you'll have a 50% chance of getting 4 points or 2 points.</p> 
+                 <p>If you activate the inner ${textNew.shape2}, you'll have a 50% chance of getting 4 points and a 50% chance of getting 2 points. (Your partner's performance doesn't matter).</p> 
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
@@ -978,6 +984,7 @@ presoloPage2: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +4 points
     </div>
@@ -1022,6 +1029,7 @@ presoloPage2: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +2 points
     </div>
@@ -1056,10 +1064,9 @@ presoloPage2: [
 soloPage2: [
 `<div class='specialOnly'>
     <p>To summarize, you and your partner will earn points based on these rules. </p>
-    <p>Remember that every 5 points is worth 1 cent.</p>
     <p>If you activate the inner ${textNew.shape2}, you'll have a 50% chance of getting 8 points or 6 points.</p> 
     <p>If you do not activate the inner ${textNew.shape2}, you'll have a 50% chance of getting 4 points or 2 points.</p>
-    <p>Your outcome depends on your performance only.</p>
+    <p>Your outcome depends on your performance only. Remember: Every 5 points is worth 1 cent.</p> 
     <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
             <table style="border-collapse: collapse; text-align: center;">
@@ -1193,6 +1200,7 @@ pregroupPage33: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +8 points
     </div>
@@ -1324,6 +1332,7 @@ pregroupPage33: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +4 points
     </div>
@@ -1368,6 +1377,7 @@ pregroupPage33: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +2 points
     </div>
@@ -1428,6 +1438,7 @@ pregroupPage332: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +8 points
     </div>
@@ -1513,6 +1524,7 @@ pregroupPage332: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +6 points
     </div>
@@ -1558,6 +1570,7 @@ pregroupPage332: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +4 points
     </div>
@@ -1602,6 +1615,7 @@ pregroupPage332: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +2 points
     </div>
@@ -1635,13 +1649,12 @@ pregroupPage332: [
 groupPage33: [
 `<div class='specialGrpOnly'>
     <p>To summarize, you and your partner will earn points based on these rules. </p>
-    <p>Remember that every 5 points is worth 1 cent.</p>
   <p>If you and your partner activate the ${textNew.shape1}s, you'll have a 100% chance of getting 8 points.</p> 
    <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1},</p>
   <p>or if you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1},</p>
   <p>or if you and your partner do not activate the ${textNew.shape1}s,</p>
   <p>you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>  
-  <p>Your outcome depends on you and your partner's performance. </p>
+  <p>Your outcome depends on you and your partner's performance. Remember: Every 5 points is worth 1 cent.</p>
 
   <div id="shape-wrapper" style="display: flex; justify-content: center;">
     <div class="table-container" style="display: block; clear: both;">
@@ -1746,13 +1759,12 @@ groupPage33: [
 groupPage332: [
 `<div class='specialGrpOnly'>
     <p>To summarize, you and your partner will earn points based on these rules. </p>
-    <p>Remember that every 5 points is worth 1 cent.</p>
   <p>If you and your partner activate the ${textNew.shape2}s, you'll have a 100% chance of getting 8 points.</p> 
    <p>If you activate the inner ${textNew.shape2} and your partner does not activate the outer ${textNew.shape2},</p>
   <p>or if you do not activate the inner ${textNew.shape2} and your partner activates the outer ${textNew.shape2},</p>
   <p>or if you and your partner do not activate the ${textNew.shape2}s,</p>
   <p>you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>  
-  <p>Your outcome depends on you and your partner's performance. </p>
+  <p>Your outcome depends on you and your partner's performance. Remember: Every 5 points is worth 1 cent.</p>
 
   <div id="shape-wrapper" style="display: flex; justify-content: center;">
     <div class="table-container" style="display: block; clear: both;">
@@ -1884,6 +1896,7 @@ pregroupPage: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +8 points
     </div>
@@ -1943,6 +1956,7 @@ pregroupPage: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +6 points
     </div>
@@ -2000,6 +2014,7 @@ pregroupPage: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +4 points
     </div>
@@ -2059,6 +2074,7 @@ pregroupPage: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +2 points
     </div>
@@ -2091,12 +2107,11 @@ pregroupPage: [
 ],
 groupPage: [   `<div class='GrpOnly'>
        <p>To summarize, you and your partner will earn points based on these rules. </p>
-       <p>Remember that every 5 points is worth 1 cent.</p>
         <p>If you and your partner activate the ${textNew.shape1}s, you'll have a 100% chance of getting 8 points.</p> 
         <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}, you'll have a 100% chance of getting 6 points.</p> 
         <p>If you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}, you'll have a 100% chance of getting 4 points.</p> 
         <p>If you and your partner do not activate the ${textNew.shape1}s, you'll have a 100% chance of getting 2 points.</p> 
-        <p>Your outcome depends on you and your partner's performance. </p>
+        <p>Your outcome depends on you and your partner's performance. Remember: Every 5 points is worth 1 cent.</p>
           <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
             <table style="border-collapse: collapse; text-align: center;">
@@ -2204,6 +2219,7 @@ pregroupPage2: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +8 points
     </div>
@@ -2263,6 +2279,7 @@ pregroupPage2: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +6 points
     </div>
@@ -2320,6 +2337,7 @@ pregroupPage2: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +4 points
     </div>
@@ -2379,6 +2397,7 @@ pregroupPage2: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +2 points
     </div>
@@ -2412,12 +2431,11 @@ pregroupPage2: [
 groupPage2: [
    `<div class='GrpOnly'>
        <p>To summarize, you and your partner will earn points based on these rules. </p>
-       <p>Remember that every 5 points is worth 1 cent.</p>
         <p>If you and your partner activate the ${textNew.shape1}s, you'll have a 100% chance of getting 8 points.</p> 
         <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}, you'll have a 100% chance of getting 6 points.</p> 
         <p>If you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}, you'll have a 100% chance of getting 4 points.</p> 
         <p>If you and your partner do not activate the ${textNew.shape1}s, you'll have a 100% chance of getting 2 points.</p> 
-        <p>Your outcome depends on you and your partner's performance. </p>
+        <p>Your outcome depends on you and your partner's performance. Remember: Every 5 points is worth 1 cent.</p>
           <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
             <table style="border-collapse: collapse; text-align: center;">
@@ -3488,7 +3506,7 @@ function generateSoloAvatarFeedback(avatar1, avatar1Text, avatar1TotalPoints, co
         justify-content: center;
     `;
 
-    const displayText = `<div style="${textStyleBase} color: ${color};">+${avatar1Text} points</div>`;
+    const displayText = `<div style="${textStyleBase} color: ${color}; margin-bottom: 40px;">+${avatar1Text} points</div>`;
 
     const deductionText = deductionAmount > 0
         ? `<div style="${textStyleBase} color: red;">-${deductionAmount} loss</div>`
@@ -3545,7 +3563,7 @@ function generateSoloAvatarFeedbackLast(avatar1, avatar1Text, avatar1TotalPoints
         justify-content: center;
     `;
 
-    const displayText = `<div style="${textStyleBase} color: ${color};">+${avatar1Text} points</div>`;
+    const displayText = `<div style="${textStyleBase} color: ${color}; margin-bottom: 40px;">+${avatar1Text} points</div>`;
 
     const deductionText = deductionAmount > 0
         ? `<div style="${textStyleBase} color: red;">-${deductionAmount} loss</div>`
@@ -3563,7 +3581,6 @@ function generateSoloAvatarFeedbackLast(avatar1, avatar1Text, avatar1TotalPoints
         </div>
     `;
 }
-
 
 const avatarChoices = [
     { color: 'Pink', code: '#ff00fe', img: './avatar/1.jpg' },
