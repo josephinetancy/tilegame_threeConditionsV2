@@ -1285,6 +1285,7 @@ pregroupPage33: [
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
     ">
       +6 points
     </div>
