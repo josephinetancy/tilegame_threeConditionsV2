@@ -1647,8 +1647,7 @@ groupPage33: [
 `<div class='specialGrpOnly'>
     <p>To summarize, you and your partner will earn points based on these rules: </p>
   <p>If you and your partner activate the ${textNew.shape1}s, you'll have a 100% chance of getting 8 points.</p> 
-   <p>If the inner or outer ${textNew.shape1} is not activated,</p>
-  <p>you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>  
+   <p>If the inner or outer ${textNew.shape1} is not activated, you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>  
   <p>Your outcome depends on you and your partner's performance. Remember: Every 5 points is worth 1 cent.</p>
 
   <div id="shape-wrapper" style="display: flex; justify-content: center;">
@@ -1754,8 +1753,8 @@ groupPage33: [
 groupPage332: [
 `<div class='specialGrpOnly'>
     <p>To summarize, you and your partner will earn points based on these rules: </p>
-   <p>If the inner or outer ${textNew.shape2} is not activated,</p>
-  <p>you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>   
+  <p>If you and your partner activate the ${textNew.shape1}s, you'll have a 100% chance of getting 8 points.</p> 
+   <p>If the inner or outer ${textNew.shape1} is not activated, you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>  
   <p>Your outcome depends on you and your partner's performance. Remember: Every 5 points is worth 1 cent.</p>
 
   <div id="shape-wrapper" style="display: flex; justify-content: center;">
