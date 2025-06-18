@@ -217,7 +217,7 @@ let avatarResponse = '#2669ee';
                 </div>`,
 
                 `<div class="parent" style="text-align: center;">
-  <p>For instance, if you earn 8 points and get a random 2 points deduction, you'll see this:</p>
+  <p>For instance, if you earn 8 points and get a random 2 point deduction, you'll see this:</p>
 
   <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
     <div style="
@@ -608,7 +608,7 @@ presoloPage: [
   </div>
 </div>`,
                  `<div class='parent'>
-                 <p>If you activate the inner ${textNew.shape1}, you'll have a 50% chance of getting 4 points and a 50% chance of getting 2 points. (Your partner's performance doesn't matter).</p> 
+                 <p>If you do not activate the inner ${textNew.shape1}, you'll have a 50% chance of getting 4 points and a 50% chance of getting 2 points. (Your partner's performance doesn't matter).</p> 
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
@@ -722,7 +722,7 @@ presoloPage: [
 ],
 soloPage: [ 
 `<div class='specialOnly'>
-    <p>To summarize, you and your partner will earn points based on these rules. </p>
+    <p>To summarize, you and your partner will earn points based on these rules:</p>
     <p>If you activate the inner ${textNew.shape1}, you'll have a 50% chance of getting 8 points or 6 points.</p> 
     <p>If you do not activate the inner ${textNew.shape1}, you'll have a 50% chance of getting 4 points or 2 points.</p>
     <p>Your outcome depends on your performance only. Remember: Every 5 points is worth 1 cent.</p>
@@ -947,7 +947,7 @@ presoloPage2: [
   </div>
 </div>`,
                  `<div class='parent'>
-                 <p>If you activate the inner ${textNew.shape2}, you'll have a 50% chance of getting 4 points and a 50% chance of getting 2 points. (Your partner's performance doesn't matter).</p> 
+                 <p>If you do not activate the inner ${textNew.shape2}, you'll have a 50% chance of getting 4 points and a 50% chance of getting 2 points. (Your partner's performance doesn't matter).</p> 
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
@@ -1063,7 +1063,7 @@ presoloPage2: [
 ],
 soloPage2: [
 `<div class='specialOnly'>
-    <p>To summarize, you and your partner will earn points based on these rules. </p>
+    <p>To summarize, you and your partner will earn points based on these rules: </p>
     <p>If you activate the inner ${textNew.shape2}, you'll have a 50% chance of getting 8 points or 6 points.</p> 
     <p>If you do not activate the inner ${textNew.shape2}, you'll have a 50% chance of getting 4 points or 2 points.</p>
     <p>Your outcome depends on your performance only. Remember: Every 5 points is worth 1 cent.</p> 
@@ -1232,9 +1232,7 @@ pregroupPage33: [
 </div>`,
 
 `<div class='parent'>
-  <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1},</p>
-  <p>or if you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1},</p>
-  <p>or if you and your partner do not activate the ${textNew.shape1}s,</p>
+  <p>If the inner or outer ${textNew.shape1} is not activated,</p>
   <p>you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>
 
   <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
@@ -1470,9 +1468,7 @@ pregroupPage332: [
 </div>`,
 
 `<div class='parent'>
-  <p>If you activate the inner ${textNew.shape2} and your partner does not activate the outer ${textNew.shape2},</p>
-  <p>or if you do not activate the inner ${textNew.shape2} and your partner activates the outer ${textNew.shape2},</p>
-  <p>or if you and your partner do not activate the ${textNew.shape2}s,</p>
+    <p>If the inner or outer ${textNew.shape2} is not activated,</p>
   <p>you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>
 
   <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
@@ -1648,11 +1644,9 @@ pregroupPage332: [
 ],
 groupPage33: [
 `<div class='specialGrpOnly'>
-    <p>To summarize, you and your partner will earn points based on these rules. </p>
+    <p>To summarize, you and your partner will earn points based on these rules: </p>
   <p>If you and your partner activate the ${textNew.shape1}s, you'll have a 100% chance of getting 8 points.</p> 
-   <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1},</p>
-  <p>or if you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1},</p>
-  <p>or if you and your partner do not activate the ${textNew.shape1}s,</p>
+   <p>If the inner or outer ${textNew.shape1} is not activated,</p>
   <p>you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>  
   <p>Your outcome depends on you and your partner's performance. Remember: Every 5 points is worth 1 cent.</p>
 
@@ -1758,12 +1752,9 @@ groupPage33: [
 ],
 groupPage332: [
 `<div class='specialGrpOnly'>
-    <p>To summarize, you and your partner will earn points based on these rules. </p>
-  <p>If you and your partner activate the ${textNew.shape2}s, you'll have a 100% chance of getting 8 points.</p> 
-   <p>If you activate the inner ${textNew.shape2} and your partner does not activate the outer ${textNew.shape2},</p>
-  <p>or if you do not activate the inner ${textNew.shape2} and your partner activates the outer ${textNew.shape2},</p>
-  <p>or if you and your partner do not activate the ${textNew.shape2}s,</p>
-  <p>you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>  
+    <p>To summarize, you and your partner will earn points based on these rules: </p>
+   <p>If the inner or outer ${textNew.shape2} is not activated,</p>
+  <p>you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>   
   <p>Your outcome depends on you and your partner's performance. Remember: Every 5 points is worth 1 cent.</p>
 
   <div id="shape-wrapper" style="display: flex; justify-content: center;">
@@ -1774,29 +1765,29 @@ groupPage332: [
           <td></td>
           <td>
             <div class="outer-container">
-              <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}; width: 100px; height: 100px;">
-                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+              <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 100px; height: 100px;">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
               </div>
             </div>
           </td>
           <td>
             <div class="outer-container">
-              <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey; width: 100px; height: 100px;">
-                <div id="inner-shape" class="${textNew.shape1}" style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
+              <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey; width: 100px; height: 100px;">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
               </div>
             </div>
           </td>
           <td>
             <div class="outer-container">
-              <div id="outer-shape" class="${textNew.shape1}" style="background-color: ${textNew.color}; width: 100px; height: 100px;">
-                <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+              <div id="outer-shape" class="${textNew.shape2}" style="background-color: ${textNew.color}; width: 100px; height: 100px;">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
               </div>
             </div>
           </td>
           <td>
             <div class="outer-container">
-              <div id="outer-shape" class="${textNew.shape1}" style="background-color: grey; width: 100px; height: 100px;">
-                <div id="inner-shape" class="${textNew.shape1}" style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
+              <div id="outer-shape" class="${textNew.shape2}" style="background-color: grey; width: 100px; height: 100px;">
+                <div id="inner-shape" class="${textNew.shape2}" style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
               </div>
             </div>
           </td>
@@ -2106,7 +2097,7 @@ pregroupPage: [
 </div>`, 
 ],
 groupPage: [   `<div class='GrpOnly'>
-       <p>To summarize, you and your partner will earn points based on these rules. </p>
+       <p>To summarize, you and your partner will earn points based on these rules: </p>
         <p>If you and your partner activate the ${textNew.shape1}s, you'll have a 100% chance of getting 8 points.</p> 
         <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}, you'll have a 100% chance of getting 6 points.</p> 
         <p>If you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}, you'll have a 100% chance of getting 4 points.</p> 
@@ -2430,7 +2421,7 @@ pregroupPage2: [
 ],
 groupPage2: [
    `<div class='GrpOnly'>
-       <p>To summarize, you and your partner will earn points based on these rules. </p>
+       <p>To summarize, you and your partner will earn points based on these rules: </p>
         <p>If you and your partner activate the ${textNew.shape1}s, you'll have a 100% chance of getting 8 points.</p> 
         <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}, you'll have a 100% chance of getting 6 points.</p> 
         <p>If you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}, you'll have a 100% chance of getting 4 points.</p> 
@@ -2860,7 +2851,7 @@ let attnChkDiv =
             .replace(/{{avatar1}}/g, selectedAvatarImg)
             .replace(/Please take a moment to memorize these rules/g, `Before you continue, please answer the following questions`)
             .replace(/specialOnly/g, `special`)
-            .replace(/To summarize, you and your partner will earn points based on these rules./g, '') 
+            .replace(/To summarize, you and your partner will earn points based on these rules:/g, '') 
     ).join(""); // Join all the updated HTML sections into a single string
 
     // Append the updated pages inside a new div to ensure layout stacking
@@ -4262,17 +4253,17 @@ p.task.GroupCircleLow = {
 
     p.Qs = {};
 
-    const FlowScale0 = ['0<br>A little immersed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very immersed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More immersed than I've ever felt`];
-    const FlowScale1 = ['0<br>A little engaged', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very engaged', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engaged than I've ever felt`];
-    const FlowScale2 = ['0<br>A little engrossed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very engrossed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engrossed than I've ever felt`];
-    const FlowScale3 = ['0<br>A little absorbed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very absorbed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More absorbed than I've ever felt`];
-    const FlowScale4 = ['0<br>A little bored', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Very bored', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More bored than I've ever felt`];
+    const FlowScale0 = ['0<br>A little immersed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Quite immersed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More immersed than I've ever felt`];
+    const FlowScale1 = ['0<br>A little engaged', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Quite engaged', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engaged than I've ever felt`];
+    const FlowScale2 = ['0<br>A little engrossed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Quite engrossed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More engrossed than I've ever felt`];
+    const FlowScale3 = ['0<br>A little absorbed', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Quite absorbed', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More absorbed than I've ever felt`];
+    const FlowScale4 = ['0<br>A little bored', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>Quite bored', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More bored than I've ever felt`];
 
     const EnjoyScale0 = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More than I've enjoyed anything`];
     const EnjoyScale1 = ['0<br>Zero fun', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More fun than I've ever had`];
     const EnjoyScale2 = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More entertained than I've ever felt`];
-    const EnjoyScale3 = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More I've ever liked anything`];
-    const EnjoyScale4 = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More I've ever disliked anything`];
+    const EnjoyScale3 = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More than I've ever liked anything`];
+    const EnjoyScale4 = ['0<br>Not at all', '1<br>', '2<br>', '3<br>', '4<br>', '5<br>', '6<br>', '7<br>','8<br>', '9<br>', `10<br>More than I've ever disliked anything`];
 
 
     
