@@ -1,5 +1,6 @@
 //randomAssignment
 
+
 const randomAssignment = Math.floor(Math.random() * 8) + 1; 
 
 console.log(randomAssignment)
@@ -8,17 +9,17 @@ console.log(randomAssignment)
 
 NEW
 
-1 = IndCircle + IntSquareLow CHECKED
-2 = IntSquareLow + IndCircle CHECKED
+1 = IndCircle + IntSquareLow CHECKED yes
+2 = IntSquareLow + IndCircle CHECKED yes
 
-3 = IndCircle + IntSquareHigh CHECKED
-4 = IntSquareHigh + IndCircle CHECKED
+3 = IndCircle + IntSquareHigh CHECKED yes
+4 = IntSquareHigh + IndCircle CHECKED yes
 
-5 = IndSquare + IntCircleLow CHECKED 
-6 = IntCircleLow + IndSquare CHECKED
+5 = IndSquare + IntCircleLow CHECKED yes
+6 = IntCircleLow + IndSquare CHECKED yes
 
-7 = IndSquare + IntCircleHigh CHECKED
-8 = IntCircleHigh + IndSquare CHECKED
+7 = IndSquare + IntCircleHigh CHECKED yes
+8 = IntCircleHigh + IndSquare CHECKED yes
 
 */
  
@@ -1847,7 +1848,7 @@ groupPage332: [
   </td>
   <td>
     <div><b>+6</b></div>
-    <div><b>+4</b>></div>
+    <div><b>+4</b></div>
     <div><b>+2</b></div>
   </td>
   <td>
@@ -2443,36 +2444,36 @@ groupPage2: [
                     <td style="padding: 10px;"></td> <!-- Empty first column -->
                     <td style="padding: 10px;">
                         <div class="outer-container">
-                            <div id="outer-shape" class="${textNew.shape1}" 
+                            <div id="outer-shape" class="${textNew.shape2}" 
                                  style="background-color: ${textNew.color}; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape1}" 
+                                <div id="inner-shape" class="${textNew.shape2}" 
                                      style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
                             </div>
                         </div>
                     </td>
                     <td style="padding: 10px;">
                         <div class="outer-container">
-                            <div id="outer-shape" class="${textNew.shape1}" 
+                            <div id="outer-shape" class="${textNew.shape2}" 
                                  style="background-color: grey; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape1}" 
+                                <div id="inner-shape" class="${textNew.shape2}" 
                                      style="background-color: {{avatarResponse}}; width: 66px; height: 66px; margin: auto;"></div>
                             </div>
                         </div>
                     </td>
                     <td style="padding: 10px;">
                         <div class="outer-container">
-                            <div id="outer-shape" class="${textNew.shape1}" 
+                            <div id="outer-shape" class="${textNew.shape2}" 
                                  style="background-color: ${textNew.color}; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape1}" 
+                                <div id="inner-shape" class="${textNew.shape2}" 
                                      style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
                             </div>
                         </div>
                     </td>
                     <td style="padding: 10px;">
                         <div class="outer-container">
-                            <div id="outer-shape" class="${textNew.shape1}" 
+                            <div id="outer-shape" class="${textNew.shape2}" 
                                  style="background-color: grey; width: 100px; height: 100px;">
-                                <div id="inner-shape" class="${textNew.shape1}" 
+                                <div id="inner-shape" class="${textNew.shape2}" 
                                      style="background-color: grey; width: 66px; height: 66px; margin: auto;"></div>
                             </div>
                         </div>
@@ -4452,7 +4453,7 @@ const html = {
     p.save_data = {
         type: jsPsychPipe,
         action: "save",
-        experiment_id: "Tn0fugLtCHI0",
+        experiment_id: "wSqHruzdNPqF",
         filename: filename,
         data_string: ()=>jsPsych.data.get().csv()
     }; 
