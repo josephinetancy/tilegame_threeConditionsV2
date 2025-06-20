@@ -1172,7 +1172,7 @@ soloPage2: [
 ],
 pregroupPage33: [ 
 `<div class='parent'>
-   <p>If you and your partner activate the ${textNew.shape1}s,</p> <p> you'll have a 100% chance of getting 8 points.</p> 
+   <p>If you and your partner activate the ${textNew.shape1}s,</p> <p> you're guaranteed 8 points.</p> 
     <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
         <!-- Outcome 1 -->
         <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -1409,7 +1409,7 @@ pregroupPage33: [
 ],
 pregroupPage332: [ 
 `<div class='parent'>
-   <p>If you and your partner activate the ${textNew.shape2}s,</p> <p> you'll have a 100% chance of getting 8 points.</p> 
+   <p>If you and your partner activate the ${textNew.shape2}s,</p> <p> you're guaranteed 8 points.</p> 
     <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
         <!-- Outcome 1 -->
         <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -1646,8 +1646,8 @@ pregroupPage332: [
 groupPage33: [
 `<div class='specialGrpOnly'>
     <p>To summarize, you and your partner will earn points based on these rules: </p>
-  <p>If you and your partner activate the ${textNew.shape1}s, you'll have a 100% chance of getting 8 points.</p> 
-   <p>If the inner or outer ${textNew.shape1} is not activated, you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>  
+  <p>If you and your partner activate the ${textNew.shape1}s, you're guaranteed 8 points.</p> 
+   <p>If the inner or outer ${textNew.shape1} is not activated, you'll randomly receive 6, 4, or 2 points.</p>  
   <p>Your outcome depends on you and your partner's performance. Remember: Every 5 points is worth 1 cent.</p>
 
   <div id="shape-wrapper" style="display: flex; justify-content: center;">
@@ -1695,22 +1695,22 @@ groupPage33: [
     </div>
   </td>
   <td>
-    <div><b>+8</b> <span style="font-size: 12px;">(100%)</span></div>
+    <div><b>+8</b></div>
   </td>
   <td>
-    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+6</b></div>
+    <div><b>+4</b></div>
+    <div><b>+2</b></div>
   </td>
   <td>
-    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+6</b></div>
+    <div><b>+4</b></div>
+    <div><b>+2</b></div>
   </td>
   <td>
-    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+6</b></div>
+    <div><b>+4</b></div>
+    <div><b>+2</b></div>
   </td>
 </tr>
 
@@ -1723,22 +1723,22 @@ groupPage33: [
     </div>
   </td>
   <td>
-    <div><b>+8</b> <span style="font-size: 12px;">(100%)</span></div>
+    <div><b>+8</b></div>
   </td>
   <td>
-    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+6</b></div>
+    <div><b>+4</b></div>
+    <div><b>+2</b></div>
   </td>
   <td>
-    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+6</b></div>
+    <div><b>+4</b></div>
+    <div><b>+2</b></div>
   </td>
   <td>
-    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+6</b></div>
+    <div><b>+4</b></div>
+    <div><b>+2</b></div>
   </td>
 </tr>
       </table>
@@ -1753,8 +1753,8 @@ groupPage33: [
 groupPage332: [
 `<div class='specialGrpOnly'>
     <p>To summarize, you and your partner will earn points based on these rules: </p>
-  <p>If you and your partner activate the ${textNew.shape1}s, you'll have a 100% chance of getting 8 points.</p> 
-   <p>If the inner or outer ${textNew.shape1} is not activated, you'll have a 33.3% chance of getting 6 points, 4 points or 2 points.</p>  
+  <p>If you and your partner activate the ${textNew.shape1}s, you're guaranteed 8 points.</p> 
+   <p>If the inner or outer ${textNew.shape1} is not activated, you'll randomly receive 6, 4, or 2 points.</p>  
   <p>Your outcome depends on you and your partner's performance. Remember: Every 5 points is worth 1 cent.</p>
 
   <div id="shape-wrapper" style="display: flex; justify-content: center;">
@@ -1802,22 +1802,22 @@ groupPage332: [
     </div>
   </td>
   <td>
-    <div><b>+8</b> <span style="font-size: 12px;">(100%)</span></div>
+    <div><b>+8</b></div>
   </td>
   <td>
-    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+6</b></div>
+    <div><b>+4</b></div>
+    <div><b>+2</b></div>
   </td>
   <td>
-    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+6</b></div>
+    <div><b>+4</b></div>
+    <div><b>+2</b></div>
   </td>
   <td>
-    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+6</b></div>
+    <div><b>+4</b></div>
+    <div><b>+2</b></div>
   </td>
 </tr>
 
@@ -1830,22 +1830,22 @@ groupPage332: [
     </div>
   </td>
   <td>
-    <div><b>+8</b> <span style="font-size: 12px;">(100%)</span></div>
+    <div><b>+8</b></div>
   </td>
   <td>
-    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+6</b></div>
+    <div><b>+4</b></div>
+    <div><b>+2</b></div>
   </td>
   <td>
-    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+6</b></div>
+    <div><b>+4</b>></div>
+    <div><b>+2</b></div>
   </td>
   <td>
-    <div><b>+6</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+4</b> <span style="font-size: 12px;">(33.3%)</span></div>
-    <div><b>+2</b> <span style="font-size: 12px;">(33.3%)</span></div>
+    <div><b>+6</b></div>
+    <div><b>+4</b></div>
+    <div><b>+2</b></div>
   </td>
 </tr>
       </table>
@@ -1859,7 +1859,7 @@ groupPage332: [
 ],
 pregroupPage: [ 
 `<div class='parent'>
-  <p>If you and your partner activate the ${textNew.shape1}s,</p> <p> you'll have a 100% chance of getting 8 points.</p> 
+  <p>If you and your partner activate the ${textNew.shape1}s,</p> <p> you're guaranteed 8 points.</p> 
     <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
         <!-- Outcome 1 -->
         <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -1919,7 +1919,7 @@ pregroupPage: [
 </div>`,
 
 `<div class='parent'>
-  <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}, </p> <p>you'll have a 100% chance of getting 6 points.</p> 
+  <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}, </p> <p>you're guaranteed 6 points.</p> 
     <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
         <!-- Outcome 1 -->
         <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -1978,7 +1978,7 @@ pregroupPage: [
   </div>
 </div>`,
                  `<div class='parent'>
-                 <p>If you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}, </p> <p>you'll have a 100% chance of getting 4 points.</p> 
+                 <p>If you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}, </p> <p>you're guaranteed 4 points.</p> 
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
@@ -2038,7 +2038,7 @@ pregroupPage: [
 
 
                  `<div class='parent'>
-                 <p>If you and your partner do not activate the ${textNew.shape1}s, </p><p>you'll have a 100% chance of getting 2 points.</p> 
+                 <p>If you and your partner do not activate the ${textNew.shape1}s, </p><p>you're guaranteed 2 points.</p> 
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
@@ -2098,10 +2098,10 @@ pregroupPage: [
 ],
 groupPage: [   `<div class='GrpOnly'>
        <p>To summarize, you and your partner will earn points based on these rules: </p>
-        <p>If you and your partner activate the ${textNew.shape1}s, you'll have a 100% chance of getting 8 points.</p> 
-        <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}, you'll have a 100% chance of getting 6 points.</p> 
-        <p>If you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}, you'll have a 100% chance of getting 4 points.</p> 
-        <p>If you and your partner do not activate the ${textNew.shape1}s, you'll have a 100% chance of getting 2 points.</p> 
+        <p>If you and your partner activate the ${textNew.shape1}s, you're guaranteed 8 points.</p> 
+        <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}, you're guaranteed 6 points.</p> 
+        <p>If you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}, you're guaranteed 4 points.</p> 
+        <p>If you and your partner do not activate the ${textNew.shape1}s, you're guaranteed 2 points.</p> 
         <p>Your outcome depends on you and your partner's performance. Remember: Every 5 points is worth 1 cent.</p>
           <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
@@ -2155,10 +2155,10 @@ groupPage: [   `<div class='GrpOnly'>
                             <span style="font-size: 12px; font-weight: bold;">(you)</span>
                         </div>
                     </td>
-                    <td><b>+8</b><span style="font-size: 12px;">(100%)</span></div></td>
-                    <td><b>+6</b><span style="font-size: 12px;">(100%)</span></div></td>
-                    <td><b>+4</b><span style="font-size: 12px;">(100%)</span></div></td>
-                    <td><b>+2</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+8</b></div></td>
+                    <td><b>+6</b></div></td>
+                    <td><b>+4</b></div></td>
+                    <td><b>+2</b></div></td>
                 </tr>
 
                 <!-- Third row: Points with avatar 4 -->
@@ -2169,10 +2169,10 @@ groupPage: [   `<div class='GrpOnly'>
                             <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
                         </div>
                     </td>
-                    <td><b>+8</b><span style="font-size: 12px;">(100%)</span></div></td>
-                    <td><b>+4</b><span style="font-size: 12px;">(100%)</span></div></td>
-                    <td><b>+6</b><span style="font-size: 12px;">(100%)</span></div></td>
-                    <td><b>+2</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+8</b></div></td>
+                    <td><b>+4</b></div></td>
+                    <td><b>+6</b></div></td>
+                    <td><b>+2</b></div></td>
                 </tr>
             </table>
         </div>
@@ -2182,7 +2182,7 @@ groupPage: [   `<div class='GrpOnly'>
 </div>`],
 pregroupPage2: [ 
 `<div class='parent'>
-  <p>If you and your partner activate the ${textNew.shape2}s,</p> <p> you'll have a 100% chance of getting 8 points.</p> 
+  <p>If you and your partner activate the ${textNew.shape2}s,</p> <p> you're guaranteed 8 points.</p> 
     <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
         <!-- Outcome 1 -->
         <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -2242,7 +2242,7 @@ pregroupPage2: [
 </div>`,
 
 `<div class='parent'>
-  <p>If you activate the inner ${textNew.shape2} and your partner does not activate the outer ${textNew.shape2}, </p> <p>you'll have a 100% chance of getting 6 points.</p> 
+  <p>If you activate the inner ${textNew.shape2} and your partner does not activate the outer ${textNew.shape2}, </p> <p>you're guaranteed 6 points.</p> 
     <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
         <!-- Outcome 1 -->
         <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -2301,7 +2301,7 @@ pregroupPage2: [
   </div>
 </div>`,
                  `<div class='parent'>
-                 <p>If you do not activate the inner ${textNew.shape2} and your partner activates the outer ${textNew.shape2}, </p> <p>you'll have a 100% chance of getting 4 points.</p> 
+                 <p>If you do not activate the inner ${textNew.shape2} and your partner activates the outer ${textNew.shape2}, </p> <p>you're guaranteed 4 points.</p> 
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
@@ -2361,7 +2361,7 @@ pregroupPage2: [
 
 
                  `<div class='parent'>
-                 <p>If you and your partner do not activate the ${textNew.shape2}s, </p><p>you'll have a 100% chance of getting 2 points.</p> 
+                 <p>If you and your partner do not activate the ${textNew.shape2}s, </p><p>you're guaranteed 2 points.</p> 
                 <div id="shape-wrapper" style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-bottom: 50px;">
             <div class="game-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <div class="outer-container">
@@ -2422,10 +2422,10 @@ pregroupPage2: [
 groupPage2: [
    `<div class='GrpOnly'>
        <p>To summarize, you and your partner will earn points based on these rules: </p>
-        <p>If you and your partner activate the ${textNew.shape1}s, you'll have a 100% chance of getting 8 points.</p> 
-        <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}, you'll have a 100% chance of getting 6 points.</p> 
-        <p>If you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}, you'll have a 100% chance of getting 4 points.</p> 
-        <p>If you and your partner do not activate the ${textNew.shape1}s, you'll have a 100% chance of getting 2 points.</p> 
+        <p>If you and your partner activate the ${textNew.shape1}s, you're guaranteed 8 points.</p> 
+        <p>If you activate the inner ${textNew.shape1} and your partner does not activate the outer ${textNew.shape1}, you're guaranteed 6 points.</p> 
+        <p>If you do not activate the inner ${textNew.shape1} and your partner activates the outer ${textNew.shape1}, you're guaranteed 4 points.</p> 
+        <p>If you and your partner do not activate the ${textNew.shape1}s, you're guaranteed 2 points.</p> 
         <p>Your outcome depends on you and your partner's performance. Remember: Every 5 points is worth 1 cent.</p>
           <div id="shape-wrapper" style="display: flex; justify-content: center;">
         <div class="table-container" style="display: block; clear: both;">
@@ -2479,10 +2479,10 @@ groupPage2: [
                             <span style="font-size: 12px; font-weight: bold;">(you)</span>
                         </div>
                     </td>
-                    <td><b>+8</b><span style="font-size: 12px;">(100%)</span></div></td>
-                    <td><b>+6</b><span style="font-size: 12px;">(100%)</span></div></td>
-                    <td><b>+4</b><span style="font-size: 12px;">(100%)</span></div></td>
-                    <td><b>+2</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+8</b></div></td>
+                    <td><b>+6</b></div></td>
+                    <td><b>+4</b></div></td>
+                    <td><b>+2</b></div></td>
                 </tr>
 
                 <!-- Third row: Points with avatar 4 -->
@@ -2493,10 +2493,10 @@ groupPage2: [
                             <span style="font-size: 12px; font-weight: bold;">(your partner)</span>
                         </div>
                     </td>
-                    <td><b>+8</b><span style="font-size: 12px;">(100%)</span></div></td>
-                    <td><b>+4</b><span style="font-size: 12px;">(100%)</span></div></td>
-                    <td><b>+6</b><span style="font-size: 12px;">(100%)</span></div></td>
-                    <td><b>+2</b><span style="font-size: 12px;">(100%)</span></div></td>
+                    <td><b>+8</b></div></td>
+                    <td><b>+4</b></div></td>
+                    <td><b>+6</b></div></td>
+                    <td><b>+2</b></div></td>
                 </tr>
             </table>
         </div>
