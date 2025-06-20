@@ -3715,7 +3715,7 @@ function MakeFeedback(mode) {
             data.avatar2TotalPoints = avatar2TotalPoints;
             data.pointsAddedAvatar1 = pointsAddedAvatar1;
             data.pointsAddedAvatar2 = pointsAddedAvatar2;
-            data.deductionAmount = deductionAmount;
+       //     data.deductionAmount = deductionAmount;
             data.groupOrInd = groupOrind;
             if (groupOrind !== "ind") {
                 data.MI = MI;
